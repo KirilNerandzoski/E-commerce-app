@@ -335,7 +335,7 @@ export const Navbar = () => {
 
             {/* Live Autocomplete Dropdown */}
             {isSearchFocused && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden z-50 animate-in fade-in duration-150">
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden z-[100] animate-in fade-in duration-150">
                 {searchQuery.trim() === "" ? (
                   // Empty query suggestions
                   <div className="p-4">

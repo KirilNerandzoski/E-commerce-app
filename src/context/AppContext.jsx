@@ -74,6 +74,7 @@ export const AppProvider = ({ children }) => {
   // "home" | "catalog" | "product" | "cart" | "checkout" | "wishlist" | "profile"
   const [currentView, setCurrentView] = useState("home");
   const [currentProductId, setCurrentProductId] = useState(null);
+  const [profileActiveTab, setProfileActiveTab] = useState("orders");
 
   // Catalog Filters & Search
   const [catalogFilters, setCatalogFilters] = useState({
@@ -189,6 +190,8 @@ export const AppProvider = ({ children }) => {
     if (view === "product" && payload) {
       setCurrentProductId(payload);
       trackProductView(payload);
+    } else if (view === "profile" && payload) {
+      setProfileActiveTab(payload);
     } else if (view === "catalog" && payload) {
       if (typeof payload === "string") {
         setCatalogFilters((prev) => ({
@@ -497,6 +500,8 @@ export const AppProvider = ({ children }) => {
         currentView,
         currentProductId,
         navigateTo,
+        profileActiveTab,
+        setProfileActiveTab,
         catalogFilters,
         setCatalogFilters,
         quickViewProduct,

@@ -21,9 +21,10 @@ import {
 } from "lucide-react";
 
 export const ProfilePage = () => {
-  const { user, updateUserProfile, navigateTo, currency, wishlist, setIsAuthModalOpen } = useApp();
+  const { user, updateUserProfile, navigateTo, currency, wishlist, setIsAuthModalOpen, profileActiveTab, setProfileActiveTab } = useApp();
 
-  const [activeTab, setActiveTab] = useState("orders"); // 'orders' | 'info' | 'addresses' | 'settings'
+  const [activeTab, setActiveTab] = useState(profileActiveTab || "orders");
+  React.useEffect(() => { if (profileActiveTab) setActiveTab(profileActiveTab); }, [profileActiveTab]); // 'orders' | 'info' | 'addresses' | 'settings'
   const [selectedOrderDetails, setSelectedOrderDetails] = useState(null);
 
   // Edit form state
