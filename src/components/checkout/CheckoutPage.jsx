@@ -97,21 +97,39 @@ export const CheckoutPage = () => {
         paymentMethodName: paymentMethodNames[paymentMethod],
         shippingFee: currentShippingFee,
       });
-      setIsSubmitting(false);
       setCreatedOrder(order);
+      setIsSubmitting(false);
     } catch (err) {
       console.error(err);
       setIsSubmitting(false);
     }
   };
 
-  if (cart.length === 0 && !createdOrder) {
+  // 1. If order was just placed, display the success modal!
+  if (createdOrder) {
+    return (
+      <OrderSuccessModal
+        order={createdOrder}
+        onClose={() => {
+          setCreatedOrder(null);
+          navigateTo("home");
+        }}
+      />
+    );
+  }
+
+  // 2. If cart is empty and NOT currently submitting
+  if (cart.length === 0 && !isSubmitting) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <div className="w-16 h-16 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-4">
+          <Lock className="w-8 h-8" />
+        </div>
         <h2 className="text-xl font-bold text-slate-800">Немате производи во кошничката</h2>
+        <p className="text-xs text-slate-500 mt-1 mb-6">Додајте производи во кошничката за да продолжите со наплата</p>
         <button
           onClick={() => navigateTo("catalog")}
-          className="mt-4 px-6 py-2.5 bg-orange-500 text-white font-bold rounded-xl"
+          className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-xs rounded-xl shadow-md transition-all"
         >
           Врати се кон каталог
         </button>
@@ -626,14 +644,6 @@ export const CheckoutPage = () => {
           </div>
         </div>
       </form>
-
-      {/* Confirmation Modal */}
-      {createdOrder && (
-        <OrderSuccessModal
-          order={createdOrder}
-          onClose={() => setCreatedOrder(null)}
-        />
-      )}
     </div>
   );
 };
