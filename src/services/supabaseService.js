@@ -70,7 +70,7 @@ export const supabaseService = {
     try {
       const payload = {
         id: orderData.id,
-        user_id: userId,
+        user_id: (typeof userId === "string" && userId.length === 36 ? userId : null),
         date: orderData.date,
         status: orderData.status,
         status_code: orderData.statusCode,
