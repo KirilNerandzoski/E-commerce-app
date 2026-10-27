@@ -9,7 +9,6 @@ import { ComparisonModal } from "./components/common/ComparisonModal";
 import { CartDrawer } from "./components/common/CartDrawer";
 import { FloatingCompareDock } from "./components/common/FloatingCompareDock";
 import { AuthModal } from "./components/common/AuthModal";
-import { ErrorBoundary } from "./components/common/ErrorBoundary";
 
 // Pages
 import { HomePage } from "./components/home/HomePage";
@@ -62,9 +61,7 @@ const AppShell = () => {
 export function App() {
   return (
     <AppProvider>
-      <ErrorBoundary>
-        <AppShell />
-      </ErrorBoundary>
+      <AppShell />
     </AppProvider>
   );
 }
