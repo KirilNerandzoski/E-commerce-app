@@ -358,7 +358,7 @@ export const AppProvider = ({ children }) => {
   const cartTotalItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   // Checkout & Order Placement (with Supabase sync)
-  const placeOrder = (orderData) => {
+  const placeOrder = async (orderData) => {
     const newOrderId = `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
     const today = new Date();
     const dateFormatted = `${today.getDate().toString().padStart(2, "0")}.${(today.getMonth() + 1)
@@ -408,7 +408,11 @@ export const AppProvider = ({ children }) => {
     setLastPlacedOrder(newOrder);
     clearCart();
     setAppliedCoupon(null);
-    addToast(`Нарачката ${newOrderId} е успешно креирана!`, "success");
+    if (supabaseSuccess) {
+      addToast(`Нарачката ${newOrderId} е зачувана во Supabase базата!`, "success");
+    } else {
+      addToast(`Нарачката ${newOrderId} е успешно креирана!`, "success");
+    }
     return newOrder;
   };
 

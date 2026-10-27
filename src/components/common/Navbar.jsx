@@ -1,3 +1,4 @@
+import { supabaseService } from '../../services/supabaseService';
 import React, { useState, useRef, useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import { CATEGORIES } from "../../data/categories";
@@ -130,6 +131,12 @@ export const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
+            {supabaseService.isConfigured && (
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Supabase Поврзан
+              </span>
+            )}
             {/* Currency Switcher */}
             <div className="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700">
               <button

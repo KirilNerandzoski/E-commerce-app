@@ -83,12 +83,11 @@ export const CheckoutPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePlaceOrder = (e) => {
+  const handlePlaceOrder = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    setTimeout(() => {
-      const order = placeOrder({
+    try {
+      const order = await placeOrder({
         address: {
           street: formData.street,
           city: formData.city,
@@ -100,7 +99,10 @@ export const CheckoutPage = () => {
       });
       setIsSubmitting(false);
       setCreatedOrder(order);
-    }, 1000);
+    } catch (err) {
+      console.error(err);
+      setIsSubmitting(false);
+    }
   };
 
   if (cart.length === 0 && !createdOrder) {
