@@ -20,6 +20,7 @@ import {
   Settings,
   ShieldCheck,
   Percent,
+  Lock,
 } from "lucide-react";
 
 export const Navbar = () => {
