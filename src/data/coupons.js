@@ -1,0 +1,35 @@
+export const COUPONS = [
+  {
+    code: "PAZAR10",
+    description: "10% попуст на целата нарачка",
+    discountPercent: 10,
+    discountAmount: 0,
+    minSpend: 0,
+    type: "percent",
+  },
+  {
+    code: "POPUST500",
+    description: "500 ден. попуст за нарачки над 3.000 ден.",
+    discountPercent: 0,
+    discountAmount: 500,
+    minSpend: 3000,
+    type: "fixed",
+  },
+  {
+    code: "FREESHIP",
+    description: "Бесплатна достава за било која нарачка",
+    discountPercent: 0,
+    discountAmount: 0,
+    freeShipping: true,
+    minSpend: 0,
+    type: "shipping",
+  },
+  {
+    code: "MAX15",
+    description: "15% викенд промоција",
+    discountPercent: 15,
+    discountAmount: 0,
+    minSpend: 5000,
+    type: "percent",
+  },
+];
