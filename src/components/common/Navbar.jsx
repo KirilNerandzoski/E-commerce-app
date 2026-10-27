@@ -33,6 +33,7 @@ export const Navbar = () => {
     navigateTo,
     setIsCompareModalOpen,
     setIsCartDrawerOpen,
+    setIsAuthModalOpen,
     user,
     setCatalogFilters,
   } = useApp();
@@ -530,6 +531,18 @@ export const Navbar = () => {
                       <Settings className="w-4 h-4 text-slate-400" />
                       Поставки & Известувања
                     </button>
+                    <div className="pt-1 mt-1 border-t border-slate-100">
+                      <button
+                        onClick={() => {
+                          setIsUserDropdownOpen(false);
+                          setIsAuthModalOpen(true);
+                        }}
+                        className="w-full text-left px-4 py-2 text-xs font-bold text-orange-600 hover:bg-orange-50 flex items-center gap-2.5 transition-colors"
+                      >
+                        <Lock className="w-4 h-4 text-orange-500" />
+                        Најава / Сметка (Supabase)
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -641,6 +654,17 @@ export const Navbar = () => {
                   </button>
                 </div>
               </div>
+
+              {/* Supabase Auth trigger on mobile */}
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsAuthModalOpen(true);
+                }}
+                className="w-full mt-3 py-2.5 px-3 bg-orange-50 hover:bg-orange-100 text-orange-600 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-colors border border-orange-200"
+              >
+                <Lock className="w-4 h-4" /> Најава / Регистрација (Supabase)
+              </button>
 
               {/* All Categories list */}
               <div className="mt-6">

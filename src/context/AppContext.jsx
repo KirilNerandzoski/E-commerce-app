@@ -3,6 +3,8 @@ import { PRODUCTS } from "../data/products";
 import { INITIAL_USER } from "../data/mockUserData";
 import { COUPONS } from "../data/coupons";
 import { FREE_SHIPPING_THRESHOLD } from "../utils/formatters";
+import { supabaseService } from "../services/supabaseService";
+import { supabase } from "../lib/supabase";
 
 const AppContext = createContext();
 
@@ -94,6 +96,7 @@ export const AppProvider = ({ children }) => {
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [lastPlacedOrder, setLastPlacedOrder] = useState(null);
 
   // Coupons
@@ -101,6 +104,40 @@ export const AppProvider = ({ children }) => {
 
   // Toasts
   const [toasts, setToasts] = useState([]);
+
+  // Fetch live products from Supabase on mount if configured
+  useEffect(() => {
+    if (supabaseService.isConfigured) {
+      supabaseService.getProducts().then(({ data }) => {
+        if (data && data.length > 0) {
+          setProducts(data);
+        }
+      });
+    }
+  }, []);
+
+  // Listen to Supabase auth state changes if configured
+  useEffect(() => {
+    if (supabase && supabaseService.isConfigured) {
+      const { data: authListener } = supabase.auth.onAuthStateChange(
+        async (event, session) => {
+          if (session?.user) {
+            setUser((prev) => ({
+              ...prev,
+              id: session.user.id,
+              email: session.user.email,
+              name: session.user.user_metadata?.full_name || prev.name,
+              phone: session.user.user_metadata?.phone || prev.phone,
+            }));
+          }
+        }
+      );
+
+      return () => {
+        authListener.subscription.unsubscribe();
+      };
+    }
+  }, []);
 
   // Sync to localStorage
   useEffect(() => {
@@ -151,7 +188,6 @@ export const AppProvider = ({ children }) => {
       setCurrentProductId(payload);
       trackProductView(payload);
     } else if (view === "catalog" && payload) {
-      // payload could be category string or filter overrides
       if (typeof payload === "string") {
         setCatalogFilters((prev) => ({
           ...prev,
@@ -319,7 +355,7 @@ export const AppProvider = ({ children }) => {
   const cartTotal = Math.max(0, cartSubtotal - cartDiscount + standardShippingCost);
   const cartTotalItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  // Checkout & Order Placement
+  // Checkout & Order Placement (with Supabase sync)
   const placeOrder = (orderData) => {
     const newOrderId = `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
     const today = new Date();
@@ -332,7 +368,7 @@ export const AppProvider = ({ children }) => {
       date: dateFormatted,
       status: "Во обработка",
       statusCode: "processing",
-      trackingNumber: `AN-MK-${Math.floor(100000 + Math.random() * 900000)}`,
+      trackingNumber: `PM-MK-${Math.floor(100000 + Math.random() * 900000)}`,
       deliveryMethod: orderData.deliveryMethodName || "Стандардна достава",
       paymentMethod: orderData.paymentMethodName || "Готовина при достава",
       address: `${orderData.address.street}, ${orderData.address.city}`,
@@ -356,10 +392,16 @@ export const AppProvider = ({ children }) => {
       ],
     };
 
+    // Save to local user state
     setUser((prev) => ({
       ...prev,
       orders: [newOrder, ...prev.orders],
     }));
+
+    // Also persist to Supabase if configured
+    if (supabaseService.isConfigured) {
+      supabaseService.createOrder(newOrder, user?.id);
+    }
 
     setLastPlacedOrder(newOrder);
     clearCart();
@@ -368,7 +410,7 @@ export const AppProvider = ({ children }) => {
     return newOrder;
   };
 
-  // Add review to product live
+  // Add review to product live (with Supabase sync)
   const addReviewToProduct = (productId, newReview) => {
     setProducts((prev) =>
       prev.map((prod) => {
@@ -389,15 +431,32 @@ export const AppProvider = ({ children }) => {
         return prod;
       })
     );
+
+    // Also persist to Supabase if configured
+    if (supabaseService.isConfigured) {
+      supabaseService.addReview({ ...newReview, productId });
+    }
+
     addToast("Вашата рецензија е успешно објавена!", "success");
   };
 
-  // Update user profile info
+  // Update user profile info (with Supabase sync)
   const updateUserProfile = (updatedData) => {
     setUser((prev) => ({
       ...prev,
       ...updatedData,
     }));
+
+    if (supabaseService.isConfigured && user?.id) {
+      supabaseService.updateProfile(user.id, {
+        full_name: updatedData.name,
+        phone: updatedData.phone,
+        street: updatedData.defaultAddress?.street,
+        city: updatedData.defaultAddress?.city,
+        postal_code: updatedData.defaultAddress?.postalCode,
+      });
+    }
+
     addToast("Профилот е успешно ажуриран!", "success");
   };
 
@@ -427,6 +486,7 @@ export const AppProvider = ({ children }) => {
         recentlyViewed,
         trackProductView,
         user,
+        setUser,
         updateUserProfile,
         currentView,
         currentProductId,
@@ -441,6 +501,8 @@ export const AppProvider = ({ children }) => {
         setIsCartDrawerOpen,
         isMobileMenuOpen,
         setIsMobileMenuOpen,
+        isAuthModalOpen,
+        setIsAuthModalOpen,
         appliedCoupon,
         applyCoupon,
         removeCoupon,

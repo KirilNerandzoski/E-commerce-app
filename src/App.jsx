@@ -8,6 +8,7 @@ import { QuickViewModal } from "./components/common/QuickViewModal";
 import { ComparisonModal } from "./components/common/ComparisonModal";
 import { CartDrawer } from "./components/common/CartDrawer";
 import { FloatingCompareDock } from "./components/common/FloatingCompareDock";
+import { AuthModal } from "./components/common/AuthModal";
 
 // Pages
 import { HomePage } from "./components/home/HomePage";
@@ -34,24 +35,33 @@ const MainContent = () => {
   );
 };
 
+const AppShell = () => {
+  const { isAuthModalOpen, setIsAuthModalOpen } = useApp();
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-800 flex flex-col justify-between selection:bg-orange-500 selection:text-white">
+      <div>
+        <Navbar />
+        <MainContent />
+      </div>
+      <Footer />
+
+      {/* Global Modals, Drawers & Notifications */}
+      <QuickViewModal />
+      <ComparisonModal />
+      <CartDrawer />
+      <FloatingCompareDock />
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <ToastContainer />
+      <MobileBottomNav />
+    </div>
+  );
+};
+
 export function App() {
   return (
     <AppProvider>
-      <div className="min-h-screen bg-[#F8FAFC] text-slate-800 flex flex-col justify-between selection:bg-orange-500 selection:text-white">
-        <div>
-          <Navbar />
-          <MainContent />
-        </div>
-        <Footer />
-
-        {/* Global Modals, Drawers & Notifications */}
-        <QuickViewModal />
-        <ComparisonModal />
-        <CartDrawer />
-        <FloatingCompareDock />
-        <ToastContainer />
-        <MobileBottomNav />
-      </div>
+      <AppShell />
     </AppProvider>
   );
 }

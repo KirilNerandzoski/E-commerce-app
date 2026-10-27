@@ -17,10 +17,11 @@ import {
   X,
   CreditCard,
   ShoppingBag,
+  Lock,
 } from "lucide-react";
 
 export const ProfilePage = () => {
-  const { user, updateUserProfile, navigateTo, currency, wishlist } = useApp();
+  const { user, updateUserProfile, navigateTo, currency, wishlist, setIsAuthModalOpen } = useApp();
 
   const [activeTab, setActiveTab] = useState("orders"); // 'orders' | 'info' | 'addresses' | 'settings'
   const [selectedOrderDetails, setSelectedOrderDetails] = useState(null);
@@ -85,6 +86,12 @@ export const ProfilePage = () => {
             <span className="text-lg font-black block text-red-400">{wishlist.length}</span>
             <span className="text-[10px] text-slate-400 uppercase font-bold">Омилени</span>
           </div>
+          <button
+            onClick={() => setIsAuthModalOpen(true)}
+            className="px-4 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl text-xs font-bold transition-all shadow-md flex items-center gap-1.5"
+          >
+            <Lock className="w-3.5 h-3.5" /> Сметка
+          </button>
         </div>
       </div>
 
