@@ -1,7 +1,7 @@
 import React from "react";
 import { useApp } from "../../context/AppContext";
 import { ProductCard } from "../product/ProductCard";
-import { History, Trash2 } from "lucide-react";
+import { History as HistoryIcon, Trash2 } from "lucide-react";
 
 export const RecentlyViewedSection = () => {
   const { recentlyViewed, products } = useApp();
@@ -20,7 +20,7 @@ export const RecentlyViewedSection = () => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
-            <History className="w-4 h-4" />
+            <HistoryIcon className="w-4 h-4" />
           </div>
           <div>
             <h2 className="text-lg sm:text-xl font-black text-slate-900">

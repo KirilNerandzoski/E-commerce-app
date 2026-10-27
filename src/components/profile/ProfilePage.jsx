@@ -75,21 +75,35 @@ export const ProfilePage = () => {
         </div>
 
         {/* Quick Stats Pill */}
-        <div className="flex items-center gap-3">
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 text-center min-w-[90px] border border-white/10">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
+          <button
+            type="button"
+            onClick={() => setActiveTab("orders")}
+            className={`bg-white/10 backdrop-blur-md rounded-2xl p-3 text-center min-w-[85px] border border-white/10 cursor-pointer hover:bg-white/20 transition-all ${activeTab === "orders" ? "ring-2 ring-orange-400 bg-white/25" : ""}`}
+          >
             <span className="text-lg font-black block">{user?.orders?.length || 0}</span>
-            <span className="text-[10px] text-slate-400 uppercase font-bold">Нарачки</span>
-          </div>
-          <div
+            <span className="text-[10px] text-slate-300 uppercase font-bold">Нарачки</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("info")}
+            className={`bg-white/10 backdrop-blur-md rounded-2xl p-3 text-center min-w-[85px] border border-white/10 cursor-pointer hover:bg-white/20 transition-all ${activeTab === "info" ? "ring-2 ring-orange-400 bg-white/25" : ""}`}
+          >
+            <span className="text-lg font-black block text-amber-300">VIP</span>
+            <span className="text-[10px] text-slate-300 uppercase font-bold">Статус</span>
+          </button>
+          <button
+            type="button"
             onClick={() => navigateTo("wishlist")}
-            className="bg-white/10 backdrop-blur-md rounded-2xl p-3 text-center min-w-[90px] border border-white/10 cursor-pointer hover:bg-white/20 transition-colors"
+            className="bg-white/10 backdrop-blur-md rounded-2xl p-3 text-center min-w-[85px] border border-white/10 cursor-pointer hover:bg-white/20 transition-all"
           >
             <span className="text-lg font-black block text-red-400">{wishlist.length}</span>
-            <span className="text-[10px] text-slate-400 uppercase font-bold">Омилени</span>
-          </div>
+            <span className="text-[10px] text-slate-300 uppercase font-bold">Омилени</span>
+          </button>
           <button
+            type="button"
             onClick={() => setIsAuthModalOpen(true)}
-            className="px-4 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl text-xs font-bold transition-all shadow-md flex items-center gap-1.5"
+            className="px-4 py-3 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white rounded-2xl text-xs font-bold transition-all shadow-md flex items-center gap-1.5"
           >
             <Lock className="w-3.5 h-3.5" /> Сметка
           </button>
