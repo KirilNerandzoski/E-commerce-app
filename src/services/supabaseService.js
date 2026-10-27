@@ -86,7 +86,7 @@ export const supabaseService = {
         timeline: orderData.timeline,
       };
 
-      const { data, error } = await supabase.from("orders").upsert(payload, { onConflict: 'id' }).select().single();
+      const { data, error } = await supabase.from("orders").insert(payload).select().single();
       return { data, error };
     } catch (err) {
       console.error("Failed to insert order to Supabase:", err);

@@ -114,11 +114,7 @@ export const AppProvider = ({ children }) => {
         }
       });
 
-      if (user?.orders?.length > 0) {
-        user.orders.forEach((ord) => {
-          supabaseService.createOrder(ord, user.id);
-        });
-      }
+
     }
   }, []);
 
