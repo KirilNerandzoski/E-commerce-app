@@ -476,14 +476,14 @@ export const Navbar = () => {
                 className="flex items-center gap-2 p-2 hover:bg-slate-100 rounded-xl transition-colors text-left"
               >
                 <div className="w-8 h-8 rounded-full bg-orange-100 text-orange-700 border border-orange-200 flex items-center justify-center overflow-hidden font-bold text-xs">
-                  {user.name ? user.name.slice(0, 2).toUpperCase() : "AP"}
+                  {user?.name ? user.name.slice(0, 2).toUpperCase() : "AP"}
                 </div>
                 <div className="hidden xl:flex flex-col">
                   <span className="text-[11px] text-slate-400 font-medium leading-none">
                     Здраво,
                   </span>
                   <span className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[100px]">
-                    {user.name.split(" ")[0]}
+                    {user?.name ? user.name.split(" ")[0] : "Корисник"}
                   </span>
                 </div>
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400 hidden xl:block" />
@@ -493,8 +493,8 @@ export const Navbar = () => {
               {isUserDropdownOpen && (
                 <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-200 py-2 z-50 animate-in fade-in duration-150">
                   <div className="px-4 py-2.5 border-b border-slate-100">
-                    <p className="text-xs font-bold text-slate-800">{user.name}</p>
-                    <p className="text-[11px] text-slate-400 truncate">{user.email}</p>
+                    <p className="text-xs font-bold text-slate-800">{user?.name || "Корисник"}</p>
+                    <p className="text-[11px] text-slate-400 truncate">{user?.email || ""}</p>
                   </div>
 
                   <div className="py-1">
@@ -506,7 +506,7 @@ export const Navbar = () => {
                       className="w-full text-left px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-2.5"
                     >
                       <Package className="w-4 h-4 text-orange-500" />
-                      Мои нарачки ({user.orders.length})
+                      Мои нарачки ({user?.orders?.length || 0})
                     </button>
                     <button
                       onClick={() => {

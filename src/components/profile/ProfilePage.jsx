@@ -28,12 +28,12 @@ export const ProfilePage = () => {
 
   // Edit form state
   const [profileForm, setProfileForm] = useState({
-    name: user.name || "",
-    email: user.email || "",
-    phone: user.phone || "",
-    street: user.defaultAddress?.street || "",
-    city: user.defaultAddress?.city || "",
-    postalCode: user.defaultAddress?.postalCode || "",
+    name: user?.name || "",
+    email: user?.email || "",
+    phone: user?.phone || "",
+    street: user?.defaultAddress?.street || "",
+    city: user?.defaultAddress?.city || "",
+    postalCode: user?.defaultAddress?.postalCode || "",
   });
 
   const handleProfileSubmit = (e) => {
@@ -57,16 +57,16 @@ export const ProfilePage = () => {
       <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl mb-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-4 text-center sm:text-left">
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-500 text-white font-black text-2xl flex items-center justify-center shadow-lg border-2 border-white/20">
-            {user.name ? user.name.slice(0, 2).toUpperCase() : "AP"}
+            {user?.name ? user.name.slice(0, 2).toUpperCase() : "AP"}
           </div>
           <div>
             <div className="flex items-center gap-2 justify-center sm:justify-start">
-              <h1 className="text-xl sm:text-2xl font-black">{user.name}</h1>
+              <h1 className="text-xl sm:text-2xl font-black">{user?.name || "Корисник"}</h1>
               <span className="bg-amber-400/20 text-amber-300 text-[10px] font-black uppercase px-2 py-0.5 rounded-full border border-amber-400/30">
                 VIP Купувач
               </span>
             </div>
-            <p className="text-xs text-slate-300 mt-1">{user.email} • {user.phone}</p>
+            <p className="text-xs text-slate-300 mt-1">{user?.email || ""} • {user?.phone || ""}</p>
             <p className="text-xs text-slate-400 mt-0.5">
               Стандардна адреса: {user.defaultAddress?.street}, {user.defaultAddress?.city}
             </p>
@@ -76,7 +76,7 @@ export const ProfilePage = () => {
         {/* Quick Stats Pill */}
         <div className="flex items-center gap-3">
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 text-center min-w-[90px] border border-white/10">
-            <span className="text-lg font-black block">{user.orders.length}</span>
+            <span className="text-lg font-black block">{user?.orders?.length || 0}</span>
             <span className="text-[10px] text-slate-400 uppercase font-bold">Нарачки</span>
           </div>
           <div
@@ -112,7 +112,7 @@ export const ProfilePage = () => {
               <span>Историја на нарачки</span>
             </div>
             <span className="text-xs bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded-full">
-              {user.orders.length}
+              {user?.orders?.length || 0}
             </span>
           </button>
 
@@ -181,10 +181,10 @@ export const ProfilePage = () => {
           {activeTab === "orders" && (
             <div className="space-y-4">
               <h2 className="text-xl font-black text-slate-900">
-                Ваши нарачки ({user.orders.length})
+                Ваши нарачки ({user?.orders?.length || 0})
               </h2>
 
-              {user.orders.map((order) => (
+              {(user?.orders || []).map((order) => (
                 <div
                   key={order.id}
                   className="bg-white rounded-3xl border border-slate-200/80 p-5 sm:p-6 shadow-xs space-y-4 hover:border-orange-200 transition-colors"
@@ -219,7 +219,7 @@ export const ProfilePage = () => {
 
                   {/* Items Preview */}
                   <div className="space-y-2">
-                    {order.items.map((item, idx) => (
+                    {(order?.items || []).map((item, idx) => (
                       <div key={idx} className="flex items-center justify-between gap-3 text-xs">
                         <div className="flex items-center gap-3">
                           <img
@@ -364,7 +364,7 @@ export const ProfilePage = () => {
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {user.savedAddresses.map((addr) => (
+                {(user?.savedAddresses || []).map((addr) => (
                   <div
                     key={addr.id}
                     className="p-5 rounded-2xl border-2 border-slate-200 bg-slate-50/50 space-y-2 relative"
@@ -473,7 +473,7 @@ export const ProfilePage = () => {
 
             {/* Items */}
             <div className="max-h-48 overflow-y-auto space-y-2 divide-y divide-slate-100 text-xs mb-4">
-              {selectedOrderDetails.items.map((item, idx) => (
+              {(selectedOrderDetails?.items || []).map((item, idx) => (
                 <div key={idx} className="pt-2 first:pt-0 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <img

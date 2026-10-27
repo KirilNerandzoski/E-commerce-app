@@ -397,7 +397,7 @@ export const AppProvider = ({ children }) => {
     // Save to local user state
     setUser((prev) => ({
       ...prev,
-      orders: [newOrder, ...prev.orders],
+      orders: [newOrder, ...(Array.isArray(prev?.orders) ? prev.orders : [])],
     }));
 
     // Also persist to Supabase if configured

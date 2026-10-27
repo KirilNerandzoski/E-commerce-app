@@ -1,3 +1,4 @@
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 import React from "react";
 import { AppProvider, useApp } from "./context/AppContext";
 import { Navbar } from "./components/common/Navbar";
@@ -42,7 +43,7 @@ const AppShell = () => {
     <div className="min-h-screen bg-[#F8FAFC] text-slate-800 flex flex-col justify-between selection:bg-orange-500 selection:text-white">
       <div>
         <Navbar />
-        <MainContent />
+        <ErrorBoundary><MainContent /></ErrorBoundary>
       </div>
       <Footer />
 
