@@ -29,12 +29,12 @@ export const CheckoutPage = () => {
 
   // Form States
   const [formData, setFormData] = useState({
-    fullName: user.name || "Александар Петровски",
-    phone: user.phone || "+389 70 234 567",
-    email: user.email || "aleksandar.petrovski@demo.mk",
-    street: user.defaultAddress?.street || "бул. Партизански Одреди бр. 42/3-12",
-    city: user.defaultAddress?.city || "Скопје",
-    postalCode: user.defaultAddress?.postalCode || "1000",
+    fullName: user?.name || "Александар Петровски",
+    phone: user?.phone || "+389 70 234 567",
+    email: user?.email || "aleksandar.petrovski@demo.mk",
+    street: user?.defaultAddress?.street || "бул. Партизански Одреди бр. 42/3-12",
+    city: user?.defaultAddress?.city || "Скопје",
+    postalCode: user?.defaultAddress?.postalCode || "1000",
     note: "",
   });
 

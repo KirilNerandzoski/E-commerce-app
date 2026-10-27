@@ -43,7 +43,7 @@ export const ProfilePage = () => {
       email: profileForm.email,
       phone: profileForm.phone,
       defaultAddress: {
-        ...user.defaultAddress,
+        ...(user?.defaultAddress || {}),
         street: profileForm.street,
         city: profileForm.city,
         postalCode: profileForm.postalCode,
@@ -68,7 +68,7 @@ export const ProfilePage = () => {
             </div>
             <p className="text-xs text-slate-300 mt-1">{user?.email || ""} • {user?.phone || ""}</p>
             <p className="text-xs text-slate-400 mt-0.5">
-              Стандардна адреса: {user.defaultAddress?.street}, {user.defaultAddress?.city}
+              Стандардна адреса: {user?.defaultAddress?.street || ""}, {user?.defaultAddress?.city || ""}
             </p>
           </div>
         </div>
@@ -143,7 +143,7 @@ export const ProfilePage = () => {
               <span>Зачувани адреси</span>
             </div>
             <span className="text-xs bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded-full">
-              {user.savedAddresses?.length || 2}
+              {user?.savedAddresses?.length || 0}
             </span>
           </button>
 
@@ -184,7 +184,7 @@ export const ProfilePage = () => {
                 Ваши нарачки ({user?.orders?.length || 0})
               </h2>
 
-              {(user?.orders || []).map((order) => (
+              {(Array.isArray(user?.orders) ? user.orders : []).map((order) => (
                 <div
                   key={order.id}
                   className="bg-white rounded-3xl border border-slate-200/80 p-5 sm:p-6 shadow-xs space-y-4 hover:border-orange-200 transition-colors"
@@ -219,7 +219,7 @@ export const ProfilePage = () => {
 
                   {/* Items Preview */}
                   <div className="space-y-2">
-                    {(order?.items || []).map((item, idx) => (
+                    {(Array.isArray(order?.items) ? order.items : (typeof order?.items === "string" ? JSON.parse(order.items || "[]") : [])).map((item, idx) => (
                       <div key={idx} className="flex items-center justify-between gap-3 text-xs">
                         <div className="flex items-center gap-3">
                           <img
@@ -364,7 +364,7 @@ export const ProfilePage = () => {
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {(user?.savedAddresses || []).map((addr) => (
+                {(Array.isArray(user?.savedAddresses) ? user.savedAddresses : []).map((addr) => (
                   <div
                     key={addr.id}
                     className="p-5 rounded-2xl border-2 border-slate-200 bg-slate-50/50 space-y-2 relative"
@@ -413,7 +413,7 @@ export const ProfilePage = () => {
 
                 <div className="p-3 rounded-xl bg-slate-50">
                   <h4 className="font-bold text-slate-800 mb-1">Префериран PazarMax Paketomat</h4>
-                  <p className="text-slate-600 font-semibold">{user.preferences?.preferredLocker}</p>
+                  <p className="text-slate-600 font-semibold">{user?.preferences?.preferredLocker || "PazarMax Paketomat"}</p>
                 </div>
               </div>
             </div>
@@ -452,7 +452,7 @@ export const ProfilePage = () => {
             {/* Tracking Steps */}
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 mb-4 space-y-3">
               <h4 className="text-xs font-bold text-slate-700 uppercase">Временска линија:</h4>
-              {selectedOrderDetails.timeline?.map((step, idx) => (
+              {(Array.isArray(selectedOrderDetails?.timeline) ? selectedOrderDetails.timeline : (typeof selectedOrderDetails?.timeline === "string" ? JSON.parse(selectedOrderDetails.timeline || "[]") : [])).map((step, idx) => (
                 <div key={idx} className="flex items-center gap-3 text-xs">
                   <div
                     className={`w-5 h-5 rounded-full flex items-center justify-center text-white shrink-0 ${
@@ -473,7 +473,7 @@ export const ProfilePage = () => {
 
             {/* Items */}
             <div className="max-h-48 overflow-y-auto space-y-2 divide-y divide-slate-100 text-xs mb-4">
-              {(selectedOrderDetails?.items || []).map((item, idx) => (
+              {(Array.isArray(selectedOrderDetails?.items) ? selectedOrderDetails.items : (typeof selectedOrderDetails?.items === "string" ? JSON.parse(selectedOrderDetails.items || "[]") : [])).map((item, idx) => (
                 <div key={idx} className="pt-2 first:pt-0 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <img

@@ -1,4 +1,3 @@
-import { ErrorBoundary } from './components/common/ErrorBoundary';
 import React from "react";
 import { AppProvider, useApp } from "./context/AppContext";
 import { Navbar } from "./components/common/Navbar";
@@ -10,6 +9,7 @@ import { ComparisonModal } from "./components/common/ComparisonModal";
 import { CartDrawer } from "./components/common/CartDrawer";
 import { FloatingCompareDock } from "./components/common/FloatingCompareDock";
 import { AuthModal } from "./components/common/AuthModal";
+import { ErrorBoundary } from "./components/common/ErrorBoundary";
 
 // Pages
 import { HomePage } from "./components/home/HomePage";
@@ -43,7 +43,7 @@ const AppShell = () => {
     <div className="min-h-screen bg-[#F8FAFC] text-slate-800 flex flex-col justify-between selection:bg-orange-500 selection:text-white">
       <div>
         <Navbar />
-        <ErrorBoundary><MainContent /></ErrorBoundary>
+        <MainContent />
       </div>
       <Footer />
 
@@ -62,7 +62,9 @@ const AppShell = () => {
 export function App() {
   return (
     <AppProvider>
-      <AppShell />
+      <ErrorBoundary>
+        <AppShell />
+      </ErrorBoundary>
     </AppProvider>
   );
 }
