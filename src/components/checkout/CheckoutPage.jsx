@@ -43,18 +43,8 @@ export const CheckoutPage = () => {
   // Delivery Method: 'standard' (150 or free), 'direct' (250), 'paketomat' (100)
   const [deliveryMethod, setDeliveryMethod] = useState("direct");
 
-  // Payment Method: 'cod' (Cash), 'card' (Credit card), 'installments'
-  const [paymentMethod, setPaymentMethod] = useState("cod");
-
-  // Card fields simulation
-  const [cardData, setCardData] = useState({
-    number: "4111 •••• •••• 4821",
-    holder: "ALEKSANDAR PETROVSKI",
-    expiry: "09/28",
-    cvv: "382",
-  });
-
-  const [installmentsCount, setInstallmentsCount] = useState(24);
+  // Payment Method & Modal States
+  const [paymentMethod, setPaymentMethod] = useState("card");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [createdOrder, setCreatedOrder] = useState(null);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -73,12 +63,6 @@ export const CheckoutPage = () => {
     standard: "Стандардна курирска достава (2-3 работни дена)",
     direct: "⚡ PazarMax Direkt 24h Експресна достава",
     paketomat: "📦 PazarMax Paketomat 24/7 подигнување",
-  };
-
-  const paymentMethodNames = {
-    cod: "Готовина при преземање (Cash on Delivery)",
-    card: "Кредитна / дебитна картичка (Visa / Mastercard)",
-    installments: `Плаќање на ${installmentsCount} рати без камата`,
   };
 
   const handleInputChange = (e) => {
@@ -104,7 +88,8 @@ export const CheckoutPage = () => {
           postalCode: formData.postalCode,
         },
         deliveryMethodName: deliveryMethodNames[deliveryMethod],
-        paymentMethodName: paymentDetails?.paymentMethodName || paymentMethodNames[paymentMethod],
+        paymentMethodName:
+          paymentDetails?.paymentMethodName || "Кредитна / дебитна картичка (онлајн)",
         shippingFee: currentShippingFee,
       });
       setIsPaymentModalOpen(false);
@@ -394,192 +379,6 @@ export const CheckoutPage = () => {
                 </label>
               </div>
             </div>
-
-            {/* Step 3: Payment Method */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-xs">
-              <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 flex-wrap gap-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-orange-500 text-white font-black text-xs flex items-center justify-center">
-                    3
-                  </div>
-                  <h3 className="text-lg font-black text-slate-900">
-                    Начин на плаќање
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIsPaymentModalOpen(true)}
-                  className="px-3.5 py-1.5 bg-orange-50 hover:bg-orange-100 text-orange-600 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-colors border border-orange-200 active:scale-95"
-                >
-                  <CreditCard className="w-3.5 h-3.5" />
-                  <span>Отвори прозорец за плаќање</span>
-                </button>
-              </div>
-
-              <div className="space-y-3">
-                {/* Cash on Delivery */}
-                <label
-                  className={`flex items-start gap-3.5 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
-                    paymentMethod === "cod"
-                      ? "border-orange-500 bg-orange-50/50"
-                      : "border-slate-200 hover:border-slate-300 bg-white"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    checked={paymentMethod === "cod"}
-                    onChange={() => setPaymentMethod("cod")}
-                    className="accent-orange-500 w-4 h-4 mt-1"
-                  />
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <Banknote className="w-4 h-4 text-emerald-600" />
-                      <span className="font-bold text-xs sm:text-sm text-slate-900">
-                        Готовина при преземање (Plaćanje pri preuzimanju)
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-500 mt-1">
-                      Платете му на курирот во кеш при самата испорака на пратката.
-                    </p>
-                  </div>
-                </label>
-
-                {/* Credit Card */}
-                <label
-                  className={`flex flex-col gap-3 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
-                    paymentMethod === "card"
-                      ? "border-orange-500 bg-orange-50/50"
-                      : "border-slate-200 hover:border-slate-300 bg-white"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3.5">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        checked={paymentMethod === "card"}
-                        onChange={() => setPaymentMethod("card")}
-                        className="accent-orange-500 w-4 h-4"
-                      />
-                      <div className="flex items-center gap-2">
-                        <CreditCard className="w-4 h-4 text-blue-600" />
-                        <span className="font-bold text-xs sm:text-sm text-slate-900">
-                          Плаќање со дебитна / кредитна картичка (онлајн)
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex gap-1 text-[10px] font-bold text-slate-500">
-                      <span>VISA</span> • <span>Mastercard</span>
-                    </div>
-                  </div>
-
-                  {/* Simulated Card Fields (if selected) */}
-                  {paymentMethod === "card" && (
-                    <div className="mt-3 p-4 bg-white rounded-xl border border-slate-200 space-y-3 text-xs">
-                      <div>
-                        <label className="block text-slate-500 font-bold mb-1">
-                          Број на картичка:
-                        </label>
-                        <input
-                          type="text"
-                          value={cardData.number}
-                          onChange={(e) =>
-                            setCardData((prev) => ({ ...prev, number: e.target.value }))
-                          }
-                          className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 font-mono font-bold"
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-slate-500 font-bold mb-1">Истекува (MM/YY):</label>
-                          <input
-                            type="text"
-                            value={cardData.expiry}
-                            onChange={(e) =>
-                              setCardData((prev) => ({ ...prev, expiry: e.target.value }))
-                            }
-                            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 font-mono"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-slate-500 font-bold mb-1">CVV / CVC код:</label>
-                          <input
-                            type="password"
-                            value={cardData.cvv}
-                            maxLength={3}
-                            onChange={(e) =>
-                              setCardData((prev) => ({ ...prev, cvv: e.target.value }))
-                            }
-                            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 font-mono"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </label>
-
-                {/* Installments */}
-                <label
-                  className={`flex flex-col gap-3 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
-                    paymentMethod === "installments"
-                      ? "border-orange-500 bg-orange-50/50"
-                      : "border-slate-200 hover:border-slate-300 bg-white"
-                  }`}
-                >
-                  <div className="flex items-center gap-3.5">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      checked={paymentMethod === "installments"}
-                      onChange={() => setPaymentMethod("installments")}
-                      className="accent-orange-500 w-4 h-4"
-                    />
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-purple-600" />
-                      <span className="font-bold text-xs sm:text-sm text-slate-900">
-                        Купување на рати (0% камата)
-                      </span>
-                    </div>
-                  </div>
-
-                  {paymentMethod === "installments" && (
-                    <div className="mt-2 p-3 bg-white rounded-xl border border-slate-200 flex items-center justify-between text-xs">
-                      <span className="font-semibold text-slate-700">Број на рати:</span>
-                      <div className="flex gap-2">
-                        {[6, 12, 24].map((count) => (
-                          <button
-                            key={count}
-                            type="button"
-                            onClick={() => setInstallmentsCount(count)}
-                            className={`px-3 py-1.5 rounded-lg font-bold ${
-                              installmentsCount === count
-                                ? "bg-orange-500 text-white"
-                                : "bg-slate-100 text-slate-700"
-                            }`}
-                          >
-                            {count} рати ({formatPrice(Math.round(finalTotal / count), currency)}/м)
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </label>
-
-                {/* Direct Action to open payment window */}
-                <div className="pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setIsPaymentModalOpen(true)}
-                    className="w-full py-3 px-4 bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-700 font-black text-xs rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xs active:scale-98"
-                  >
-                    <Lock className="w-4 h-4 text-emerald-600" />
-                    <span>Отвори го прозорецот за избор на начин на плаќање</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-orange-500" />
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Right Summary Sidebar (4 cols) */}
@@ -642,28 +441,15 @@ export const CheckoutPage = () => {
                 </div>
               </div>
 
-              {/* Selected Payment Preview Badge */}
-              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <CreditCard className="w-4 h-4 text-orange-500" />
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block leading-tight">
-                      Избран начин на плаќање:
-                    </span>
-                    <span className="font-bold text-slate-800 line-clamp-1">
-                      {paymentMethod === "cod" && "Готовина при преземање"}
-                      {paymentMethod === "card" && "Картичка (Visa / Mastercard)"}
-                      {paymentMethod === "installments" && `Плаќање на ${installmentsCount} рати`}
-                    </span>
-                  </div>
+              {/* Payment Info Badge */}
+              <div className="p-3.5 bg-orange-50/70 rounded-2xl border border-orange-200/60 flex items-center gap-3 text-xs text-orange-950">
+                <CreditCard className="w-5 h-5 text-orange-600 shrink-0" />
+                <div className="leading-snug">
+                  <span className="font-bold block text-slate-900">Избор на плаќање на следниот чекор</span>
+                  <span className="text-[11px] text-slate-500">
+                    Картичка (Visa/Mastercard), Готовина или на Рати без камата.
+                  </span>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setIsPaymentModalOpen(true)}
-                  className="text-orange-600 font-bold text-xs hover:underline shrink-0 ml-2"
-                >
-                  Промени
-                </button>
               </div>
 
               {/* Terms check */}
@@ -690,7 +476,7 @@ export const CheckoutPage = () => {
                 ) : (
                   <>
                     <Lock className="w-5 h-5 text-orange-200" />
-                    <span>Избери начин на плаќање</span>
+                    <span>Продолжи кон избор на плаќање</span>
                     <ArrowRight className="w-5 h-5" />
                   </>
                 )}
