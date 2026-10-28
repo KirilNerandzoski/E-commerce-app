@@ -87,10 +87,78 @@ export const supabaseService = {
       };
 
       const { data, error } = await supabase.from("orders").insert(payload).select().single();
+
+      // Send directly to WorkRelay Webhook
+      this.sendToWorkRelay(orderData);
+
       return { data, error };
     } catch (err) {
       console.error("Failed to insert order to Supabase:", err);
       return { data: orderData, error: err };
+    }
+  },
+
+  // --- WORKRELAY WEBHOOK DISPATCH ---
+  async sendToWorkRelay(orderData) {
+    try {
+      const items = (orderData.items || []).map((item) => ({
+        sku: String(item.id || item.title || "ITEM").slice(0, 32),
+        name: String(item.title || "Производ"),
+        quantity: Number(item.quantity) || 1,
+        unit_price_minor: Math.round((Number(item.price) || 0) * 100),
+      }));
+
+      const wrPayload = {
+        event_id: `evt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+        event_type: "order.created",
+        occurred_at: new Date().toISOString(),
+        order: {
+          external_id: String(orderData.id),
+          order_number: `#${orderData.id}`,
+          currency: "MKD",
+          customer: {
+            name: orderData.customerName || "Купувач",
+            email: orderData.customerEmail || "customer@pazarmax.mk",
+          },
+          totals: {
+            subtotal_minor: Math.round(
+              (Number(orderData.subtotal) || Number(orderData.total) || 0) * 100
+            ),
+            shipping_minor: Math.round((Number(orderData.shipping) || 0) * 100),
+            total_minor: Math.round((Number(orderData.total) || 0) * 100),
+          },
+          status: "pending",
+          payment_status: "paid",
+          fulfillment_status: "unfulfilled",
+          items:
+            items.length > 0
+              ? items
+              : [
+                  {
+                    sku: "ITEM-1",
+                    name: "Нарачка",
+                    quantity: 1,
+                    unit_price_minor: Math.round((Number(orderData.total) || 0) * 100),
+                  },
+                ],
+        },
+      };
+
+      await fetch(
+        "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v1/order-webhook",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2",
+            "X-Store-Id": "pazarmax",
+          },
+          body: JSON.stringify(wrPayload),
+        }
+      );
+    } catch (err) {
+      console.warn("WorkRelay webhook dispatch failed:", err);
     }
   },
 

@@ -374,6 +374,8 @@ export const AppProvider = ({ children }) => {
       status: "Во обработка",
       statusCode: "processing",
       trackingNumber: `PM-MK-${Math.floor(100000 + Math.random() * 900000)}`,
+      customerName: orderData.customerName || user?.name || "Александар Петровски",
+      customerEmail: orderData.customerEmail || user?.email || "aleksandar.petrovski@demo.mk",
       deliveryMethod: orderData.deliveryMethodName || "Стандардна достава",
       paymentMethod: orderData.paymentMethodName || "Готовина при достава",
       address: `${orderData.address.street}, ${orderData.address.city}`,

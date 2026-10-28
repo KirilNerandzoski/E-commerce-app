@@ -82,6 +82,8 @@ export const CheckoutPage = () => {
     setIsSubmitting(true);
     try {
       const order = await placeOrder({
+        customerName: formData.fullName,
+        customerEmail: formData.email,
         address: {
           street: formData.street,
           city: formData.city,
