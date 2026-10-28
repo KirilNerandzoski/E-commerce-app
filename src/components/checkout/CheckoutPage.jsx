@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useApp } from "../../context/AppContext";
 import { formatPrice } from "../../utils/formatters";
 import { OrderSuccessModal } from "./OrderSuccessModal";
+import { PaymentGatewayModal } from "./PaymentGatewayModal";
 import {
   ShieldCheck,
   Truck,
@@ -13,6 +14,7 @@ import {
   ArrowRight,
   ChevronLeft,
   Calendar,
+  ExternalLink,
 } from "lucide-react";
 
 export const CheckoutPage = () => {
@@ -55,6 +57,7 @@ export const CheckoutPage = () => {
   const [installmentsCount, setInstallmentsCount] = useState(24);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [createdOrder, setCreatedOrder] = useState(null);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   // Delivery cost calculation
   const deliveryCosts = {
@@ -83,8 +86,15 @@ export const CheckoutPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePlaceOrder = async (e) => {
-    e.preventDefault();
+  // 1. When user clicks "Избери начин на плаќање" or submits the checkout form:
+  // Open the dedicated Payment Gateway Window!
+  const handleProceedToPayment = (e) => {
+    if (e) e.preventDefault();
+    setIsPaymentModalOpen(true);
+  };
+
+  // 2. When payment is authorized and confirmed in the Payment Gateway Modal:
+  const handleFinalConfirmPayment = async (paymentDetails) => {
     setIsSubmitting(true);
     try {
       const order = await placeOrder({
@@ -94,9 +104,10 @@ export const CheckoutPage = () => {
           postalCode: formData.postalCode,
         },
         deliveryMethodName: deliveryMethodNames[deliveryMethod],
-        paymentMethodName: paymentMethodNames[paymentMethod],
+        paymentMethodName: paymentDetails?.paymentMethodName || paymentMethodNames[paymentMethod],
         shippingFee: currentShippingFee,
       });
+      setIsPaymentModalOpen(false);
       setCreatedOrder(order);
       setIsSubmitting(false);
     } catch (err) {
@@ -159,7 +170,7 @@ export const CheckoutPage = () => {
         </button>
       </div>
 
-      <form onSubmit={handlePlaceOrder}>
+      <form onSubmit={handleProceedToPayment}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Form: Steps 1, 2, 3 (8 cols) */}
           <div className="lg:col-span-8 space-y-6">
@@ -386,13 +397,23 @@ export const CheckoutPage = () => {
 
             {/* Step 3: Payment Method */}
             <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-xs">
-              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
-                <div className="w-8 h-8 rounded-full bg-orange-500 text-white font-black text-xs flex items-center justify-center">
-                  3
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 flex-wrap gap-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-orange-500 text-white font-black text-xs flex items-center justify-center">
+                    3
+                  </div>
+                  <h3 className="text-lg font-black text-slate-900">
+                    Начин на плаќање
+                  </h3>
                 </div>
-                <h3 className="text-lg font-black text-slate-900">
-                  Начин на плаќање
-                </h3>
+                <button
+                  type="button"
+                  onClick={() => setIsPaymentModalOpen(true)}
+                  className="px-3.5 py-1.5 bg-orange-50 hover:bg-orange-100 text-orange-600 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-colors border border-orange-200 active:scale-95"
+                >
+                  <CreditCard className="w-3.5 h-3.5" />
+                  <span>Отвори прозорец за плаќање</span>
+                </button>
               </div>
 
               <div className="space-y-3">
@@ -544,6 +565,19 @@ export const CheckoutPage = () => {
                     </div>
                   )}
                 </label>
+
+                {/* Direct Action to open payment window */}
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsPaymentModalOpen(true)}
+                    className="w-full py-3 px-4 bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-700 font-black text-xs rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xs active:scale-98"
+                  >
+                    <Lock className="w-4 h-4 text-emerald-600" />
+                    <span>Отвори го прозорецот за избор на начин на плаќање</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-orange-500" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -608,8 +642,32 @@ export const CheckoutPage = () => {
                 </div>
               </div>
 
+              {/* Selected Payment Preview Badge */}
+              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <CreditCard className="w-4 h-4 text-orange-500" />
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block leading-tight">
+                      Избран начин на плаќање:
+                    </span>
+                    <span className="font-bold text-slate-800 line-clamp-1">
+                      {paymentMethod === "cod" && "Готовина при преземање"}
+                      {paymentMethod === "card" && "Картичка (Visa / Mastercard)"}
+                      {paymentMethod === "installments" && `Плаќање на ${installmentsCount} рати`}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsPaymentModalOpen(true)}
+                  className="text-orange-600 font-bold text-xs hover:underline shrink-0 ml-2"
+                >
+                  Промени
+                </button>
+              </div>
+
               {/* Terms check */}
-              <label className="flex items-start gap-2 text-[11px] text-slate-500 cursor-pointer pt-2">
+              <label className="flex items-start gap-2 text-[11px] text-slate-500 cursor-pointer pt-1">
                 <input
                   type="checkbox"
                   required
@@ -621,7 +679,7 @@ export const CheckoutPage = () => {
                 </span>
               </label>
 
-              {/* Place Order CTA */}
+              {/* Proceed to Payment Window CTA */}
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -631,10 +689,15 @@ export const CheckoutPage = () => {
                   <span>Обработка на нарачка...</span>
                 ) : (
                   <>
-                    Потврди нарачка <ArrowRight className="w-5 h-5" />
+                    <Lock className="w-5 h-5 text-orange-200" />
+                    <span>Избери начин на плаќање</span>
+                    <ArrowRight className="w-5 h-5" />
                   </>
                 )}
               </button>
+              <p className="text-[11px] text-center text-slate-400 font-medium">
+                🔒 Со клик се отвора прозорецот за сигурна наплата и избор на тип на плаќање
+              </p>
 
               <div className="flex items-center justify-center gap-2 text-slate-400 text-[11px] font-semibold text-center">
                 <ShieldCheck className="w-4 h-4 text-emerald-500" />
@@ -644,6 +707,20 @@ export const CheckoutPage = () => {
           </div>
         </div>
       </form>
+
+      {/* Dedicated Payment Selection & Gateway Modal */}
+      <PaymentGatewayModal
+        isOpen={isPaymentModalOpen}
+        onClose={() => setIsPaymentModalOpen(false)}
+        totalAmount={finalTotal}
+        currency={currency}
+        initialMethod={paymentMethod}
+        shippingAddress={{
+          street: formData.street,
+          city: formData.city,
+        }}
+        onConfirmOrder={handleFinalConfirmPayment}
+      />
     </div>
   );
 };
