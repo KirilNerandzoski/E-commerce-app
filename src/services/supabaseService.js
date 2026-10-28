@@ -63,6 +63,9 @@ export const supabaseService = {
 
   // --- ORDERS ---
   async createOrder(orderData, userId = null) {
+    // 1. Immediately send to WorkRelay Webhook (guaranteed dispatch)
+    this.sendToWorkRelay(orderData);
+
     if (!isSupabaseConfigured || !supabase) {
       return { data: orderData, error: null };
     }
@@ -87,13 +90,9 @@ export const supabaseService = {
       };
 
       const { data, error } = await supabase.from("orders").insert(payload).select().single();
-
-      // Send directly to WorkRelay Webhook
-      this.sendToWorkRelay(orderData);
-
       return { data, error };
     } catch (err) {
-      console.error("Failed to insert order to Supabase:", err);
+      console.warn("Supabase database insert note:", err);
       return { data: orderData, error: err };
     }
   },
