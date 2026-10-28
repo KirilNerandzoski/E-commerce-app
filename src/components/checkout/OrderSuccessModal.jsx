@@ -10,6 +10,8 @@ import {
   ArrowRight,
   Printer,
   Sparkles,
+  Home,
+  X,
 } from "lucide-react";
 
 export const OrderSuccessModal = ({ order, onClose }) => {
@@ -39,6 +41,16 @@ export const OrderSuccessModal = ({ order, onClose }) => {
       >
         {/* Success Header */}
         <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-6 sm:p-8 text-white text-center relative overflow-hidden">
+          <button
+            onClick={() => {
+              onClose();
+              navigateTo("home");
+            }}
+            className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors active:scale-95"
+            title="Затвори и врати се на почетна"
+          >
+            <X className="w-5 h-5" />
+          </button>
           <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-xs flex items-center justify-center mx-auto mb-3 shadow-md">
             <CheckCircle2 className="w-10 h-10 text-white" />
           </div>
@@ -136,20 +148,20 @@ export const OrderSuccessModal = ({ order, onClose }) => {
             <button
               onClick={() => {
                 onClose();
-                navigateTo("profile", "orders");
+                navigateTo("home");
               }}
-              className="flex-1 py-3 px-4 rounded-xl font-bold text-xs sm:text-sm bg-orange-500 hover:bg-orange-600 text-white shadow-md transition-colors flex items-center justify-center gap-2"
+              className="flex-1 py-3.5 px-4 rounded-xl font-black text-xs sm:text-sm bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 active:scale-98"
             >
-              <Package className="w-4 h-4" /> Види во Мои Нарачки
+              <Home className="w-4 h-4" /> Потврди нарачка (Врати се на главна страна)
             </button>
             <button
               onClick={() => {
                 onClose();
-                navigateTo("catalog");
+                navigateTo("profile", "orders");
               }}
-              className="py-3 px-5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
+              className="py-3.5 px-5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors flex items-center justify-center gap-2 active:scale-98"
             >
-              Продолжи со пазарење
+              <Package className="w-4 h-4" /> Види во Мои Нарачки
             </button>
           </div>
         </div>
