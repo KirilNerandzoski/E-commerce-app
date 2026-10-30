@@ -268,7 +268,7 @@ export const supabaseService = {
   },
 
   // --- WORKRELAY INVENTORY SYNC PUSH ---
-  async syncInventoryToWorkRelay(productsList = PRODUCTS) {
+  async syncInventoryToWorkRelay(productsList = PRODUCTS, options = {}) {
     try {
       const formatted = (productsList || PRODUCTS).map((p) => ({
         sku: p.id,
@@ -282,6 +282,22 @@ export const supabaseService = {
         updated_at: new Date().toISOString(),
       }));
 
+      const bodyPayload = {
+        products: formatted,
+      };
+
+      // Optional sync notifications metadata (synced_by & quiet)
+      if (options.syncedBy) {
+        bodyPayload.synced_by = {
+          name: String(options.syncedBy.name || "Главен Администратор").slice(0, 120),
+          role: String(options.syncedBy.role || "SuperAdmin").slice(0, 60),
+        };
+      }
+
+      if (options.quiet === true) {
+        bodyPayload.quiet = true;
+      }
+
       const res = await fetch(
         "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v1/inventory-webhook",
         {
@@ -292,7 +308,7 @@ export const supabaseService = {
               "Bearer wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2",
             "X-Store-Id": "pazarmax",
           },
-          body: JSON.stringify({ products: formatted }),
+          body: JSON.stringify(bodyPayload),
         }
       );
 

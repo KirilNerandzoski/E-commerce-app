@@ -45,6 +45,9 @@ export const ProfilePage = () => {
 
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncStatus, setSyncStatus] = useState(null);
+  const [isQuietMode, setIsQuietMode] = useState(false);
+  const [customSenderName, setCustomSenderName] = useState("Кирил Неранџоски");
+  const [customSenderRole, setCustomSenderRole] = useState("Admin");
 
   const handleSyncToWorkRelay = async () => {
     if (!isSuperAdmin) {
@@ -58,11 +61,25 @@ export const ProfilePage = () => {
     setIsSyncing(true);
     setSyncStatus(null);
     try {
-      const res = await supabaseService.syncInventoryToWorkRelay(PRODUCTS);
+      const syncOptions = {
+        quiet: isQuietMode,
+        syncedBy: isQuietMode
+          ? undefined
+          : {
+              name: customSenderName || "Главен Администратор",
+              role: customSenderRole || "SuperAdmin",
+            },
+      };
+
+      const res = await supabaseService.syncInventoryToWorkRelay(PRODUCTS, syncOptions);
       if (res.status === 200 || res.status === 201) {
+        const notifMsg = isQuietMode
+          ? "Синхронизирано тивко (Quiet: true - нема известување во Discord/Slack)."
+          : `Испратено со известување за: "${syncOptions.syncedBy.name} (${syncOptions.syncedBy.role})" во Discord/Slack!`;
+
         setSyncStatus({
           success: true,
-          message: `✅ Успешно синхронизирани ${res.data?.applied || PRODUCTS.length} производи во WorkRelay! Залихите се ажурирани.`,
+          message: `✅ Успешно синхронизирани ${res.data?.applied || PRODUCTS.length} производи во WorkRelay! ${notifMsg}`,
         });
       } else if (res.status === 202) {
         setSyncStatus({
@@ -72,7 +89,7 @@ export const ProfilePage = () => {
       } else {
         setSyncStatus({
           success: true,
-          message: `Синхронизацијата е иницирана (Статус: ${res.status}). Проверете во WorkRelay Inventory табот.`,
+          message: `Синхронизацијата е испратена (Статус: ${res.status}). Проверете во WorkRelay Inventory табот.`,
         });
       }
     } catch (err) {
@@ -567,7 +584,7 @@ export const ProfilePage = () => {
 
               {/* Push Sync Button or Forbidden Banner */}
               {isSuperAdmin ? (
-                <div className="p-5 rounded-2xl bg-indigo-50/50 border border-indigo-200 space-y-3">
+                <div className="p-5 rounded-2xl bg-indigo-50/50 border border-indigo-200 space-y-4">
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div>
                       <div className="flex items-center gap-2">
@@ -592,9 +609,63 @@ export const ProfilePage = () => {
                       <span>{isSyncing ? "Испраќање производи..." : "Sync to WorkRelay"}</span>
                     </button>
                   </div>
-                  <p className="text-[11px] text-slate-400">
-                    ℹ️ Доколку ова врати 202 "inventory_push_disabled", потребно е тимот на WorkRelay да го вклучи „Quick sync“ за pazarmax.
-                  </p>
+
+                  {/* Sync Notification Settings (synced_by & quiet) */}
+                  <div className="pt-3 border-t border-indigo-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">
+                        Име на испраќач (synced_by.name):
+                      </label>
+                      <input
+                        type="text"
+                        disabled={isQuietMode || isSyncing}
+                        value={customSenderName}
+                        onChange={(e) => setCustomSenderName(e.target.value)}
+                        placeholder="пр. Кирил Неранџоски"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-800 font-semibold outline-none focus:border-indigo-500 disabled:opacity-50"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">
+                        Улога (synced_by.role):
+                      </label>
+                      <input
+                        type="text"
+                        disabled={isQuietMode || isSyncing}
+                        value={customSenderRole}
+                        onChange={(e) => setCustomSenderRole(e.target.value)}
+                        placeholder="пр. Admin"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-800 font-semibold outline-none focus:border-indigo-500 disabled:opacity-50"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2 flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 mt-1">
+                      <div>
+                        <span className="font-bold text-slate-800 block">Тивка синхронизација (quiet: true)</span>
+                        <span className="text-[11px] text-slate-500">
+                          Не испраќа известувања во Discord / Slack на тимот на WorkRelay
+                        </span>
+                      </div>
+                      <input
+                        type="checkbox"
+                        checked={isQuietMode}
+                        onChange={(e) => setIsQuietMode(e.target.checked)}
+                        className="w-4 h-4 accent-indigo-600 cursor-pointer"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2 text-[11px] text-indigo-900 bg-indigo-100/60 p-2.5 rounded-xl">
+                      📢 <strong>Што ќе види тимот на WorkRelay во Discord/Slack:</strong>{" "}
+                      {isQuietMode ? (
+                        <span className="italic text-slate-600">Нема известување (quiet режим)</span>
+                      ) : (
+                        <span>
+                          <strong>{customSenderName || "Главен Администратор"} ({customSenderRole || "SuperAdmin"})</strong> has synced their products (pazarmax)
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className="p-6 rounded-2xl bg-red-50/60 border border-red-200 text-center space-y-3">
