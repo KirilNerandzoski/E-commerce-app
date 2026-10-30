@@ -220,7 +220,88 @@ export const supabaseService = {
       },
     });
 
+    if (!error && data?.user) {
+      this.sendCustomerToWorkRelay({
+        id: data.user.id,
+        email: data.user.email || email,
+        name: fullName,
+        phone: phone,
+        registeredAt: new Date().toISOString(),
+      });
+    }
+
     return { data, error };
+  },
+
+  // --- WORKRELAY CUSTOMER SIGNUP WEBHOOK ---
+  async sendCustomerToWorkRelay(customer) {
+    try {
+      const payload = {
+        event_id: `cust_${customer.id || Date.now()}:created`,
+        event_type: "customer.created",
+        occurred_at: new Date().toISOString(),
+        customer: {
+          external_id: String(customer.id || Date.now()),
+          email: customer.email,
+          name: customer.name || "Корисник",
+          phone: customer.phone || undefined,
+          registered_at: customer.registeredAt || new Date().toISOString(),
+        },
+      };
+
+      await fetch(
+        "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v1/customer-webhook",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2",
+            "X-Store-Id": "pazarmax",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+    } catch (err) {
+      console.warn("WorkRelay customer signup webhook failed:", err);
+    }
+  },
+
+  // --- WORKRELAY INVENTORY SYNC PUSH ---
+  async syncInventoryToWorkRelay(productsList = PRODUCTS) {
+    try {
+      const formatted = (productsList || PRODUCTS).map((p) => ({
+        sku: p.id,
+        name: p.title,
+        stock: p.stock ?? (p.inStock ? 10 : 0),
+        notify_on: 5,
+        price_minor: Math.round((Number(p.price) || 0) * 100),
+        currency: "MKD",
+        unit: "pcs",
+        category: p.category,
+        updated_at: new Date().toISOString(),
+      }));
+
+      const res = await fetch(
+        "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v1/inventory-webhook",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2",
+            "X-Store-Id": "pazarmax",
+          },
+          body: JSON.stringify({ products: formatted }),
+        }
+      );
+
+      const data = await res.json().catch(() => ({}));
+      return { status: res.status, data };
+    } catch (err) {
+      console.error("WorkRelay inventory sync error:", err);
+      return { status: 500, error: err };
+    }
   },
 
   async signIn(email, password) {
