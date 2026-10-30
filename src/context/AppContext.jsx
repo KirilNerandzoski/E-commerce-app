@@ -474,6 +474,20 @@ export const AppProvider = ({ children }) => {
     addToast("Профилот е успешно ажуриран!", "success");
   };
 
+  // Logout / SignOut
+  const logoutUser = async () => {
+    try {
+      if (supabaseService.isConfigured) {
+        await supabaseService.signOut();
+      }
+    } catch (err) {
+      console.warn("SignOut notice:", err);
+    }
+    localStorage.removeItem("pazarmax_user");
+    setUser(INITIAL_USER);
+    addToast("Успешно се одјавивте!", "info");
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -502,6 +516,7 @@ export const AppProvider = ({ children }) => {
         user,
         setUser,
         updateUserProfile,
+        logoutUser,
         currentView,
         currentProductId,
         navigateTo,

@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 
 export const ProfilePage = () => {
-  const { user, updateUserProfile, navigateTo, currency, wishlist, setIsAuthModalOpen, profileActiveTab, setProfileActiveTab } = useApp();
+  const { user, updateUserProfile, logoutUser, navigateTo, currency, wishlist, setIsAuthModalOpen, profileActiveTab, setProfileActiveTab } = useApp();
 
   const isSuperAdmin = user?.isSuperAdmin || user?.role === "superadmin" || user?.email?.toLowerCase() === "superadmin@pazarmax.mk";
 
@@ -105,14 +105,34 @@ export const ProfilePage = () => {
           <div>
             <div className="flex items-center gap-2 justify-center sm:justify-start">
               <h1 className="text-xl sm:text-2xl font-black">{user?.name || "Корисник"}</h1>
-              <span className="bg-amber-400/20 text-amber-300 text-[10px] font-black uppercase px-2 py-0.5 rounded-full border border-amber-400/30">
-                VIP Купувач
-              </span>
+              {isSuperAdmin ? (
+                <span className="bg-purple-500/30 text-purple-200 text-[10px] font-black uppercase px-2 py-0.5 rounded-full border border-purple-400/40">
+                  SuperAdmin
+                </span>
+              ) : (
+                <span className="bg-amber-400/20 text-amber-300 text-[10px] font-black uppercase px-2 py-0.5 rounded-full border border-amber-400/30">
+                  VIP Купувач
+                </span>
+              )}
             </div>
             <p className="text-xs text-slate-300 mt-1">{user?.email || ""} • {user?.phone || ""}</p>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Стандардна адреса: {user?.defaultAddress?.street || ""}, {user?.defaultAddress?.city || ""}
-            </p>
+            <div className="flex items-center gap-3 mt-2">
+              <button
+                type="button"
+                onClick={() => setIsAuthModalOpen(true)}
+                className="text-[11px] font-bold text-orange-400 hover:text-orange-300 underline cursor-pointer"
+              >
+                {isSuperAdmin ? "Промени сметка" : "Најави се со друга сметка"}
+              </button>
+              <span className="text-slate-500">•</span>
+              <button
+                type="button"
+                onClick={logoutUser}
+                className="text-[11px] font-bold text-red-400 hover:text-red-300 underline cursor-pointer"
+              >
+                Одјави се
+              </button>
+            </div>
           </div>
         </div>
 

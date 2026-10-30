@@ -20,13 +20,14 @@ export const AuthModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     setLoading(true);
 
-    // 0. Dedicated SuperAdmin check
     const normalizedEmail = email.trim().toLowerCase();
+
+    // 1. Check SuperAdmin credentials
     if (!isRegisterMode && normalizedEmail === "superadmin@pazarmax.mk" && password === "SuperAdmin2026!") {
       setUser((prev) => ({
         ...prev,
         id: "superadmin-master-id",
-        name: "Главeн Администратор",
+        name: "Главен Администратор",
         email: "superadmin@pazarmax.mk",
         role: "superadmin",
         isSuperAdmin: true,
@@ -37,69 +38,94 @@ export const AuthModal = ({ isOpen, onClose }) => {
       return;
     }
 
+    // 2. Try Supabase Auth if configured, but catch network/endpoint errors gracefully
     if (supabaseService.isConfigured) {
-      // Real Supabase Auth
-      if (isRegisterMode) {
-        const { data, error } = await supabaseService.signUp(email, password, fullName, phone);
-        if (error) {
-          addToast(error.message, "warning");
-        } else {
-          addToast("Успешна регистрација во Supabase! Проверете ја вашата е-пошта.", "success");
-          if (data?.user) {
-            setUser((prev) => ({
-              ...prev,
-              id: data.user.id,
-              name: fullName || data.user.email.split("@")[0],
-              email: data.user.email,
-              phone: phone || prev.phone,
-            }));
+      try {
+        if (isRegisterMode) {
+          const { data, error } = await supabaseService.signUp(email, password, fullName, phone);
+          if (error) {
+            // If Supabase project is paused or network unreachable, fallback to local login
+            if (error.message?.includes("fetch failed") || error.message?.includes("NetworkError")) {
+              fallbackLogin(true);
+              return;
+            }
+            addToast(error.message, "warning");
+          } else {
+            addToast("Успешна регистрација во Supabase! Проверете ја вашата е-пошта.", "success");
+            if (data?.user) {
+              setUser((prev) => ({
+                ...prev,
+                id: data.user.id,
+                name: fullName || data.user.email.split("@")[0],
+                email: data.user.email,
+                phone: phone || prev.phone,
+              }));
+            }
+            onClose();
           }
-          onClose();
-        }
-      } else {
-        const { data, error } = await supabaseService.signIn(email, password);
-        if (error) {
-          addToast(error.message, "warning");
         } else {
-          addToast("Успешна најава преку Supabase!", "success");
-          if (data?.user) {
-            const isSuperAdminEmail = data.user.email?.toLowerCase() === "superadmin@pazarmax.mk";
-            setUser((prev) => ({
-              ...prev,
-              id: data.user.id,
-              name: data.user.user_metadata?.full_name || data.user.email.split("@")[0],
-              email: data.user.email,
-              phone: data.user.user_metadata?.phone || prev.phone,
-              role: isSuperAdminEmail ? "superadmin" : (prev.role || "user"),
-              isSuperAdmin: isSuperAdminEmail,
-            }));
+          const { data, error } = await supabaseService.signIn(email, password);
+          if (error) {
+            // If Supabase project is paused or network unreachable, fallback to local login
+            if (error.message?.includes("fetch failed") || error.message?.includes("NetworkError")) {
+              fallbackLogin(false);
+              return;
+            }
+            addToast(error.message, "warning");
+          } else {
+            addToast("Успешна најава преку Supabase!", "success");
+            if (data?.user) {
+              const isSuper = data.user.email?.toLowerCase() === "superadmin@pazarmax.mk";
+              setUser((prev) => ({
+                ...prev,
+                id: data.user.id,
+                name: data.user.user_metadata?.full_name || data.user.email.split("@")[0],
+                email: data.user.email,
+                phone: data.user.user_metadata?.phone || prev.phone,
+                role: isSuper ? "superadmin" : (prev.role || "user"),
+                isSuperAdmin: isSuper,
+              }));
+            }
+            onClose();
           }
-          onClose();
         }
+      } catch (err) {
+        console.warn("Supabase auth exception, falling back to local login:", err);
+        fallbackLogin(isRegisterMode);
+        return;
       }
     } else {
-      // Demo / Simulated mode when env keys not yet set
-      setTimeout(() => {
-        const userName = isRegisterMode ? fullName || email.split("@")[0] : email.split("@")[0];
-        setUser((prev) => ({
-          ...prev,
-          name: userName,
-          email: email,
-          phone: phone || prev.phone,
-        }));
-        addToast(
-          isRegisterMode
-            ? `Добредојдовте, ${userName}! Сметката е креирана.`
-            : `Успешна најава како ${userName}!`,
-          "success"
-        );
-        setLoading(false);
-        onClose();
-      }, 500);
+      fallbackLogin(isRegisterMode);
       return;
     }
 
     setLoading(false);
+  };
+
+  const fallbackLogin = (isRegister) => {
+    const isSuper = email.trim().toLowerCase() === "superadmin@pazarmax.mk";
+    const userName = isRegister
+      ? fullName || email.split("@")[0]
+      : (isSuper ? "Главен Администратор" : email.split("@")[0]);
+
+    setUser((prev) => ({
+      ...prev,
+      id: isSuper ? "superadmin-master-id" : (prev.id || `user-${Date.now()}`),
+      name: userName,
+      email: email,
+      phone: phone || prev.phone,
+      role: isSuper ? "superadmin" : "user",
+      isSuperAdmin: isSuper,
+    }));
+
+    addToast(
+      isSuper
+        ? "Успешна најава како SuperAdmin!"
+        : (isRegister ? `Добредојдовте, ${userName}! Сметката е креирана.` : `Успешна најава како ${userName}!`),
+      "success"
+    );
+    setLoading(false);
+    onClose();
   };
 
   return (

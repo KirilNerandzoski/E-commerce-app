@@ -37,6 +37,7 @@ export const Navbar = () => {
     setIsCartDrawerOpen,
     setIsAuthModalOpen,
     user,
+    logoutUser,
     setCatalogFilters,
   } = useApp();
 
@@ -564,7 +565,7 @@ export const Navbar = () => {
                       <span>Поставки & Известувања</span>
                     </button>
 
-                    <div className="pt-1 mt-1 border-t border-slate-100">
+                    <div className="pt-1 mt-1 border-t border-slate-100 space-y-0.5">
                       <button
                         type="button"
                         onClick={() => {
@@ -574,7 +575,19 @@ export const Navbar = () => {
                         className="w-full text-left px-4 py-2.5 text-xs font-bold text-orange-600 hover:bg-orange-50 flex items-center gap-2.5 transition-colors"
                       >
                         <Lock className="w-4 h-4 text-orange-500" />
-                        <span>Најава / Сметка (Supabase)</span>
+                        <span>Најава со друга сметка / SuperAdmin</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsUserDropdownOpen(false);
+                          logoutUser();
+                        }}
+                        className="w-full text-left px-4 py-2 text-xs font-semibold text-slate-500 hover:text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors"
+                      >
+                        <LogOut className="w-4 h-4 text-slate-400" />
+                        <span>Одјави се</span>
                       </button>
                     </div>
                   </div>
