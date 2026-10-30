@@ -20,6 +20,23 @@ export const AuthModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     setLoading(true);
 
+    // 0. Dedicated SuperAdmin check
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!isRegisterMode && normalizedEmail === "superadmin@pazarmax.mk" && password === "SuperAdmin2026!") {
+      setUser((prev) => ({
+        ...prev,
+        id: "superadmin-master-id",
+        name: "Главeн Администратор",
+        email: "superadmin@pazarmax.mk",
+        role: "superadmin",
+        isSuperAdmin: true,
+      }));
+      addToast("Успешна најава како SuperAdmin! Доделени се целосни администраторски овластувања.", "success");
+      setLoading(false);
+      onClose();
+      return;
+    }
+
     if (supabaseService.isConfigured) {
       // Real Supabase Auth
       if (isRegisterMode) {
@@ -46,12 +63,15 @@ export const AuthModal = ({ isOpen, onClose }) => {
         } else {
           addToast("Успешна најава преку Supabase!", "success");
           if (data?.user) {
+            const isSuperAdminEmail = data.user.email?.toLowerCase() === "superadmin@pazarmax.mk";
             setUser((prev) => ({
               ...prev,
               id: data.user.id,
               name: data.user.user_metadata?.full_name || data.user.email.split("@")[0],
               email: data.user.email,
               phone: data.user.user_metadata?.phone || prev.phone,
+              role: isSuperAdminEmail ? "superadmin" : (prev.role || "user"),
+              isSuperAdmin: isSuperAdminEmail,
             }));
           }
           onClose();

@@ -125,12 +125,15 @@ export const AppProvider = ({ children }) => {
       const { data: authListener } = supabase.auth.onAuthStateChange(
         async (event, session) => {
           if (session?.user) {
+            const isSuper = session.user.email?.toLowerCase() === "superadmin@pazarmax.mk";
             setUser((prev) => ({
               ...prev,
               id: session.user.id,
               email: session.user.email,
               name: session.user.user_metadata?.full_name || prev.name,
               phone: session.user.user_metadata?.phone || prev.phone,
+              role: isSuper ? "superadmin" : prev.role,
+              isSuperAdmin: isSuper,
             }));
           }
         }

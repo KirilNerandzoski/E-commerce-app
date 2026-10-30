@@ -27,6 +27,8 @@ import {
 export const ProfilePage = () => {
   const { user, updateUserProfile, navigateTo, currency, wishlist, setIsAuthModalOpen, profileActiveTab, setProfileActiveTab } = useApp();
 
+  const isSuperAdmin = user?.isSuperAdmin || user?.role === "superadmin" || user?.email?.toLowerCase() === "superadmin@pazarmax.mk";
+
   const [activeTab, setActiveTab] = useState(profileActiveTab || "orders");
   React.useEffect(() => { if (profileActiveTab) setActiveTab(profileActiveTab); }, [profileActiveTab]); // 'orders' | 'info' | 'addresses' | 'settings'
   const [selectedOrderDetails, setSelectedOrderDetails] = useState(null);
@@ -45,6 +47,14 @@ export const ProfilePage = () => {
   const [syncStatus, setSyncStatus] = useState(null);
 
   const handleSyncToWorkRelay = async () => {
+    if (!isSuperAdmin) {
+      setSyncStatus({
+        success: false,
+        message: "⛔ Пристапот е забранет! Единствено SuperAdmin има привилегија за синхронизација со WorkRelay.",
+      });
+      return;
+    }
+
     setIsSyncing(true);
     setSyncStatus(null);
     try {
@@ -496,9 +506,22 @@ export const ProfilePage = () => {
                     Синхронизација на залихи (каталог со производи) со надворешниот WorkRelay систем
                   </p>
                 </div>
-                <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200">
-                  Store ID: pazarmax
-                </span>
+                <div className="flex items-center gap-2">
+                  {isSuperAdmin ? (
+                    <span className="bg-purple-100 text-purple-800 text-xs font-black px-3 py-1 rounded-full border border-purple-200 flex items-center gap-1">
+                      <ShieldCheck className="w-3.5 h-3.5 text-purple-700" />
+                      SuperAdmin Привилегија
+                    </span>
+                  ) : (
+                    <span className="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full border border-red-200 flex items-center gap-1">
+                      <Lock className="w-3.5 h-3.5 text-red-600" />
+                      Ограничен Пристап
+                    </span>
+                  )}
+                  <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200">
+                    Store ID: pazarmax
+                  </span>
+                </div>
               </div>
 
               {/* Status Banner */}
@@ -519,36 +542,63 @@ export const ProfilePage = () => {
                 </div>
               )}
 
-              {/* Push Sync Button */}
-              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div>
-                    <h3 className="font-black text-slate-900 text-sm">
-                      1. Директно испраќање („Sync to WorkRelay“ копче)
-                    </h3>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Го испраќа целиот каталог ({PRODUCTS.length} производи) на <code>POST /inventory-webhook</code>
-                    </p>
+              {/* Push Sync Button or Forbidden Banner */}
+              {isSuperAdmin ? (
+                <div className="p-5 rounded-2xl bg-indigo-50/50 border border-indigo-200 space-y-3">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-black text-slate-900 text-sm">
+                          1. Директно испраќање („Sync to WorkRelay“ копче)
+                        </h3>
+                        <span className="bg-indigo-600 text-white text-[10px] font-black uppercase px-2 py-0.5 rounded">
+                          SuperAdmin Only
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Го испраќа целиот каталог ({PRODUCTS.length} производи) на <code>POST /inventory-webhook</code>
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleSyncToWorkRelay}
+                      disabled={isSyncing}
+                      className="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-black text-xs rounded-xl shadow-lg shadow-indigo-600/25 transition-all flex items-center gap-2 disabled:opacity-50"
+                    >
+                      <RefreshCw className={`w-4 h-4 ${isSyncing ? "animate-spin" : ""}`} />
+                      <span>{isSyncing ? "Испраќање производи..." : "Sync to WorkRelay"}</span>
+                    </button>
                   </div>
+                  <p className="text-[11px] text-slate-400">
+                    ℹ️ Доколку ова врати 202 "inventory_push_disabled", потребно е тимот на WorkRelay да го вклучи „Quick sync“ за pazarmax.
+                  </p>
+                </div>
+              ) : (
+                <div className="p-6 rounded-2xl bg-red-50/60 border border-red-200 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">
+                    <Lock className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-base font-black text-red-900">
+                    403 Забранет пристап (Forbidden)
+                  </h3>
+                  <p className="text-xs text-red-700 max-w-md mx-auto leading-relaxed">
+                    Само <strong>SuperAdmin</strong> има привилегија за рачно синхронизирање на залихите со WorkRelay.
+                    За обични корисници ова копче е заклучено и недостапно.
+                  </p>
                   <button
                     type="button"
-                    onClick={handleSyncToWorkRelay}
-                    disabled={isSyncing}
-                    className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-2 disabled:opacity-50"
+                    onClick={() => setIsAuthModalOpen(true)}
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl shadow-sm transition-colors"
                   >
-                    <RefreshCw className={`w-4 h-4 ${isSyncing ? "animate-spin" : ""}`} />
-                    <span>{isSyncing ? "Испраќање..." : "Sync to WorkRelay"}</span>
+                    Најави се како SuperAdmin
                   </button>
                 </div>
-                <p className="text-[11px] text-slate-400">
-                  ℹ️ Доколку ова врати 202 "inventory_push_disabled", потребно е тимот на WorkRelay да го вклучи „Quick sync“ за pazarmax.
-                </p>
-              </div>
+              )}
 
               {/* Scheduled Pull Products Endpoint */}
-              <div className="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100 space-y-3 text-xs">
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 text-xs">
                 <div>
-                  <h3 className="font-black text-indigo-950 text-sm">
+                  <h3 className="font-black text-slate-900 text-sm">
                     2. Јавен Products Feed Endpoint (Препорачано за закажан Sync)
                   </h3>
                   <p className="text-slate-600 mt-1">
@@ -556,7 +606,7 @@ export const ProfilePage = () => {
                   </p>
                 </div>
 
-                <div className="p-3 bg-white rounded-xl border border-indigo-200 font-mono text-[11px] text-indigo-900 break-all select-all">
+                <div className="p-3 bg-white rounded-xl border border-slate-300 font-mono text-[11px] text-indigo-900 break-all select-all">
                   https://KirilNerandzoski.github.io/E-commerce-app/workrelay-products.json
                 </div>
 
