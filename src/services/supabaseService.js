@@ -6,15 +6,11 @@ const WORKRELAY_BASE_URL = "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v
 const PAZARMAX_WORKRELAY_KEY = "wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2";
 const PAZARMAX_STORE_ID = "pazarmax";
 
-// Both Supabase projects owned by the user (if workrelay_relay SQL is installed on either one, it will work!)
+// PazarMax's dedicated Supabase project
 const SUPABASE_RELAY_TARGETS = [
   {
     url: "https://qjxwnnrnxyznjymkfseb.supabase.co",
     anonKey: "sb_publishable_S415xwwZoyj7bet3paR2pQ_mFPEBlsL",
-  },
-  {
-    url: "https://svcixkmutoygzzcsepuf.supabase.co",
-    anonKey: "sb_publishable_i4Z0UTE9y3wZ3uvj1EoCEA_NVM9y7y1",
   },
 ];
 
