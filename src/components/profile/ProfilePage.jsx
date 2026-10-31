@@ -61,25 +61,36 @@ export const ProfilePage = () => {
     setIsSyncing(true);
     setSyncStatus(null);
     try {
+      const trimmedName = (customSenderName || "").trim();
+      const trimmedRole = (customSenderRole || "").trim();
+      const hasSender = Boolean(trimmedName || trimmedRole);
+
       const syncOptions = {
         quiet: isQuietMode,
-        syncedBy: isQuietMode
-          ? undefined
-          : {
-              name: customSenderName || "Главен Администратор",
-              role: customSenderRole || "SuperAdmin",
-            },
+        syncedBy: !isQuietMode && hasSender
+          ? {
+              ...(trimmedName ? { name: trimmedName } : {}),
+              ...(trimmedRole ? { role: trimmedRole } : {}),
+            }
+          : undefined,
       };
 
       const res = await supabaseService.syncInventoryToWorkRelay(PRODUCTS, syncOptions);
       if (res.status === 200 || res.status === 201) {
         const notifMsg = isQuietMode
-          ? "Синхронизирано во тивок режим (quiet: true)."
-          : `Испратено известување: "${syncOptions.syncedBy.name} (${syncOptions.syncedBy.role})" за pazarmax.`;
+          ? "Синхронизирано во тивок режим (quiet: true — без Discord/Slack известување)."
+          : hasSender
+            ? `Испратено известување од: "${trimmedName || ""}${trimmedName && trimmedRole ? ` (${trimmedRole})` : trimmedRole || ""}" за pazarmax.`
+            : "Испратено известување од име на продавницата: pazarmax has synced their products.";
 
         setSyncStatus({
           success: true,
-          message: `✅ Успешно синхронизирани ${res.data?.applied || PRODUCTS.length} производи во WorkRelay! ${notifMsg}`,
+          message: `✅ Успешно синхронизирани ${res.data?.applied || PRODUCTS.length} производи директно во WorkRelay преку Supabase Relay! ${notifMsg}`,
+        });
+      } else if (res.needsSupabaseSql) {
+        setSyncStatus({
+          success: false,
+          message: "⚠️ Потребно е еднаш да ја извршите кратката SQL функција (public.workrelay_relay) во Supabase SQL Editor за прелистувачот да праќа директно преку Supabase серверот без CORS блокада.",
         });
       } else if (res.status === 202) {
         setSyncStatus({
@@ -88,14 +99,14 @@ export const ProfilePage = () => {
         });
       } else {
         setSyncStatus({
-          success: true,
-          message: `✅ Барањето за синхронизација е успешно испратено до WorkRelay! Залихите за сите ${PRODUCTS.length} производи се ажурирани.`,
+          success: false,
+          message: `Грешка при синхронизација (Статус: ${res.status}).`,
         });
       }
     } catch (err) {
       setSyncStatus({
-        success: true,
-        message: `✅ Каталогот со ${PRODUCTS.length} производи е подготвен и ажуриран за WorkRelay.`,
+        success: false,
+        message: `Грешка: ${err.message}`,
       });
     } finally {
       setIsSyncing(false);

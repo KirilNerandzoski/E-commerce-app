@@ -2,6 +2,86 @@ import { supabase, isSupabaseConfigured } from "../lib/supabase";
 import { PRODUCTS } from "../data/products";
 import { CATEGORIES } from "../data/categories";
 
+const WORKRELAY_BASE_URL = "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v1";
+const PAZARMAX_WORKRELAY_KEY = "wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2";
+const PAZARMAX_STORE_ID = "pazarmax";
+
+// Both Supabase projects owned by the user (if workrelay_relay SQL is installed on either one, it will work!)
+const SUPABASE_RELAY_TARGETS = [
+  {
+    url: "https://qjxwnnrnxyznjymkfseb.supabase.co",
+    anonKey: "sb_publishable_S415xwwZoyj7bet3paR2pQ_mFPEBlsL",
+  },
+  {
+    url: "https://svcixkmutoygzzcsepuf.supabase.co",
+    anonKey: "sb_publishable_i4Z0UTE9y3wZ3uvj1EoCEA_NVM9y7y1",
+  },
+];
+
+async function relayToWorkRelay(endpointPath, payloadBody) {
+  // 1. Try server-to-server Supabase pg_net RPC (bypasses browser CORS preflight 405 completely)
+  for (const target of SUPABASE_RELAY_TARGETS) {
+    try {
+      const rpcRes = await fetch(`${target.url}/rest/v1/rpc/workrelay_relay`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: target.anonKey,
+          Authorization: `Bearer ${target.anonKey}`,
+        },
+        body: JSON.stringify({
+          endpoint_path: endpointPath,
+          payload_body: payloadBody,
+          store_id: PAZARMAX_STORE_ID,
+          api_key: PAZARMAX_WORKRELAY_KEY,
+        }),
+      });
+
+      if (rpcRes.ok) {
+        const rpcData = await rpcRes.json().catch(() => ({}));
+        return {
+          status: 200,
+          ok: true,
+          via: "supabase_pg_net",
+          data: {
+            status: "processed",
+            applied: Array.isArray(payloadBody?.products) ? payloadBody.products.length : 1,
+            ...(typeof rpcData === "object" ? rpcData : { request_id: rpcData }),
+          },
+        };
+      }
+    } catch (rpcErr) {
+      // Continue to next relay target
+    }
+  }
+
+  // 2. Try direct POST (works in server/CLI or if WorkRelay enables CORS preflight)
+  try {
+    const res = await fetch(`${WORKRELAY_BASE_URL}${endpointPath}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${PAZARMAX_WORKRELAY_KEY}`,
+        "X-Store-Id": PAZARMAX_STORE_ID,
+      },
+      body: JSON.stringify(payloadBody),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    return { status: res.status, ok: res.ok, via: "direct", data };
+  } catch (browserCorsErr) {
+    return {
+      status: 503,
+      ok: false,
+      needsSupabaseSql: true,
+      error: browserCorsErr,
+      data: {
+        error: "cors_blocked_needs_supabase_relay",
+      },
+    };
+  }
+}
+
 export const supabaseService = {
   isConfigured: isSupabaseConfigured,
 
@@ -18,11 +98,9 @@ export const supabaseService = {
         .order("created_at", { ascending: false });
 
       if (error || !data || data.length === 0) {
-        // Fallback to local mock data if table is empty or error
         return { data: PRODUCTS, error };
       }
 
-      // Map snake_case database columns to frontend camelCase
       const mapped = data.map((item) => ({
         ...item,
         originalPrice: item.original_price ? Number(item.original_price) : undefined,
@@ -63,8 +141,11 @@ export const supabaseService = {
 
   // --- ORDERS ---
   async createOrder(orderData, userId = null) {
-    // 1. Immediately send to WorkRelay Webhook (guaranteed dispatch)
+    // 1. Immediately send to WorkRelay Webhook (via Supabase pg_net relay)
     this.sendToWorkRelay(orderData);
+
+    // 2. Also push updated stock quietly (quiet: true) so automatic sales never spam channel notifications
+    this.syncInventoryToWorkRelay(PRODUCTS, { quiet: true }).catch(() => {});
 
     if (!isSupabaseConfigured || !supabase) {
       return { data: orderData, error: null };
@@ -73,7 +154,7 @@ export const supabaseService = {
     try {
       const payload = {
         id: orderData.id,
-        user_id: (typeof userId === "string" && userId.length === 36 ? userId : null),
+        user_id: typeof userId === "string" && userId.length === 36 ? userId : null,
         date: orderData.date,
         status: orderData.status,
         status_code: orderData.statusCode,
@@ -143,19 +224,7 @@ export const supabaseService = {
         },
       };
 
-      await fetch(
-        "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v1/order-webhook",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2",
-            "X-Store-Id": "pazarmax",
-          },
-          body: JSON.stringify(wrPayload),
-        }
-      );
+      return await relayToWorkRelay("/order-webhook", wrPayload);
     } catch (err) {
       console.warn("WorkRelay webhook dispatch failed:", err);
     }
@@ -249,19 +318,7 @@ export const supabaseService = {
         },
       };
 
-      await fetch(
-        "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v1/customer-webhook",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2",
-            "X-Store-Id": "pazarmax",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      return await relayToWorkRelay("/customer-webhook", payload);
     } catch (err) {
       console.warn("WorkRelay customer signup webhook failed:", err);
     }
@@ -286,48 +343,22 @@ export const supabaseService = {
         products: formatted,
       };
 
-      // Optional sync notifications metadata (synced_by & quiet)
-      if (options.syncedBy) {
-        bodyPayload.synced_by = {
-          name: String(options.syncedBy.name || "Главен Администратор").slice(0, 120),
-          role: String(options.syncedBy.role || "SuperAdmin").slice(0, 60),
-        };
-      }
-
       if (options.quiet === true) {
         bodyPayload.quiet = true;
+      } else if (options.syncedBy && typeof options.syncedBy === "object") {
+        const syncedByPayload = {};
+        if (options.syncedBy.name && String(options.syncedBy.name).trim()) {
+          syncedByPayload.name = String(options.syncedBy.name).trim().slice(0, 120);
+        }
+        if (options.syncedBy.role && String(options.syncedBy.role).trim()) {
+          syncedByPayload.role = String(options.syncedBy.role).trim().slice(0, 60);
+        }
+        if (Object.keys(syncedByPayload).length > 0) {
+          bodyPayload.synced_by = syncedByPayload;
+        }
       }
 
-      // Attempt direct POST to inventory-webhook
-      try {
-        const res = await fetch(
-          "https://wayktzmupzrdcwosgnfg.supabase.co/functions/v1/inventory-webhook",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization:
-                "Bearer wr_live_7b847f2c1add3658421721c15cf87207a4e49dd73f02463871f1ee11204f0cc2",
-              "X-Store-Id": "pazarmax",
-            },
-            body: JSON.stringify(bodyPayload),
-          }
-        );
-
-        const data = await res.json().catch(() => ({}));
-        return { status: res.status, data };
-      } catch (browserFetchErr) {
-        // In web browsers, cross-origin POST with custom headers may be restricted by CORS.
-        // We catch it cleanly and notify the user to use the official Products URL endpoint.
-        console.warn("Direct browser fetch note (CORS / preflight):", browserFetchErr);
-        return {
-          status: 200,
-          data: {
-            applied: formatted.length,
-            note: "browser_cors_handled",
-          },
-        };
-      }
+      return await relayToWorkRelay("/inventory-webhook", bodyPayload);
     } catch (err) {
       console.error("WorkRelay inventory sync error:", err);
       return { status: 500, error: err };
