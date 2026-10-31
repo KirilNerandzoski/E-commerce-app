@@ -668,6 +668,16 @@ export const ProfilePage = () => {
                         </span>
                       )}
                     </div>
+
+                    {/* Direct Curl / Script command for manual terminal sync */}
+                    <div className="sm:col-span-2 pt-2 border-t border-indigo-100 space-y-1.5">
+                      <span className="font-bold text-slate-800 block text-[11px]">
+                        💻 Рачно стартување со еден клик од вашиот компјутер:
+                      </span>
+                      <p className="text-[11px] text-slate-500">
+                        На вашата работна површина во фолдерот е креирана датотеката <code>sync-workrelay.bat</code>. Со двоен клик на неа, самите директно ги испраќате производите во WorkRelay без CORS ограничувања од прелистувачот!
+                      </p>
+                    </div>
                   </div>
                 </div>
               ) : (
