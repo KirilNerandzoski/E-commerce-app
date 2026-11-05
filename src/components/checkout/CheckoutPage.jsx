@@ -31,14 +31,29 @@ export const CheckoutPage = () => {
 
   // Form States
   const [formData, setFormData] = useState({
-    fullName: user?.name || "Александар Петровски",
-    phone: user?.phone || "+389 70 234 567",
-    email: user?.email || "aleksandar.petrovski@demo.mk",
-    street: user?.defaultAddress?.street || "бул. Партизански Одреди бр. 42/3-12",
-    city: user?.defaultAddress?.city || "Скопје",
-    postalCode: user?.defaultAddress?.postalCode || "1000",
+    fullName: user?.name || "",
+    phone: user?.phone || "",
+    email: user?.email || "",
+    street: user?.defaultAddress?.street || "",
+    city: user?.defaultAddress?.city || "",
+    postalCode: user?.defaultAddress?.postalCode || "",
     note: "",
   });
+
+  // Keep form data in sync if user logs in during checkout
+  React.useEffect(() => {
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        fullName: prev.fullName || user.name || "",
+        phone: prev.phone || user.phone || "",
+        email: prev.email || user.email || "",
+        street: prev.street || user.defaultAddress?.street || "",
+        city: prev.city || user.defaultAddress?.city || "",
+        postalCode: prev.postalCode || user.defaultAddress?.postalCode || "",
+      }));
+    }
+  }, [user]);
 
   // Delivery Method: 'standard' (150 or free), 'direct' (250), 'paketomat' (100)
   const [deliveryMethod, setDeliveryMethod] = useState("direct");

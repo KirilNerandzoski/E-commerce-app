@@ -128,6 +128,40 @@ export const ProfilePage = () => {
     });
   };
 
+  if (!user) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-sm max-w-lg mx-auto">
+          <div className="w-20 h-20 rounded-3xl bg-orange-100 text-orange-600 flex items-center justify-center mx-auto mb-6 shadow-md shadow-orange-500/10">
+            <User className="w-10 h-10" />
+          </div>
+          <h1 className="text-2xl font-black text-slate-800 mb-2">
+            Добредојдовте во PazarMax
+          </h1>
+          <p className="text-sm text-slate-500 mb-8 leading-relaxed">
+            Моментално не сте најавени. Најавете се на вашата сметка за пристап до историјата на нарачки, зачуваните адреси и кориснички поставки.
+          </p>
+
+          <div className="space-y-3">
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
+              className="w-full py-3.5 px-6 rounded-2xl bg-orange-500 hover:bg-orange-600 active:scale-98 text-white font-bold text-sm shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Lock className="w-4 h-4" />
+              <span>Најави се / Регистрирај се</span>
+            </button>
+            <button
+              onClick={() => navigateTo("catalog")}
+              className="w-full py-3 px-6 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer"
+            >
+              Разгледај каталог на производи
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Profile Header Banner */}

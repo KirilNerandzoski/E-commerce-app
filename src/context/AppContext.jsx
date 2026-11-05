@@ -64,9 +64,9 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     try {
       const saved = localStorage.getItem("pazarmax_user");
-      return saved ? JSON.parse(saved) : INITIAL_USER;
+      return saved ? JSON.parse(saved) : null;
     } catch {
-      return INITIAL_USER;
+      return null;
     }
   });
 
@@ -127,14 +127,17 @@ export const AppProvider = ({ children }) => {
           if (session?.user) {
             const isSuper = session.user.email?.toLowerCase() === "superadmin@pazarmax.mk";
             setUser((prev) => ({
-              ...prev,
+              ...(prev || {}),
               id: session.user.id,
               email: session.user.email,
-              name: session.user.user_metadata?.full_name || prev.name,
-              phone: session.user.user_metadata?.phone || prev.phone,
-              role: isSuper ? "superadmin" : prev.role,
+              name: session.user.user_metadata?.full_name || prev?.name || session.user.email.split("@")[0],
+              phone: session.user.user_metadata?.phone || prev?.phone || "",
+              role: isSuper ? "superadmin" : (prev?.role || "user"),
               isSuperAdmin: isSuper,
             }));
+          } else if (event === "SIGNED_OUT") {
+            setUser(null);
+            localStorage.removeItem("pazarmax_user");
           }
         }
       );
@@ -163,7 +166,11 @@ export const AppProvider = ({ children }) => {
   }, [recentlyViewed]);
 
   useEffect(() => {
-    localStorage.setItem("pazarmax_user", JSON.stringify(user));
+    if (user) {
+      localStorage.setItem("pazarmax_user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("pazarmax_user");
+    }
   }, [user]);
 
   useEffect(() => {
@@ -377,8 +384,8 @@ export const AppProvider = ({ children }) => {
       status: "Во обработка",
       statusCode: "processing",
       trackingNumber: `PM-MK-${Math.floor(100000 + Math.random() * 900000)}`,
-      customerName: orderData.customerName || user?.name || "Александар Петровски",
-      customerEmail: orderData.customerEmail || user?.email || "aleksandar.petrovski@demo.mk",
+      customerName: orderData.customerName || user?.name || "Гостин Купувач",
+      customerEmail: orderData.customerEmail || user?.email || "gostin@pazarmax.mk",
       deliveryMethod: orderData.deliveryMethodName || "Стандардна достава",
       paymentMethod: orderData.paymentMethodName || "Готовина при достава",
       address: `${orderData.address.street}, ${orderData.address.city}`,
@@ -402,11 +409,14 @@ export const AppProvider = ({ children }) => {
       ],
     };
 
-    // Save to local user state
-    setUser((prev) => ({
-      ...prev,
-      orders: [newOrder, ...(Array.isArray(prev?.orders) ? prev.orders : [])],
-    }));
+    // Save to local user state if user is logged in
+    setUser((prev) => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        orders: [newOrder, ...(Array.isArray(prev?.orders) ? prev.orders : [])],
+      };
+    });
 
     // Also persist to Supabase if configured
     if (supabaseService.isConfigured) {
@@ -456,10 +466,13 @@ export const AppProvider = ({ children }) => {
 
   // Update user profile info (with Supabase sync)
   const updateUserProfile = (updatedData) => {
-    setUser((prev) => ({
-      ...prev,
-      ...updatedData,
-    }));
+    setUser((prev) => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        ...updatedData,
+      };
+    });
 
     if (supabaseService.isConfigured && user?.id) {
       supabaseService.updateProfile(user.id, {
@@ -484,7 +497,7 @@ export const AppProvider = ({ children }) => {
       console.warn("SignOut notice:", err);
     }
     localStorage.removeItem("pazarmax_user");
-    setUser(INITIAL_USER);
+    setUser(null);
     addToast("Успешно се одјавивте!", "info");
   };
 

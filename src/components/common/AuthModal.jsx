@@ -25,12 +25,16 @@ export const AuthModal = ({ isOpen, onClose }) => {
     // 1. Check SuperAdmin credentials
     if (!isRegisterMode && normalizedEmail === "superadmin@pazarmax.mk" && password === "SuperAdmin2026!") {
       setUser((prev) => ({
-        ...prev,
+        ...(prev || {}),
         id: "superadmin-master-id",
         name: "Главен Администратор",
         email: "superadmin@pazarmax.mk",
+        phone: prev?.phone || "+389 75 895 655",
         role: "superadmin",
         isSuperAdmin: true,
+        orders: prev?.orders || [],
+        savedAddresses: prev?.savedAddresses || [],
+        preferences: prev?.preferences || {},
       }));
       addToast("Успешна најава како SuperAdmin! Доделени се целосни администраторски овластувања.", "success");
       setLoading(false);
@@ -54,11 +58,13 @@ export const AuthModal = ({ isOpen, onClose }) => {
             addToast("Успешна регистрација во Supabase! Проверете ја вашата е-пошта.", "success");
             if (data?.user) {
               setUser((prev) => ({
-                ...prev,
+                ...(prev || {}),
                 id: data.user.id,
                 name: fullName || data.user.email.split("@")[0],
                 email: data.user.email,
-                phone: phone || prev.phone,
+                phone: phone || prev?.phone || "",
+                role: "user",
+                isSuperAdmin: false,
               }));
             }
             onClose();
@@ -77,12 +83,12 @@ export const AuthModal = ({ isOpen, onClose }) => {
             if (data?.user) {
               const isSuper = data.user.email?.toLowerCase() === "superadmin@pazarmax.mk";
               setUser((prev) => ({
-                ...prev,
+                ...(prev || {}),
                 id: data.user.id,
-                name: data.user.user_metadata?.full_name || data.user.email.split("@")[0],
+                name: data.user.user_metadata?.full_name || (isSuper ? "Главен Администратор" : data.user.email.split("@")[0]),
                 email: data.user.email,
-                phone: data.user.user_metadata?.phone || prev.phone,
-                role: isSuper ? "superadmin" : (prev.role || "user"),
+                phone: data.user.user_metadata?.phone || prev?.phone || "",
+                role: isSuper ? "superadmin" : (prev?.role || "user"),
                 isSuperAdmin: isSuper,
               }));
             }
@@ -109,13 +115,16 @@ export const AuthModal = ({ isOpen, onClose }) => {
       : (isSuper ? "Главен Администратор" : email.split("@")[0]);
 
     setUser((prev) => ({
-      ...prev,
-      id: isSuper ? "superadmin-master-id" : (prev.id || `user-${Date.now()}`),
+      ...(prev || {}),
+      id: isSuper ? "superadmin-master-id" : (prev?.id || `user-${Date.now()}`),
       name: userName,
       email: email,
-      phone: phone || prev.phone,
+      phone: phone || prev?.phone || "",
       role: isSuper ? "superadmin" : "user",
       isSuperAdmin: isSuper,
+      orders: prev?.orders || [],
+      savedAddresses: prev?.savedAddresses || [],
+      preferences: prev?.preferences || {},
     }));
 
     addToast(

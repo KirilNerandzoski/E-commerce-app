@@ -471,129 +471,150 @@ export const Navbar = () => {
               )}
             </button>
 
-            {/* User Profile Dropdown */}
-            <div ref={userDropdownRef} className="relative">
+            {/* User Profile / Login */}
+            {user ? (
+              <div ref={userDropdownRef} className="relative">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsUserDropdownOpen((prev) => !prev);
+                  }}
+                  className="flex items-center gap-2 p-2 hover:bg-slate-100 rounded-xl transition-colors text-left cursor-pointer select-none"
+                >
+                  <div className="w-8 h-8 rounded-full bg-orange-100 text-orange-700 border border-orange-200 flex items-center justify-center overflow-hidden font-bold text-xs">
+                    {user.name ? user.name.slice(0, 2).toUpperCase() : "AP"}
+                  </div>
+                  <div className="hidden xl:flex flex-col">
+                    <span className="text-[11px] text-slate-400 font-medium leading-none">
+                      Здраво,
+                    </span>
+                    <span className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[100px]">
+                      {user.name ? user.name.split(" ")[0] : "Корисник"}
+                    </span>
+                  </div>
+                  <ChevronDown className={`w-3.5 h-3.5 text-slate-400 hidden xl:block transition-transform duration-200 ${isUserDropdownOpen ? "rotate-180 text-orange-500" : ""}`} />
+                </button>
+
+                {/* Dropdown Menu */}
+                {isUserDropdownOpen && (
+                  <div
+                    className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200 py-2 z-[100] animate-in fade-in duration-150"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="px-4 py-2.5 border-b border-slate-100">
+                      <p className="text-xs font-bold text-slate-800">{user.name || "Корисник"}</p>
+                      <p className="text-[11px] text-slate-400 truncate">{user.email || ""}</p>
+                    </div>
+
+                    <div className="py-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsUserDropdownOpen(false);
+                          navigateTo("profile", "orders");
+                        }}
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 flex items-center justify-between transition-colors"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <Package className="w-4 h-4 text-orange-500" />
+                          <span>Мои нарачки</span>
+                        </div>
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">
+                          {user.orders?.length || 0}
+                        </span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsUserDropdownOpen(false);
+                          navigateTo("profile", "info");
+                        }}
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 flex items-center gap-2.5 transition-colors"
+                      >
+                        <User className="w-4 h-4 text-slate-400" />
+                        <span>Податоци за профил & Статистика</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsUserDropdownOpen(false);
+                          navigateTo("wishlist");
+                        }}
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 flex items-center justify-between transition-colors"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <Heart className="w-4 h-4 text-red-500" />
+                          <span>Листа на омилени</span>
+                        </div>
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-red-600">
+                          {wishlist.length}
+                        </span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsUserDropdownOpen(false);
+                          navigateTo("profile", "preferences");
+                        }}
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 flex items-center gap-2.5 transition-colors"
+                      >
+                        <Settings className="w-4 h-4 text-slate-400" />
+                        <span>Поставки & Известувања</span>
+                      </button>
+
+                      <div className="pt-1 mt-1 border-t border-slate-100 space-y-0.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsUserDropdownOpen(false);
+                            setIsAuthModalOpen(true);
+                          }}
+                          className="w-full text-left px-4 py-2.5 text-xs font-bold text-orange-600 hover:bg-orange-50 flex items-center gap-2.5 transition-colors"
+                        >
+                          <Lock className="w-4 h-4 text-orange-500" />
+                          <span>Најава со друга сметка / SuperAdmin</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsUserDropdownOpen(false);
+                            logoutUser();
+                          }}
+                          className="w-full text-left px-4 py-2 text-xs font-semibold text-slate-500 hover:text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors"
+                        >
+                          <LogOut className="w-4 h-4 text-slate-400" />
+                          <span>Одјави се</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
               <button
                 type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsUserDropdownOpen((prev) => !prev);
-                }}
-                className="flex items-center gap-2 p-2 hover:bg-slate-100 rounded-xl transition-colors text-left cursor-pointer select-none"
+                onClick={() => setIsAuthModalOpen(true)}
+                className="flex items-center gap-2 p-2 hover:bg-orange-50 rounded-xl transition-colors text-left cursor-pointer group"
+                title="Најави се или регистрирај се"
               >
-                <div className="w-8 h-8 rounded-full bg-orange-100 text-orange-700 border border-orange-200 flex items-center justify-center overflow-hidden font-bold text-xs">
-                  {user?.name ? user.name.slice(0, 2).toUpperCase() : "AP"}
+                <div className="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-orange-100 text-slate-600 group-hover:text-orange-600 flex items-center justify-center transition-colors">
+                  <User className="w-4.5 h-4.5" />
                 </div>
                 <div className="hidden xl:flex flex-col">
                   <span className="text-[11px] text-slate-400 font-medium leading-none">
-                    Здраво,
+                    Добредојдовте,
                   </span>
-                  <span className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[100px]">
-                    {user?.name ? user.name.split(" ")[0] : "Корисник"}
+                  <span className="text-xs font-bold text-slate-800 group-hover:text-orange-600 leading-tight transition-colors">
+                    Најави се
                   </span>
                 </div>
-                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 hidden xl:block transition-transform duration-200 ${isUserDropdownOpen ? "rotate-180 text-orange-500" : ""}`} />
               </button>
-
-              {/* Dropdown Menu */}
-              {isUserDropdownOpen && (
-                <div
-                  className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200 py-2 z-[100] animate-in fade-in duration-150"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="px-4 py-2.5 border-b border-slate-100">
-                    <p className="text-xs font-bold text-slate-800">{user?.name || "Корисник"}</p>
-                    <p className="text-[11px] text-slate-400 truncate">{user?.email || ""}</p>
-                  </div>
-
-                  <div className="py-1">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsUserDropdownOpen(false);
-                        navigateTo("profile", "orders");
-                      }}
-                      className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 flex items-center justify-between transition-colors"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Package className="w-4 h-4 text-orange-500" />
-                        <span>Мои нарачки</span>
-                      </div>
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">
-                        {user?.orders?.length || 0}
-                      </span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsUserDropdownOpen(false);
-                        navigateTo("profile", "info");
-                      }}
-                      className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 flex items-center gap-2.5 transition-colors"
-                    >
-                      <User className="w-4 h-4 text-slate-400" />
-                      <span>Податоци за профил & Статистика</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsUserDropdownOpen(false);
-                        navigateTo("wishlist");
-                      }}
-                      className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 flex items-center justify-between transition-colors"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Heart className="w-4 h-4 text-red-500" />
-                        <span>Листа на омилени</span>
-                      </div>
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-red-600">
-                        {wishlist.length}
-                      </span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsUserDropdownOpen(false);
-                        navigateTo("profile", "preferences");
-                      }}
-                      className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-orange-50 hover:text-orange-600 flex items-center gap-2.5 transition-colors"
-                    >
-                      <Settings className="w-4 h-4 text-slate-400" />
-                      <span>Поставки & Известувања</span>
-                    </button>
-
-                    <div className="pt-1 mt-1 border-t border-slate-100 space-y-0.5">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsUserDropdownOpen(false);
-                          setIsAuthModalOpen(true);
-                        }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-bold text-orange-600 hover:bg-orange-50 flex items-center gap-2.5 transition-colors"
-                      >
-                        <Lock className="w-4 h-4 text-orange-500" />
-                        <span>Најава со друга сметка / SuperAdmin</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsUserDropdownOpen(false);
-                          logoutUser();
-                        }}
-                        className="w-full text-left px-4 py-2 text-xs font-semibold text-slate-500 hover:text-red-600 hover:bg-red-50 flex items-center gap-2.5 transition-colors"
-                      >
-                        <LogOut className="w-4 h-4 text-slate-400" />
-                        <span>Одјави се</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            )}
 
             {/* Shopping Cart Button */}
             <button
@@ -710,7 +731,7 @@ export const Navbar = () => {
                 }}
                 className="w-full mt-3 py-2.5 px-3 bg-orange-50 hover:bg-orange-100 text-orange-600 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-colors border border-orange-200"
               >
-                <Lock className="w-4 h-4" /> Најава / Регистрација (Supabase)
+                <Lock className="w-4 h-4" /> {user ? `Најавен: ${user.name || user.email}` : "Најава / Регистрација"}
               </button>
 
               {/* All Categories list */}
