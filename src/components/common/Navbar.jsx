@@ -686,43 +686,60 @@ export const Navbar = () => {
       </div>
 
       {/* 3. Horizontal Secondary Category Bar (Desktop) */}
-      <div className={`hidden lg:block ${theme === "light" ? "bg-[#F4EFEA] border-t border-[#E5DDD2] text-[#5C544B]" : "bg-[#100E0D] border-t border-[#231F1B] text-[#A8A095]"} px-4 sm:px-8 transition-colors`}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto no-scrollbar py-2 text-xs font-semibold">
-          <div className="flex items-center gap-1">
-            {CATEGORIES.slice(0, 8).map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => handleCategorySelect(cat.id)}
-                className={`px-3 py-1.5 rounded-lg transition-all whitespace-nowrap cursor-pointer ${
-                  theme === "light"
-                    ? "text-[#5C544B] hover:bg-[#EAE3D8] hover:text-[#C84E25]"
-                    : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#E26D46]"
-                }`}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
+      <div className={`hidden lg:block ${theme === "light" ? "bg-[#F4EFEA] border-t border-[#E5DDD2] text-[#5C544B]" : "bg-[#100E0D] border-t border-[#231F1B] text-[#A8A095]"} px-4 sm:px-6 transition-colors`}>
+        <div className="max-w-7xl mx-auto py-1.5 flex items-center justify-center">
+          <div className="grid grid-cols-9 gap-1.5 w-full max-w-6xl items-center justify-center">
+            {[
+              { id: "electronics", name: "Електроника & Телефони", shortName: "Електроника" },
+              { id: "computers", name: "Компјутери & Гејминг", shortName: "Компјутери" },
+              { id: "appliances", name: "Бела техника & Апарати", shortName: "Бела техника" },
+              { id: "home-living", name: "Мебел & Домување", shortName: "Домување" },
+              { id: "fashion", name: "Облека & Мода", shortName: "Мода" },
+              { id: "beauty", name: "Убавина & Лична нега", shortName: "Убавина" },
+              { id: "sports", name: "Спорт & Опрема", shortName: "Спорт" },
+              { id: "groceries", name: "Маркет & Кафе", shortName: "Маркет" },
+              {
+                id: "deals",
+                name: "Супер Попусти %",
+                shortName: "% Попусти",
+                isSpecial: true,
+                onClick: () => {
+                  setCatalogFilters((prev) => ({ ...prev, discountOnly: true, category: "all" }));
+                  navigateTo("catalog");
+                },
+              },
+            ].map((item) => {
+              if (item.isSpecial) {
+                return (
+                  <button
+                    key={item.id}
+                    onClick={item.onClick}
+                    className="w-full flex items-center justify-center gap-1 py-1.5 px-1 rounded-xl bg-[#E26D46]/15 text-[#E26D46] border border-[#E26D46]/30 hover:bg-[#E26D46]/25 font-black text-xs transition-all cursor-pointer text-center truncate"
+                    title={item.name}
+                  >
+                    <Percent className="w-3.5 h-3.5 shrink-0" />
+                    <span className="hidden xl:inline truncate">{item.name}</span>
+                    <span className="xl:hidden truncate">{item.shortName}</span>
+                  </button>
+                );
+              }
 
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={() => {
-                setCatalogFilters((prev) => ({ ...prev, discountOnly: true, category: "all" }));
-                navigateTo("catalog");
-              }}
-              className="flex items-center gap-1 px-3 py-1 rounded-lg bg-[#E26D46]/15 text-[#E26D46] border border-[#E26D46]/30 hover:bg-[#E26D46]/25 font-bold transition-colors cursor-pointer"
-            >
-              <Percent className="w-3.5 h-3.5" /> Супер Попусти %
-            </button>
-            <button
-              onClick={() => {
-                setCatalogFilters((prev) => ({ ...prev, directOnly: true, category: "all" }));
-                navigateTo("catalog");
-              }}
-              className="flex items-center gap-1 px-3 py-1 rounded-lg bg-[#D49A55]/15 text-[#D49A55] border border-[#D49A55]/30 hover:bg-[#D49A55]/25 font-black tracking-wide transition-colors cursor-pointer"
-            >
-              <Zap className="w-3.5 h-3.5 fill-[#D49A55] text-[#D49A55]" /> Aura Direkt 24h
-            </button>
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleCategorySelect(item.id)}
+                  className={`w-full flex items-center justify-center py-1.5 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer text-center truncate ${
+                    theme === "light"
+                      ? "text-[#5C544B] hover:bg-[#EAE3D8] hover:text-[#C84E25]"
+                      : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
+                  }`}
+                  title={item.name}
+                >
+                  <span className="hidden xl:inline truncate">{item.name}</span>
+                  <span className="xl:hidden truncate">{item.shortName}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
