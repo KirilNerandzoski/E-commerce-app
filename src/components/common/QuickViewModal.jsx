@@ -8,6 +8,9 @@ import {
   Heart,
   Zap,
   Check,
+  ChevronLeft,
+  ChevronRight,
+  SlidersHorizontal,
 } from "lucide-react";
 
 export const QuickViewModal = () => {
@@ -17,6 +20,8 @@ export const QuickViewModal = () => {
     addToCart,
     toggleWishlist,
     isInWishlist,
+    toggleCompare,
+    isInCompare,
     navigateTo,
   } = useApp();
 
@@ -58,7 +63,7 @@ export const QuickViewModal = () => {
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Gallery Side */}
           <div className="p-6 bg-[#171412] flex flex-col justify-between border-b md:border-b-0 md:border-r border-[#2A2520]">
-            <div className="relative aspect-square w-full rounded-2xl bg-[#FAF7F2] p-4 flex items-center justify-center border border-[#E6DFD5] overflow-hidden">
+            <div className="relative aspect-square w-full rounded-2xl bg-[#FAF7F2] p-4 flex items-center justify-center border border-[#E6DFD5] overflow-hidden group select-none">
               <img
                 src={product.images[activeImageIndex] || product.images[0]}
                 alt={product.title}
@@ -69,11 +74,33 @@ export const QuickViewModal = () => {
                   -{product.discount}%
                 </span>
               )}
+
+              {/* Prev / Next Arrows */}
+              {product.images.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setActiveImageIndex((prev) => (prev > 0 ? prev - 1 : product.images.length - 1))}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#141210]/85 hover:bg-[#141210] text-[#FAF6F0] flex items-center justify-center shadow-md transition-all border border-[#2A2520] cursor-pointer"
+                    aria-label="Претходна"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveImageIndex((prev) => (prev < product.images.length - 1 ? prev + 1 : 0))}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#141210]/85 hover:bg-[#141210] text-[#FAF6F0] flex items-center justify-center shadow-md transition-all border border-[#2A2520] cursor-pointer"
+                    aria-label="Следна"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </>
+              )}
             </div>
 
             {/* Thumbnails */}
             {product.images.length > 1 && (
-              <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-1">
+              <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-1 no-scrollbar">
                 {product.images.map((img, idx) => (
                   <button
                     key={idx}
@@ -94,15 +121,33 @@ export const QuickViewModal = () => {
           {/* Details Side */}
           <div className="p-6 sm:p-8 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-[#D49A55] uppercase tracking-wider">
-                  {product.brand}
-                </span>
-                {product.isDirectDelivery && (
-                  <span className="inline-flex items-center gap-1 bg-[#D49A55]/20 text-[#D49A55] border border-[#D49A55]/30 text-[10px] font-black px-2 py-0.5 rounded uppercase">
-                    <Zap className="w-3 h-3 fill-[#D49A55]" /> Direkt 24h
+              {/* Brand & Filters/Compare Logo bar placed directly above Product Title */}
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-[#D49A55] uppercase tracking-wider">
+                    {product.brand}
                   </span>
-                )}
+                  {product.isDirectDelivery && (
+                    <span className="inline-flex items-center gap-1 bg-[#D49A55]/20 text-[#D49A55] border border-[#D49A55]/30 text-[10px] font-black px-2 py-0.5 rounded uppercase">
+                      <Zap className="w-3 h-3 fill-[#D49A55]" /> Direkt 24h
+                    </span>
+                  )}
+                </div>
+
+                {/* Filters / Compare logo button positioned directly above product name */}
+                <button
+                  type="button"
+                  onClick={() => toggleCompare(product.id)}
+                  className={`px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer ${
+                    isInCompare(product.id)
+                      ? "bg-[#D49A55] text-[#141210] border-[#D49A55]"
+                      : "bg-[#25211D] border-[#2A2520] text-[#A8A095] hover:text-[#D49A55] hover:border-[#D49A55]/50"
+                  }`}
+                  title="Спореди производ"
+                >
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-[#D49A55]" />
+                  <span>{isInCompare(product.id) ? "Во споредба" : "Спореди"}</span>
+                </button>
               </div>
 
               <h2 className="text-xl sm:text-2xl font-bold text-[#FAF6F0] mt-2 leading-snug">

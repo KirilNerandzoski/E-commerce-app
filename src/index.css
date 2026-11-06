@@ -11,6 +11,7 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -29,6 +30,130 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #3D352E;
+}
+
+/* ========================================================
+   LIGHT MODE: Quiet Luxury Alabaster & Warm Amber Palette
+   ======================================================== */
+html.light,
+[data-theme="light"],
+.light {
+  color-scheme: light;
+}
+
+.light body {
+  background-color: #FBF9F5 !important;
+  color: #1A1614 !important;
+}
+
+/* Scrollbar in Light Mode */
+.light ::-webkit-scrollbar-track {
+  background: #FBF9F5;
+}
+.light ::-webkit-scrollbar-thumb {
+  background: #D8D0C5;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #C4BAAE;
+}
+
+/* Background mappings */
+.light .bg-\[\#141210\] {
+  background-color: #FBF9F5 !important;
+}
+.light .bg-\[\#141210\]\/95 {
+  background-color: rgba(251, 249, 245, 0.95) !important;
+}
+.light .bg-\[\#141210\]\/90 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+.light .bg-\[\#141210\]\/80 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+.light .bg-\[\#141210\]\/60 {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+.light .bg-\[\#0D0B0A\] {
+  background-color: #F1ECE4 !important;
+}
+.light .bg-\[\#171412\] {
+  background-color: #FFFFFF !important;
+}
+.light .bg-\[\#1D1A17\] {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 4px 20px -2px rgba(26, 22, 20, 0.04), 0 1px 3px rgba(26, 22, 20, 0.03);
+}
+.light .bg-\[\#25211D\] {
+  background-color: #F2ECE4 !important;
+}
+.light .bg-\[\#2A2520\] {
+  background-color: #E6DFD5 !important;
+}
+.light .bg-\[\#FAF7F2\] {
+  background-color: #F7F3EC !important;
+}
+
+/* Hover background mappings */
+.light .hover\:bg-\[\#25211D\]:hover {
+  background-color: #EAE3D9 !important;
+}
+.light .hover\:bg-\[\#2A2520\]:hover {
+  background-color: #DFD7CB !important;
+}
+.light .hover\:bg-\[\#1D1A17\]:hover {
+  background-color: #F7F3EC !important;
+}
+
+/* Borders */
+.light .border-\[\#2A2520\] {
+  border-color: #E5DDD2 !important;
+}
+.light .border-\[\#1F1C18\] {
+  border-color: #E2DAD0 !important;
+}
+.light .border-\[\#38322B\] {
+  border-color: #D6CCC0 !important;
+}
+.light .border-\[\#E6DFD5\] {
+  border-color: #DDD4C7 !important;
+}
+
+/* Text colors */
+.light .text-\[\#FAF6F0\],
+.light .text-\[\#F5EFEB\],
+.light .text-\[\#E8E2D8\] {
+  color: #1A1614 !important;
+}
+.light .text-\[\#A8A095\] {
+  color: #5C544B !important;
+}
+.light .text-\[\#8C8377\] {
+  color: #7A6F62 !important;
+}
+.light .text-\[\#F5BA58\] {
+  color: #B45309 !important; /* High-contrast warm honey amber on light surfaces */
+}
+.light .text-\[\#D49A55\] {
+  color: #9E651E !important;
+}
+
+/* Form inputs & controls in light mode */
+.light input,
+.light select,
+.light textarea {
+  background-color: #FFFFFF !important;
+  color: #1A1614 !important;
+  border-color: #E2DAD0 !important;
+}
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #9C9184 !important;
+}
+.light input:focus,
+.light select:focus,
+.light textarea:focus {
+  border-color: #C84E25 !important;
 }
 
 @keyframes slideInUp {

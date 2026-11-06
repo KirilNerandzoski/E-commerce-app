@@ -77,6 +77,8 @@ export const PRODUCTS = [
     images: [
       "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800&auto=format&fit=crop&q=80",
     ],
     description:
       "Samsung Galaxy S24 Ultra ја носи новата ера на Galaxy AI. Со вградено S Pen пенкало, 200MP камера со систем за ноќна фотографија и Snapdragon 8 Gen 3 процесор оптимизиран за ултимативен мултитаскинг.",
@@ -126,6 +128,8 @@ export const PRODUCTS = [
     images: [
       "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&auto=format&fit=crop&q=80",
     ],
     description:
       "Водечко во класата активно поништување на бучава со 2 процесори и 8 микрофони. Прецизен инженеринг на звук со LDAC поддршка и батерија до 30 часа со брзо полнење (3 минути за 3 часа слушање).",
@@ -172,6 +176,8 @@ export const PRODUCTS = [
     images: [
       "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1510017803434-a899398421b3?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=800&auto=format&fit=crop&q=80",
     ],
     description:
       "Попаметен, посветол и помоќен со новиот S9 SiP чип. Новиот гест со двојно допирање (Double Tap) овозможува ракување без допирање на екранот. Напредни сензори за срцев ритам, ЕКГ и кислород во крвта.",
@@ -220,6 +226,7 @@ export const PRODUCTS = [
     images: [
       "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&auto=format&fit=crop&q=80",
     ],
     description:
       "Ултимативен гејминг лаптоп напојуван од Intel Core i7 14-та генерација и NVIDIA GeForce RTX 4070 со полна моќност од 140W TGP. ColdFront 5.0 ладење со масивни топлински цевки и 240Hz PureSight Gaming дисплеј со 100% sRGB покриеност.",
@@ -358,7 +365,9 @@ export const PRODUCTS = [
     isNew: false,
     freeShipping: true,
     images: [
-      "https://images.unsplash.com/photo-1585515320310-259814833e62?w=800&auto=format&fit=crop&q=80",
+      "https://plus.unsplash.com/premium_photo-1672192166833-c8ae84e5e127?w=800&auto=format&fit=crop&q=80",
+      "https://plus.unsplash.com/premium_photo-1711725196376-9f1bb3db3093?w=800&auto=format&fit=crop&q=80",
+      "https://plus.unsplash.com/premium_photo-1711752902713-e49e0ecb5c97?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&auto=format&fit=crop&q=80",
     ],
     description:
@@ -623,6 +632,8 @@ export const PRODUCTS = [
     images: [
       "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=800&auto=format&fit=crop&q=80",
     ],
     description:
       "Nike Air Max 270 се инспирирани од две легендарни икони на голема воздушна комора: Air Max 180 и Air Max 93. Имаат најголема пета со воздух на Nike досега, за супер меко газење што изгледа толку неверојатно колку што се чувствува.",
@@ -941,6 +952,8 @@ export const PRODUCTS = [
     images: [
       "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&auto=format&fit=crop&q=80",
     ],
     description:
       "Италијанска кафе симфонија од 1956 година. 100% одбрани зрна Arabica од Централна и Јужна Америка со слатки цветни и овошни ноти и златна свилена крема.",

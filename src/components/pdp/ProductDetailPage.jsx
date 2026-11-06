@@ -5,6 +5,7 @@ import { formatPrice, getInstallmentPrice } from "../../utils/formatters";
 import { StarRating } from "../product/StarRating";
 import { ProductCard } from "../product/ProductCard";
 import {
+  ChevronLeft,
   ChevronRight,
   Heart,
   SlidersHorizontal,
@@ -149,12 +150,43 @@ export const ProductDetailPage = () => {
         {/* Left Column: Gallery (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
           {/* Main Photo with Badges & Action Overlays */}
-          <div className="relative aspect-square w-full rounded-3xl bg-[#FAF7F2] border border-[#E6DFD5] p-6 flex items-center justify-center shadow-md overflow-hidden group">
+          <div className="relative aspect-square w-full rounded-3xl bg-[#FAF7F2] border border-[#E6DFD5] p-6 flex items-center justify-center shadow-md overflow-hidden group select-none">
             <img
               src={product.images[activeImageIndex] || product.images[0]}
-              alt={product.title}
-              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+              alt={`${product.title} - поглед ${activeImageIndex + 1}`}
+              className="w-full h-full object-contain transition-all duration-300 group-hover:scale-105"
             />
+
+            {/* Left / Right Arrow navigation to view sides of the product */}
+            {product.images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setActiveImageIndex((prev) => (prev > 0 ? prev - 1 : product.images.length - 1))}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#141210]/85 hover:bg-[#141210] text-[#FAF6F0] flex items-center justify-center shadow-xl transition-all opacity-85 hover:opacity-100 hover:scale-110 border border-[#2A2520] cursor-pointer z-20"
+                  aria-label="Претходен агол"
+                  title="Претходен агол"
+                >
+                  <ChevronLeft className="w-5 h-5 text-[#FAF6F0]" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveImageIndex((prev) => (prev < product.images.length - 1 ? prev + 1 : 0))}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#141210]/85 hover:bg-[#141210] text-[#FAF6F0] flex items-center justify-center shadow-xl transition-all opacity-85 hover:opacity-100 hover:scale-110 border border-[#2A2520] cursor-pointer z-20"
+                  aria-label="Следен агол"
+                  title="Следен агол"
+                >
+                  <ChevronRight className="w-5 h-5 text-[#FAF6F0]" />
+                </button>
+              </>
+            )}
+
+            {/* Angle Indicator Pill */}
+            {product.images.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 px-3 py-1 rounded-full bg-[#141210]/85 text-[#FAF6F0] text-xs font-bold backdrop-blur-xs border border-[#2A2520]/50 flex items-center gap-1.5 shadow-md">
+                <span>Агол {activeImageIndex + 1} / {product.images.length}</span>
+              </div>
+            )}
 
             {/* Badges on Top Left */}
             <div className="absolute top-4 left-4 flex flex-col gap-1.5 z-10">
@@ -170,7 +202,7 @@ export const ProductDetailPage = () => {
               )}
             </div>
 
-            {/* Floating Actions on Top Right */}
+            {/* Floating Actions on Top Right (Wishlist & Share only) */}
             <div className="absolute top-4 right-4 flex flex-col gap-2 z-10">
               <button
                 onClick={() => toggleWishlist(product.id)}
@@ -185,18 +217,6 @@ export const ProductDetailPage = () => {
               </button>
 
               <button
-                onClick={() => toggleCompare(product.id)}
-                className={`w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-colors cursor-pointer border ${
-                  inCompare
-                    ? "bg-[#D49A55] text-[#141210] font-bold border-[#D49A55]"
-                    : "bg-[#141210]/90 text-[#FAF6F0] hover:text-[#D49A55] hover:bg-[#1D1A17] border-[#2A2520]"
-                }`}
-                title="Спореди"
-              >
-                <SlidersHorizontal className="w-4 h-4" />
-              </button>
-
-              <button
                 onClick={handleShare}
                 className="w-10 h-10 rounded-full bg-[#141210]/90 text-[#FAF6F0] hover:text-[#E26D46] hover:bg-[#1D1A17] flex items-center justify-center shadow-md transition-colors border border-[#2A2520] cursor-pointer"
                 title="Сподели"
@@ -206,26 +226,35 @@ export const ProductDetailPage = () => {
             </div>
           </div>
 
-          {/* Thumbnails Row */}
+          {/* Multi-angle Thumbnails Row */}
           {product.images.length > 1 && (
-            <div className="flex items-center gap-3 overflow-x-auto pb-2">
-              {product.images.map((img, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveImageIndex(idx)}
-                  className={`w-20 h-20 rounded-2xl border-2 p-1 bg-[#FAF7F2] shrink-0 transition-all cursor-pointer ${
-                    activeImageIndex === idx
-                      ? "border-[#E26D46] ring-2 ring-[#E26D46]/30"
-                      : "border-[#E6DFD5] hover:border-[#D49A55]"
-                  }`}
-                >
-                  <img
-                    src={img}
-                    alt="thumbnail"
-                    className="w-full h-full object-contain"
-                  />
-                </button>
-              ))}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs text-[#A8A095] px-1 font-semibold">
+                <span>Сите агли & страни на производот:</span>
+                <span className="text-[#D49A55]">{activeImageIndex + 1} од {product.images.length}</span>
+              </div>
+              <div className="flex items-center gap-2.5 overflow-x-auto pb-2 no-scrollbar">
+                {product.images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImageIndex(idx)}
+                    className={`relative w-20 h-20 rounded-2xl border-2 p-1.5 bg-[#FAF7F2] shrink-0 transition-all cursor-pointer shadow-xs ${
+                      activeImageIndex === idx
+                        ? "border-[#E26D46] ring-2 ring-[#E26D46]/40 scale-102"
+                        : "border-[#E6DFD5] hover:border-[#D49A55] opacity-75 hover:opacity-100"
+                    }`}
+                  >
+                    <img
+                      src={img}
+                      alt={`Поглед ${idx + 1}`}
+                      className="w-full h-full object-contain"
+                    />
+                    <span className="absolute bottom-1 right-1 text-[9px] font-black bg-[#141210]/85 text-[#FAF6F0] px-1 rounded">
+                      {idx + 1}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -233,11 +262,36 @@ export const ProductDetailPage = () => {
         {/* Right Column: Details & Actions (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
           <div className="bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-6 sm:p-8 shadow-2xl text-[#FAF6F0]">
-            {/* Brand & Stock */}
-            <div className="flex items-center justify-between gap-2 pb-2">
-              <span className="text-xs font-black text-[#D49A55] uppercase tracking-widest">
-                {product.brand}
-              </span>
+            {/* Brand & Filters/Compare Logo bar placed directly above Product Title */}
+            <div className="flex items-center justify-between gap-2 pb-2 flex-wrap">
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => navigateTo("catalog", { brand: product.brand })}
+                  className="text-xs font-black text-[#D49A55] hover:text-[#E26D46] uppercase tracking-widest transition-colors cursor-pointer flex items-center gap-1"
+                  title={`Филтрирај по бренд ${product.brand}`}
+                >
+                  <span>{product.brand}</span>
+                </button>
+
+                <span className="text-[#8C8377]">•</span>
+
+                {/* Filters / Compare logo button positioned directly above product name */}
+                <button
+                  type="button"
+                  onClick={() => toggleCompare(product.id)}
+                  className={`px-3 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border cursor-pointer ${
+                    inCompare
+                      ? "bg-[#D49A55] text-[#141210] border-[#D49A55]"
+                      : "bg-[#25211D] text-[#FAF6F0] border-[#2A2520] hover:border-[#D49A55]"
+                  }`}
+                  title={inCompare ? "Отстрани од споредба" : "Спореди / Филтрирај производ"}
+                >
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-[#D49A55]" />
+                  <span>{inCompare ? "Во споредба" : "Спореди"}</span>
+                </button>
+              </div>
+
               <span
                 className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
                   product.inStock ? "bg-emerald-950/40 text-emerald-400 border border-emerald-800/40" : "bg-red-950/40 text-red-400 border border-red-800/40"
@@ -436,7 +490,7 @@ export const ProductDetailPage = () => {
               <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#25211D] border border-[#2A2520]">
                 <Package className="w-4 h-4 text-[#D49A55] shrink-0" />
                 <span>
-                  <strong className="text-[#FAF6F0]">Paketomat 0-24:</strong> Подигни кога сакаш
+                  <strong className="text-[#FAF6F0]">AuraBox 0-24:</strong> Подигни кога сакаш
                 </span>
               </div>
             </div>

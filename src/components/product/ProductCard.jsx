@@ -75,9 +75,17 @@ export const ProductCard = ({ product, layout = "grid" }) => {
         <div className="flex-1 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between gap-2">
-              <span className="text-xs font-bold text-[#D49A55] uppercase tracking-wider">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigateTo("catalog", { brand: product.brand });
+                }}
+                className="text-xs font-bold text-[#D49A55] hover:text-[#E26D46] uppercase tracking-wider transition-colors cursor-pointer"
+                title={`Филтрирај по бренд ${product.brand}`}
+              >
                 {product.brand}
-              </span>
+              </button>
               <div className="flex items-center gap-1.5">
                 <button
                   type="button"
@@ -85,7 +93,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                     e.stopPropagation();
                     toggleWishlist(product.id);
                   }}
-                  className={`p-1.5 rounded-lg border transition-colors ${
+                  className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
                     inWishlist
                       ? "bg-[#E26D46]/20 border-[#E26D46] text-[#E26D46]"
                       : "bg-[#25211D] border-[#2A2520] text-[#A8A095] hover:text-[#E26D46] hover:border-[#E26D46]/50"
@@ -100,14 +108,15 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                     e.stopPropagation();
                     toggleCompare(product.id);
                   }}
-                  className={`p-1.5 rounded-lg border transition-colors ${
+                  className={`px-2.5 py-1 rounded-lg border text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer ${
                     inCompare
-                      ? "bg-[#D49A55]/20 border-[#D49A55] text-[#D49A55]"
+                      ? "bg-[#D49A55] text-[#141210] border-[#D49A55]"
                       : "bg-[#25211D] border-[#2A2520] text-[#A8A095] hover:text-[#D49A55] hover:border-[#D49A55]/50"
                   }`}
-                  title="Спореди"
+                  title="Спореди производ"
                 >
-                  <SlidersHorizontal className="w-4 h-4" />
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-[#D49A55]" />
+                  <span>{inCompare ? "Во споредба" : "Спореди"}</span>
                 </button>
               </div>
             </div>
@@ -186,13 +195,32 @@ export const ProductCard = ({ product, layout = "grid" }) => {
     >
       <div>
         {/* Image Pod with Badges & Floating Actions */}
-        <div className="relative w-full aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden flex items-center justify-center p-3 sm:p-4 mb-3 border border-[#E6DFD5]">
+        <div className="relative w-full aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden flex items-center justify-center p-3 sm:p-4 mb-3 border border-[#E6DFD5] group/img">
           <img
             src={product.images[0]}
             alt={product.title}
-            className="w-full h-full object-contain group-hover:scale-108 transition-transform duration-300"
+            className={`w-full h-full object-contain transition-all duration-300 ${
+              product.images.length > 1 ? "group-hover/img:opacity-0" : "group-hover:scale-108"
+            }`}
             loading="lazy"
           />
+
+          {/* Secondary side image on hover */}
+          {product.images.length > 1 && (
+            <img
+              src={product.images[1]}
+              alt={`${product.title} - страничен поглед`}
+              className="absolute inset-0 w-full h-full object-contain p-3 sm:p-4 transition-all duration-300 opacity-0 group-hover/img:opacity-100 group-hover/img:scale-105 pointer-events-none"
+              loading="lazy"
+            />
+          )}
+
+          {/* Side Count Indicator Pill */}
+          {product.images.length > 1 && (
+            <div className="absolute bottom-2 left-2 z-10 px-2 py-0.5 rounded-md bg-[#141210]/80 text-[10px] font-bold text-[#FAF6F0] backdrop-blur-xs flex items-center gap-1 border border-[#2A2520]/40 pointer-events-none shadow-xs">
+              <span>📷 {product.images.length} агли</span>
+            </div>
+          )}
 
           {/* Badges on Top Left */}
           <div className="absolute top-2 left-2 flex flex-col gap-1 z-10 pointer-events-none">
@@ -213,7 +241,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
             )}
           </div>
 
-          {/* Floating Actions on Top Right */}
+          {/* Floating Actions on Top Right (Wishlist & Quick View only) */}
           <div className="absolute top-2 right-2 flex flex-col gap-1.5 z-10">
             <button
               type="button"
@@ -229,22 +257,6 @@ export const ProductCard = ({ product, layout = "grid" }) => {
               title="Омилени"
             >
               <Heart className={`w-4 h-4 ${inWishlist ? "fill-white" : ""}`} />
-            </button>
-
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleCompare(product.id);
-              }}
-              className={`w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${
-                inCompare
-                  ? "bg-[#D49A55] text-[#141210] font-bold"
-                  : "bg-[#141210]/90 backdrop-blur-sm text-[#FAF6F0] hover:text-[#D49A55] hover:bg-[#1D1A17] border border-[#2A2520]"
-              }`}
-              title="Спореди"
-            >
-              <SlidersHorizontal className="w-3.5 h-3.5" />
             </button>
 
             <button
@@ -270,10 +282,39 @@ export const ProductCard = ({ product, layout = "grid" }) => {
           )}
         </div>
 
-        {/* Brand & Title */}
-        <div className="text-[11px] font-bold text-[#D49A55] uppercase tracking-wider mb-1">
-          {product.brand}
+        {/* Brand & Filters Logo above Title */}
+        <div className="flex items-center justify-between gap-1 mb-1.5">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateTo("catalog", { brand: product.brand });
+            }}
+            className="text-[11px] font-bold text-[#D49A55] hover:text-[#E26D46] uppercase tracking-wider transition-colors cursor-pointer text-left truncate"
+            title={`Филтрирај по бренд ${product.brand}`}
+          >
+            {product.brand}
+          </button>
+
+          {/* Filters / Compare logo button positioned directly above product name */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleCompare(product.id);
+            }}
+            className={`px-2 py-0.5 rounded-lg text-[10px] font-bold flex items-center gap-1 transition-all border cursor-pointer shrink-0 ${
+              inCompare
+                ? "bg-[#D49A55] text-[#141210] border-[#D49A55]"
+                : "bg-[#25211D] text-[#A8A095] hover:text-[#FAF6F0] border-[#2A2520] hover:border-[#D49A55]/50"
+            }`}
+            title={inCompare ? "Отстрани од споредба" : "Спореди / Филтер"}
+          >
+            <SlidersHorizontal className="w-3 h-3 text-[#D49A55]" />
+            <span>{inCompare ? "Во споредба" : "Спореди"}</span>
+          </button>
         </div>
+
         <h3 className="font-bold text-[#FAF6F0] text-sm leading-snug group-hover:text-[#E26D46] transition-colors line-clamp-2 min-h-[2.5rem]">
           {product.title}
         </h3>

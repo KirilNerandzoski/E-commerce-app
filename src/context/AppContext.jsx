@@ -9,10 +9,44 @@ import { supabase } from "../lib/supabase";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  // Products list (can receive new user reviews live)
+  // Theme: 'dark' (Smoked Espresso & Raw Honey) | 'light' (Quiet Luxury Warm Alabaster)
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("aura_theme") || "dark";
+  });
+
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      const next = prev === "dark" ? "light" : "dark";
+      localStorage.setItem("aura_theme", next);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    if (theme === "light") {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    }
+  }, [theme]);
+
+  // Products list (updates when fresh product catalog is provided)
   const [products, setProducts] = useState(() => {
-    const saved = localStorage.getItem("pazarmax_products");
-    return saved ? JSON.parse(saved) : PRODUCTS;
+    try {
+      const version = localStorage.getItem("aura_products_version");
+      if (version === "aura_v2_gallery") {
+        const saved = localStorage.getItem("aura_products");
+        if (saved) return JSON.parse(saved);
+      }
+    } catch {
+      // fallback
+    }
+    localStorage.setItem("aura_products_version", "aura_v2_gallery");
+    localStorage.setItem("aura_products", JSON.stringify(PRODUCTS));
+    return PRODUCTS;
   });
 
   // Currency
@@ -214,6 +248,7 @@ export const AppProvider = ({ children }) => {
       } else if (typeof payload === "object") {
         setCatalogFilters((prev) => ({
           ...prev,
+          ...(payload.brand ? { selectedBrands: [payload.brand], category: "all", subcategory: null } : {}),
           ...payload,
         }));
       }
@@ -506,6 +541,9 @@ export const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         products,
+        theme,
+        toggleTheme,
+        setTheme,
         currency,
         setCurrency,
         cart,

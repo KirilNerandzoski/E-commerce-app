@@ -21,6 +21,8 @@ import {
   ShieldCheck,
   Percent,
   Lock,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 export const Navbar = () => {
@@ -39,6 +41,8 @@ export const Navbar = () => {
     user,
     logoutUser,
     setCatalogFilters,
+    theme,
+    toggleTheme,
   } = useApp();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -164,6 +168,27 @@ export const Navbar = () => {
                 € EUR
               </button>
             </div>
+
+            {/* Light / Dark Mode Toggle */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1D1A17] hover:bg-[#25211D] border border-[#2A2520] text-xs font-bold transition-all cursor-pointer shadow-xs"
+              title={theme === "light" ? "Префрли на темен режим" : "Префрли на светол режим"}
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-[#D49A55]" />
+                  <span className="hidden md:inline text-[11px] text-[#5C544B]">Темен</span>
+                </>
+              ) : (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-[#F5BA58]" />
+                  <span className="hidden md:inline text-[11px] text-[#A8A095]">Светол</span>
+                </>
+              )}
+            </button>
 
             <div className="hidden sm:flex items-center gap-1 text-[#A8A095] hover:text-[#F5EFEB] transition-colors cursor-pointer text-[11px]">
               <Phone className="w-3 h-3 text-[#D49A55]" />
@@ -723,6 +748,28 @@ export const Navbar = () => {
                     € EUR
                   </button>
                 </div>
+              </div>
+
+              {/* Theme on mobile */}
+              <div className="mt-2 flex items-center justify-between p-2 rounded-xl bg-[#1D1A17] border border-[#2A2520]">
+                <span className="text-xs font-semibold text-[#A8A095]">Тема:</span>
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#25211D] text-xs font-bold transition-all border border-[#2A2520]"
+                >
+                  {theme === "light" ? (
+                    <>
+                      <Moon className="w-3.5 h-3.5 text-[#D49A55]" />
+                      <span className="text-[#FAF6F0]">Темен режим</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sun className="w-3.5 h-3.5 text-[#F5BA58]" />
+                      <span className="text-[#FAF6F0]">Светол режим</span>
+                    </>
+                  )}
+                </button>
               </div>
 
               {/* Supabase Auth trigger on mobile */}

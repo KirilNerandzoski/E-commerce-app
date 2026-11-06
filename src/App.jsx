@@ -39,11 +39,11 @@ const MainContent = () => {
 };
 
 const AppShell = () => {
-  const { isAuthModalOpen, setIsAuthModalOpen } = useApp();
+  const { isAuthModalOpen, setIsAuthModalOpen, theme } = useApp();
   const [isSpinModalOpen, setIsSpinModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#141210] text-[#F5EFEB] flex flex-col justify-between selection:bg-[#E26D46] selection:text-white relative">
+    <div className={`min-h-screen ${theme} ${theme === 'light' ? 'bg-[#FBF9F5] text-[#181513]' : 'bg-[#141210] text-[#F5EFEB]'} flex flex-col justify-between selection:bg-[#E26D46] selection:text-white relative transition-colors duration-300`}>
       {/* Warm ambient background glows */}
       <div className="fixed top-0 left-1/4 w-96 h-96 bg-[#D49A55]/4 rounded-full blur-3xl pointer-events-none" />
       <div className="fixed top-1/3 right-10 w-96 h-96 bg-[#E26D46]/4 rounded-full blur-3xl pointer-events-none" />
