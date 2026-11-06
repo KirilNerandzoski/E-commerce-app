@@ -113,21 +113,21 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-[#0B1120]/95 backdrop-blur-xl border-b border-slate-800 shadow-2xl">
+    <header className="sticky top-0 z-40 bg-[#141210]/95 backdrop-blur-xl border-b border-[#2A2520] shadow-2xl">
       {/* 1. Top Announcement Bar */}
-      <div className="bg-[#050811] text-slate-300 text-xs py-1.5 px-4 sm:px-8 border-b border-slate-850">
+      <div className="bg-[#0D0B0A] text-[#A8A095] text-xs py-1.5 px-4 sm:px-8 border-b border-[#1F1C18]">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4 overflow-hidden">
-            <span className="flex items-center gap-1.5 text-amber-400 font-semibold truncate">
-              <Zap className="w-3.5 h-3.5 fill-amber-400 shrink-0" />
+            <span className="flex items-center gap-1.5 text-[#D49A55] font-semibold truncate">
+              <Zap className="w-3.5 h-3.5 fill-[#D49A55] shrink-0" />
               БЕСПЛАТНА достава за нарачки над 1.500 ден.
             </span>
-            <span className="hidden md:inline text-slate-600">|</span>
-            <span className="hidden md:inline text-slate-400">
+            <span className="hidden md:inline text-[#3D352E]">|</span>
+            <span className="hidden md:inline text-[#A8A095]">
               Гарантирано враќање во рок од 14 дена
             </span>
-            <span className="hidden lg:inline text-slate-600">|</span>
-            <span className="hidden lg:inline text-slate-400">
+            <span className="hidden lg:inline text-[#3D352E]">|</span>
+            <span className="hidden lg:inline text-[#A8A095]">
               📦 PazarMax Paketomat 0-24ч преземање
             </span>
           </div>
@@ -140,14 +140,14 @@ export const Navbar = () => {
               </span>
             )}
             {/* Currency Switcher */}
-            <div className="flex items-center bg-slate-900 rounded-lg p-0.5 border border-slate-800">
+            <div className="flex items-center bg-[#1D1A17] rounded-lg p-0.5 border border-[#2A2520]">
               <button
                 type="button"
                 onClick={() => setCurrency("MKD")}
                 className={`px-2 py-0.5 text-[11px] font-bold rounded ${
                   currency === "MKD"
-                    ? "bg-orange-500 text-white"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-[#E26D46] text-[#FAF6F0]"
+                    : "text-[#A8A095] hover:text-white"
                 }`}
               >
                 ден. MKD
@@ -157,16 +157,16 @@ export const Navbar = () => {
                 onClick={() => setCurrency("EUR")}
                 className={`px-2 py-0.5 text-[11px] font-bold rounded ${
                   currency === "EUR"
-                    ? "bg-orange-500 text-white"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-[#E26D46] text-[#FAF6F0]"
+                    : "text-[#A8A095] hover:text-white"
                 }`}
               >
                 € EUR
               </button>
             </div>
 
-            <div className="hidden sm:flex items-center gap-1 text-slate-400 hover:text-white transition-colors cursor-pointer text-[11px]">
-              <Phone className="w-3 h-3 text-orange-400" />
+            <div className="hidden sm:flex items-center gap-1 text-[#A8A095] hover:text-[#F5EFEB] transition-colors cursor-pointer text-[11px]">
+              <Phone className="w-3 h-3 text-[#D49A55]" />
               <span>02 3100 500</span>
             </div>
           </div>
@@ -179,7 +179,7 @@ export const Navbar = () => {
           {/* Mobile menu trigger */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="lg:hidden p-2 text-slate-300 hover:bg-slate-800 rounded-xl"
+            className="lg:hidden p-2 text-[#A8A095] hover:bg-[#25211D] rounded-xl"
             aria-label="Отвори мени"
           >
             <Menu className="w-6 h-6" />
@@ -190,14 +190,14 @@ export const Navbar = () => {
             onClick={() => navigateTo("home")}
             className="flex items-center gap-2 cursor-pointer select-none shrink-0"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-orange-600 via-orange-500 to-amber-400 flex items-center justify-center shadow-lg shadow-orange-500/25 text-white font-black text-xl">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-[#C8522C] via-[#E26D46] to-[#D49A55] flex items-center justify-center shadow-lg shadow-[#E26D46]/20 text-white font-black text-xl">
               🛍️
             </div>
             <div className="flex items-baseline">
-              <span className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-                pazar<span className="text-orange-500">max</span>
+              <span className="text-2xl sm:text-3xl font-black tracking-tight text-[#FAF6F0]">
+                pazar<span className="text-[#E26D46]">max</span>
               </span>
-              <span className="text-xs font-black bg-orange-500/20 text-orange-400 border border-orange-500/40 px-1.5 py-0.5 rounded ml-1 tracking-wider">
+              <span className="text-xs font-black bg-[#E26D46]/20 text-[#E26D46] border border-[#E26D46]/40 px-1.5 py-0.5 rounded ml-1 tracking-wider">
                 .mk
               </span>
             </div>
@@ -209,8 +209,8 @@ export const Navbar = () => {
               onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all border ${
                 isMegaMenuOpen
-                  ? "bg-orange-500 text-white border-orange-400"
-                  : "bg-slate-800 hover:bg-slate-750 text-slate-200 border-slate-700"
+                  ? "bg-[#E26D46] text-white border-[#E26D46]"
+                  : "bg-[#1D1A17] hover:bg-[#25211D] text-[#E8E2D8] border-[#2A2520]"
               }`}
             >
               <Menu className="w-4 h-4 text-orange-400" />
@@ -221,24 +221,24 @@ export const Navbar = () => {
             {/* MegaMenu Dropdown */}
             {isMegaMenuOpen && (
               <div
-                className="absolute top-full left-0 mt-2 w-[780px] bg-[#0E172A] rounded-2xl shadow-2xl border border-slate-700 overflow-hidden z-50 flex animate-in fade-in zoom-in-95 duration-150 text-slate-200"
+                className="absolute top-full left-0 mt-2 w-[780px] bg-[#1D1A17] rounded-2xl shadow-2xl border border-[#2A2520] overflow-hidden z-50 flex animate-in fade-in zoom-in-95 duration-150 text-[#F5EFEB]"
                 onMouseLeave={() => setIsMegaMenuOpen(false)}
               >
                 {/* Left Categories List */}
-                <div className="w-64 bg-[#0B1120] p-2 border-r border-slate-800 overflow-y-auto max-h-[460px]">
+                <div className="w-64 bg-[#141210] p-2 border-r border-[#2A2520] overflow-y-auto max-h-[460px]">
                   {CATEGORIES.map((cat) => (
                     <button
                       key={cat.id}
                       onMouseEnter={() => setActiveMegaCategory(cat)}
                       onClick={() => handleCategorySelect(cat.id)}
-                      className={`w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors ${
+                      className={`w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                         activeMegaCategory.id === cat.id
-                          ? "bg-slate-800 text-orange-400 font-bold"
-                          : "text-slate-400 hover:bg-slate-850 hover:text-white"
+                          ? "bg-[#25211D] text-[#E26D46] font-bold"
+                          : "text-[#A8A095] hover:bg-[#1D1A17] hover:text-[#FAF6F0]"
                       }`}
                     >
                       <span className="truncate">{cat.name}</span>
-                      <span className="text-[10px] text-slate-500 font-normal">›</span>
+                      <span className="text-[10px] text-[#6E665B] font-normal">›</span>
                     </button>
                   ))}
                 </div>
@@ -248,16 +248,16 @@ export const Navbar = () => {
                   <div>
                     <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                       <div>
-                        <h4 className="text-base font-bold text-white">
+                        <h4 className="text-base font-bold text-[#FAF6F0]">
                           {activeMegaCategory.name}
                         </h4>
-                        <span className="text-xs text-slate-400">
+                        <span className="text-xs text-[#A8A095]">
                           Прегледајте над {activeMegaCategory.itemCount} достапни производи
                         </span>
                       </div>
                       <button
                         onClick={() => handleCategorySelect(activeMegaCategory.id)}
-                        className="text-xs font-bold text-orange-400 hover:text-orange-300"
+                        className="text-xs font-bold text-[#E26D46] hover:text-[#D49A55] cursor-pointer"
                       >
                         Види сѐ &rarr;
                       </button>
@@ -268,12 +268,12 @@ export const Navbar = () => {
                         <button
                           key={sub.id}
                           onClick={() => handleCategorySelect(activeMegaCategory.id, sub.id)}
-                          className="text-left p-2.5 rounded-xl hover:bg-slate-800 group transition-colors"
+                          className="text-left p-2.5 rounded-xl hover:bg-[#25211D] group transition-colors cursor-pointer"
                         >
-                          <div className="text-xs font-semibold text-slate-200 group-hover:text-orange-400 transition-colors">
+                          <div className="text-xs font-semibold text-[#E8E2D8] group-hover:text-[#E26D46] transition-colors">
                             {sub.name}
                           </div>
-                          <span className="text-[11px] text-slate-500">
+                          <span className="text-[11px] text-[#8C8377]">
                             {sub.count} производи
                           </span>
                         </button>
@@ -284,17 +284,17 @@ export const Navbar = () => {
                   {/* Promo inside megamenu */}
                   <div
                     onClick={() => handleCategorySelect(activeMegaCategory.id)}
-                    className="mt-6 p-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 flex items-center justify-between cursor-pointer hover:shadow-lg transition-shadow"
+                    className="mt-6 p-4 rounded-xl bg-gradient-to-r from-[#C8522C] to-[#D49A55] text-[#141210] flex items-center justify-between cursor-pointer hover:shadow-lg transition-shadow"
                   >
                     <div>
-                      <div className="text-xs uppercase font-extrabold tracking-wider text-slate-900">
+                      <div className="text-xs uppercase font-extrabold tracking-wider text-[#141210]/80">
                         Супер попусти до 30%
                       </div>
-                      <div className="text-sm font-black">
+                      <div className="text-sm font-black text-[#141210]">
                         Најбарани артикли од категоријата {activeMegaCategory.name}
                       </div>
                     </div>
-                    <span className="px-3 py-1 bg-slate-950 text-amber-400 text-xs font-black rounded-lg shrink-0">
+                    <span className="px-3 py-1 bg-[#141210] text-[#D49A55] text-xs font-black rounded-lg shrink-0">
                       Погледни
                     </span>
                   </div>
@@ -312,23 +312,23 @@ export const Navbar = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
                 placeholder="Пребарајте производи, брендови, категории (пр. iPhone, Airfryer, Bosch)..."
-                className="w-full bg-[#111A30] hover:bg-[#152038] focus:bg-[#17233E] text-white placeholder-slate-400 text-xs sm:text-sm pl-11 pr-24 py-2.5 sm:py-3 rounded-2xl border border-slate-700/80 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none"
+                className="w-full bg-[#1D1A17] hover:bg-[#25211D] focus:bg-[#25211D] text-[#FAF6F0] placeholder-[#8C8377] text-xs sm:text-sm pl-11 pr-24 py-2.5 sm:py-3 rounded-2xl border border-[#2A2520] focus:border-[#E26D46] focus:ring-4 focus:ring-[#E26D46]/20 transition-all outline-none"
               />
-              <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-[#8C8377] absolute left-4 top-1/2 -translate-y-1/2" />
 
               <div className="absolute right-1.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
                 {searchQuery && (
                   <button
                     type="button"
                     onClick={() => setSearchQuery("")}
-                    className="p-1 hover:bg-slate-700 text-slate-400 rounded-full"
+                    className="p-1 hover:bg-[#25211D] text-[#8C8377] hover:text-[#FAF6F0] rounded-full"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
                 )}
                 <button
                   type="submit"
-                  className="px-3 py-1.5 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-xs rounded-xl shadow-xs transition-colors hidden sm:block cursor-pointer"
+                  className="px-3.5 py-1.5 bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 active:scale-95 text-[#141210] font-black text-xs rounded-xl shadow-xs transition-all hidden sm:block cursor-pointer"
                 >
                   Барај
                 </button>
@@ -337,11 +337,11 @@ export const Navbar = () => {
 
             {/* Live Autocomplete Dropdown */}
             {isSearchFocused && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-[#0E172A] rounded-2xl shadow-2xl border border-slate-700 overflow-hidden z-[100] animate-in fade-in duration-150 text-slate-200">
+              <div className="absolute top-full left-0 right-0 mt-2 bg-[#1D1A17] rounded-2xl shadow-2xl border border-[#2A2520] overflow-hidden z-[100] animate-in fade-in duration-150 text-[#FAF6F0]">
                 {searchQuery.trim() === "" ? (
                   // Empty query suggestions
                   <div className="p-4">
-                    <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2.5">
+                    <div className="text-[11px] font-bold text-[#A8A095] uppercase tracking-wider mb-2.5">
                       Популарни пребарувања
                     </div>
                     <div className="flex flex-wrap gap-1.5">
@@ -353,9 +353,9 @@ export const Navbar = () => {
                             navigateTo("catalog", { search: term, category: "all" });
                             setIsSearchFocused(false);
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 hover:bg-orange-500/20 hover:text-orange-400 border border-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
+                          className="px-3 py-1.5 rounded-xl bg-[#25211D] text-[#FAF6F0] hover:bg-[#E26D46]/20 hover:text-[#E26D46] border border-[#2A2520] text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
                         >
-                          <Search className="w-3 h-3 text-slate-400" />
+                          <Search className="w-3 h-3 text-[#A8A095]" />
                           {term}
                         </button>
                       ))}
@@ -363,11 +363,11 @@ export const Navbar = () => {
                   </div>
                 ) : (
                   // Search query active
-                  <div className="max-h-[420px] overflow-y-auto divide-y divide-slate-800">
+                  <div className="max-h-[420px] overflow-y-auto divide-y divide-[#2A2520]">
                     {/* Matching categories */}
                     {matchingCategories.length > 0 && (
-                      <div className="p-3 bg-[#0B1120]">
-                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                      <div className="p-3 bg-[#141210]">
+                        <div className="text-[10px] font-bold text-[#A8A095] uppercase tracking-wider mb-1.5">
                           Категории
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -378,7 +378,7 @@ export const Navbar = () => {
                                 handleCategorySelect(c.id);
                                 setIsSearchFocused(false);
                               }}
-                              className="text-xs font-semibold text-orange-400 hover:text-orange-300 bg-slate-800 border border-slate-700 px-3 py-1 rounded-lg cursor-pointer"
+                              className="text-xs font-semibold text-[#E26D46] hover:text-[#D49A55] bg-[#25211D] border border-[#2A2520] px-3 py-1 rounded-lg cursor-pointer"
                             >
                               Во категорија: {c.name}
                             </button>
@@ -390,28 +390,28 @@ export const Navbar = () => {
                     {/* Products list */}
                     {searchResults.length > 0 ? (
                       <div className="p-2">
-                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2 py-1">
+                        <div className="text-[10px] font-bold text-[#A8A095] uppercase tracking-wider px-2 py-1">
                           Производи ({searchResults.length})
                         </div>
                         {searchResults.map((product) => (
                           <div
                             key={product.id}
                             onClick={() => handleProductSelect(product.id)}
-                            className="p-2 rounded-xl hover:bg-slate-800 flex items-center gap-3 cursor-pointer transition-colors"
+                            className="p-2 rounded-xl hover:bg-[#25211D] flex items-center gap-3 cursor-pointer transition-colors"
                           >
                             <img
                               src={product.images[0]}
                               alt={product.title}
-                              className="w-12 h-12 rounded-lg object-contain bg-white p-1 shrink-0 border border-slate-700"
+                              className="w-12 h-12 rounded-lg object-contain bg-[#FAF7F2] p-1 shrink-0 border border-[#E6DFD5]"
                             />
                             <div className="flex-1 min-w-0">
-                              <span className="text-[10px] font-bold text-orange-400 uppercase">
+                              <span className="text-[10px] font-bold text-[#D49A55] uppercase">
                                 {product.brand}
                               </span>
-                              <h5 className="text-xs font-semibold text-white truncate">
+                              <h5 className="text-xs font-semibold text-[#FAF6F0] truncate">
                                 {product.title}
                               </h5>
-                              <div className="text-xs font-bold text-slate-200 mt-0.5">
+                              <div className="text-xs font-bold text-[#E26D46] mt-0.5">
                                 {formatPrice(product.price, currency)}
                               </div>
                             </div>
@@ -419,17 +419,17 @@ export const Navbar = () => {
                         ))}
                       </div>
                     ) : (
-                      <div className="p-6 text-center text-xs text-slate-400">
+                      <div className="p-6 text-center text-xs text-[#A8A095]">
                         Нема пронајдено производи за "<strong>{searchQuery}</strong>".
                       </div>
                     )}
 
                     {/* View all search results button */}
                     {searchResults.length > 0 && (
-                      <div className="p-2.5 bg-[#0B1120] text-center">
+                      <div className="p-2.5 bg-[#141210] text-center">
                         <button
                           onClick={handleSearchSubmit}
-                          className="text-xs font-bold text-orange-400 hover:text-orange-300 cursor-pointer"
+                          className="text-xs font-bold text-[#E26D46] hover:text-[#D49A55] cursor-pointer"
                         >
                           Види ги сите резултати за "{searchQuery}" &rarr;
                         </button>
@@ -446,12 +446,12 @@ export const Navbar = () => {
             {/* Compare Tool */}
             <button
               onClick={() => setIsCompareModalOpen(true)}
-              className="relative p-2.5 text-slate-300 hover:text-amber-400 hover:bg-slate-800 rounded-xl transition-colors hidden sm:flex items-center cursor-pointer"
+              className="relative p-2.5 text-[#A8A095] hover:text-[#D49A55] hover:bg-[#25211D] rounded-xl transition-colors hidden sm:flex items-center cursor-pointer"
               title="Спореди производи"
             >
               <SlidersHorizontal className="w-5 h-5" />
               {compareList.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-amber-500 text-slate-950 font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
+                <span className="absolute -top-1 -right-1 bg-[#D49A55] text-[#141210] font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-xs">
                   {compareList.length}
                 </span>
               )}
@@ -460,12 +460,12 @@ export const Navbar = () => {
             {/* Wishlist */}
             <button
               onClick={() => navigateTo("wishlist")}
-              className="relative p-2.5 text-slate-300 hover:text-red-400 hover:bg-slate-800 rounded-xl transition-colors hidden sm:flex items-center cursor-pointer"
+              className="relative p-2.5 text-[#A8A095] hover:text-[#E26D46] hover:bg-[#25211D] rounded-xl transition-colors hidden sm:flex items-center cursor-pointer"
               title="Омилени"
             >
               <Heart className="w-5 h-5" />
               {wishlist.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white font-extrabold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
+                <span className="absolute -top-1 -right-1 bg-[#E26D46] text-white font-extrabold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-xs">
                   {wishlist.length}
                 </span>
               )}
@@ -480,31 +480,31 @@ export const Navbar = () => {
                     e.stopPropagation();
                     setIsUserDropdownOpen((prev) => !prev);
                   }}
-                  className="flex items-center gap-2 p-2 hover:bg-slate-800 rounded-xl transition-colors text-left cursor-pointer select-none"
+                  className="flex items-center gap-2 p-2 hover:bg-[#25211D] rounded-xl transition-colors text-left cursor-pointer select-none"
                 >
-                  <div className="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/40 flex items-center justify-center overflow-hidden font-bold text-xs">
+                  <div className="w-8 h-8 rounded-full bg-[#E26D46]/20 text-[#E26D46] border border-[#E26D46]/40 flex items-center justify-center overflow-hidden font-bold text-xs">
                     {user.name ? user.name.slice(0, 2).toUpperCase() : "AP"}
                   </div>
                   <div className="hidden xl:flex flex-col">
-                    <span className="text-[11px] text-slate-400 font-medium leading-none">
+                    <span className="text-[11px] text-[#A8A095] font-medium leading-none">
                       Здраво,
                     </span>
-                    <span className="text-xs font-bold text-white leading-tight truncate max-w-[100px]">
+                    <span className="text-xs font-bold text-[#FAF6F0] leading-tight truncate max-w-[100px]">
                       {user.name ? user.name.split(" ")[0] : "Корисник"}
                     </span>
                   </div>
-                  <ChevronDown className={`w-3.5 h-3.5 text-slate-400 hidden xl:block transition-transform duration-200 ${isUserDropdownOpen ? "rotate-180 text-orange-500" : ""}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 text-[#A8A095] hidden xl:block transition-transform duration-200 ${isUserDropdownOpen ? "rotate-180 text-[#E26D46]" : ""}`} />
                 </button>
 
                 {/* Dropdown Menu */}
                 {isUserDropdownOpen && (
                   <div
-                    className="absolute right-0 top-full mt-2 w-64 bg-[#0E172A] rounded-2xl shadow-2xl border border-slate-700 py-2 z-[100] animate-in fade-in duration-150 text-slate-200"
+                    className="absolute right-0 top-full mt-2 w-64 bg-[#1D1A17] rounded-2xl shadow-2xl border border-[#2A2520] py-2 z-[100] animate-in fade-in duration-150 text-[#FAF6F0]"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="px-4 py-2.5 border-b border-slate-800">
-                      <p className="text-xs font-bold text-white">{user.name || "Корисник"}</p>
-                      <p className="text-[11px] text-slate-400 truncate">{user.email || ""}</p>
+                    <div className="px-4 py-2.5 border-b border-[#2A2520]">
+                      <p className="text-xs font-bold text-[#FAF6F0]">{user.name || "Корисник"}</p>
+                      <p className="text-[11px] text-[#A8A095] truncate">{user.email || ""}</p>
                     </div>
 
                     <div className="py-1">
@@ -514,13 +514,13 @@ export const Navbar = () => {
                           setIsUserDropdownOpen(false);
                           navigateTo("profile", "orders");
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-300 hover:bg-slate-800 hover:text-orange-400 flex items-center justify-between transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46] flex items-center justify-between transition-colors"
                       >
                         <div className="flex items-center gap-2.5">
-                          <Package className="w-4 h-4 text-orange-500" />
+                          <Package className="w-4 h-4 text-[#E26D46]" />
                           <span>Мои нарачки</span>
                         </div>
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-300">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#25211D] text-[#A8A095]">
                           {user.orders?.length || 0}
                         </span>
                       </button>
@@ -531,9 +531,9 @@ export const Navbar = () => {
                           setIsUserDropdownOpen(false);
                           navigateTo("profile", "info");
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-300 hover:bg-slate-800 hover:text-orange-400 flex items-center gap-2.5 transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46] flex items-center gap-2.5 transition-colors"
                       >
-                        <User className="w-4 h-4 text-slate-400" />
+                        <User className="w-4 h-4 text-[#A8A095]" />
                         <span>Податоци за профил & Статистика</span>
                       </button>
 
@@ -543,13 +543,13 @@ export const Navbar = () => {
                           setIsUserDropdownOpen(false);
                           navigateTo("wishlist");
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-300 hover:bg-slate-800 hover:text-orange-400 flex items-center justify-between transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46] flex items-center justify-between transition-colors"
                       >
                         <div className="flex items-center gap-2.5">
-                          <Heart className="w-4 h-4 text-red-500" />
+                          <Heart className="w-4 h-4 text-[#E26D46]" />
                           <span>Листа на омилени</span>
                         </div>
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-900/30 text-red-400">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#E26D46]/20 text-[#E26D46]">
                           {wishlist.length}
                         </span>
                       </button>
@@ -560,22 +560,22 @@ export const Navbar = () => {
                           setIsUserDropdownOpen(false);
                           navigateTo("profile", "preferences");
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-300 hover:bg-slate-800 hover:text-orange-400 flex items-center gap-2.5 transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46] flex items-center gap-2.5 transition-colors"
                       >
-                        <Settings className="w-4 h-4 text-slate-400" />
+                        <Settings className="w-4 h-4 text-[#A8A095]" />
                         <span>Поставки & Известувања</span>
                       </button>
 
-                      <div className="pt-1 mt-1 border-t border-slate-800 space-y-0.5">
+                      <div className="pt-1 mt-1 border-t border-[#2A2520] space-y-0.5">
                         <button
                           type="button"
                           onClick={() => {
                             setIsUserDropdownOpen(false);
                             setIsAuthModalOpen(true);
                           }}
-                          className="w-full text-left px-4 py-2.5 text-xs font-bold text-orange-400 hover:bg-slate-800 flex items-center gap-2.5 transition-colors"
+                          className="w-full text-left px-4 py-2.5 text-xs font-bold text-[#E26D46] hover:bg-[#25211D] flex items-center gap-2.5 transition-colors"
                         >
-                          <Lock className="w-4 h-4 text-orange-500" />
+                          <Lock className="w-4 h-4 text-[#E26D46]" />
                           <span>Најава со друга сметка / SuperAdmin</span>
                         </button>
 
@@ -585,9 +585,9 @@ export const Navbar = () => {
                             setIsUserDropdownOpen(false);
                             logoutUser();
                           }}
-                          className="w-full text-left px-4 py-2 text-xs font-semibold text-slate-400 hover:text-red-400 hover:bg-red-950/20 flex items-center gap-2.5 transition-colors"
+                          className="w-full text-left px-4 py-2 text-xs font-semibold text-[#A8A095] hover:text-red-400 hover:bg-red-950/20 flex items-center gap-2.5 transition-colors"
                         >
-                          <LogOut className="w-4 h-4 text-slate-400" />
+                          <LogOut className="w-4 h-4 text-[#A8A095]" />
                           <span>Одјави се</span>
                         </button>
                       </div>
@@ -599,17 +599,17 @@ export const Navbar = () => {
               <button
                 type="button"
                 onClick={() => setIsAuthModalOpen(true)}
-                className="flex items-center gap-2 p-2 hover:bg-slate-800 rounded-xl transition-colors text-left cursor-pointer group border border-slate-800 hover:border-slate-700"
+                className="flex items-center gap-2 p-2 hover:bg-[#25211D] rounded-xl transition-colors text-left cursor-pointer group border border-[#2A2520] hover:border-[#38322B]"
                 title="Најави се или регистрирај се"
               >
-                <div className="w-8 h-8 rounded-full bg-slate-800 group-hover:bg-orange-500/20 text-slate-300 group-hover:text-orange-400 flex items-center justify-center transition-colors">
+                <div className="w-8 h-8 rounded-full bg-[#25211D] group-hover:bg-[#E26D46]/20 text-[#A8A095] group-hover:text-[#E26D46] flex items-center justify-center transition-colors">
                   <User className="w-4.5 h-4.5" />
                 </div>
                 <div className="hidden xl:flex flex-col">
-                  <span className="text-[11px] text-slate-400 font-medium leading-none">
+                  <span className="text-[11px] text-[#A8A095] font-medium leading-none">
                     Добредојдовте,
                   </span>
-                  <span className="text-xs font-bold text-white group-hover:text-orange-400 leading-tight transition-colors">
+                  <span className="text-xs font-bold text-[#FAF6F0] group-hover:text-[#E26D46] leading-tight transition-colors">
                     Најави се
                   </span>
                 </div>
@@ -619,19 +619,19 @@ export const Navbar = () => {
             {/* Shopping Cart Button */}
             <button
               onClick={() => setIsCartDrawerOpen(true)}
-              className="flex items-center gap-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 active:scale-95 text-slate-950 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl font-black shadow-lg shadow-orange-500/25 transition-all cursor-pointer"
+              className="flex items-center gap-2.5 bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 active:scale-95 text-[#141210] px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl font-black shadow-lg shadow-[#E26D46]/20 transition-all cursor-pointer"
             >
               <div className="relative">
-                <ShoppingCart className="w-5 h-5 text-slate-950" />
+                <ShoppingCart className="w-5 h-5 text-[#141210]" />
                 {cartTotalItemsCount > 0 && (
-                  <span className="absolute -top-2.5 -right-2.5 bg-slate-950 text-amber-400 font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-xs border border-amber-400/30">
+                  <span className="absolute -top-2.5 -right-2.5 bg-[#141210] text-[#D49A55] font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-xs border border-[#D49A55]/40">
                     {cartTotalItemsCount}
                   </span>
                 )}
               </div>
               <div className="hidden md:flex flex-col text-left">
-                <span className="text-[10px] font-bold text-slate-900 uppercase tracking-wider leading-none">Кошничка</span>
-                <span className="text-xs font-black leading-tight text-slate-950">
+                <span className="text-[10px] font-bold text-[#141210]/80 uppercase tracking-wider leading-none">Кошничка</span>
+                <span className="text-xs font-black leading-tight text-[#141210]">
                   {formatPrice(cartSubtotal, currency)}
                 </span>
               </div>
@@ -641,14 +641,14 @@ export const Navbar = () => {
       </div>
 
       {/* 3. Horizontal Secondary Category Bar (Desktop) */}
-      <div className="hidden lg:block bg-[#070C18] border-t border-slate-850 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto no-scrollbar py-2 text-xs font-semibold text-slate-400">
+      <div className="hidden lg:block bg-[#100E0D] border-t border-[#231F1B] px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto no-scrollbar py-2 text-xs font-semibold text-[#A8A095]">
           <div className="flex items-center gap-1">
             {CATEGORIES.slice(0, 8).map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => handleCategorySelect(cat.id)}
-                className="px-3 py-1.5 rounded-lg hover:bg-slate-800 hover:text-orange-400 transition-all whitespace-nowrap cursor-pointer"
+                className="px-3 py-1.5 rounded-lg hover:bg-[#25211D] hover:text-[#E26D46] transition-all whitespace-nowrap cursor-pointer"
               >
                 {cat.name}
               </button>
@@ -661,7 +661,7 @@ export const Navbar = () => {
                 setCatalogFilters((prev) => ({ ...prev, discountOnly: true, category: "all" }));
                 navigateTo("catalog");
               }}
-              className="flex items-center gap-1 px-3 py-1 rounded-lg bg-red-950/50 text-red-400 border border-red-800/40 hover:bg-red-900/50 font-bold transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-3 py-1 rounded-lg bg-[#E26D46]/15 text-[#E26D46] border border-[#E26D46]/30 hover:bg-[#E26D46]/25 font-bold transition-colors cursor-pointer"
             >
               <Percent className="w-3.5 h-3.5" /> Супер Попусти %
             </button>
@@ -670,9 +670,9 @@ export const Navbar = () => {
                 setCatalogFilters((prev) => ({ ...prev, directOnly: true, category: "all" }));
                 navigateTo("catalog");
               }}
-              className="flex items-center gap-1 px-3 py-1 rounded-lg bg-amber-950/40 text-amber-400 border border-amber-800/40 hover:bg-amber-900/40 font-black tracking-wide transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-3 py-1 rounded-lg bg-[#D49A55]/15 text-[#D49A55] border border-[#D49A55]/30 hover:bg-[#D49A55]/25 font-black tracking-wide transition-colors cursor-pointer"
             >
-              <Zap className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> PazarMax Direkt 24h
+              <Zap className="w-3.5 h-3.5 fill-[#D49A55] text-[#D49A55]" /> PazarMax Direkt 24h
             </button>
           </div>
         </div>
@@ -683,39 +683,39 @@ export const Navbar = () => {
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
             onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 bg-black/70 backdrop-blur-xs"
+            className="fixed inset-0 bg-black/80 backdrop-blur-xs"
           />
-          <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-[#0B1120] text-slate-200 border-r border-slate-800 shadow-2xl p-6 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-left duration-200">
+          <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-[#171412] text-[#FAF6F0] border-r border-[#2A2520] shadow-2xl p-6 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-left duration-200">
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+              <div className="flex items-center justify-between pb-4 border-b border-[#2A2520]">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🛍️</span>
-                  <span className="text-xl font-black text-white">pazar<span className="text-orange-500">max</span>.mk</span>
+                  <span className="text-xl font-black text-[#FAF6F0]">pazar<span className="text-[#E26D46]">max</span>.mk</span>
                 </div>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-1.5 rounded-full bg-slate-800 text-slate-400 hover:text-white"
+                  className="p-1.5 rounded-full bg-[#25211D] text-[#A8A095] hover:text-[#FAF6F0]"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Currency on mobile */}
-              <div className="mt-4 flex items-center justify-between p-2 rounded-xl bg-slate-900 border border-slate-800">
-                <span className="text-xs font-semibold text-slate-400">Валута:</span>
+              <div className="mt-4 flex items-center justify-between p-2 rounded-xl bg-[#1D1A17] border border-[#2A2520]">
+                <span className="text-xs font-semibold text-[#A8A095]">Валута:</span>
                 <div className="flex gap-1">
                   <button
                     onClick={() => setCurrency("MKD")}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                      currency === "MKD" ? "bg-orange-500 text-white" : "text-slate-400"
+                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${
+                      currency === "MKD" ? "bg-[#E26D46] text-[#141210]" : "text-[#A8A095] hover:text-[#FAF6F0]"
                     }`}
                   >
                     ден. MKD
                   </button>
                   <button
                     onClick={() => setCurrency("EUR")}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                      currency === "EUR" ? "bg-orange-500 text-white" : "text-slate-400"
+                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${
+                      currency === "EUR" ? "bg-[#E26D46] text-[#141210]" : "text-[#A8A095] hover:text-[#FAF6F0]"
                     }`}
                   >
                     € EUR
@@ -729,14 +729,14 @@ export const Navbar = () => {
                   setIsMobileMenuOpen(false);
                   setIsAuthModalOpen(true);
                 }}
-                className="w-full mt-3 py-2.5 px-3 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-colors border border-orange-500/30"
+                className="w-full mt-3 py-2.5 px-3 bg-[#E26D46]/10 hover:bg-[#E26D46]/20 text-[#E26D46] font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-colors border border-[#E26D46]/30"
               >
                 <Lock className="w-4 h-4" /> {user ? `Најавен: ${user.name || user.email}` : "Најава / Регистрација"}
               </button>
 
               {/* All Categories list */}
               <div className="mt-6">
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                <div className="text-[11px] font-bold text-[#A8A095] uppercase tracking-wider mb-2">
                   Категории
                 </div>
                 <div className="space-y-1">
@@ -744,10 +744,10 @@ export const Navbar = () => {
                     <button
                       key={cat.id}
                       onClick={() => handleCategorySelect(cat.id)}
-                      className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800 text-xs font-bold text-slate-300 hover:text-orange-400 flex items-center justify-between transition-colors"
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-[#25211D] text-xs font-bold text-[#FAF6F0] hover:text-[#E26D46] flex items-center justify-between transition-colors"
                     >
                       <span>{cat.name}</span>
-                      <span className="text-slate-500">›</span>
+                      <span className="text-[#8C8377]">›</span>
                     </button>
                   ))}
                 </div>
@@ -755,8 +755,8 @@ export const Navbar = () => {
             </div>
 
             {/* Bottom Support Info */}
-            <div className="pt-6 border-t border-slate-800 text-xs text-slate-400">
-              <p className="font-semibold text-slate-200">Корисничка поддршка</p>
+            <div className="pt-6 border-t border-[#2A2520] text-xs text-[#A8A095]">
+              <p className="font-semibold text-[#FAF6F0]">Корисничка поддршка</p>
               <p className="mt-1">📞 02 3100 500 (Пон - Саб 08-20h)</p>
               <p>✉️ podrska@pazarmax.mk</p>
             </div>

@@ -66,20 +66,18 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
     if (isMobileDrawer) onCloseMobile();
   };
 
-  const selectedCategoryObj = CATEGORIES.find((c) => c.id === catalogFilters.category);
-
   return (
-    <aside className="w-full bg-[#0E1626]/90 rounded-3xl border border-slate-800 p-5 shadow-xl space-y-6 text-slate-200">
+    <aside className="w-full bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-5 shadow-xl space-y-6 text-[#FAF6F0]">
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-        <div className="flex items-center gap-2 font-bold text-sm text-white">
-          <SlidersHorizontal className="w-4 h-4 text-orange-400" />
+      <div className="flex items-center justify-between pb-4 border-b border-[#2A2520]">
+        <div className="flex items-center gap-2 font-bold text-sm text-[#FAF6F0]">
+          <SlidersHorizontal className="w-4 h-4 text-[#E26D46]" />
           <span>Филтрирај</span>
         </div>
 
         <button
           onClick={handleResetFilters}
-          className="text-xs font-semibold text-rose-400 hover:text-rose-300 flex items-center gap-1 transition-colors cursor-pointer"
+          className="text-xs font-semibold text-[#E26D46] hover:text-[#D49A55] flex items-center gap-1 transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3.5 h-3.5" /> Ресетирај
         </button>
@@ -87,7 +85,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
 
       {/* 1. Category Hierarchy */}
       <div>
-        <h4 className="text-xs font-extrabold text-white uppercase tracking-wider mb-2.5">
+        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2.5">
           Категорија
         </h4>
         <div className="space-y-1">
@@ -95,12 +93,12 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             onClick={() => handleCategoryChange("all")}
             className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
               catalogFilters.category === "all"
-                ? "bg-orange-500/10 text-orange-400 font-bold"
-                : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                ? "bg-[#E26D46]/15 text-[#E26D46] font-bold border border-[#E26D46]/30"
+                : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
             }`}
           >
             <span>Сите категории</span>
-            <span className="text-[11px] text-slate-500">{products.length}</span>
+            <span className="text-[11px] text-[#8C8377]">{products.length}</span>
           </button>
 
           {CATEGORIES.map((cat) => (
@@ -109,32 +107,32 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
                 onClick={() => handleCategoryChange(cat.id)}
                 className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                   catalogFilters.category === cat.id
-                    ? "bg-orange-500/10 text-orange-400 font-bold"
-                    : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                    ? "bg-[#E26D46]/15 text-[#E26D46] font-bold border border-[#E26D46]/30"
+                    : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
                 }`}
               >
                 <span className="truncate">{cat.name}</span>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-[#8C8377]">
                   {products.filter((p) => p.category === cat.id).length}
                 </span>
               </button>
 
               {/* Subcategories (if current category selected) */}
               {catalogFilters.category === cat.id && cat.subcategories && (
-                <div className="pl-4 pr-1 py-1 space-y-1 border-l-2 border-orange-500/30 ml-3 mt-1">
+                <div className="pl-4 pr-1 py-1 space-y-1 border-l-2 border-[#E26D46]/40 ml-3 mt-1">
                   {cat.subcategories.map((sub) => (
                     <button
                       key={sub.id}
                       onClick={() => handleSubcategoryChange(sub.id)}
                       className={`w-full text-left py-1 px-2 rounded-lg text-[11px] transition-colors flex items-center justify-between cursor-pointer ${
                         catalogFilters.subcategory === sub.id
-                          ? "font-bold text-orange-400 bg-orange-500/20"
-                          : "text-slate-400 hover:text-slate-200"
+                          ? "font-bold text-[#E26D46] bg-[#E26D46]/20"
+                          : "text-[#A8A095] hover:text-[#FAF6F0]"
                       }`}
                     >
                       <span className="truncate">{sub.name}</span>
                       {catalogFilters.subcategory === sub.id && (
-                        <Check className="w-3 h-3 text-orange-400 shrink-0" />
+                        <Check className="w-3 h-3 text-[#E26D46] shrink-0" />
                       )}
                     </button>
                   ))}
@@ -146,16 +144,16 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
       </div>
 
       {/* 2. Fast Delivery & Badges */}
-      <div className="pt-4 border-t border-slate-100 space-y-2.5">
-        <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider mb-2">
+      <div className="pt-4 border-t border-[#2A2520] space-y-2.5">
+        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2">
           Услуги & Поволности
         </h4>
 
         {/* PazarMax Direkt 24h */}
-        <label className="flex items-center justify-between p-2 rounded-xl hover:bg-amber-50/60 cursor-pointer text-xs font-bold text-slate-700 transition-colors">
+        <label className="flex items-center justify-between p-2 rounded-xl hover:bg-[#25211D] cursor-pointer text-xs font-bold text-[#FAF6F0] transition-colors border border-transparent hover:border-[#2A2520]">
           <div className="flex items-center gap-2">
-            <span className="w-5 h-5 rounded-md bg-amber-400 flex items-center justify-center text-white">
-              <Zap className="w-3 h-3 fill-white" />
+            <span className="w-5 h-5 rounded-md bg-[#D49A55] flex items-center justify-center text-[#141210]">
+              <Zap className="w-3 h-3 fill-[#141210]" />
             </span>
             <span>PazarMax Direkt 24h</span>
           </div>
@@ -165,14 +163,14 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             onChange={(e) =>
               setCatalogFilters((prev) => ({ ...prev, directOnly: e.target.checked }))
             }
-            className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-400"
+            className="w-4 h-4 rounded border-[#2A2520] text-[#E26D46] focus:ring-[#E26D46]"
           />
         </label>
 
         {/* Free Shipping */}
-        <label className="flex items-center justify-between p-2 rounded-xl hover:bg-emerald-50/60 cursor-pointer text-xs font-bold text-slate-700 transition-colors">
+        <label className="flex items-center justify-between p-2 rounded-xl hover:bg-[#25211D] cursor-pointer text-xs font-bold text-[#FAF6F0] transition-colors border border-transparent hover:border-[#2A2520]">
           <div className="flex items-center gap-2">
-            <span className="w-5 h-5 rounded-md bg-emerald-500 flex items-center justify-center text-white">
+            <span className="w-5 h-5 rounded-md bg-emerald-600 flex items-center justify-center text-white">
               <Truck className="w-3 h-3" />
             </span>
             <span>Бесплатна достава</span>
@@ -183,14 +181,14 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             onChange={(e) =>
               setCatalogFilters((prev) => ({ ...prev, freeShippingOnly: e.target.checked }))
             }
-            className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-400"
+            className="w-4 h-4 rounded border-[#2A2520] text-[#E26D46] focus:ring-[#E26D46]"
           />
         </label>
 
         {/* Only Discounts */}
-        <label className="flex items-center justify-between p-2 rounded-xl hover:bg-red-50/60 cursor-pointer text-xs font-bold text-slate-700 transition-colors">
+        <label className="flex items-center justify-between p-2 rounded-xl hover:bg-[#25211D] cursor-pointer text-xs font-bold text-[#FAF6F0] transition-colors border border-transparent hover:border-[#2A2520]">
           <div className="flex items-center gap-2">
-            <span className="w-5 h-5 rounded-md bg-red-500 flex items-center justify-center text-white font-black text-[10px]">
+            <span className="w-5 h-5 rounded-md bg-[#E26D46] flex items-center justify-center text-white font-black text-[10px]">
               %
             </span>
             <span>Само со попуст</span>
@@ -201,12 +199,12 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             onChange={(e) =>
               setCatalogFilters((prev) => ({ ...prev, discountOnly: e.target.checked }))
             }
-            className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-400"
+            className="w-4 h-4 rounded border-[#2A2520] text-[#E26D46] focus:ring-[#E26D46]"
           />
         </label>
 
         {/* In Stock only */}
-        <label className="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer text-xs font-semibold text-slate-700 transition-colors">
+        <label className="flex items-center justify-between p-2 rounded-xl hover:bg-[#25211D] cursor-pointer text-xs font-semibold text-[#FAF6F0] transition-colors border border-transparent hover:border-[#2A2520]">
           <span>Само на залиха</span>
           <input
             type="checkbox"
@@ -214,20 +212,20 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             onChange={(e) =>
               setCatalogFilters((prev) => ({ ...prev, inStockOnly: e.target.checked }))
             }
-            className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-400"
+            className="w-4 h-4 rounded border-[#2A2520] text-[#E26D46] focus:ring-[#E26D46]"
           />
         </label>
       </div>
 
       {/* 3. Price Range Slider */}
-      <div className="pt-4 border-t border-slate-100">
-        <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider mb-2">
+      <div className="pt-4 border-t border-[#2A2520]">
+        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2">
           Опсег на цена
         </h4>
-        <div className="flex items-center justify-between text-xs font-bold text-slate-700 mb-2">
+        <div className="flex items-center justify-between text-xs font-bold text-[#FAF6F0] mb-2">
           <span>{formatPrice(catalogFilters.minPrice, currency)}</span>
-          <span className="text-slate-400">-</span>
-          <span>{formatPrice(catalogFilters.maxPrice, currency)}</span>
+          <span className="text-[#8C8377]">-</span>
+          <span className="text-[#E26D46]">{formatPrice(catalogFilters.maxPrice, currency)}</span>
         </div>
 
         <input
@@ -239,38 +237,38 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
           onChange={(e) =>
             setCatalogFilters((prev) => ({ ...prev, maxPrice: Number(e.target.value) }))
           }
-          className="w-full accent-orange-500 cursor-pointer"
+          className="w-full accent-[#E26D46] cursor-pointer"
         />
 
         <div className="flex items-center gap-2 mt-3">
-          <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-2 text-xs">
-            <span className="text-[10px] text-slate-400 block">Мин (ден.)</span>
+          <div className="flex-1 bg-[#25211D] border border-[#2A2520] rounded-xl p-2 text-xs">
+            <span className="text-[10px] text-[#A8A095] block">Мин (ден.)</span>
             <input
               type="number"
               value={catalogFilters.minPrice}
               onChange={(e) =>
                 setCatalogFilters((prev) => ({ ...prev, minPrice: Number(e.target.value) }))
               }
-              className="w-full bg-transparent font-bold text-slate-800 outline-none"
+              className="w-full bg-transparent font-bold text-[#FAF6F0] outline-none"
             />
           </div>
-          <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-2 text-xs">
-            <span className="text-[10px] text-slate-400 block">Макс (ден.)</span>
+          <div className="flex-1 bg-[#25211D] border border-[#2A2520] rounded-xl p-2 text-xs">
+            <span className="text-[10px] text-[#A8A095] block">Макс (ден.)</span>
             <input
               type="number"
               value={catalogFilters.maxPrice}
               onChange={(e) =>
                 setCatalogFilters((prev) => ({ ...prev, maxPrice: Number(e.target.value) }))
               }
-              className="w-full bg-transparent font-bold text-slate-800 outline-none"
+              className="w-full bg-transparent font-bold text-[#FAF6F0] outline-none"
             />
           </div>
         </div>
       </div>
 
       {/* 4. Brands Filter with Search */}
-      <div className="pt-4 border-t border-slate-100">
-        <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider mb-2">
+      <div className="pt-4 border-t border-[#2A2520]">
+        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2">
           Бренд
         </h4>
 
@@ -281,9 +279,9 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             value={brandSearch}
             onChange={(e) => setBrandSearch(e.target.value)}
             placeholder="Пребарај бренд..."
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 pl-7 text-xs text-slate-800 placeholder-slate-400 outline-none focus:border-orange-500"
+            className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-2.5 py-1.5 pl-7 text-xs text-[#FAF6F0] placeholder-[#8C8377] outline-none focus:border-[#E26D46]"
           />
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2 top-1/2 -translate-y-1/2" />
+          <Search className="w-3.5 h-3.5 text-[#8C8377] absolute left-2 top-1/2 -translate-y-1/2" />
         </div>
 
         <div className="max-h-48 overflow-y-auto space-y-1 pr-1">
@@ -294,20 +292,20 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             return (
               <label
                 key={brand}
-                className="flex items-center justify-between p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer text-xs transition-colors"
+                className="flex items-center justify-between p-1.5 rounded-lg hover:bg-[#25211D] cursor-pointer text-xs transition-colors"
               >
                 <div className="flex items-center gap-2">
                   <input
                     type="checkbox"
                     checked={isChecked}
                     onChange={() => handleBrandToggle(brand)}
-                    className="w-3.5 h-3.5 rounded border-slate-300 text-orange-500 focus:ring-orange-400"
+                    className="w-3.5 h-3.5 rounded border-[#2A2520] text-[#E26D46] focus:ring-[#E26D46]"
                   />
-                  <span className={isChecked ? "font-bold text-orange-600" : "text-slate-700"}>
+                  <span className={isChecked ? "font-bold text-[#E26D46]" : "text-[#FAF6F0]"}>
                     {brand}
                   </span>
                 </div>
-                <span className="text-[10px] text-slate-400">({count})</span>
+                <span className="text-[10px] text-[#8C8377]">({count})</span>
               </label>
             );
           })}
@@ -315,8 +313,8 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
       </div>
 
       {/* 5. Rating Filter */}
-      <div className="pt-4 border-t border-slate-100">
-        <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider mb-2">
+      <div className="pt-4 border-t border-[#2A2520]">
+        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2">
           Минимална оцена
         </h4>
         <div className="space-y-1">
@@ -329,18 +327,18 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
                   minRating: prev.minRating === stars ? 0 : stars,
                 }))
               }
-              className={`w-full p-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors ${
+              className={`w-full p-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                 catalogFilters.minRating === stars
-                  ? "bg-amber-50 text-amber-900 font-bold"
-                  : "text-slate-600 hover:bg-slate-50"
+                  ? "bg-[#D49A55]/20 text-[#D49A55] font-bold border border-[#D49A55]/40"
+                  : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
               }`}
             >
-              <div className="flex items-center gap-1.5 text-amber-500">
-                <Star className="w-3.5 h-3.5 fill-amber-400" />
+              <div className="flex items-center gap-1.5 text-[#D49A55]">
+                <Star className="w-3.5 h-3.5 fill-[#D49A55]" />
                 <span>{stars}★ и повеќе</span>
               </div>
               {catalogFilters.minRating === stars && (
-                <Check className="w-3.5 h-3.5 text-amber-600" />
+                <Check className="w-3.5 h-3.5 text-[#D49A55]" />
               )}
             </button>
           ))}
@@ -349,10 +347,10 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
 
       {/* Mobile drawer apply button */}
       {isMobileDrawer && (
-        <div className="pt-4 border-t border-slate-100">
+        <div className="pt-4 border-t border-[#2A2520]">
           <button
             onClick={onCloseMobile}
-            className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm rounded-xl shadow-md transition-colors"
+            className="w-full py-3 bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 text-[#141210] font-black text-sm rounded-xl shadow-md transition-colors cursor-pointer"
           >
             Примени филтри
           </button>

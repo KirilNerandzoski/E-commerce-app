@@ -1,7 +1,7 @@
 import React from "react";
 import { useApp } from "../../context/AppContext";
 import { ProductCard } from "../product/ProductCard";
-import { History as HistoryIcon, Trash2 } from "lucide-react";
+import { History as HistoryIcon } from "lucide-react";
 
 export const RecentlyViewedSection = () => {
   const { recentlyViewed, products } = useApp();
@@ -19,14 +19,14 @@ export const RecentlyViewedSection = () => {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-orange-400 border border-slate-750">
+          <div className="w-8 h-8 rounded-lg bg-[#1D1A17] flex items-center justify-center text-[#E26D46] border border-[#2A2520]">
             <HistoryIcon className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-lg sm:text-xl font-black text-white">
+            <h2 className="text-lg sm:text-xl font-black text-[#FAF6F0]">
               Неодамна прегледани производи
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-[#A8A095]">
               Производи што ги разгледавте при оваа или претходна посета
             </p>
           </div>

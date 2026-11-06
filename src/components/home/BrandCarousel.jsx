@@ -31,10 +31,10 @@ export const BrandCarousel = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
       <div className="text-center mb-6">
-        <h2 className="text-lg sm:text-xl font-black text-slate-900">
+        <h2 className="text-lg sm:text-xl font-black text-[#FAF6F0]">
           Официјални партнерски брендови
         </h2>
-        <p className="text-xs text-slate-500 mt-1">
+        <p className="text-xs text-[#A8A095] mt-1">
           100% оригинални производи со директна овластена гаранција
         </p>
       </div>
@@ -44,7 +44,7 @@ export const BrandCarousel = () => {
           <button
             key={b.name}
             onClick={() => handleBrandClick(b.name)}
-            className="p-4 rounded-2xl bg-white border border-slate-200/80 hover:border-orange-300 hover:shadow-md hover:text-orange-600 transition-all font-black text-sm sm:text-base text-slate-700 flex items-center justify-center min-h-[64px]"
+            className="p-4 rounded-2xl bg-[#1D1A17] border border-[#2A2520] hover:border-[#E26D46]/60 hover:shadow-xl hover:text-[#E26D46] transition-all font-black text-sm sm:text-base text-[#FAF6F0] flex items-center justify-center min-h-[64px] cursor-pointer"
           >
             {b.logo}
           </button>

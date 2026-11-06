@@ -43,10 +43,10 @@ const AppShell = () => {
   const [isSpinModalOpen, setIsSpinModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#080D1A] text-white flex flex-col justify-between selection:bg-orange-500 selection:text-white relative">
-      {/* Ambient background glows */}
-      <div className="fixed top-0 left-1/4 w-96 h-96 bg-indigo-600/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="fixed top-1/3 right-10 w-96 h-96 bg-orange-600/5 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-[#141210] text-[#F5EFEB] flex flex-col justify-between selection:bg-[#E26D46] selection:text-white relative">
+      {/* Warm ambient background glows */}
+      <div className="fixed top-0 left-1/4 w-96 h-96 bg-[#D49A55]/4 rounded-full blur-3xl pointer-events-none" />
+      <div className="fixed top-1/3 right-10 w-96 h-96 bg-[#E26D46]/4 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10">
         <Navbar />

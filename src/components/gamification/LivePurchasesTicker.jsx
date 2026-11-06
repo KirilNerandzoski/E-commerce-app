@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PRODUCTS } from "../../data/products";
 import { useApp } from "../../context/AppContext";
-import { ShoppingBag, X, CheckCircle2 } from "lucide-react";
+import { X } from "lucide-react";
 
 const CITIES = [
   "Скопје (Аеродром)",
@@ -86,10 +86,10 @@ export const LivePurchasesTicker = () => {
     >
       <div
         onClick={() => navigateTo("product", currentNotification.product.id)}
-        className="bg-[#0D1527]/95 border border-slate-700/80 hover:border-orange-500/50 rounded-2xl p-3 shadow-2xl shadow-black/80 backdrop-blur-md flex items-center gap-3 cursor-pointer group"
+        className="bg-[#1D1A17]/95 border border-[#2A2520] hover:border-[#E26D46]/50 rounded-2xl p-3 shadow-2xl shadow-black/80 backdrop-blur-md flex items-center gap-3 cursor-pointer group"
       >
-        {/* Product Thumbnail in White pod */}
-        <div className="w-12 h-12 rounded-xl bg-white p-1 shrink-0 overflow-hidden flex items-center justify-center border border-slate-700/40">
+        {/* Product Thumbnail in Warm Ivory pod */}
+        <div className="w-12 h-12 rounded-xl bg-[#FAF7F2] p-1 shrink-0 overflow-hidden flex items-center justify-center border border-[#E6DFD5]">
           <img
             src={currentNotification.product.images[0]}
             alt={currentNotification.product.title}
@@ -103,10 +103,10 @@ export const LivePurchasesTicker = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>Штотуку купено од {currentNotification.city}</span>
           </div>
-          <div className="text-xs font-bold text-white truncate group-hover:text-orange-400 transition-colors">
+          <div className="text-xs font-bold text-[#FAF6F0] truncate group-hover:text-[#E26D46] transition-colors">
             {currentNotification.product.title}
           </div>
-          <div className="flex items-center gap-2 text-[10px] text-slate-400 mt-0.5">
+          <div className="flex items-center gap-2 text-[10px] text-[#A8A095] mt-0.5">
             <span>{currentNotification.name}</span>
             <span>•</span>
             <span>{currentNotification.timeAgo}</span>
@@ -119,7 +119,7 @@ export const LivePurchasesTicker = () => {
             e.stopPropagation();
             setIsDismissed(true);
           }}
-          className="p-1 rounded-full text-slate-500 hover:text-slate-300 hover:bg-slate-800 transition-colors cursor-pointer"
+          className="p-1 rounded-full text-[#8C8377] hover:text-[#FAF6F0] hover:bg-[#25211D] transition-colors cursor-pointer"
           title="Затвори известувања"
         >
           <X className="w-3.5 h-3.5" />

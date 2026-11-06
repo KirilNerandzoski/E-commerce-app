@@ -13,18 +13,18 @@ export const RecommendationsSection = () => {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <div className="flex items-center gap-1.5 text-xs font-bold text-orange-400 uppercase tracking-wider">
-            <Sparkles className="w-4 h-4 fill-orange-400 text-orange-400" />
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#D49A55] uppercase tracking-wider">
+            <Sparkles className="w-4 h-4 fill-[#D49A55] text-[#D49A55]" />
             <span>Персонализиран избор</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-white mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-[#FAF6F0] mt-1">
             Препорачано за тебе
           </h2>
         </div>
 
         <button
           onClick={() => navigateTo("catalog")}
-          className="text-xs sm:text-sm font-bold text-orange-400 hover:text-orange-300 flex items-center gap-1 transition-colors cursor-pointer"
+          className="text-xs sm:text-sm font-bold text-[#E26D46] hover:text-[#D49A55] flex items-center gap-1 transition-colors cursor-pointer"
         >
           Види повеќе <ArrowRight className="w-4 h-4" />
         </button>

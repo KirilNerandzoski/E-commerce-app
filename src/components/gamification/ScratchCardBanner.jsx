@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import { soundFX } from "../../utils/soundEffects";
 import { useApp } from "../../context/AppContext";
-import { Sparkles, Gift, Check, ArrowRight, Wand2 } from "lucide-react";
+import { Check, ArrowRight, Wand2 } from "lucide-react";
 
 export const ScratchCardBanner = () => {
   const { applyCoupon, addToast } = useApp();
@@ -22,22 +22,22 @@ export const ScratchCardBanner = () => {
     const width = canvas.width;
     const height = canvas.height;
 
-    // Draw metallic scratchable top coat
+    // Metallic warm bronze/amber scratch surface
     const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, "#D97706");
-    gradient.addColorStop(0.5, "#F59E0B");
-    gradient.addColorStop(1, "#EA580C");
+    gradient.addColorStop(0, "#C8522C");
+    gradient.addColorStop(0.5, "#D49A55");
+    gradient.addColorStop(1, "#E26D46");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
     // Decorative texture & pattern
-    ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+    ctx.fillStyle = "rgba(0, 0, 0, 0.18)";
     for (let i = 0; i < width; i += 16) {
       ctx.fillRect(i, 0, 8, height);
     }
 
     // Centered CTA text on scratch surface
-    ctx.fillStyle = "#0B0F19";
+    ctx.fillStyle = "#141210";
     ctx.font = "bold 13px 'Plus Jakarta Sans', sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -59,8 +59,6 @@ export const ScratchCardBanner = () => {
     ctx.fill();
 
     soundFX.playTick();
-
-    // Check progress periodically
     checkProgress();
   };
 
@@ -87,7 +85,7 @@ export const ScratchCardBanner = () => {
         particleCount: 60,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ["#F97316", "#F59E0B", "#10B981", "#FFFFFF"],
+        colors: ["#E26D46", "#D49A55", "#FAF6F0"],
       });
     }
   };
@@ -106,37 +104,37 @@ export const ScratchCardBanner = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-      <div className="bg-gradient-to-r from-[#0E172A] via-[#151F38] to-[#0E172A] border border-amber-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-6">
+      <div className="bg-[#1D1A17] border border-[#2A2520] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-6">
         {/* Glow backdrop */}
-        <div className="absolute -top-24 -left-24 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#E26D46]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-[#D49A55]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Text info */}
         <div className="text-center lg:text-left relative z-10 max-w-xl">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D49A55]/15 border border-[#D49A55]/30 text-[#D49A55] text-xs font-bold mb-3">
             <Wand2 className="w-3.5 h-3.5" />
             <span>Интерактивна Грепка за Попуст</span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+          <h3 className="text-2xl sm:text-3xl font-black text-[#FAF6F0] leading-tight">
             Избришете ја картичката и откријте го вашиот таен купон!
           </h3>
-          <p className="text-xs sm:text-sm text-slate-400 mt-2">
+          <p className="text-xs sm:text-sm text-[#A8A095] mt-2">
             Држете го глувчето или прстот врз картичката за да го откриете ексклузивниот попуст за денешната нарачка.
           </p>
         </div>
 
         {/* Scratchable Card Box */}
         <div className="relative z-10 shrink-0 flex flex-col items-center">
-          <div className="relative w-[280px] sm:w-[320px] h-[130px] rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-500/50 bg-[#0B0F19] flex items-center justify-center select-none cursor-pointer">
+          <div className="relative w-[280px] sm:w-[320px] h-[130px] rounded-2xl overflow-hidden shadow-2xl border-2 border-[#D49A55]/40 bg-[#141210] flex items-center justify-center select-none cursor-pointer">
             {/* Hidden Prize Underneath */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 to-indigo-950 flex flex-col items-center justify-center p-4 text-center">
-              <span className="text-[11px] font-extrabold text-amber-400 uppercase tracking-widest">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#141210] to-[#25211D] flex flex-col items-center justify-center p-4 text-center">
+              <span className="text-[11px] font-extrabold text-[#D49A55] uppercase tracking-widest">
                 СУПЕР ПОПУСТ
               </span>
-              <span className="text-xl font-black text-white mt-0.5">
+              <span className="text-xl font-black text-[#FAF6F0] mt-0.5">
                 {discountLabel}
               </span>
-              <div className="mt-1 px-3 py-1 bg-orange-500/20 border border-orange-500/40 rounded-xl font-mono text-sm font-black text-orange-400 tracking-wider">
+              <div className="mt-1 px-3 py-1 bg-[#E26D46]/20 border border-[#E26D46]/40 rounded-xl font-mono text-sm font-black text-[#E26D46] tracking-wider">
                 {secretCode}
               </div>
             </div>
@@ -170,21 +168,21 @@ export const ScratchCardBanner = () => {
             <div className="flex items-center gap-2 mt-3 w-full">
               <button
                 onClick={handleCopy}
-                className="flex-1 py-2 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors border border-slate-700 cursor-pointer"
+                className="flex-1 py-2 px-3 bg-[#25211D] hover:bg-[#2A2520] text-[#FAF6F0] font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors border border-[#2A2520] cursor-pointer"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : null}
                 <span>{copied ? "Копирано" : "Копирај код"}</span>
               </button>
               <button
                 onClick={handleApply}
-                className="flex-1 py-2 px-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md shadow-orange-500/20 transition-all cursor-pointer"
+                className="flex-1 py-2 px-3 bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 text-[#141210] font-black rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md shadow-[#E26D46]/20 transition-all cursor-pointer"
               >
                 <span>Примени во кошничка</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           ) : (
-            <span className="text-[11px] text-slate-500 mt-2 font-medium">
+            <span className="text-[11px] text-[#A8A095] mt-2 font-medium">
               Повлечете со глувчето за да избришете ({scratchedPercent}%)
             </span>
           )}

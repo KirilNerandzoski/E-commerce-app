@@ -10,7 +10,6 @@ import {
   ChevronRight,
   X,
   RotateCcw,
-  Sparkles,
 } from "lucide-react";
 
 export const ProductCatalog = () => {
@@ -107,7 +106,6 @@ export const ProductCatalog = () => {
   }, [products, catalogFilters]);
 
   // Paginated products
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
   const paginatedProducts = filteredProducts.slice(0, currentPage * itemsPerPage);
 
   const handleResetFilters = () => {
@@ -138,24 +136,24 @@ export const ProductCatalog = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* 1. Breadcrumbs */}
-      <nav className="flex items-center gap-1.5 text-xs text-slate-500 mb-4 overflow-x-auto whitespace-nowrap">
-        <button onClick={() => navigateTo("home")} className="hover:text-orange-600 transition-colors">
+      <nav className="flex items-center gap-1.5 text-xs text-[#A8A095] mb-4 overflow-x-auto whitespace-nowrap">
+        <button onClick={() => navigateTo("home")} className="hover:text-[#E26D46] transition-colors cursor-pointer">
           Почетна
         </button>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+        <ChevronRight className="w-3.5 h-3.5 text-[#8C8377] shrink-0" />
         <button
           onClick={() => setCatalogFilters((prev) => ({ ...prev, category: "all", subcategory: null }))}
-          className={`hover:text-orange-600 transition-colors ${
-            catalogFilters.category === "all" ? "font-bold text-slate-800" : ""
+          className={`hover:text-[#E26D46] transition-colors cursor-pointer ${
+            catalogFilters.category === "all" ? "font-bold text-[#FAF6F0]" : ""
           }`}
         >
           Каталог
         </button>
         {activeCategory && (
           <>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 text-[#8C8377] shrink-0" />
             <span
-              className={!activeSubcategory ? "font-bold text-slate-800" : "hover:text-orange-600 cursor-pointer"}
+              className={!activeSubcategory ? "font-bold text-[#FAF6F0]" : "hover:text-[#E26D46] cursor-pointer"}
               onClick={() => setCatalogFilters((prev) => ({ ...prev, subcategory: null }))}
             >
               {activeCategory.name}
@@ -164,19 +162,19 @@ export const ProductCatalog = () => {
         )}
         {activeSubcategory && (
           <>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span className="font-bold text-slate-800">{activeSubcategory.name}</span>
+            <ChevronRight className="w-3.5 h-3.5 text-[#8C8377] shrink-0" />
+            <span className="font-bold text-[#FAF6F0]">{activeSubcategory.name}</span>
           </>
         )}
       </nav>
 
       {/* 2. Category Title Banner */}
-      <div className="bg-[#0E1626]/90 rounded-3xl border border-slate-800 p-6 sm:p-8 mb-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 text-slate-200">
+      <div className="bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-6 sm:p-8 mb-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 text-[#FAF6F0]">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#FAF6F0] tracking-tight">
             {activeCategory ? activeCategory.name : "Сите производи во понуда"}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+          <p className="text-xs sm:text-sm text-[#A8A095] mt-1 max-w-xl">
             {activeCategory
               ? `Прегледајте ги најдобрите понуди, попусти и гарантиран квалитет во категоријата ${activeCategory.name}.`
               : "Најголем избор на електроника, апарати за домаќинство, мода, спорт и сѐ за вашиот дом."}
@@ -184,8 +182,8 @@ export const ProductCatalog = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="px-4 py-2 rounded-2xl bg-slate-800 text-xs font-bold text-slate-200 border border-slate-700">
-            Вкупно: <span className="text-orange-400 font-extrabold">{filteredProducts.length}</span> производи
+          <div className="px-4 py-2 rounded-2xl bg-[#25211D] text-xs font-bold text-[#FAF6F0] border border-[#2A2520]">
+            Вкупно: <span className="text-[#E26D46] font-extrabold">{filteredProducts.length}</span> производи
           </div>
         </div>
       </div>
@@ -202,9 +200,9 @@ export const ProductCatalog = () => {
           <div className="fixed inset-0 z-50 lg:hidden">
             <div
               onClick={() => setIsMobileFiltersOpen(false)}
-              className="fixed inset-0 bg-black/70 backdrop-blur-xs"
+              className="fixed inset-0 bg-black/80 backdrop-blur-xs"
             />
-            <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-[#0B1120] text-slate-200 border-l border-slate-800 shadow-2xl p-4 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-right duration-200">
+            <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-[#171412] text-[#FAF6F0] border-l border-[#2A2520] shadow-2xl p-4 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-right duration-200">
               <FilterSidebar
                 isMobileDrawer={true}
                 onCloseMobile={() => setIsMobileFiltersOpen(false)}
@@ -216,33 +214,33 @@ export const ProductCatalog = () => {
         {/* Catalog Main Content (3 cols) */}
         <div className="lg:col-span-3 space-y-4">
           {/* Top Control Bar: Active filters, Grid/List switch, Sort dropdown */}
-          <div className="bg-[#0E1626]/90 rounded-2xl border border-slate-800 p-3 sm:p-4 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-slate-200">
+          <div className="bg-[#1D1A17] rounded-2xl border border-[#2A2520] p-3 sm:p-4 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[#FAF6F0]">
             {/* Left: Mobile Filter Button & Active Filter Summary */}
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMobileFiltersOpen(true)}
-                className="lg:hidden px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700"
+                className="lg:hidden px-3.5 py-2 bg-[#25211D] hover:bg-[#2A2520] text-[#FAF6F0] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-[#2A2520]"
               >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-orange-400" />
+                <SlidersHorizontal className="w-3.5 h-3.5 text-[#E26D46]" />
                 Филтри
               </button>
 
-              <span className="text-xs text-slate-400 font-medium">
-                Прикажани <strong className="text-white">{paginatedProducts.length}</strong> од{" "}
-                <strong className="text-white">{filteredProducts.length}</strong>
+              <span className="text-xs text-[#A8A095] font-medium">
+                Прикажани <strong className="text-[#FAF6F0]">{paginatedProducts.length}</strong> од{" "}
+                <strong className="text-[#FAF6F0]">{filteredProducts.length}</strong>
               </span>
             </div>
 
             {/* Right: Layout Switch & Sort */}
             <div className="flex items-center gap-3">
               {/* Layout Switcher */}
-              <div className="flex items-center bg-slate-800 p-0.5 rounded-xl border border-slate-700">
+              <div className="flex items-center bg-[#25211D] p-0.5 rounded-xl border border-[#2A2520]">
                 <button
                   onClick={() => setLayoutMode("grid")}
                   className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                     layoutMode === "grid"
-                      ? "bg-slate-900 text-orange-400 shadow-xs"
-                      : "text-slate-400 hover:text-white"
+                      ? "bg-[#141210] text-[#E26D46] shadow-xs"
+                      : "text-[#A8A095] hover:text-[#FAF6F0]"
                   }`}
                   title="Grid поглед"
                 >
@@ -252,8 +250,8 @@ export const ProductCatalog = () => {
                   onClick={() => setLayoutMode("list")}
                   className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                     layoutMode === "list"
-                      ? "bg-slate-900 text-orange-400 shadow-xs"
-                      : "text-slate-400 hover:text-white"
+                      ? "bg-[#141210] text-[#E26D46] shadow-xs"
+                      : "text-[#A8A095] hover:text-[#FAF6F0]"
                   }`}
                   title="Листа поглед"
                 >
@@ -263,20 +261,20 @@ export const ProductCatalog = () => {
 
               {/* Sort Dropdown */}
               <div className="flex items-center gap-1.5 text-xs">
-                <span className="text-slate-400 hidden sm:inline">Сортирај:</span>
+                <span className="text-[#A8A095] hidden sm:inline">Сортирај:</span>
                 <select
                   value={catalogFilters.sortBy}
                   onChange={(e) =>
                     setCatalogFilters((prev) => ({ ...prev, sortBy: e.target.value }))
                   }
-                  className="bg-slate-50 border border-slate-200 text-slate-800 font-bold text-xs py-2 px-3 rounded-xl outline-none focus:border-orange-500 cursor-pointer"
+                  className="bg-[#25211D] border border-[#2A2520] text-[#FAF6F0] font-bold text-xs py-2 px-3 rounded-xl outline-none focus:border-[#E26D46] cursor-pointer"
                 >
-                  <option value="popularity">Најпопуларни</option>
-                  <option value="price-asc">Цена: Ниска кон висока</option>
-                  <option value="price-desc">Цена: Висока кон ниска</option>
-                  <option value="rating">Највисока оцена</option>
-                  <option value="discount">Најголем попуст %</option>
-                  <option value="newest">Најнови производи</option>
+                  <option value="popularity" className="bg-[#1D1A17] text-[#FAF6F0]">Најпопуларни</option>
+                  <option value="price-asc" className="bg-[#1D1A17] text-[#FAF6F0]">Цена: Ниска кон висока</option>
+                  <option value="price-desc" className="bg-[#1D1A17] text-[#FAF6F0]">Цена: Висока кон ниска</option>
+                  <option value="rating" className="bg-[#1D1A17] text-[#FAF6F0]">Највисока оцена</option>
+                  <option value="discount" className="bg-[#1D1A17] text-[#FAF6F0]">Најголем попуст %</option>
+                  <option value="newest" className="bg-[#1D1A17] text-[#FAF6F0]">Најнови производи</option>
                 </select>
               </div>
             </div>
@@ -292,31 +290,31 @@ export const ProductCatalog = () => {
             catalogFilters.inStockOnly ||
             catalogFilters.search ||
             catalogFilters.minRating > 0) && (
-            <div className="flex flex-wrap items-center gap-1.5 bg-slate-50 p-2.5 rounded-2xl border border-slate-200/60">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">
+            <div className="flex flex-wrap items-center gap-1.5 bg-[#1D1A17] p-2.5 rounded-2xl border border-[#2A2520]">
+              <span className="text-[11px] font-bold text-[#A8A095] uppercase tracking-wider mr-1">
                 Активни:
               </span>
 
               {catalogFilters.category !== "all" && activeCategory && (
-                <span className="inline-flex items-center gap-1 bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700">
+                <span className="inline-flex items-center gap-1 bg-[#25211D] border border-[#2A2520] px-2.5 py-1 rounded-lg text-xs font-semibold text-[#FAF6F0]">
                   {activeCategory.name}
                   <button
                     onClick={() =>
                       setCatalogFilters((prev) => ({ ...prev, category: "all", subcategory: null }))
                     }
                   >
-                    <X className="w-3 h-3 text-slate-400 hover:text-slate-700" />
+                    <X className="w-3 h-3 text-[#A8A095] hover:text-[#FAF6F0]" />
                   </button>
                 </span>
               )}
 
               {catalogFilters.subcategory && activeSubcategory && (
-                <span className="inline-flex items-center gap-1 bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700">
+                <span className="inline-flex items-center gap-1 bg-[#25211D] border border-[#2A2520] px-2.5 py-1 rounded-lg text-xs font-semibold text-[#FAF6F0]">
                   {activeSubcategory.name}
                   <button
                     onClick={() => setCatalogFilters((prev) => ({ ...prev, subcategory: null }))}
                   >
-                    <X className="w-3 h-3 text-slate-400 hover:text-slate-700" />
+                    <X className="w-3 h-3 text-[#A8A095] hover:text-[#FAF6F0]" />
                   </button>
                 </span>
               )}
@@ -324,40 +322,39 @@ export const ProductCatalog = () => {
               {catalogFilters.selectedBrands.map((brand) => (
                 <span
                   key={brand}
-                  className="inline-flex items-center gap-1 bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700"
-                >
+                  className="inline-flex items-center gap-1 bg-[#25211D] border border-[#2A2520] px-2.5 py-1 rounded-lg text-xs font-semibold text-[#FAF6F0]">
                   Бренд: {brand}
                   <button onClick={() => removeBrandFilter(brand)}>
-                    <X className="w-3 h-3 text-slate-400 hover:text-slate-700" />
+                    <X className="w-3 h-3 text-[#A8A095] hover:text-[#FAF6F0]" />
                   </button>
                 </span>
               ))}
 
               {catalogFilters.discountOnly && (
-                <span className="inline-flex items-center gap-1 bg-red-50 border border-red-200 px-2.5 py-1 rounded-lg text-xs font-bold text-red-600">
+                <span className="inline-flex items-center gap-1 bg-[#E26D46]/20 border border-[#E26D46]/40 px-2.5 py-1 rounded-lg text-xs font-bold text-[#E26D46]">
                   Со попуст
                   <button
                     onClick={() => setCatalogFilters((prev) => ({ ...prev, discountOnly: false }))}
                   >
-                    <X className="w-3 h-3 text-red-400 hover:text-red-700" />
+                    <X className="w-3 h-3 text-[#E26D46]" />
                   </button>
                 </span>
               )}
 
               {catalogFilters.directOnly && (
-                <span className="inline-flex items-center gap-1 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg text-xs font-bold text-amber-700">
+                <span className="inline-flex items-center gap-1 bg-[#D49A55]/20 border border-[#D49A55]/40 px-2.5 py-1 rounded-lg text-xs font-bold text-[#D49A55]">
                   PazarMax Direkt
                   <button
                     onClick={() => setCatalogFilters((prev) => ({ ...prev, directOnly: false }))}
                   >
-                    <X className="w-3 h-3 text-amber-400 hover:text-amber-700" />
+                    <X className="w-3 h-3 text-[#D49A55]" />
                   </button>
                 </span>
               )}
 
               <button
                 onClick={handleResetFilters}
-                className="text-xs font-bold text-rose-600 hover:text-rose-700 ml-auto px-2 py-1"
+                className="text-xs font-bold text-[#E26D46] hover:text-[#D49A55] ml-auto px-2 py-1 cursor-pointer"
               >
                 Исчисти сѐ
               </button>
@@ -366,19 +363,19 @@ export const ProductCatalog = () => {
 
           {/* Product Cards Grid / List */}
           {filteredProducts.length === 0 ? (
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center flex flex-col items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center mb-4">
+            <div className="bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-12 text-center flex flex-col items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-[#25211D] text-[#E26D46] border border-[#2A2520] flex items-center justify-center mb-4">
                 <SlidersHorizontal className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-slate-800">
+              <h3 className="text-xl font-bold text-[#FAF6F0]">
                 Не се пронајдени производи
               </h3>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-sm">
+              <p className="text-xs sm:text-sm text-[#A8A095] mt-1 max-w-sm">
                 Обидете се да ги промените филтрите, да го зголемите опсегот на цената или да го ресетирате пребарувањето.
               </p>
               <button
                 onClick={handleResetFilters}
-                className="mt-6 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow-md transition-colors flex items-center gap-2"
+                className="mt-6 px-6 py-2.5 bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 text-[#141210] font-black text-xs rounded-xl shadow-md transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" /> Ресетирај ги сите филтри
               </button>
@@ -402,7 +399,7 @@ export const ProductCatalog = () => {
                 <div className="pt-8 pb-4 text-center">
                   <button
                     onClick={() => setCurrentPage((p) => p + 1)}
-                    className="px-8 py-3 bg-white border border-slate-300 hover:border-orange-500 hover:text-orange-600 font-bold text-sm text-slate-700 rounded-2xl shadow-sm hover:shadow-md transition-all active:scale-98"
+                    className="px-8 py-3 bg-[#1D1A17] border border-[#2A2520] hover:border-[#E26D46] text-[#FAF6F0] hover:text-[#E26D46] font-bold text-sm rounded-2xl shadow-sm hover:shadow-md transition-all active:scale-98 cursor-pointer"
                   >
                     Вчитај уште производи ({filteredProducts.length - paginatedProducts.length} останати)
                   </button>

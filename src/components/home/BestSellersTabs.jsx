@@ -29,33 +29,33 @@ export const BestSellersTabs = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-black text-amber-400 uppercase tracking-wider">
-            <Trophy className="w-4 h-4 fill-amber-400 text-amber-400" />
+          <div className="flex items-center gap-2 text-xs font-black text-[#D49A55] uppercase tracking-wider">
+            <Trophy className="w-4 h-4 fill-[#D49A55] text-[#D49A55]" />
             <span>Најпопуларен избор од купувачите</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-white mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-[#FAF6F0] mt-1">
             Најпродавани производи
           </h2>
         </div>
 
         <button
           onClick={() => navigateTo("catalog")}
-          className="text-xs sm:text-sm font-bold text-orange-400 hover:text-orange-300 flex items-center gap-1 transition-colors self-start sm:self-auto cursor-pointer"
+          className="text-xs sm:text-sm font-bold text-[#E26D46] hover:text-[#D49A55] flex items-center gap-1 transition-colors self-start sm:self-auto cursor-pointer"
         >
           Види ги сите производи <ArrowRight className="w-4 h-4" />
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-800 mb-6 no-scrollbar">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-[#2A2520] mb-6 no-scrollbar">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === tab.id
-                ? "bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-black shadow-lg shadow-orange-500/25"
-                : "bg-slate-850 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-750"
+                ? "bg-gradient-to-r from-[#E26D46] to-[#D49A55] text-[#141210] font-black shadow-lg shadow-[#E26D46]/20"
+                : "bg-[#1D1A17] text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0] border border-[#2A2520]"
             }`}
           >
             {tab.label}

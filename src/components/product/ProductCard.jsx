@@ -45,10 +45,10 @@ export const ProductCard = ({ product, layout = "grid" }) => {
     return (
       <div
         onClick={handleCardClick}
-        className="group bg-[#0E1626]/90 rounded-2xl border border-slate-800 p-4 transition-all duration-200 hover:shadow-2xl hover:border-orange-500/40 flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer relative text-slate-200"
+        className="group bg-[#1D1A17] rounded-2xl border border-[#2A2520] p-4 transition-all duration-200 hover:shadow-2xl hover:border-[#E26D46]/50 flex flex-col sm:flex-row gap-4 sm:gap-6 cursor-pointer relative text-[#FAF6F0]"
       >
-        {/* Left Image */}
-        <div className="relative w-full sm:w-56 h-48 sm:h-52 shrink-0 bg-white rounded-xl overflow-hidden flex items-center justify-center p-3 border border-slate-700/40">
+        {/* Left Image Pod */}
+        <div className="relative w-full sm:w-56 h-48 sm:h-52 shrink-0 bg-[#FAF7F2] rounded-xl overflow-hidden flex items-center justify-center p-3 border border-[#E6DFD5]">
           <img
             src={product.images[0]}
             alt={product.title}
@@ -59,13 +59,13 @@ export const ProductCard = ({ product, layout = "grid" }) => {
           {/* Badges */}
           <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
             {product.discount > 0 && (
-              <span className="bg-red-500 text-white font-bold text-xs px-2 py-0.5 rounded-md shadow-sm">
+              <span className="bg-[#E26D46] text-white font-bold text-xs px-2 py-0.5 rounded-md shadow-xs">
                 -{product.discount}%
               </span>
             )}
             {product.isDirectDelivery && (
-              <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-md shadow-sm flex items-center gap-1">
-                <Zap className="w-3 h-3 fill-slate-950" /> Direkt
+              <span className="bg-gradient-to-r from-[#D49A55] to-[#E26D46] text-[#141210] font-black text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs flex items-center gap-1">
+                <Zap className="w-3 h-3 fill-[#141210]" /> Direkt
               </span>
             )}
           </div>
@@ -75,7 +75,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
         <div className="flex-1 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between gap-2">
-              <span className="text-xs font-bold text-orange-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#D49A55] uppercase tracking-wider">
                 {product.brand}
               </span>
               <div className="flex items-center gap-1.5">
@@ -87,12 +87,12 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                   }}
                   className={`p-1.5 rounded-lg border transition-colors ${
                     inWishlist
-                      ? "bg-red-950/40 border-red-800 text-red-400"
-                      : "bg-slate-800 border-slate-700 text-slate-400 hover:text-red-400 hover:border-red-700"
+                      ? "bg-[#E26D46]/20 border-[#E26D46] text-[#E26D46]"
+                      : "bg-[#25211D] border-[#2A2520] text-[#A8A095] hover:text-[#E26D46] hover:border-[#E26D46]/50"
                   }`}
                   title="Омилени"
                 >
-                  <Heart className={`w-4 h-4 ${inWishlist ? "fill-red-400" : ""}`} />
+                  <Heart className={`w-4 h-4 ${inWishlist ? "fill-[#E26D46]" : ""}`} />
                 </button>
                 <button
                   type="button"
@@ -102,8 +102,8 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                   }}
                   className={`p-1.5 rounded-lg border transition-colors ${
                     inCompare
-                      ? "bg-amber-950/40 border-amber-800 text-amber-400"
-                      : "bg-slate-800 border-slate-700 text-slate-400 hover:text-amber-400 hover:border-amber-700"
+                      ? "bg-[#D49A55]/20 border-[#D49A55] text-[#D49A55]"
+                      : "bg-[#25211D] border-[#2A2520] text-[#A8A095] hover:text-[#D49A55] hover:border-[#D49A55]/50"
                   }`}
                   title="Спореди"
                 >
@@ -112,7 +112,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
               </div>
             </div>
 
-            <h3 className="font-bold text-white text-base sm:text-lg mt-1 group-hover:text-orange-400 transition-colors line-clamp-2">
+            <h3 className="font-bold text-[#FAF6F0] text-base sm:text-lg mt-1 group-hover:text-[#E26D46] transition-colors line-clamp-2">
               {product.title}
             </h3>
 
@@ -125,12 +125,12 @@ export const ProductCard = ({ product, layout = "grid" }) => {
               )}
             </div>
 
-            <p className="text-xs text-slate-400 mt-2 line-clamp-2 hidden sm:block">
+            <p className="text-xs text-[#A8A095] mt-2 line-clamp-2 hidden sm:block">
               {product.description}
             </p>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-end justify-between gap-3">
+          <div className="mt-4 pt-3 border-t border-[#2A2520] flex flex-wrap items-end justify-between gap-3">
             <PriceDisplay
               price={product.price}
               originalPrice={product.originalPrice}
@@ -145,9 +145,9 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                   e.stopPropagation();
                   setQuickViewProduct(product);
                 }}
-                className="px-3 py-2 text-xs font-semibold text-slate-300 bg-slate-850 hover:bg-slate-800 rounded-xl transition-colors hidden sm:inline-flex items-center gap-1.5 border border-slate-750"
+                className="px-3 py-2 text-xs font-semibold text-[#FAF6F0] bg-[#25211D] hover:bg-[#2A2520] rounded-xl transition-colors hidden sm:inline-flex items-center gap-1.5 border border-[#2A2520]"
               >
-                <Eye className="w-3.5 h-3.5" /> Брз преглед
+                <Eye className="w-3.5 h-3.5 text-[#A8A095]" /> Брз преглед
               </button>
               <button
                 type="button"
@@ -157,8 +157,8 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                   isAdded
                     ? "bg-emerald-600 text-white"
                     : product.inStock
-                    ? "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-slate-950 active:scale-95 shadow-orange-500/20"
-                    : "bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed"
+                    ? "bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 text-[#141210] active:scale-95 shadow-[#E26D46]/20"
+                    : "bg-[#25211D] text-[#8C8377] border border-[#2A2520] cursor-not-allowed"
                 }`}
               >
                 {isAdded ? (
@@ -167,7 +167,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                   </>
                 ) : (
                   <>
-                    <ShoppingCart className="w-4 h-4 text-slate-950" /> Во кошничка
+                    <ShoppingCart className="w-4 h-4 text-[#141210]" /> Во кошничка
                   </>
                 )}
               </button>
@@ -182,11 +182,11 @@ export const ProductCard = ({ product, layout = "grid" }) => {
   return (
     <div
       onClick={handleCardClick}
-      className="group bg-[#0E1626]/90 rounded-2xl border border-slate-800/80 p-3 sm:p-4 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 hover:border-orange-500/40 flex flex-col justify-between cursor-pointer relative text-slate-200"
+      className="group bg-[#1D1A17] rounded-2xl border border-[#2A2520] p-3 sm:p-4 transition-all duration-300 hover:shadow-2xl hover:shadow-[#E26D46]/10 hover:-translate-y-1 hover:border-[#E26D46]/50 flex flex-col justify-between cursor-pointer relative text-[#FAF6F0]"
     >
       <div>
-        {/* Image Container with Badges & Floating Actions */}
-        <div className="relative w-full aspect-square bg-white rounded-xl overflow-hidden flex items-center justify-center p-3 sm:p-4 mb-3 border border-slate-700/30">
+        {/* Image Pod with Badges & Floating Actions */}
+        <div className="relative w-full aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden flex items-center justify-center p-3 sm:p-4 mb-3 border border-[#E6DFD5]">
           <img
             src={product.images[0]}
             alt={product.title}
@@ -197,18 +197,18 @@ export const ProductCard = ({ product, layout = "grid" }) => {
           {/* Badges on Top Left */}
           <div className="absolute top-2 left-2 flex flex-col gap-1 z-10 pointer-events-none">
             {product.discount > 0 && (
-              <span className="bg-red-500 text-white font-extrabold text-[11px] px-2 py-0.5 rounded-md shadow-sm">
+              <span className="bg-[#E26D46] text-white font-extrabold text-[11px] px-2 py-0.5 rounded-md shadow-xs">
                 -{product.discount}%
               </span>
             )}
             {product.isDirectDelivery && (
-              <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-md shadow-sm flex items-center gap-0.5">
-                <Zap className="w-2.5 h-2.5 fill-slate-950" /> Direkt
+              <span className="bg-gradient-to-r from-[#D49A55] to-[#E26D46] text-[#141210] font-black text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-md shadow-xs flex items-center gap-0.5">
+                <Zap className="w-2.5 h-2.5 fill-[#141210]" /> Direkt
               </span>
             )}
             {product.isDealOfTheDay && (
-              <span className="bg-purple-600 text-white font-bold text-[9px] px-1.5 py-0.5 rounded-md shadow-sm">
-                Супер Зделка
+              <span className="bg-[#D49A55] text-[#141210] font-black text-[9px] px-1.5 py-0.5 rounded-md shadow-xs uppercase tracking-wide">
+                Зделка на денот
               </span>
             )}
           </div>
@@ -223,8 +223,8 @@ export const ProductCard = ({ product, layout = "grid" }) => {
               }}
               className={`w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${
                 inWishlist
-                  ? "bg-red-500 text-white"
-                  : "bg-slate-900/90 backdrop-blur-sm text-slate-300 hover:text-red-400 hover:bg-slate-900 border border-slate-700/60"
+                  ? "bg-[#E26D46] text-white"
+                  : "bg-[#141210]/90 backdrop-blur-sm text-[#FAF6F0] hover:text-[#E26D46] hover:bg-[#1D1A17] border border-[#2A2520]"
               }`}
               title="Омилени"
             >
@@ -239,8 +239,8 @@ export const ProductCard = ({ product, layout = "grid" }) => {
               }}
               className={`w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${
                 inCompare
-                  ? "bg-amber-500 text-slate-950 font-bold"
-                  : "bg-slate-900/90 backdrop-blur-sm text-slate-300 hover:text-amber-400 hover:bg-slate-900 border border-slate-700/60"
+                  ? "bg-[#D49A55] text-[#141210] font-bold"
+                  : "bg-[#141210]/90 backdrop-blur-sm text-[#FAF6F0] hover:text-[#D49A55] hover:bg-[#1D1A17] border border-[#2A2520]"
               }`}
               title="Спореди"
             >
@@ -253,7 +253,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                 e.stopPropagation();
                 setQuickViewProduct(product);
               }}
-              className="w-8 h-8 rounded-full bg-slate-900/90 backdrop-blur-sm text-slate-300 hover:text-white hover:bg-slate-900 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 hidden sm:flex border border-slate-700/60"
+              className="w-8 h-8 rounded-full bg-[#141210]/90 backdrop-blur-sm text-[#FAF6F0] hover:text-[#E26D46] hover:bg-[#1D1A17] flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 hidden sm:flex border border-[#2A2520]"
               title="Брз преглед"
             >
               <Eye className="w-4 h-4" />
@@ -262,8 +262,8 @@ export const ProductCard = ({ product, layout = "grid" }) => {
 
           {/* Out of Stock Overlay */}
           {!product.inStock && (
-            <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-[2px] flex items-center justify-center">
-              <span className="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
+            <div className="absolute inset-0 bg-[#141210]/85 backdrop-blur-[2px] flex items-center justify-center">
+              <span className="bg-[#E26D46] text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
                 Распродадено
               </span>
             </div>
@@ -271,10 +271,10 @@ export const ProductCard = ({ product, layout = "grid" }) => {
         </div>
 
         {/* Brand & Title */}
-        <div className="text-[11px] font-bold text-orange-400 uppercase tracking-wider mb-1">
+        <div className="text-[11px] font-bold text-[#D49A55] uppercase tracking-wider mb-1">
           {product.brand}
         </div>
-        <h3 className="font-bold text-white text-sm leading-snug group-hover:text-orange-400 transition-colors line-clamp-2 min-h-[2.5rem]">
+        <h3 className="font-bold text-[#FAF6F0] text-sm leading-snug group-hover:text-[#E26D46] transition-colors line-clamp-2 min-h-[2.5rem]">
           {product.title}
         </h3>
 
@@ -290,7 +290,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
       </div>
 
       {/* Price & Add to Cart button */}
-      <div className="mt-3 pt-2.5 border-t border-slate-800 flex flex-col gap-2">
+      <div className="mt-3 pt-2.5 border-t border-[#2A2520] flex flex-col gap-2">
         <PriceDisplay
           price={product.price}
           originalPrice={product.originalPrice}
@@ -306,8 +306,8 @@ export const ProductCard = ({ product, layout = "grid" }) => {
             isAdded
               ? "bg-emerald-600 text-white"
               : product.inStock
-              ? "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 active:scale-98 text-slate-950 shadow-orange-500/20"
-              : "bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed"
+              ? "bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 active:scale-98 text-[#141210] shadow-[#E26D46]/20"
+              : "bg-[#25211D] text-[#8C8377] border border-[#2A2520] cursor-not-allowed"
           }`}
         >
           {isAdded ? (
@@ -316,7 +316,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
             </>
           ) : (
             <>
-              <ShoppingCart className="w-3.5 h-3.5 text-slate-950" /> Во кошничка
+              <ShoppingCart className="w-3.5 h-3.5 text-[#141210]" /> Во кошничка
             </>
           )}
         </button>
