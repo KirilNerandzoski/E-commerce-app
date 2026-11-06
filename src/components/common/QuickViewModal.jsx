@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useApp } from "../../context/AppContext";
 import { StarRating } from "../product/StarRating";
 import { PriceDisplay } from "../product/PriceDisplay";
+import { BrandLogo } from "./BrandLogos";
 import {
   X,
   ShoppingCart,
@@ -124,8 +125,8 @@ export const QuickViewModal = () => {
               {/* Brand & Filters/Compare Logo bar placed directly above Product Title */}
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-[#D49A55] uppercase tracking-wider">
-                    {product.brand}
+                  <span className="text-xs font-bold text-[#D49A55] transition-colors flex items-center gap-1.5">
+                    <BrandLogo brand={product.brand} size="sm" showName={true} />
                   </span>
                   {product.isDirectDelivery && (
                     <span className="inline-flex items-center gap-1 bg-[#D49A55]/20 text-[#D49A55] border border-[#D49A55]/30 text-[10px] font-black px-2 py-0.5 rounded uppercase">

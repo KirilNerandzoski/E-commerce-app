@@ -1,22 +1,23 @@
 import React from "react";
 import { useApp } from "../../context/AppContext";
+import { BrandLogo, BRAND_CONFIG } from "../common/BrandLogos";
 
 export const BrandCarousel = () => {
   const { navigateTo, setCatalogFilters } = useApp();
 
-  const brands = [
-    { name: "Apple", logo: " Apple" },
-    { name: "Samsung", logo: "SAMSUNG" },
-    { name: "Sony", logo: "SONY" },
-    { name: "Philips", logo: "PHILIPS" },
-    { name: "Bosch", logo: "BOSCH" },
-    { name: "Dyson", logo: "dyson" },
-    { name: "Nike", logo: "NIKE" },
-    { name: "Makita", logo: "makita" },
-    { name: "Xiaomi", logo: "XIAOMI" },
-    { name: "DeLonghi", logo: "De'Longhi" },
-    { name: "LEGO", logo: "LEGO" },
-    { name: "Lavazza", logo: "LAVAZZA" },
+  const brandKeys = [
+    "Apple",
+    "Samsung",
+    "Sony",
+    "Philips",
+    "Bosch",
+    "Dyson",
+    "Nike",
+    "Makita",
+    "Xiaomi",
+    "DeLonghi",
+    "LEGO",
+    "Lavazza",
   ];
 
   const handleBrandClick = (brandName) => {
@@ -39,16 +40,26 @@ export const BrandCarousel = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 sm:gap-4">
-        {brands.map((b) => (
-          <button
-            key={b.name}
-            onClick={() => handleBrandClick(b.name)}
-            className="p-4 rounded-2xl bg-[#1D1A17] border border-[#2A2520] hover:border-[#E26D46]/60 hover:shadow-xl hover:text-[#E26D46] transition-all font-black text-sm sm:text-base text-[#FAF6F0] flex items-center justify-center min-h-[64px] cursor-pointer"
-          >
-            {b.logo}
-          </button>
-        ))}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+        {brandKeys.map((key) => {
+          const config = BRAND_CONFIG[key] || { name: key };
+          return (
+            <button
+              key={key}
+              onClick={() => handleBrandClick(key)}
+              className="group p-4 rounded-2xl bg-[#1D1A17] border border-[#2A2520] hover:border-[#E26D46] hover:bg-[#25211D] hover:shadow-xl transition-all flex flex-col items-center justify-center min-h-[96px] cursor-pointer"
+              title={`Прегледај производи од ${config.name}`}
+            >
+              <BrandLogo brand={key} size="lg" showName={false} />
+              <span className="text-xs font-black text-[#FAF6F0] group-hover:text-[#E26D46] transition-colors mt-2 tracking-wide">
+                {config.name}
+              </span>
+              <span className="text-[10px] text-[#8C8377] font-semibold mt-0.5">
+                {config.category || "Овластен бренд"}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </section>
   );

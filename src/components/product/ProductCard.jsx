@@ -3,6 +3,7 @@ import { useApp } from "../../context/AppContext";
 import { soundFX } from "../../utils/soundEffects";
 import { StarRating } from "./StarRating";
 import { PriceDisplay } from "./PriceDisplay";
+import { BrandLogo } from "../common/BrandLogos";
 import {
   Heart,
   Eye,
@@ -81,10 +82,10 @@ export const ProductCard = ({ product, layout = "grid" }) => {
                   e.stopPropagation();
                   navigateTo("catalog", { brand: product.brand });
                 }}
-                className="text-xs font-bold text-[#D49A55] hover:text-[#E26D46] uppercase tracking-wider transition-colors cursor-pointer"
+                className="text-xs font-bold text-[#D49A55] hover:text-[#E26D46] transition-colors cursor-pointer flex items-center gap-1.5"
                 title={`Филтрирај по бренд ${product.brand}`}
               >
-                {product.brand}
+                <BrandLogo brand={product.brand} size="sm" showName={true} />
               </button>
               <div className="flex items-center gap-1.5">
                 <button
@@ -282,7 +283,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
           )}
         </div>
 
-        {/* Brand & Filters Logo above Title */}
+        {/* Brand Logo & Filters Button above Title */}
         <div className="flex items-center justify-between gap-1 mb-1.5">
           <button
             type="button"
@@ -290,10 +291,10 @@ export const ProductCard = ({ product, layout = "grid" }) => {
               e.stopPropagation();
               navigateTo("catalog", { brand: product.brand });
             }}
-            className="text-[11px] font-bold text-[#D49A55] hover:text-[#E26D46] uppercase tracking-wider transition-colors cursor-pointer text-left truncate"
+            className="text-[11px] font-bold text-[#D49A55] hover:text-[#E26D46] transition-colors cursor-pointer text-left truncate flex items-center gap-1.5"
             title={`Филтрирај по бренд ${product.brand}`}
           >
-            {product.brand}
+            <BrandLogo brand={product.brand} size="sm" showName={true} />
           </button>
 
           {/* Filters / Compare logo button positioned directly above product name */}

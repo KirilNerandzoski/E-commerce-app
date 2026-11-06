@@ -4,6 +4,7 @@ import { CATEGORIES } from "../../data/categories";
 import { formatPrice, getInstallmentPrice } from "../../utils/formatters";
 import { StarRating } from "../product/StarRating";
 import { ProductCard } from "../product/ProductCard";
+import { BrandLogo } from "../common/BrandLogos";
 import {
   ChevronLeft,
   ChevronRight,
@@ -268,10 +269,10 @@ export const ProductDetailPage = () => {
                 <button
                   type="button"
                   onClick={() => navigateTo("catalog", { brand: product.brand })}
-                  className="text-xs font-black text-[#D49A55] hover:text-[#E26D46] uppercase tracking-widest transition-colors cursor-pointer flex items-center gap-1"
+                  className="text-xs font-black text-[#D49A55] hover:text-[#E26D46] transition-colors cursor-pointer flex items-center gap-1.5"
                   title={`Филтрирај по бренд ${product.brand}`}
                 >
-                  <span>{product.brand}</span>
+                  <BrandLogo brand={product.brand} size="md" showName={true} />
                 </button>
 
                 <span className="text-[#8C8377]">•</span>
