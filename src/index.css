@@ -146,7 +146,7 @@ html.light,
 
 /* Preserve bright white text on buttons, badges, gradients and dark showcase */
 .light .text-white,
-.light [class*="text-white"],
+.light .\!text-white,
 .light .dark-showcase,
 .light .dark-showcase h1,
 .light .dark-showcase h2,
