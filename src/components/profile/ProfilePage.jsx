@@ -27,7 +27,7 @@ import {
 export const ProfilePage = () => {
   const { user, updateUserProfile, logoutUser, navigateTo, currency, wishlist, setIsAuthModalOpen, profileActiveTab, setProfileActiveTab } = useApp();
 
-  const isSuperAdmin = user?.isSuperAdmin || user?.role === "superadmin" || user?.email?.toLowerCase() === "superadmin@pazarmax.mk";
+  const isSuperAdmin = user?.isSuperAdmin || user?.role === "superadmin" || user?.email?.toLowerCase() === "superadmin@aura.mk" || user?.email?.toLowerCase() === "superadmin@pazarmax.mk";
 
   const [activeTab, setActiveTab] = useState(profileActiveTab || "orders");
   React.useEffect(() => { if (profileActiveTab) setActiveTab(profileActiveTab); }, [profileActiveTab]); // 'orders' | 'info' | 'addresses' | 'settings'
@@ -136,7 +136,7 @@ export const ProfilePage = () => {
             <User className="w-10 h-10" />
           </div>
           <h1 className="text-2xl font-black text-slate-800 mb-2">
-            Добредојдовте во PazarMax
+            Добредојдовте во AURA
           </h1>
           <p className="text-sm text-slate-500 mb-8 leading-relaxed">
             Моментално не сте најавени. Најавете се на вашата сметка за пристап до историјата на нарачки, зачуваните адреси и кориснички поставки.
@@ -574,8 +574,8 @@ export const ProfilePage = () => {
                 </div>
 
                 <div className="p-3 rounded-xl bg-slate-50">
-                  <h4 className="font-bold text-slate-800 mb-1">Префериран PazarMax Paketomat</h4>
-                  <p className="text-slate-600 font-semibold">{user?.preferences?.preferredLocker || "PazarMax Paketomat"}</p>
+                  <h4 className="font-bold text-slate-800 mb-1">Префериран AuraBox 24/7</h4>
+                  <p className="text-slate-600 font-semibold">{user?.preferences?.preferredLocker || "AuraBox 24/7"}</p>
                 </div>
               </div>
             </div>

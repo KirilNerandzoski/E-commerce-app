@@ -69,8 +69,8 @@ export const CheckoutPage = () => {
 
   const deliveryMethodNames = {
     standard: "Стандардна курирска достава (2-3 работни дена)",
-    direct: "⚡ PazarMax Direkt 24h Експресна достава",
-    paketomat: "📦 PazarMax Paketomat 24/7 подигнување",
+    direct: "⚡ Aura Direkt 24h Експресна достава",
+    paketomat: "📦 AuraBox 24/7 подигнување",
   };
 
   const handleInputChange = (e) => {
@@ -284,7 +284,7 @@ export const CheckoutPage = () => {
               </div>
 
               <div className="space-y-3">
-                {/* 1. PazarMax Direkt 24h */}
+                {/* 1. Aura Direkt 24h */}
                 <label
                   className={`flex items-center justify-between p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                     deliveryMethod === "direct"
@@ -303,7 +303,7 @@ export const CheckoutPage = () => {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-xs sm:text-sm text-[#FAF6F0]">
-                          ⚡ PazarMax Direkt (Експрес 24h достава)
+                          ⚡ Aura Direkt (Експрес 24h достава)
                         </span>
                         <span className="bg-[#D49A55]/20 text-[#D49A55] border border-[#D49A55]/30 text-[10px] font-black px-2 py-0.5 rounded">
                           ПРЕПОРАЧАНО
@@ -371,7 +371,7 @@ export const CheckoutPage = () => {
                     />
                     <div>
                       <span className="font-bold text-xs sm:text-sm text-[#FAF6F0] block">
-                        📦 PazarMax Paketomat 24/7 (Подигнување од автоматизиран пакет-бокс)
+                        📦 AuraBox 24/7 (Подигнување од автоматизиран пакет-бокс)
                       </span>
                       <p className="text-xs text-[#A8A095] mt-0.5">
                         Подигнете ја пратката со СМС пин-код без чекање курир.
@@ -466,7 +466,7 @@ export const CheckoutPage = () => {
                   className="rounded border-[#2A2520] text-[#E26D46] focus:ring-[#E26D46] mt-0.5"
                 />
                 <span>
-                  Се согласувам со општите правила и услови за користење и политиката за заштита на лични податоци на PazarMax.mk
+                  Се согласувам со општите правила и услови за користење и политиката за заштита на лични податоци на AURA.mk
                 </span>
               </label>
 

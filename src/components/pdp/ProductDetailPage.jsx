@@ -165,7 +165,7 @@ export const ProductDetailPage = () => {
               )}
               {product.isDirectDelivery && (
                 <span className="bg-gradient-to-r from-[#D49A55] to-[#E26D46] text-[#141210] font-black text-[10px] uppercase px-2.5 py-1 rounded-md shadow-md flex items-center gap-1">
-                  <Zap className="w-3 h-3 fill-[#141210]" /> PazarMax Direkt 24h
+                  <Zap className="w-3 h-3 fill-[#141210]" /> Aura Direkt 24h
                 </span>
               )}
             </div>
@@ -666,10 +666,10 @@ export const ProductDetailPage = () => {
               </p>
               <ul className="list-disc pl-5 space-y-2">
                 <li>
-                  <strong className="text-[#FAF6F0]">PazarMax Direkt:</strong> Испорака за 24 часа директно од нашиот централен логистички центар.
+                  <strong className="text-[#FAF6F0]">Aura Direkt:</strong> Испорака за 24 часа директно од нашиот централен логистички центар.
                 </li>
                 <li>
-                  <strong className="text-[#FAF6F0]">PazarMax Paketomat:</strong> Подигнување во било кое време (00-24ч) без чекање со уникатен СМС код за отклучување.
+                  <strong className="text-[#FAF6F0]">AuraBox 24/7:</strong> Подигнување во било кое време (00-24ч) без чекање со уникатен СМС код за отклучување.
                 </li>
                 <li>
                   <strong className="text-[#FAF6F0]">Бесплатна достава:</strong> За секоја нарачка со вкупна вредност поголема од 1.500 ден.

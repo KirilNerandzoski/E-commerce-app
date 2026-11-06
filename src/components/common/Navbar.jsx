@@ -128,7 +128,7 @@ export const Navbar = () => {
             </span>
             <span className="hidden lg:inline text-[#3D352E]">|</span>
             <span className="hidden lg:inline text-[#A8A095]">
-              📦 PazarMax Paketomat 0-24ч преземање
+              📦 AuraBox 0-24ч преземање
             </span>
           </div>
 
@@ -188,16 +188,16 @@ export const Navbar = () => {
           {/* Logo */}
           <div
             onClick={() => navigateTo("home")}
-            className="flex items-center gap-2 cursor-pointer select-none shrink-0"
+            className="flex items-center gap-2.5 cursor-pointer select-none shrink-0"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-[#C8522C] via-[#E26D46] to-[#D49A55] flex items-center justify-center shadow-lg shadow-[#E26D46]/20 text-white font-black text-xl">
-              🛍️
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-[#C8522C] via-[#E26D46] to-[#D49A55] flex items-center justify-center shadow-lg shadow-[#E26D46]/25 text-[#141210] font-black">
+              <span className="text-base font-black tracking-tight text-[#141210]">AU</span>
             </div>
             <div className="flex items-baseline">
-              <span className="text-2xl sm:text-3xl font-black tracking-tight text-[#FAF6F0]">
-                pazar<span className="text-[#E26D46]">max</span>
+              <span className="text-2xl sm:text-3xl font-black tracking-tight text-[#FAF6F0] uppercase">
+                AUR<span className="text-[#E26D46]">A</span>
               </span>
-              <span className="text-xs font-black bg-[#E26D46]/20 text-[#E26D46] border border-[#E26D46]/40 px-1.5 py-0.5 rounded ml-1 tracking-wider">
+              <span className="text-[10px] font-black bg-[#E26D46]/20 text-[#D49A55] border border-[#D49A55]/40 px-1.5 py-0.5 rounded-md ml-1.5 tracking-widest uppercase">
                 .mk
               </span>
             </div>
@@ -672,7 +672,7 @@ export const Navbar = () => {
               }}
               className="flex items-center gap-1 px-3 py-1 rounded-lg bg-[#D49A55]/15 text-[#D49A55] border border-[#D49A55]/30 hover:bg-[#D49A55]/25 font-black tracking-wide transition-colors cursor-pointer"
             >
-              <Zap className="w-3.5 h-3.5 fill-[#D49A55] text-[#D49A55]" /> PazarMax Direkt 24h
+              <Zap className="w-3.5 h-3.5 fill-[#D49A55] text-[#D49A55]" /> Aura Direkt 24h
             </button>
           </div>
         </div>
@@ -688,9 +688,11 @@ export const Navbar = () => {
           <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-[#171412] text-[#FAF6F0] border-r border-[#2A2520] shadow-2xl p-6 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-left duration-200">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-[#2A2520]">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">🛍️</span>
-                  <span className="text-xl font-black text-[#FAF6F0]">pazar<span className="text-[#E26D46]">max</span>.mk</span>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#C8522C] to-[#D49A55] flex items-center justify-center font-black text-xs text-[#141210]">
+                    AU
+                  </div>
+                  <span className="text-xl font-black text-[#FAF6F0] tracking-tight uppercase">AUR<span className="text-[#E26D46]">A</span>.mk</span>
                 </div>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -758,7 +760,7 @@ export const Navbar = () => {
             <div className="pt-6 border-t border-[#2A2520] text-xs text-[#A8A095]">
               <p className="font-semibold text-[#FAF6F0]">Корисничка поддршка</p>
               <p className="mt-1">📞 02 3100 500 (Пон - Саб 08-20h)</p>
-              <p>✉️ podrska@pazarmax.mk</p>
+              <p>✉️ podrska@aura.mk</p>
             </div>
           </div>
         </div>

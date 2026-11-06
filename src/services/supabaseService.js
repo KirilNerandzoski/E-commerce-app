@@ -194,7 +194,7 @@ export const supabaseService = {
           currency: "MKD",
           customer: {
             name: orderData.customerName || "Купувач",
-            email: orderData.customerEmail || "customer@pazarmax.mk",
+            email: orderData.customerEmail || "customer@aura.mk",
           },
           totals: {
             subtotal_minor: Math.round(

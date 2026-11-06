@@ -82,7 +82,7 @@ export const ProductCatalog = () => {
           return false;
         }
 
-        // PazarMax Direkt Only
+        // Aura Direkt Only
         if (catalogFilters.directOnly && !product.isDirectDelivery) {
           return false;
         }
@@ -343,7 +343,7 @@ export const ProductCatalog = () => {
 
               {catalogFilters.directOnly && (
                 <span className="inline-flex items-center gap-1 bg-[#D49A55]/20 border border-[#D49A55]/40 px-2.5 py-1 rounded-lg text-xs font-bold text-[#D49A55]">
-                  PazarMax Direkt
+                  Aura Direkt
                   <button
                     onClick={() => setCatalogFilters((prev) => ({ ...prev, directOnly: false }))}
                   >

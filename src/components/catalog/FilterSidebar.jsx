@@ -149,13 +149,13 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
           Услуги & Поволности
         </h4>
 
-        {/* PazarMax Direkt 24h */}
+        {/* Aura Direkt 24h */}
         <label className="flex items-center justify-between p-2 rounded-xl hover:bg-[#25211D] cursor-pointer text-xs font-bold text-[#FAF6F0] transition-colors border border-transparent hover:border-[#2A2520]">
           <div className="flex items-center gap-2">
             <span className="w-5 h-5 rounded-md bg-[#D49A55] flex items-center justify-center text-[#141210]">
               <Zap className="w-3 h-3 fill-[#141210]" />
             </span>
-            <span>PazarMax Direkt 24h</span>
+            <span>Aura Direkt 24h</span>
           </div>
           <input
             type="checkbox"

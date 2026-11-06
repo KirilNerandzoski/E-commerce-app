@@ -190,14 +190,14 @@ export const ComparisonModal = () => {
                   ))}
                 </div>
 
-                {/* PazarMax Direkt Badge */}
+                {/* Aura Direkt Badge */}
                 <div className="grid grid-cols-5 py-3 gap-4 items-center bg-slate-50/50">
                   <div className="col-span-1 font-bold text-slate-600 pl-2">Брза испорака</div>
                   {compareProducts.map((p) => (
                     <div key={p.id} className="col-span-1">
                       {p.isDirectDelivery ? (
                         <span className="text-amber-700 font-bold flex items-center gap-1 text-[11px]">
-                          ⚡ PazarMax Direkt (24h)
+                          ⚡ Aura Direkt (24h)
                         </span>
                       ) : (
                         <span className="text-slate-400">Стандардна (48-72h)</span>

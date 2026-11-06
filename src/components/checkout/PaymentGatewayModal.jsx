@@ -93,7 +93,7 @@ export const PaymentGatewayModal = ({
 
           <div className="flex items-center gap-2 mb-1.5 text-[#E26D46] font-bold text-xs uppercase tracking-wider">
             <Lock className="w-4 h-4" />
-            <span>PazarMax SecurePay • 256-bit SSL Gateway</span>
+            <span>AURA SecurePay • 256-bit SSL Gateway</span>
           </div>
 
           <h2 className="text-xl sm:text-2xl font-black text-[#FAF6F0]">
@@ -239,7 +239,7 @@ export const PaymentGatewayModal = ({
                   <div className="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 bg-[#E26D46]/20 rounded-full blur-2xl" />
                   <div className="flex justify-between items-start mb-6">
                     <span className="font-mono text-xs uppercase tracking-widest text-[#D49A55]">
-                      PazarMax Pay
+                      AURA Pay
                     </span>
                     <span className="font-black italic text-base tracking-wider text-[#E26D46]">
                       Mastercard

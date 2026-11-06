@@ -12,7 +12,7 @@ export const ScratchCardBanner = () => {
   const [scratchedPercent, setScratchedPercent] = useState(0);
   const [copied, setCopied] = useState(false);
 
-  const secretCode = "PAZAR10";
+  const secretCode = "AURA10";
   const discountLabel = "10% ПОПУСТ НА СÈ";
 
   useEffect(() => {

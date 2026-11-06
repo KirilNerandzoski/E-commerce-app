@@ -42,7 +42,7 @@ export const INITIAL_USER = {
     notifications: true,
     smsAlerts: true,
     newsletter: true,
-    preferredLocker: "PazarMax Paketomat - Skopje City Mall (0-24)",
+    preferredLocker: "AuraBox - Skopje City Mall (0-24)",
   },
   orders: [
     {
@@ -50,8 +50,8 @@ export const INITIAL_USER = {
       date: "14.10.2026",
       status: "Доставено",
       statusCode: "delivered",
-      trackingNumber: "PM-MK-892410",
-      deliveryMethod: "PazarMax Direkt (24h)",
+      trackingNumber: "AURA-892410",
+      deliveryMethod: "Aura Direkt (24h)",
       paymentMethod: "Картичка онлајн (Mastercard •••• 4821)",
       address: "бул. Партизански Одреди бр. 42/3-12, Скопје",
       subtotal: 6490,

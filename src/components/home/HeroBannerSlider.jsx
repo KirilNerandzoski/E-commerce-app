@@ -12,7 +12,7 @@ export const HeroBannerSlider = () => {
       tag: "ГОЛЕМА ТЕХНО АКЦИЈА",
       tagColor: "bg-[#E26D46] text-white",
       title: "Најнови паметни телефони и лаптопи",
-      subtitle: "До 25% попуст на Apple, Samsung, Lenovo и водечките брендови со PazarMax Direkt брза достава.",
+      subtitle: "До 25% попуст на Apple, Samsung, Lenovo и водечките брендови со Aura Direkt брза достава.",
       ctaText: "Истражи Технологија",
       targetCategory: "electronics",
       bgGradient: "from-[#1A1613] via-[#1D1A17] to-[#141210]",
@@ -143,7 +143,7 @@ export const HeroBannerSlider = () => {
 
         {/* Side Mini Promo Cards */}
         <div className="lg:col-span-4 xl:col-span-3 flex flex-col sm:flex-row lg:flex-col gap-4">
-          {/* Card 1: PazarMax Direkt */}
+          {/* Card 1: Aura Direkt */}
           <div
             onClick={() => navigateTo("catalog", { directOnly: true })}
             className="flex-1 bg-gradient-to-br from-[#D49A55] to-[#E26D46] rounded-3xl p-5 text-[#141210] flex flex-col justify-between shadow-xl cursor-pointer hover:brightness-105 transition-all group"
@@ -151,7 +151,7 @@ export const HeroBannerSlider = () => {
             <div>
               <div className="flex items-center justify-between">
                 <span className="bg-[#141210] text-[#D49A55] text-[10px] font-black uppercase px-2 py-0.5 rounded-md flex items-center gap-1">
-                  <Zap className="w-3 h-3 fill-[#D49A55]" /> Direkt Hub
+                  <Zap className="w-3 h-3 fill-[#D49A55]" /> Aura Direkt
                 </span>
                 <span className="text-xs font-bold bg-[#141210]/15 px-2 py-0.5 rounded-md text-[#141210]">24ч достава</span>
               </div>
@@ -168,7 +168,7 @@ export const HeroBannerSlider = () => {
             </div>
           </div>
 
-          {/* Card 2: Paketomat 24/7 */}
+          {/* Card 2: AuraBox 24/7 */}
           <div
             onClick={() => navigateTo("catalog", "household")}
             className="flex-1 bg-[#1D1A17] rounded-3xl p-5 text-[#FAF6F0] flex flex-col justify-between shadow-xl cursor-pointer hover:border-[#E26D46]/50 transition-all border border-[#2A2520] group"
@@ -176,7 +176,7 @@ export const HeroBannerSlider = () => {
             <div>
               <div className="flex items-center justify-between">
                 <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-black uppercase px-2 py-0.5 rounded-md">
-                  0-24ч Paketomat
+                  0-24ч AuraBox
                 </span>
                 <span className="text-xs text-[#A8A095]">50+ локации</span>
               </div>

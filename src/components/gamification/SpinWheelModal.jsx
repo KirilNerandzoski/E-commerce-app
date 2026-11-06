@@ -5,10 +5,10 @@ import { useApp } from "../../context/AppContext";
 import { X, Sparkles, Gift, Check, ArrowRight, RotateCw } from "lucide-react";
 
 const SEGMENTS = [
-  { label: "10% Попуст", code: "PAZAR10", color: "#E26D46", textColor: "#FFFFFF" },
+  { label: "10% Попуст", code: "AURA10", color: "#E26D46", textColor: "#FFFFFF" },
   { label: "Бесплатна Достава", code: "FREESHIP", color: "#2E5B70", textColor: "#FFFFFF" },
   { label: "500 ден. Попуст", code: "POPUST500", color: "#8E5A3C", textColor: "#FFFFFF" },
-  { label: "15% VIP Купон", code: "MAX15", color: "#A84E32", textColor: "#FFFFFF" },
+  { label: "15% VIP Купон", code: "AURA15", color: "#A84E32", textColor: "#FFFFFF" },
   { label: "5% Бонус", code: "SPIN5", color: "#3B7A57", textColor: "#FFFFFF" },
   { label: "20% Џекпот!", code: "VIP20", color: "#D49A55", textColor: "#141210" },
 ];
@@ -189,7 +189,7 @@ export const SpinWheelModal = ({ isOpen, onClose }) => {
         </div>
         <h2 className="text-2xl font-black text-[#FAF6F0]">Заврти и освој попуст!</h2>
         <p className="text-xs text-[#A8A095] mt-1 mb-6">
-          Секој ден имате шанса за ексклузивни купони, ваучери и бесплатна достава на PazarMax.
+          Секој ден имате шанса за ексклузивни купони, ваучери и бесплатна достава на AURA.
         </p>
 
         {/* Wheel Container */}

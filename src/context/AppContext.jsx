@@ -125,7 +125,8 @@ export const AppProvider = ({ children }) => {
       const { data: authListener } = supabase.auth.onAuthStateChange(
         async (event, session) => {
           if (session?.user) {
-            const isSuper = session.user.email?.toLowerCase() === "superadmin@pazarmax.mk";
+            const userEmail = session.user.email?.toLowerCase();
+            const isSuper = userEmail === "superadmin@aura.mk" || userEmail === "superadmin@pazarmax.mk";
             setUser((prev) => ({
               ...(prev || {}),
               id: session.user.id,
@@ -383,9 +384,9 @@ export const AppProvider = ({ children }) => {
       date: dateFormatted,
       status: "Во обработка",
       statusCode: "processing",
-      trackingNumber: `PM-MK-${Math.floor(100000 + Math.random() * 900000)}`,
+      trackingNumber: `AURA-${Math.floor(100000 + Math.random() * 900000)}`,
       customerName: orderData.customerName || user?.name || "Гостин Купувач",
-      customerEmail: orderData.customerEmail || user?.email || "gostin@pazarmax.mk",
+      customerEmail: orderData.customerEmail || user?.email || "gostin@aura.mk",
       deliveryMethod: orderData.deliveryMethodName || "Стандардна достава",
       paymentMethod: orderData.paymentMethodName || "Готовина при достава",
       address: `${orderData.address.street}, ${orderData.address.city}`,
@@ -403,7 +404,7 @@ export const AppProvider = ({ children }) => {
       })),
       timeline: [
         { step: "Нарачката е успешно креирана", date: `${dateFormatted} ${today.getHours()}:${today.getMinutes().toString().padStart(2, "0")}`, done: true },
-        { step: "Подготовка во PazarMax централен магацин", date: "Очекувано денес", done: false },
+        { step: "Подготовка во AURA централен магацин", date: "Очекувано денес", done: false },
         { step: "Преземање од брза пошта", date: "Очекувано утре", done: false },
         { step: "Достава на вашата адреса", date: "Очекувано за 24-48h", done: false },
       ],

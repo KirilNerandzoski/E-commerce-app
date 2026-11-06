@@ -1,10 +1,26 @@
 export const COUPONS = [
   {
+    code: "AURA10",
+    description: "10% попуст на целата нарачка во AURA",
+    discountPercent: 10,
+    discountAmount: 0,
+    minSpend: 0,
+    type: "percent",
+  },
+  {
     code: "PAZAR10",
     description: "10% попуст на целата нарачка",
     discountPercent: 10,
     discountAmount: 0,
     minSpend: 0,
+    type: "percent",
+  },
+  {
+    code: "AURA15",
+    description: "15% викенд промоција во AURA",
+    discountPercent: 15,
+    discountAmount: 0,
+    minSpend: 5000,
     type: "percent",
   },
   {
