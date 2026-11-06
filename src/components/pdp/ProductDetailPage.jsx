@@ -271,7 +271,7 @@ export const ProductDetailPage = () => {
             <div className="mt-6 p-5 rounded-2xl bg-[#25211D] border border-[#2A2520] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <div className="flex items-baseline gap-3">
-                  <span className="text-3xl sm:text-4xl font-black text-[#E26D46]">
+                  <span className="text-3xl sm:text-4xl font-black text-[#F5BA58]">
                     {formatPrice(product.price, currency)}
                   </span>
                   {product.originalPrice && product.originalPrice > product.price && (

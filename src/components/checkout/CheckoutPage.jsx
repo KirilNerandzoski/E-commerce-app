@@ -5,16 +5,10 @@ import { OrderSuccessModal } from "./OrderSuccessModal";
 import { PaymentGatewayModal } from "./PaymentGatewayModal";
 import {
   ShieldCheck,
-  Truck,
   CreditCard,
-  Banknote,
-  Package,
-  CheckCircle2,
   Lock,
   ArrowRight,
   ChevronLeft,
-  Calendar,
-  ExternalLink,
 } from "lucide-react";
 
 export const CheckoutPage = () => {
@@ -22,7 +16,6 @@ export const CheckoutPage = () => {
     cart,
     cartSubtotal,
     cartDiscount,
-    cartTotal,
     user,
     placeOrder,
     navigateTo,
@@ -59,7 +52,7 @@ export const CheckoutPage = () => {
   const [deliveryMethod, setDeliveryMethod] = useState("direct");
 
   // Payment Method & Modal States
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [paymentMethod] = useState("card");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [createdOrder, setCreatedOrder] = useState(null);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -85,14 +78,11 @@ export const CheckoutPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 1. When user clicks "Избери начин на плаќање" or submits the checkout form:
-  // Open the dedicated Payment Gateway Window!
   const handleProceedToPayment = (e) => {
     if (e) e.preventDefault();
     setIsPaymentModalOpen(true);
   };
 
-  // 2. When payment is authorized and confirmed in the Payment Gateway Modal:
   const handleFinalConfirmPayment = async (paymentDetails) => {
     setIsSubmitting(true);
     try {
@@ -118,7 +108,6 @@ export const CheckoutPage = () => {
     }
   };
 
-  // 1. If order was just placed, display the success modal!
   if (createdOrder) {
     return (
       <OrderSuccessModal
@@ -131,18 +120,17 @@ export const CheckoutPage = () => {
     );
   }
 
-  // 2. If cart is empty and NOT currently submitting
   if (cart.length === 0 && !isSubmitting) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <div className="w-16 h-16 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center mx-auto mb-4">
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center text-[#FAF6F0]">
+        <div className="w-16 h-16 rounded-full bg-[#25211D] border border-[#2A2520] text-[#E26D46] flex items-center justify-center mx-auto mb-4">
           <Lock className="w-8 h-8" />
         </div>
-        <h2 className="text-xl font-bold text-slate-800">Немате производи во кошничката</h2>
-        <p className="text-xs text-slate-500 mt-1 mb-6">Додајте производи во кошничката за да продолжите со наплата</p>
+        <h2 className="text-xl font-bold text-[#FAF6F0]">Немате производи во кошничката</h2>
+        <p className="text-xs text-[#A8A095] mt-1 mb-6">Додајте производи во кошничката за да продолжите со наплата</p>
         <button
           onClick={() => navigateTo("catalog")}
-          className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-xs rounded-xl shadow-md transition-all"
+          className="px-6 py-2.5 bg-gradient-to-r from-[#E26D46] to-[#D49A55] text-[#141210] font-black text-xs rounded-xl shadow-md transition-all cursor-pointer"
         >
           Врати се кон каталог
         </button>
@@ -151,22 +139,22 @@ export const CheckoutPage = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 text-[#FAF6F0]">
       {/* Title & Back to Cart */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+      <div className="flex items-center justify-between pb-4 border-b border-[#2A2520] mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2">
-            <Lock className="w-6 h-6 text-emerald-600" />
+          <h1 className="text-2xl sm:text-3xl font-black text-[#FAF6F0] flex items-center gap-2">
+            <Lock className="w-6 h-6 text-emerald-400" />
             Брза и сигурна наплата
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-[#A8A095] mt-0.5">
             Пополнете ги податоците за испорака и изберете начин на плаќање
           </p>
         </div>
 
         <button
           onClick={() => navigateTo("cart")}
-          className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1"
+          className="text-xs font-bold text-[#E26D46] hover:text-[#D49A55] flex items-center gap-1 cursor-pointer transition-colors"
         >
           <ChevronLeft className="w-4 h-4" /> Назад кон кошничка
         </button>
@@ -174,22 +162,22 @@ export const CheckoutPage = () => {
 
       <form onSubmit={handleProceedToPayment}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Form: Steps 1, 2, 3 (8 cols) */}
+          {/* Left Form: Steps 1, 2 (8 cols) */}
           <div className="lg:col-span-8 space-y-6">
             {/* Step 1: Shipping Address & Contact */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-xs">
-              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
-                <div className="w-8 h-8 rounded-full bg-orange-500 text-white font-black text-xs flex items-center justify-center">
+            <div className="bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-6 sm:p-8 shadow-xl">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#2A2520]">
+                <div className="w-8 h-8 rounded-full bg-[#E26D46] text-[#141210] font-black text-xs flex items-center justify-center">
                   1
                 </div>
-                <h3 className="text-lg font-black text-slate-900">
+                <h3 className="text-lg font-black text-[#FAF6F0]">
                   Податоци за достава & Контакт
                 </h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">
+                  <label className="block font-bold text-[#FAF6F0] mb-1">
                     Име и презиме *
                   </label>
                   <input
@@ -198,12 +186,12 @@ export const CheckoutPage = () => {
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 font-semibold outline-none focus:border-orange-500"
+                    className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 text-[#FAF6F0] font-semibold outline-none focus:border-[#E26D46]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">
+                  <label className="block font-bold text-[#FAF6F0] mb-1">
                     Телефонски број (за СМС известување) *
                   </label>
                   <input
@@ -212,12 +200,12 @@ export const CheckoutPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 font-semibold outline-none focus:border-orange-500"
+                    className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 text-[#FAF6F0] font-semibold outline-none focus:border-[#E26D46]"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block font-bold text-slate-700 mb-1">
+                  <label className="block font-bold text-[#FAF6F0] mb-1">
                     Е-пошта за потврда на нарачката *
                   </label>
                   <input
@@ -226,12 +214,12 @@ export const CheckoutPage = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 font-semibold outline-none focus:border-orange-500"
+                    className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 text-[#FAF6F0] font-semibold outline-none focus:border-[#E26D46]"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block font-bold text-slate-700 mb-1">
+                  <label className="block font-bold text-[#FAF6F0] mb-1">
                     Улица и куќен број / Влез / Стан *
                   </label>
                   <input
@@ -240,36 +228,36 @@ export const CheckoutPage = () => {
                     name="street"
                     value={formData.street}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 font-semibold outline-none focus:border-orange-500"
+                    className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 text-[#FAF6F0] font-semibold outline-none focus:border-[#E26D46]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Град / Населено место *</label>
+                  <label className="block font-bold text-[#FAF6F0] mb-1">Град / Населено место *</label>
                   <input
                     type="text"
                     required
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 font-semibold outline-none focus:border-orange-500"
+                    className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 text-[#FAF6F0] font-semibold outline-none focus:border-[#E26D46]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Поштенски број *</label>
+                  <label className="block font-bold text-[#FAF6F0] mb-1">Поштенски број *</label>
                   <input
                     type="text"
                     required
                     name="postalCode"
                     value={formData.postalCode}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 font-semibold outline-none focus:border-orange-500"
+                    className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 text-[#FAF6F0] font-semibold outline-none focus:border-[#E26D46]"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block font-bold text-slate-700 mb-1">
+                  <label className="block font-bold text-[#FAF6F0] mb-1">
                     Забелешка за курирот (опционално):
                   </label>
                   <input
@@ -278,19 +266,19 @@ export const CheckoutPage = () => {
                     value={formData.note}
                     onChange={handleInputChange}
                     placeholder="пр. Ѕвонете на интерфон бр. 12 или јавете се пред пристигнување"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-800 outline-none focus:border-orange-500"
+                    className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 text-[#FAF6F0] placeholder-[#8C8377] outline-none focus:border-[#E26D46]"
                   />
                 </div>
               </div>
             </div>
 
             {/* Step 2: Delivery Method */}
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-xs">
-              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
-                <div className="w-8 h-8 rounded-full bg-orange-500 text-white font-black text-xs flex items-center justify-center">
+            <div className="bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-6 sm:p-8 shadow-xl">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#2A2520]">
+                <div className="w-8 h-8 rounded-full bg-[#E26D46] text-[#141210] font-black text-xs flex items-center justify-center">
                   2
                 </div>
-                <h3 className="text-lg font-black text-slate-900">
+                <h3 className="text-lg font-black text-[#FAF6F0]">
                   Избор на начин на испорака
                 </h3>
               </div>
@@ -300,8 +288,8 @@ export const CheckoutPage = () => {
                 <label
                   className={`flex items-center justify-between p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                     deliveryMethod === "direct"
-                      ? "border-orange-500 bg-orange-50/50"
-                      : "border-slate-200 hover:border-slate-300 bg-white"
+                      ? "border-[#E26D46] bg-[#E26D46]/10"
+                      : "border-[#2A2520] hover:border-[#38322B] bg-[#25211D]"
                   }`}
                 >
                   <div className="flex items-center gap-3.5">
@@ -310,23 +298,23 @@ export const CheckoutPage = () => {
                       name="deliveryMethod"
                       checked={deliveryMethod === "direct"}
                       onChange={() => setDeliveryMethod("direct")}
-                      className="accent-orange-500 w-4 h-4"
+                      className="accent-[#E26D46] w-4 h-4 cursor-pointer"
                     />
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-xs sm:text-sm text-slate-900">
+                        <span className="font-bold text-xs sm:text-sm text-[#FAF6F0]">
                           ⚡ PazarMax Direkt (Експрес 24h достава)
                         </span>
-                        <span className="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded">
+                        <span className="bg-[#D49A55]/20 text-[#D49A55] border border-[#D49A55]/30 text-[10px] font-black px-2 py-0.5 rounded">
                           ПРЕПОРАЧАНО
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#A8A095] mt-0.5">
                         Директно од централниот склад. Испорака утре до вашата врата.
                       </p>
                     </div>
                   </div>
-                  <span className="font-bold text-xs sm:text-sm text-slate-900 shrink-0">
+                  <span className="font-black text-xs sm:text-sm text-[#F5BA58] shrink-0">
                     {formatPrice(250, currency)}
                   </span>
                 </label>
@@ -335,8 +323,8 @@ export const CheckoutPage = () => {
                 <label
                   className={`flex items-center justify-between p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                     deliveryMethod === "standard"
-                      ? "border-orange-500 bg-orange-50/50"
-                      : "border-slate-200 hover:border-slate-300 bg-white"
+                      ? "border-[#E26D46] bg-[#E26D46]/10"
+                      : "border-[#2A2520] hover:border-[#38322B] bg-[#25211D]"
                   }`}
                 >
                   <div className="flex items-center gap-3.5">
@@ -345,20 +333,20 @@ export const CheckoutPage = () => {
                       name="deliveryMethod"
                       checked={deliveryMethod === "standard"}
                       onChange={() => setDeliveryMethod("standard")}
-                      className="accent-orange-500 w-4 h-4"
+                      className="accent-[#E26D46] w-4 h-4 cursor-pointer"
                     />
                     <div>
-                      <span className="font-bold text-xs sm:text-sm text-slate-900 block">
+                      <span className="font-bold text-xs sm:text-sm text-[#FAF6F0] block">
                         Стандардна курирска достава (2-3 работни дена)
                       </span>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#A8A095] mt-0.5">
                         Бесплатна за сите нарачки со вредност над 1.500 ден.
                       </p>
                     </div>
                   </div>
-                  <span className="font-bold text-xs sm:text-sm text-slate-900 shrink-0">
+                  <span className="font-black text-xs sm:text-sm text-[#F5BA58] shrink-0">
                     {cartSubtotal >= 1500 ? (
-                      <span className="text-emerald-600 font-extrabold">БЕСПЛАТНА</span>
+                      <span className="text-emerald-400 font-extrabold">БЕСПЛАТНА</span>
                     ) : (
                       formatPrice(150, currency)
                     )}
@@ -369,8 +357,8 @@ export const CheckoutPage = () => {
                 <label
                   className={`flex items-center justify-between p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                     deliveryMethod === "paketomat"
-                      ? "border-orange-500 bg-orange-50/50"
-                      : "border-slate-200 hover:border-slate-300 bg-white"
+                      ? "border-[#E26D46] bg-[#E26D46]/10"
+                      : "border-[#2A2520] hover:border-[#38322B] bg-[#25211D]"
                   }`}
                 >
                   <div className="flex items-center gap-3.5">
@@ -379,18 +367,18 @@ export const CheckoutPage = () => {
                       name="deliveryMethod"
                       checked={deliveryMethod === "paketomat"}
                       onChange={() => setDeliveryMethod("paketomat")}
-                      className="accent-orange-500 w-4 h-4"
+                      className="accent-[#E26D46] w-4 h-4 cursor-pointer"
                     />
                     <div>
-                      <span className="font-bold text-xs sm:text-sm text-slate-900 block">
+                      <span className="font-bold text-xs sm:text-sm text-[#FAF6F0] block">
                         📦 PazarMax Paketomat 24/7 (Подигнување од автоматизиран пакет-бокс)
                       </span>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-[#A8A095] mt-0.5">
                         Подигнете ја пратката со СМС пин-код без чекање курир.
                       </p>
                     </div>
                   </div>
-                  <span className="font-bold text-xs sm:text-sm text-slate-900 shrink-0">
+                  <span className="font-black text-xs sm:text-sm text-[#F5BA58] shrink-0">
                     {formatPrice(100, currency)}
                   </span>
                 </label>
@@ -400,25 +388,25 @@ export const CheckoutPage = () => {
 
           {/* Right Summary Sidebar (4 cols) */}
           <div className="lg:col-span-4 space-y-4 sticky top-24">
-            <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-xs space-y-5">
-              <h3 className="text-base font-black text-slate-900 pb-3 border-b border-slate-100">
+            <div className="bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-6 shadow-xl space-y-5">
+              <h3 className="text-base font-black text-[#FAF6F0] pb-3 border-b border-[#2A2520]">
                 Резиме на нарачката ({cart.length} артикли)
               </h3>
 
               {/* Items mini list */}
-              <div className="max-h-48 overflow-y-auto space-y-3 divide-y divide-slate-100 pr-1">
+              <div className="max-h-48 overflow-y-auto space-y-3 divide-y divide-[#2A2520] pr-1">
                 {cart.map((item) => (
                   <div key={item.cartItemId} className="pt-2 first:pt-0 flex items-center gap-3 text-xs">
                     <img
                       src={item.product.images[0]}
                       alt={item.product.title}
-                      className="w-12 h-12 object-contain bg-slate-50 rounded-xl p-1 border border-slate-100 shrink-0"
+                      className="w-12 h-12 object-contain bg-[#FAF7F2] rounded-xl p-1 border border-[#E6DFD5] shrink-0"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-slate-800 truncate">{item.product.title}</p>
-                      <p className="text-[11px] text-slate-400">Кол: {item.quantity}</p>
+                      <p className="font-bold text-[#FAF6F0] truncate">{item.product.title}</p>
+                      <p className="text-[11px] text-[#A8A095]">Кол: {item.quantity}</p>
                     </div>
-                    <span className="font-bold text-slate-900 shrink-0">
+                    <span className="font-black text-[#F5BA58] shrink-0">
                       {formatPrice(item.product.price * item.quantity, currency)}
                     </span>
                   </div>
@@ -426,56 +414,56 @@ export const CheckoutPage = () => {
               </div>
 
               {/* Price Calculation */}
-              <div className="space-y-2 text-xs pt-3 border-t border-slate-100">
-                <div className="flex justify-between text-slate-600">
+              <div className="space-y-2 text-xs pt-3 border-t border-[#2A2520]">
+                <div className="flex justify-between text-[#A8A095]">
                   <span>Вкупно производи:</span>
-                  <span className="font-bold text-slate-800">
+                  <span className="font-bold text-[#FAF6F0]">
                     {formatPrice(cartSubtotal, currency)}
                   </span>
                 </div>
 
                 {cartDiscount > 0 && (
-                  <div className="flex justify-between text-emerald-600 font-semibold">
+                  <div className="flex justify-between text-emerald-400 font-semibold">
                     <span>Купон попуст:</span>
                     <span>-{formatPrice(cartDiscount, currency)}</span>
                   </div>
                 )}
 
-                <div className="flex justify-between text-slate-600">
+                <div className="flex justify-between text-[#A8A095]">
                   <span>Трошок за испорака:</span>
-                  <span className="font-bold text-slate-800">
+                  <span className="font-bold text-[#FAF6F0]">
                     {currentShippingFee === 0 ? (
-                      <span className="text-emerald-600 font-bold">БЕСПЛАТНА</span>
+                      <span className="text-emerald-400 font-bold">БЕСПЛАТНА</span>
                     ) : (
                       formatPrice(currentShippingFee, currency)
                     )}
                   </span>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200 flex justify-between items-baseline text-lg font-black text-slate-900">
+                <div className="pt-3 border-t border-[#2A2520] flex justify-between items-baseline text-lg font-black text-[#FAF6F0]">
                   <span>Вкупно за наплата:</span>
-                  <span className="text-orange-600">{formatPrice(finalTotal, currency)}</span>
+                  <span className="text-[#F5BA58] text-xl font-black">{formatPrice(finalTotal, currency)}</span>
                 </div>
               </div>
 
               {/* Payment Info Badge */}
-              <div className="p-3.5 bg-orange-50/70 rounded-2xl border border-orange-200/60 flex items-center gap-3 text-xs text-orange-950">
-                <CreditCard className="w-5 h-5 text-orange-600 shrink-0" />
+              <div className="p-3.5 bg-[#25211D] rounded-2xl border border-[#2A2520] flex items-center gap-3 text-xs text-[#A8A095]">
+                <CreditCard className="w-5 h-5 text-[#D49A55] shrink-0" />
                 <div className="leading-snug">
-                  <span className="font-bold block text-slate-900">Избор на плаќање на следниот чекор</span>
-                  <span className="text-[11px] text-slate-500">
+                  <span className="font-bold block text-[#FAF6F0]">Избор на плаќање на следниот чекор</span>
+                  <span className="text-[11px] text-[#A8A095]">
                     Картичка (Visa/Mastercard), Готовина или на Рати без камата.
                   </span>
                 </div>
               </div>
 
               {/* Terms check */}
-              <label className="flex items-start gap-2 text-[11px] text-slate-500 cursor-pointer pt-1">
+              <label className="flex items-start gap-2 text-[11px] text-[#A8A095] cursor-pointer pt-1">
                 <input
                   type="checkbox"
                   required
                   defaultChecked
-                  className="rounded border-slate-300 text-orange-500 focus:ring-orange-400 mt-0.5"
+                  className="rounded border-[#2A2520] text-[#E26D46] focus:ring-[#E26D46] mt-0.5"
                 />
                 <span>
                   Се согласувам со општите правила и услови за користење и политиката за заштита на лични податоци на PazarMax.mk
@@ -486,24 +474,24 @@ export const CheckoutPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 bg-orange-500 hover:bg-orange-600 active:scale-98 text-white font-black text-base rounded-2xl shadow-xl shadow-orange-500/30 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                className="w-full py-4 bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 active:scale-98 text-[#141210] font-black text-base rounded-2xl shadow-xl shadow-[#E26D46]/25 flex items-center justify-center gap-2 transition-all disabled:opacity-50 cursor-pointer"
               >
                 {isSubmitting ? (
                   <span>Обработка на нарачка...</span>
                 ) : (
                   <>
-                    <Lock className="w-5 h-5 text-orange-200" />
+                    <Lock className="w-5 h-5 text-[#141210]" />
                     <span>Продолжи кон избор на плаќање</span>
                     <ArrowRight className="w-5 h-5" />
                   </>
                 )}
               </button>
-              <p className="text-[11px] text-center text-slate-400 font-medium">
+              <p className="text-[11px] text-center text-[#8C8377] font-medium">
                 🔒 Со клик се отвора прозорецот за сигурна наплата и избор на тип на плаќање
               </p>
 
-              <div className="flex items-center justify-center gap-2 text-slate-400 text-[11px] font-semibold text-center">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+              <div className="flex items-center justify-center gap-2 text-[#A8A095] text-[11px] font-semibold text-center">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 Гаранција за сигурност и безбедна достава
               </div>
             </div>

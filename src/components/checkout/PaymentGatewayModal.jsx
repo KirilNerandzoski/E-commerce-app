@@ -57,7 +57,6 @@ export const PaymentGatewayModal = ({
       setProcessingStep(2);
       setTimeout(() => {
         setIsProcessing(false);
-        // Build detailed payment method text
         let methodName = "Готовина при преземање (Cash on Delivery)";
         if (selectedMethod === "card") {
           methodName = `Картичка (${cardData.number.slice(-4)}) - 3D Secure Авторизирано`;
@@ -77,34 +76,34 @@ export const PaymentGatewayModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 text-[#FAF6F0]">
       <div
-        className="bg-white rounded-3xl max-w-xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-slate-100 flex flex-col"
+        className="bg-[#1D1A17] rounded-3xl max-w-xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-[#2A2520] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-slate-900 text-white p-5 sm:p-6 relative">
+        <div className="bg-[#141210] text-[#FAF6F0] p-5 sm:p-6 relative border-b border-[#2A2520]">
           <button
             onClick={onClose}
             disabled={isProcessing}
-            className="absolute top-5 right-5 p-2 rounded-full bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+            className="absolute top-5 right-5 p-2 rounded-full bg-[#25211D] text-[#A8A095] hover:text-[#FAF6F0] hover:bg-[#2A2520] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center gap-2 mb-1.5 text-orange-400 font-bold text-xs uppercase tracking-wider">
+          <div className="flex items-center gap-2 mb-1.5 text-[#E26D46] font-bold text-xs uppercase tracking-wider">
             <Lock className="w-4 h-4" />
             <span>PazarMax SecurePay • 256-bit SSL Gateway</span>
           </div>
 
-          <h2 className="text-xl sm:text-2xl font-black text-white">
+          <h2 className="text-xl sm:text-2xl font-black text-[#FAF6F0]">
             Изберете начин на плаќање
           </h2>
 
-          <div className="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between">
-            <div className="text-xs text-slate-400">
+          <div className="mt-3 pt-3 border-t border-[#2A2520] flex items-center justify-between">
+            <div className="text-xs text-[#A8A095]">
               Вкупно за уплата:
-              <span className="block text-xl font-black text-white">
+              <span className="block text-xl font-black text-[#F5BA58]">
                 {formatPrice(totalAmount, currency)}
               </span>
             </div>
@@ -119,24 +118,24 @@ export const PaymentGatewayModal = ({
         {isProcessing ? (
           <div className="p-12 text-center flex flex-col items-center justify-center space-y-4">
             <div className="relative">
-              <Loader2 className="w-16 h-16 text-orange-500 animate-spin" />
-              <Lock className="w-6 h-6 text-slate-700 absolute inset-0 m-auto" />
+              <Loader2 className="w-16 h-16 text-[#E26D46] animate-spin" />
+              <Lock className="w-6 h-6 text-[#A8A095] absolute inset-0 m-auto" />
             </div>
 
             <div className="space-y-1">
-              <h3 className="text-lg font-black text-slate-800">
+              <h3 className="text-lg font-black text-[#FAF6F0]">
                 {processingStep === 1
                   ? "Поврзување со банкарскиот систем..."
                   : "3D Secure авторизација на уплатата..."}
               </h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-[#A8A095]">
                 Ве молиме почекајте неколку секунди, не го затворајте прозорецот.
               </p>
             </div>
 
-            <div className="w-48 bg-slate-100 rounded-full h-2 overflow-hidden mt-4">
+            <div className="w-48 bg-[#25211D] rounded-full h-2 overflow-hidden mt-4 border border-[#2A2520]">
               <div
-                className="bg-orange-500 h-full transition-all duration-700"
+                className="bg-gradient-to-r from-[#E26D46] to-[#D49A55] h-full transition-all duration-700"
                 style={{ width: processingStep === 1 ? "55%" : "95%" }}
               />
             </div>
@@ -149,25 +148,25 @@ export const PaymentGatewayModal = ({
               <button
                 type="button"
                 onClick={() => setSelectedMethod("card")}
-                className={`p-3 sm:p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all ${
+                className={`p-3 sm:p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all cursor-pointer ${
                   selectedMethod === "card"
-                    ? "border-orange-500 bg-orange-50/40 text-slate-900 shadow-sm ring-2 ring-orange-500/20"
-                    : "border-slate-200 hover:border-slate-300 text-slate-600 bg-white"
+                    ? "border-[#E26D46] bg-[#E26D46]/10 text-[#FAF6F0] shadow-sm ring-2 ring-[#E26D46]/20"
+                    : "border-[#2A2520] hover:border-[#38322B] text-[#A8A095] bg-[#25211D]"
                 }`}
               >
                 <div className="flex items-center justify-between w-full mb-2">
                   <CreditCard
                     className={`w-5 h-5 ${
-                      selectedMethod === "card" ? "text-orange-500" : "text-slate-400"
+                      selectedMethod === "card" ? "text-[#E26D46]" : "text-[#8C8377]"
                     }`}
                   />
                   {selectedMethod === "card" && (
-                    <span className="w-2 h-2 rounded-full bg-orange-500" />
+                    <span className="w-2 h-2 rounded-full bg-[#E26D46]" />
                   )}
                 </div>
                 <div>
-                  <span className="block font-black text-xs sm:text-sm">Картичка</span>
-                  <span className="text-[10px] text-slate-400 font-medium leading-none">
+                  <span className="block font-black text-xs sm:text-sm text-[#FAF6F0]">Картичка</span>
+                  <span className="text-[10px] text-[#A8A095] font-medium leading-none">
                     Visa / Master
                   </span>
                 </div>
@@ -177,25 +176,25 @@ export const PaymentGatewayModal = ({
               <button
                 type="button"
                 onClick={() => setSelectedMethod("cod")}
-                className={`p-3 sm:p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all ${
+                className={`p-3 sm:p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all cursor-pointer ${
                   selectedMethod === "cod"
-                    ? "border-orange-500 bg-orange-50/40 text-slate-900 shadow-sm ring-2 ring-orange-500/20"
-                    : "border-slate-200 hover:border-slate-300 text-slate-600 bg-white"
+                    ? "border-[#E26D46] bg-[#E26D46]/10 text-[#FAF6F0] shadow-sm ring-2 ring-[#E26D46]/20"
+                    : "border-[#2A2520] hover:border-[#38322B] text-[#A8A095] bg-[#25211D]"
                 }`}
               >
                 <div className="flex items-center justify-between w-full mb-2">
                   <Banknote
                     className={`w-5 h-5 ${
-                      selectedMethod === "cod" ? "text-orange-500" : "text-slate-400"
+                      selectedMethod === "cod" ? "text-[#E26D46]" : "text-[#8C8377]"
                     }`}
                   />
                   {selectedMethod === "cod" && (
-                    <span className="w-2 h-2 rounded-full bg-orange-500" />
+                    <span className="w-2 h-2 rounded-full bg-[#E26D46]" />
                   )}
                 </div>
                 <div>
-                  <span className="block font-black text-xs sm:text-sm">Готовина</span>
-                  <span className="text-[10px] text-slate-400 font-medium leading-none">
+                  <span className="block font-black text-xs sm:text-sm text-[#FAF6F0]">Готовина</span>
+                  <span className="text-[10px] text-[#A8A095] font-medium leading-none">
                     При преземање
                   </span>
                 </div>
@@ -205,27 +204,27 @@ export const PaymentGatewayModal = ({
               <button
                 type="button"
                 onClick={() => setSelectedMethod("installments")}
-                className={`p-3 sm:p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all ${
+                className={`p-3 sm:p-4 rounded-2xl border-2 text-left flex flex-col justify-between transition-all cursor-pointer ${
                   selectedMethod === "installments"
-                    ? "border-orange-500 bg-orange-50/40 text-slate-900 shadow-sm ring-2 ring-orange-500/20"
-                    : "border-slate-200 hover:border-slate-300 text-slate-600 bg-white"
+                    ? "border-[#E26D46] bg-[#E26D46]/10 text-[#FAF6F0] shadow-sm ring-2 ring-[#E26D46]/20"
+                    : "border-[#2A2520] hover:border-[#38322B] text-[#A8A095] bg-[#25211D]"
                 }`}
               >
                 <div className="flex items-center justify-between w-full mb-2">
                   <Calendar
                     className={`w-5 h-5 ${
                       selectedMethod === "installments"
-                        ? "text-orange-500"
-                        : "text-slate-400"
+                        ? "text-[#E26D46]"
+                        : "text-[#8C8377]"
                     }`}
                   />
                   {selectedMethod === "installments" && (
-                    <span className="w-2 h-2 rounded-full bg-orange-500" />
+                    <span className="w-2 h-2 rounded-full bg-[#E26D46]" />
                   )}
                 </div>
                 <div>
-                  <span className="block font-black text-xs sm:text-sm">На рати</span>
-                  <span className="text-[10px] text-slate-400 font-medium leading-none">
+                  <span className="block font-black text-xs sm:text-sm text-[#FAF6F0]">На рати</span>
+                  <span className="text-[10px] text-[#A8A095] font-medium leading-none">
                     0% камата
                   </span>
                 </div>
@@ -236,27 +235,27 @@ export const PaymentGatewayModal = ({
             {selectedMethod === "card" && (
               <div className="space-y-4 animate-in fade-in duration-150">
                 {/* Visual Card Mockup */}
-                <div className="bg-gradient-to-tr from-slate-900 via-slate-800 to-orange-950 text-white rounded-2xl p-5 shadow-lg relative overflow-hidden">
-                  <div className="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 bg-orange-500/20 rounded-full blur-2xl" />
+                <div className="bg-gradient-to-tr from-[#141210] via-[#211C18] to-[#2D241E] text-white rounded-2xl p-5 shadow-xl relative overflow-hidden border border-[#2A2520]">
+                  <div className="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 bg-[#E26D46]/20 rounded-full blur-2xl" />
                   <div className="flex justify-between items-start mb-6">
-                    <span className="font-mono text-xs uppercase tracking-widest text-slate-300">
+                    <span className="font-mono text-xs uppercase tracking-widest text-[#D49A55]">
                       PazarMax Pay
                     </span>
-                    <span className="font-black italic text-base tracking-wider text-orange-400">
+                    <span className="font-black italic text-base tracking-wider text-[#E26D46]">
                       Mastercard
                     </span>
                   </div>
-                  <div className="font-mono text-lg sm:text-xl tracking-widest font-black mb-4">
+                  <div className="font-mono text-lg sm:text-xl tracking-widest font-black mb-4 text-[#FAF6F0]">
                     {cardData.number || "•••• •••• •••• ••••"}
                   </div>
-                  <div className="flex justify-between items-end text-[11px] font-mono text-slate-300">
+                  <div className="flex justify-between items-end text-[11px] font-mono text-[#A8A095]">
                     <div>
-                      <span className="text-[9px] block text-slate-400">СОПСТВЕНИК</span>
-                      <span className="font-bold text-white uppercase">{cardData.holder}</span>
+                      <span className="text-[9px] block text-[#8C8377]">СОПСТВЕНИК</span>
+                      <span className="font-bold text-[#FAF6F0] uppercase">{cardData.holder}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] block text-slate-400">ВАЖИ ДО</span>
-                      <span className="font-bold text-white">{cardData.expiry}</span>
+                      <span className="text-[9px] block text-[#8C8377]">ВАЖИ ДО</span>
+                      <span className="font-bold text-[#FAF6F0]">{cardData.expiry}</span>
                     </div>
                   </div>
                 </div>
@@ -264,7 +263,7 @@ export const PaymentGatewayModal = ({
                 {/* Form Inputs */}
                 <div className="space-y-3 text-xs">
                   <div>
-                    <label className="block font-bold text-slate-700 mb-1">
+                    <label className="block font-bold text-[#FAF6F0] mb-1">
                       Број на дебитна/кредитна картичка:
                     </label>
                     <input
@@ -273,14 +272,14 @@ export const PaymentGatewayModal = ({
                       onChange={(e) =>
                         setCardData((prev) => ({ ...prev, number: e.target.value }))
                       }
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-mono text-sm font-bold text-slate-800 outline-none focus:border-orange-500 focus:bg-white"
+                      className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 font-mono text-sm font-bold text-[#FAF6F0] outline-none focus:border-[#E26D46]"
                       placeholder="XXXX XXXX XXXX XXXX"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block font-bold text-slate-700 mb-1">
+                      <label className="block font-bold text-[#FAF6F0] mb-1">
                         Истекува (MM/YY):
                       </label>
                       <input
@@ -290,12 +289,12 @@ export const PaymentGatewayModal = ({
                         onChange={(e) =>
                           setCardData((prev) => ({ ...prev, expiry: e.target.value }))
                         }
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-mono text-slate-800 font-bold outline-none focus:border-orange-500 focus:bg-white"
+                        className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 font-mono text-[#FAF6F0] font-bold outline-none focus:border-[#E26D46]"
                         placeholder="MM/YY"
                       />
                     </div>
                     <div>
-                      <label className="block font-bold text-slate-700 mb-1">
+                      <label className="block font-bold text-[#FAF6F0] mb-1">
                         CVV / CVC код:
                       </label>
                       <input
@@ -305,14 +304,14 @@ export const PaymentGatewayModal = ({
                         onChange={(e) =>
                           setCardData((prev) => ({ ...prev, cvv: e.target.value }))
                         }
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-mono text-slate-800 font-bold outline-none focus:border-orange-500 focus:bg-white"
+                        className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 font-mono text-[#FAF6F0] font-bold outline-none focus:border-[#E26D46]"
                         placeholder="•••"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-bold text-slate-700 mb-1">
+                    <label className="block font-bold text-[#FAF6F0] mb-1">
                       Име и презиме на картичката:
                     </label>
                     <input
@@ -321,13 +320,13 @@ export const PaymentGatewayModal = ({
                       onChange={(e) =>
                         setCardData((prev) => ({ ...prev, holder: e.target.value }))
                       }
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 uppercase text-slate-800 font-bold outline-none focus:border-orange-500 focus:bg-white"
+                      className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 uppercase text-[#FAF6F0] font-bold outline-none focus:border-[#E26D46]"
                     />
                   </div>
                 </div>
 
-                <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-100 flex items-center gap-2.5 text-xs text-emerald-800">
-                  <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                <div className="p-3 bg-emerald-950/30 rounded-xl border border-emerald-800/40 flex items-center gap-2.5 text-xs text-emerald-300">
+                  <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
                   <span>
                     Трансакцијата е заштитена преку 3D Secure процесор. Банката ќе побара SMS
                     код за верификација.
@@ -339,14 +338,14 @@ export const PaymentGatewayModal = ({
             {/* TAB CONTENT 2: CASH ON DELIVERY */}
             {selectedMethod === "cod" && (
               <div className="space-y-4 animate-in fade-in duration-150">
-                <div className="p-4 bg-orange-50 rounded-2xl border border-orange-100 text-xs space-y-2">
-                  <div className="flex items-center gap-2 text-orange-800 font-black text-sm">
-                    <Banknote className="w-5 h-5 text-orange-600" />
+                <div className="p-4 bg-[#25211D] rounded-2xl border border-[#2A2520] text-xs space-y-2">
+                  <div className="flex items-center gap-2 text-[#D49A55] font-black text-sm">
+                    <Banknote className="w-5 h-5 text-[#E26D46]" />
                     <span>Плаќање во готовина при преземање</span>
                   </div>
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-[#A8A095] leading-relaxed">
                     Нарачката ќе ви биде доставена на вашата наведена адреса. Износот од{" "}
-                    <strong className="text-slate-900 font-black">
+                    <strong className="text-[#F5BA58] font-black">
                       {formatPrice(totalAmount, currency)}
                     </strong>{" "}
                     му го плаќате директно во готовина (кеш) на курирот при врачување на
@@ -355,16 +354,16 @@ export const PaymentGatewayModal = ({
                 </div>
 
                 <div className="space-y-2 text-xs">
-                  <div className="flex items-center gap-2 text-slate-700 font-semibold">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <div className="flex items-center gap-2 text-[#FAF6F0] font-semibold">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>Не се бара внес на банкарска картичка</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-700 font-semibold">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <div className="flex items-center gap-2 text-[#FAF6F0] font-semibold">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>Добивате фискална сметка и испратница во пакетот</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-700 font-semibold">
-                    <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <div className="flex items-center gap-2 text-[#FAF6F0] font-semibold">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>Можност за проверка на пакетот пред исплата</span>
                   </div>
                 </div>
@@ -375,16 +374,16 @@ export const PaymentGatewayModal = ({
             {selectedMethod === "installments" && (
               <div className="space-y-4 animate-in fade-in duration-150 text-xs">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">
+                  <label className="block font-bold text-[#FAF6F0] mb-1">
                     Изберете банка издавач на картичката:
                   </label>
                   <select
                     value={installmentsBank}
                     onChange={(e) => setInstallmentsBank(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-bold text-slate-800 outline-none focus:border-orange-500 focus:bg-white"
+                    className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-3.5 py-2.5 font-bold text-[#FAF6F0] outline-none focus:border-[#E26D46]"
                   >
                     {banks.map((b) => (
-                      <option key={b.id} value={b.id}>
+                      <option key={b.id} value={b.id} className="bg-[#1D1A17] text-[#FAF6F0]">
                         {b.name}
                       </option>
                     ))}
@@ -392,7 +391,7 @@ export const PaymentGatewayModal = ({
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-700 mb-2">
+                  <label className="block font-bold text-[#FAF6F0] mb-2">
                     Изберете број на месечни рати (0% камата):
                   </label>
                   <div className="grid grid-cols-3 gap-2">
@@ -403,16 +402,16 @@ export const PaymentGatewayModal = ({
                           key={count}
                           type="button"
                           onClick={() => setInstallmentsCount(count)}
-                          className={`p-3 rounded-xl border text-center transition-all ${
+                          className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
                             installmentsCount === count
-                              ? "border-orange-500 bg-orange-500 text-white font-bold shadow-md"
-                              : "border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700"
+                              ? "border-[#E26D46] bg-[#E26D46]/20 text-[#FAF6F0] font-bold shadow-md"
+                              : "border-[#2A2520] bg-[#25211D] hover:bg-[#2A2520] text-[#A8A095]"
                           }`}
                         >
-                          <span className="block text-sm font-black">{count} рати</span>
+                          <span className="block text-sm font-black text-[#FAF6F0]">{count} рати</span>
                           <span
                             className={`text-[10px] block mt-0.5 ${
-                              installmentsCount === count ? "text-orange-100" : "text-slate-500"
+                              installmentsCount === count ? "text-[#D49A55]" : "text-[#8C8377]"
                             }`}
                           >
                             {formatPrice(perMonth, currency)}/месец
@@ -423,12 +422,12 @@ export const PaymentGatewayModal = ({
                   </div>
                 </div>
 
-                <div className="p-3 bg-purple-50 rounded-xl border border-purple-100 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-purple-900 font-bold">
-                    <Building2 className="w-4 h-4 text-purple-600" />
+                <div className="p-3 bg-[#25211D] rounded-xl border border-[#2A2520] flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-[#D49A55] font-bold">
+                    <Building2 className="w-4 h-4 text-[#D49A55]" />
                     <span>Вкупен износ на рата:</span>
                   </div>
-                  <span className="text-sm font-black text-purple-900">
+                  <span className="text-sm font-black text-[#F5BA58]">
                     {formatPrice(Math.round(totalAmount / installmentsCount), currency)} / месечно
                   </span>
                 </div>
@@ -437,9 +436,9 @@ export const PaymentGatewayModal = ({
 
             {/* Destination Summary */}
             {shippingAddress && (
-              <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-500 flex items-center justify-between">
+              <div className="pt-3 border-t border-[#2A2520] text-[11px] text-[#A8A095] flex items-center justify-between">
                 <span>Испорака до:</span>
-                <span className="font-bold text-slate-800">
+                <span className="font-bold text-[#FAF6F0]">
                   {shippingAddress.street}, {shippingAddress.city}
                 </span>
               </div>
@@ -450,18 +449,18 @@ export const PaymentGatewayModal = ({
               <button
                 type="button"
                 onClick={handlePayNow}
-                className="w-full py-4 bg-orange-500 hover:bg-orange-600 active:scale-98 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-orange-500/25 flex items-center justify-center gap-2 transition-all"
+                className="w-full py-4 bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 active:scale-98 text-[#141210] font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-[#E26D46]/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
                 {selectedMethod === "card" && (
                   <>
                     <span>Плати {formatPrice(totalAmount, currency)} (3D Secure)</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-5 h-5 text-[#141210]" />
                   </>
                 )}
                 {selectedMethod === "cod" && (
                   <>
                     <span>Потврди нарачка со плаќање во готовина</span>
-                    <CheckCircle2 className="w-5 h-5" />
+                    <CheckCircle2 className="w-5 h-5 text-[#141210]" />
                   </>
                 )}
                 {selectedMethod === "installments" && (
@@ -469,7 +468,7 @@ export const PaymentGatewayModal = ({
                     <span>
                       Потврди {installmentsCount} рати ({formatPrice(totalAmount, currency)})
                     </span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-5 h-5 text-[#141210]" />
                   </>
                 )}
               </button>
