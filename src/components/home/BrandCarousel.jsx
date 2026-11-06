@@ -40,21 +40,20 @@ export const BrandCarousel = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4">
         {brandKeys.map((key) => {
           const config = BRAND_CONFIG[key] || { name: key };
           return (
             <button
               key={key}
               onClick={() => handleBrandClick(key)}
-              className="group p-4 rounded-2xl bg-[#1D1A17] border border-[#2A2520] hover:border-[#E26D46] hover:bg-[#25211D] hover:shadow-xl transition-all flex flex-col items-center justify-center min-h-[96px] cursor-pointer"
+              className="group p-5 rounded-2xl bg-[#1D1A17] border border-[#2A2520] hover:border-[#E26D46] hover:bg-[#25211D] hover:shadow-2xl transition-all flex flex-col items-center justify-between min-h-[125px] sm:min-h-[140px] cursor-pointer"
               title={`Прегледај производи од ${config.name}`}
             >
-              <BrandLogo brand={key} size="lg" showName={false} />
-              <span className="text-xs font-black text-[#FAF6F0] group-hover:text-[#E26D46] transition-colors mt-2 tracking-wide">
-                {config.name}
-              </span>
-              <span className="text-[10px] text-[#8C8377] font-semibold mt-0.5">
+              <div className="flex-1 flex items-center justify-center w-full px-2 py-1">
+                <BrandLogo brand={key} size="xl" showName={false} />
+              </div>
+              <span className="text-[11px] text-[#8C8377] font-semibold tracking-wide group-hover:text-[#E26D46] transition-colors mt-1">
                 {config.category || "Овластен бренд"}
               </span>
             </button>
