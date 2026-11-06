@@ -366,9 +366,9 @@ export const PRODUCTS = [
     freeShipping: true,
     images: [
       "https://plus.unsplash.com/premium_photo-1672192166833-c8ae84e5e127?w=800&auto=format&fit=crop&q=80",
-      "https://plus.unsplash.com/premium_photo-1711725196376-9f1bb3db3093?w=800&auto=format&fit=crop&q=80",
-      "https://plus.unsplash.com/premium_photo-1711752902713-e49e0ecb5c97?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&auto=format&fit=crop&q=80",
+      "https://upload.wikimedia.org/wikipedia/commons/d/d3/Air_Fryer_2020.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/16/Chefman_Air_Fryer.jpg",
+      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&auto=format&fit=crop&q=80"
     ],
     description:
       "Гответе вкусно со до 90% помалку маснотии со технологијата Rapid Air. Голем капацитет од 7.2 литри (1.4 кг компирчиња или цело пиле) идеален за семејни ручеци со 16 автоматски програми за готвење.",

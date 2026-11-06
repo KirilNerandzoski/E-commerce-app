@@ -59,7 +59,7 @@ html.light,
 }
 
 /* Background mappings */
-.light .bg-\[\#141210\] {
+.light .bg-\[\#141210\]:not(.dark-showcase) {
   background-color: #FBF9F5 !important;
 }
 .light .bg-\[\#141210\]\/95 {
@@ -77,14 +77,20 @@ html.light,
 .light .bg-\[\#0D0B0A\] {
   background-color: #F1ECE4 !important;
 }
+.light .bg-\[\#100E0D\] {
+  background-color: #F4EFEA !important;
+}
+.light .border-\[\#231F1B\] {
+  border-color: #E5DDD2 !important;
+}
 .light .bg-\[\#171412\] {
   background-color: #FFFFFF !important;
 }
-.light .bg-\[\#1D1A17\] {
+.light .bg-\[\#1D1A17\]:not(.dark-showcase) {
   background-color: #FFFFFF !important;
   box-shadow: 0 4px 20px -2px rgba(26, 22, 20, 0.04), 0 1px 3px rgba(26, 22, 20, 0.03);
 }
-.light .bg-\[\#25211D\] {
+.light .bg-\[\#25211D\]:not(.dark-showcase) {
   background-color: #F2ECE4 !important;
 }
 .light .bg-\[\#2A2520\] {
@@ -123,19 +129,35 @@ html.light,
 .light .text-\[\#FAF6F0\],
 .light .text-\[\#F5EFEB\],
 .light .text-\[\#E8E2D8\] {
-  color: #1A1614 !important;
+  color: #1A1614;
 }
 .light .text-\[\#A8A095\] {
-  color: #5C544B !important;
+  color: #5C544B;
 }
 .light .text-\[\#8C8377\] {
-  color: #7A6F62 !important;
+  color: #7A6F62;
 }
 .light .text-\[\#F5BA58\] {
-  color: #B45309 !important; /* High-contrast warm honey amber on light surfaces */
+  color: #B45309; /* High-contrast warm honey amber on light surfaces */
 }
 .light .text-\[\#D49A55\] {
-  color: #9E651E !important;
+  color: #9E651E;
+}
+
+/* Preserve bright white text on buttons, badges, gradients and dark showcase */
+.light .text-white,
+.light [class*="text-white"],
+.light .dark-showcase,
+.light .dark-showcase h1,
+.light .dark-showcase h2,
+.light .dark-showcase h3,
+.light .dark-showcase span:not([class*="text-"]),
+.light .dark-showcase p,
+.light .dark-showcase button:not([class*="bg-gradient"]) {
+  color: #FFFFFF !important;
+}
+.light .dark-showcase p {
+  color: #D5CCC0 !important;
 }
 
 /* Form inputs & controls in light mode */

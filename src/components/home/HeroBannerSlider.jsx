@@ -59,7 +59,7 @@ export const HeroBannerSlider = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
         {/* Main Hero Slider */}
-        <div className="lg:col-span-8 xl:col-span-9 relative rounded-3xl overflow-hidden shadow-2xl min-h-[360px] sm:min-h-[420px] flex items-center bg-[#141210] border border-[#2A2520]">
+        <div className="lg:col-span-8 xl:col-span-9 relative rounded-3xl overflow-hidden shadow-2xl min-h-[360px] sm:min-h-[420px] flex items-center bg-[#1A1613] border border-[#2A2520] dark-showcase">
           {/* Animated Background */}
           <div
             className={`absolute inset-0 bg-gradient-to-r ${activeSlide.bgGradient} transition-all duration-700`}
@@ -77,11 +77,11 @@ export const HeroBannerSlider = () => {
                 {activeSlide.tag}
               </span>
 
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#FAF6F0] leading-tight tracking-tight">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black !text-white leading-tight tracking-tight">
                 {activeSlide.title}
               </h1>
 
-              <p className="text-xs sm:text-sm text-[#A8A095] mt-3 leading-relaxed max-w-md">
+              <p className="text-xs sm:text-sm !text-neutral-300 mt-3 leading-relaxed max-w-md">
                 {activeSlide.subtitle}
               </p>
 
@@ -92,7 +92,7 @@ export const HeroBannerSlider = () => {
                 >
                   {activeSlide.ctaText} <ArrowRight className="w-4 h-4" />
                 </button>
-                <div className="hidden sm:flex items-center gap-2 text-xs text-[#A8A095] font-medium pl-2">
+                <div className="hidden sm:flex items-center gap-2 text-xs !text-neutral-300 font-medium pl-2">
                   <Truck className="w-4 h-4 text-emerald-400" /> Брза 24h испорака
                 </div>
               </div>
@@ -113,17 +113,17 @@ export const HeroBannerSlider = () => {
           {/* Slider Arrow Controls */}
           <button
             onClick={() => setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#141210]/70 hover:bg-[#141210] text-[#FAF6F0] flex items-center justify-center backdrop-blur-xs transition-colors z-20 border border-[#2A2520] cursor-pointer"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 !text-white flex items-center justify-center backdrop-blur-xs transition-colors z-20 border border-white/20 cursor-pointer"
             aria-label="Previous Slide"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 !text-white" />
           </button>
           <button
             onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#141210]/70 hover:bg-[#141210] text-[#FAF6F0] flex items-center justify-center backdrop-blur-xs transition-colors z-20 border border-[#2A2520] cursor-pointer"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 !text-white flex items-center justify-center backdrop-blur-xs transition-colors z-20 border border-white/20 cursor-pointer"
             aria-label="Next Slide"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-5 h-5 !text-white" />
           </button>
 
           {/* Dots Indicator */}

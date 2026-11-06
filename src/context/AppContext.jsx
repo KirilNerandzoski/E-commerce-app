@@ -33,19 +33,13 @@ export const AppProvider = ({ children }) => {
     }
   }, [theme]);
 
-  // Products list (updates when fresh product catalog is provided)
+  // Products list (Always fresh from PRODUCTS to prevent stale cached images)
   const [products, setProducts] = useState(() => {
     try {
-      const version = localStorage.getItem("aura_products_version");
-      if (version === "aura_v2_gallery") {
-        const saved = localStorage.getItem("aura_products");
-        if (saved) return JSON.parse(saved);
-      }
-    } catch {
-      // fallback
-    }
-    localStorage.setItem("aura_products_version", "aura_v2_gallery");
-    localStorage.setItem("aura_products", JSON.stringify(PRODUCTS));
+      localStorage.removeItem("pazarmax_products");
+      localStorage.removeItem("aura_products");
+      localStorage.removeItem("aura_products_version");
+    } catch {}
     return PRODUCTS;
   });
 
@@ -211,10 +205,6 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("pazarmax_currency", currency);
   }, [currency]);
-
-  useEffect(() => {
-    localStorage.setItem("pazarmax_products", JSON.stringify(products));
-  }, [products]);
 
   // Toast Helper
   const addToast = (message, type = "success") => {

@@ -117,21 +117,21 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-[#141210]/95 backdrop-blur-xl border-b border-[#2A2520] shadow-2xl">
+    <header className={`sticky top-0 z-40 ${theme === "light" ? "bg-[#FBF9F5]/95 border-b border-[#E5DDD2]" : "bg-[#141210]/95 border-b border-[#2A2520]"} backdrop-blur-xl shadow-md transition-colors`}>
       {/* 1. Top Announcement Bar */}
-      <div className="bg-[#0D0B0A] text-[#A8A095] text-xs py-1.5 px-4 sm:px-8 border-b border-[#1F1C18]">
+      <div className={`${theme === "light" ? "bg-[#EDE7DE] text-[#5C544B] border-b border-[#E0D7CC]" : "bg-[#0D0B0A] text-[#A8A095] border-b border-[#1F1C18]"} text-xs py-1.5 px-4 sm:px-8 transition-colors`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4 overflow-hidden">
             <span className="flex items-center gap-1.5 text-[#D49A55] font-semibold truncate">
               <Zap className="w-3.5 h-3.5 fill-[#D49A55] shrink-0" />
               БЕСПЛАТНА достава за нарачки над 1.500 ден.
             </span>
-            <span className="hidden md:inline text-[#3D352E]">|</span>
-            <span className="hidden md:inline text-[#A8A095]">
+            <span className="hidden md:inline text-[#8C8377]/40">|</span>
+            <span className="hidden md:inline">
               Гарантирано враќање во рок од 14 дена
             </span>
-            <span className="hidden lg:inline text-[#3D352E]">|</span>
-            <span className="hidden lg:inline text-[#A8A095]">
+            <span className="hidden lg:inline text-[#8C8377]/40">|</span>
+            <span className="hidden lg:inline">
               📦 AuraBox 0-24ч преземање
             </span>
           </div>
@@ -666,14 +666,18 @@ export const Navbar = () => {
       </div>
 
       {/* 3. Horizontal Secondary Category Bar (Desktop) */}
-      <div className="hidden lg:block bg-[#100E0D] border-t border-[#231F1B] px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto no-scrollbar py-2 text-xs font-semibold text-[#A8A095]">
+      <div className={`hidden lg:block ${theme === "light" ? "bg-[#F4EFEA] border-t border-[#E5DDD2] text-[#5C544B]" : "bg-[#100E0D] border-t border-[#231F1B] text-[#A8A095]"} px-4 sm:px-8 transition-colors`}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto no-scrollbar py-2 text-xs font-semibold">
           <div className="flex items-center gap-1">
             {CATEGORIES.slice(0, 8).map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => handleCategorySelect(cat.id)}
-                className="px-3 py-1.5 rounded-lg hover:bg-[#25211D] hover:text-[#E26D46] transition-all whitespace-nowrap cursor-pointer"
+                className={`px-3 py-1.5 rounded-lg transition-all whitespace-nowrap cursor-pointer ${
+                  theme === "light"
+                    ? "text-[#5C544B] hover:bg-[#EAE3D8] hover:text-[#C84E25]"
+                    : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#E26D46]"
+                }`}
               >
                 {cat.name}
               </button>
