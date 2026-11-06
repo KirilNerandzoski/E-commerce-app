@@ -12,6 +12,7 @@ import { AuthModal } from "./components/common/AuthModal";
 import { SpinWheelModal } from "./components/gamification/SpinWheelModal";
 import { FloatingSpinTrigger } from "./components/gamification/FloatingSpinTrigger";
 import { LivePurchasesTicker } from "./components/gamification/LivePurchasesTicker";
+import { OrderCompletedChatBubble } from "./components/common/OrderCompletedChatBubble";
 
 // Pages
 import { HomePage } from "./components/home/HomePage";
@@ -63,6 +64,7 @@ const AppShell = () => {
       <SpinWheelModal isOpen={isSpinModalOpen} onClose={() => setIsSpinModalOpen(false)} />
       <FloatingSpinTrigger onOpen={() => setIsSpinModalOpen(true)} />
       <LivePurchasesTicker />
+      <OrderCompletedChatBubble />
       <ToastContainer />
       <MobileBottomNav />
     </div>

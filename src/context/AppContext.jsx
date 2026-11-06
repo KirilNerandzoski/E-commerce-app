@@ -5,6 +5,7 @@ import { COUPONS } from "../data/coupons";
 import { FREE_SHIPPING_THRESHOLD } from "../utils/formatters";
 import { supabaseService } from "../services/supabaseService";
 import { supabase } from "../lib/supabase";
+import { soundFX } from "../utils/soundEffects";
 
 const AppContext = createContext();
 
@@ -126,7 +127,16 @@ export const AppProvider = ({ children }) => {
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [lastPlacedOrder, setLastPlacedOrder] = useState(null);
+  const [lastPlacedOrder, setLastPlacedOrder] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem("aura_last_order");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [isOrderChatBubbleOpen, setIsOrderChatBubbleOpen] = useState(false);
+  const [hasOrderNotification, setHasOrderNotification] = useState(false);
 
   // Coupons
   const [appliedCoupon, setAppliedCoupon] = useState(null);
@@ -450,6 +460,16 @@ export const AppProvider = ({ children }) => {
     }
 
     setLastPlacedOrder(newOrder);
+    try {
+      sessionStorage.setItem("aura_last_order", JSON.stringify(newOrder));
+    } catch {}
+    setHasOrderNotification(true);
+    setTimeout(() => {
+      setIsOrderChatBubbleOpen(true);
+      try {
+        soundFX.playPop();
+      } catch {}
+    }, 800);
     clearCart();
     setAppliedCoupon(null);
     if (supabaseSuccess) {
@@ -582,6 +602,10 @@ export const AppProvider = ({ children }) => {
         placeOrder,
         lastPlacedOrder,
         setLastPlacedOrder,
+        isOrderChatBubbleOpen,
+        setIsOrderChatBubbleOpen,
+        hasOrderNotification,
+        setHasOrderNotification,
         addReviewToProduct,
         toasts,
         addToast,

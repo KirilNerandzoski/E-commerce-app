@@ -1,9 +1,19 @@
 import React from "react";
+import { useApp } from "../../context/AppContext";
 import { Sparkles, Gift } from "lucide-react";
 
 export const FloatingSpinTrigger = ({ onOpen }) => {
+  const { lastPlacedOrder, isOrderChatBubbleOpen } = useApp();
+
+  // Hide spin button when order chat is expanded to keep screen clean
+  if (isOrderChatBubbleOpen) return null;
+
   return (
-    <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 animate-bounce duration-1000">
+    <div
+      className={`fixed bottom-20 sm:bottom-6 z-40 animate-bounce duration-1000 transition-all ${
+        lastPlacedOrder ? "right-20 sm:right-24" : "right-4 sm:right-6"
+      }`}
+    >
       <button
         onClick={onOpen}
         type="button"
