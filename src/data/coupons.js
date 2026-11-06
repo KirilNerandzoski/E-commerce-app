@@ -32,4 +32,20 @@ export const COUPONS = [
     minSpend: 5000,
     type: "percent",
   },
+  {
+    code: "SPIN5",
+    description: "5% бонус среќно тркало",
+    discountPercent: 5,
+    discountAmount: 0,
+    minSpend: 0,
+    type: "percent",
+  },
+  {
+    code: "VIP20",
+    description: "20% Ексклузивен VIP попуст",
+    discountPercent: 20,
+    discountAmount: 0,
+    minSpend: 2000,
+    type: "percent",
+  },
 ];

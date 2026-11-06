@@ -52,24 +52,24 @@ export const CartDrawer = () => {
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300">
+        <div className="w-screen max-w-md bg-[#0B1120] text-slate-200 border-l border-slate-800 shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300">
           {/* Header */}
-          <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+          <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-[#070C18]">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center border border-orange-500/20">
                 <ShoppingCart className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="font-bold text-slate-800 text-base">
+                <h2 className="font-bold text-white text-base">
                   Твоја кошничка ({cartTotalItemsCount})
                 </h2>
-                <span className="text-xs text-slate-500">Сигурно и брзо купување</span>
+                <span className="text-xs text-slate-400">Сигурно и брзо купување</span>
               </div>
             </div>
 
             <button
               onClick={() => setIsCartDrawerOpen(false)}
-              className="w-8 h-8 rounded-full bg-slate-200/70 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors"
+              className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -188,48 +188,48 @@ export const CartDrawer = () => {
 
           {/* Footer Summary & CTAs */}
           {cart.length > 0 && (
-            <div className="p-4 sm:p-5 border-t border-slate-200 bg-slate-50/70 space-y-3">
+            <div className="p-4 sm:p-5 border-t border-slate-850 bg-[#070C18] space-y-3 text-slate-300">
               <div className="space-y-1.5 text-xs">
-                <div className="flex justify-between text-slate-600">
+                <div className="flex justify-between text-slate-400">
                   <span>Вкупно производи:</span>
-                  <span className="font-semibold text-slate-800">{formatPrice(cartSubtotal, currency)}</span>
+                  <span className="font-semibold text-white">{formatPrice(cartSubtotal, currency)}</span>
                 </div>
 
                 {cartDiscount > 0 && (
-                  <div className="flex justify-between text-emerald-600">
+                  <div className="flex justify-between text-emerald-400">
                     <span>Попуст со купон:</span>
                     <span className="font-semibold">-{formatPrice(cartDiscount, currency)}</span>
                   </div>
                 )}
 
-                <div className="flex justify-between text-slate-600">
+                <div className="flex justify-between text-slate-400">
                   <span>Достава:</span>
-                  <span className="font-semibold text-slate-800">
+                  <span className="font-semibold text-white">
                     {standardShippingCost === 0 ? (
-                      <span className="text-emerald-600 font-bold">БЕСПЛАТНА</span>
+                      <span className="text-emerald-400 font-bold">БЕСПЛАТНА</span>
                     ) : (
                       formatPrice(standardShippingCost, currency)
                     )}
                   </span>
                 </div>
 
-                <div className="pt-2 border-t border-slate-200 flex justify-between text-sm sm:text-base font-extrabold text-slate-900">
+                <div className="pt-2 border-t border-slate-800 flex justify-between text-sm sm:text-base font-extrabold text-white">
                   <span>Вкупно за плаќање:</span>
-                  <span className="text-orange-600">{formatPrice(cartTotal, currency)}</span>
+                  <span className="text-orange-400">{formatPrice(cartTotal, currency)}</span>
                 </div>
               </div>
 
               <div className="flex flex-col gap-2 pt-1">
                 <button
                   onClick={handleGoToCheckout}
-                  className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-orange-500 hover:bg-orange-600 active:scale-98 text-white shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2 transition-all"
+                  className="w-full py-3 px-4 rounded-xl font-black text-sm bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 active:scale-98 text-slate-950 shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
                 >
                   Кон брза наплата <ArrowRight className="w-4 h-4" />
                 </button>
 
                 <button
                   onClick={handleGoToCartPage}
-                  className="w-full py-2.5 px-4 rounded-xl font-semibold text-xs text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-xs text-slate-300 bg-slate-850 border border-slate-750 hover:bg-slate-800 transition-colors cursor-pointer"
                 >
                   Отвори детална кошничка
                 </button>

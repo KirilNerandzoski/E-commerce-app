@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppProvider, useApp } from "./context/AppContext";
 import { Navbar } from "./components/common/Navbar";
 import { Footer } from "./components/common/Footer";
@@ -9,6 +9,9 @@ import { ComparisonModal } from "./components/common/ComparisonModal";
 import { CartDrawer } from "./components/common/CartDrawer";
 import { FloatingCompareDock } from "./components/common/FloatingCompareDock";
 import { AuthModal } from "./components/common/AuthModal";
+import { SpinWheelModal } from "./components/gamification/SpinWheelModal";
+import { FloatingSpinTrigger } from "./components/gamification/FloatingSpinTrigger";
+import { LivePurchasesTicker } from "./components/gamification/LivePurchasesTicker";
 
 // Pages
 import { HomePage } from "./components/home/HomePage";
@@ -37,10 +40,15 @@ const MainContent = () => {
 
 const AppShell = () => {
   const { isAuthModalOpen, setIsAuthModalOpen } = useApp();
+  const [isSpinModalOpen, setIsSpinModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-800 flex flex-col justify-between selection:bg-orange-500 selection:text-white">
-      <div>
+    <div className="min-h-screen bg-[#080D1A] text-white flex flex-col justify-between selection:bg-orange-500 selection:text-white relative">
+      {/* Ambient background glows */}
+      <div className="fixed top-0 left-1/4 w-96 h-96 bg-indigo-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="fixed top-1/3 right-10 w-96 h-96 bg-orange-600/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10">
         <Navbar />
         <MainContent />
       </div>
@@ -52,6 +60,9 @@ const AppShell = () => {
       <CartDrawer />
       <FloatingCompareDock />
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <SpinWheelModal isOpen={isSpinModalOpen} onClose={() => setIsSpinModalOpen(false)} />
+      <FloatingSpinTrigger onOpen={() => setIsSpinModalOpen(true)} />
+      <LivePurchasesTicker />
       <ToastContainer />
       <MobileBottomNav />
     </div>

@@ -4,6 +4,7 @@ import { FlashDealsSection } from "./FlashDealsSection";
 import { CategoryGrid } from "./CategoryGrid";
 import { BestSellersTabs } from "./BestSellersTabs";
 import { PromoBanners } from "./PromoBanners";
+import { ScratchCardBanner } from "../gamification/ScratchCardBanner";
 import { BrandCarousel } from "./BrandCarousel";
 import { RecommendationsSection } from "./RecommendationsSection";
 import { RecentlyViewedSection } from "./RecentlyViewedSection";
@@ -15,6 +16,7 @@ export const HomePage = () => {
       <FlashDealsSection />
       <CategoryGrid />
       <BestSellersTabs />
+      <ScratchCardBanner />
       <PromoBanners />
       <RecommendationsSection />
       <BrandCarousel />

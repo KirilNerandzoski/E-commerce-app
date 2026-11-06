@@ -12,12 +12,12 @@ export const MobileBottomNav = () => {
   } = useApp();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200/90 py-1.5 px-3 flex items-center justify-around shadow-lg lg:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#0B1120]/95 backdrop-blur-xl border-t border-slate-800 py-1.5 px-3 flex items-center justify-around shadow-2xl lg:hidden text-slate-400">
       {/* Home */}
       <button
         onClick={() => navigateTo("home")}
         className={`flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors ${
-          currentView === "home" ? "text-orange-600" : "text-slate-500 hover:text-slate-800"
+          currentView === "home" ? "text-orange-400 font-bold" : "text-slate-400 hover:text-white"
         }`}
       >
         <Home className="w-5 h-5" />
@@ -28,7 +28,7 @@ export const MobileBottomNav = () => {
       <button
         onClick={() => navigateTo("catalog")}
         className={`flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors ${
-          currentView === "catalog" ? "text-orange-600" : "text-slate-500 hover:text-slate-800"
+          currentView === "catalog" ? "text-orange-400 font-bold" : "text-slate-400 hover:text-white"
         }`}
       >
         <Grid className="w-5 h-5" />
@@ -39,7 +39,7 @@ export const MobileBottomNav = () => {
       <button
         onClick={() => navigateTo("wishlist")}
         className={`relative flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors ${
-          currentView === "wishlist" ? "text-orange-600" : "text-slate-500 hover:text-slate-800"
+          currentView === "wishlist" ? "text-orange-400 font-bold" : "text-slate-400 hover:text-white"
         }`}
       >
         <div className="relative">
@@ -57,13 +57,13 @@ export const MobileBottomNav = () => {
       <button
         onClick={() => setIsCartDrawerOpen(true)}
         className={`relative flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors ${
-          currentView === "cart" ? "text-orange-600" : "text-slate-500 hover:text-slate-800"
+          currentView === "cart" ? "text-orange-400 font-bold" : "text-slate-400 hover:text-white"
         }`}
       >
         <div className="relative">
           <ShoppingCart className="w-5 h-5" />
           {cartTotalItemsCount > 0 && (
-            <span className="absolute -top-1.5 -right-2 bg-orange-500 text-white font-black text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
+            <span className="absolute -top-1.5 -right-2 bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-black text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
               {cartTotalItemsCount}
             </span>
           )}
@@ -75,7 +75,7 @@ export const MobileBottomNav = () => {
       <button
         onClick={() => navigateTo("profile")}
         className={`flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors ${
-          currentView === "profile" ? "text-orange-600" : "text-slate-500 hover:text-slate-800"
+          currentView === "profile" ? "text-orange-400 font-bold" : "text-slate-400 hover:text-white"
         }`}
       >
         <User className="w-5 h-5" />

@@ -10,17 +10,17 @@ export const CategoryGrid = () => {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+          <h2 className="text-xl sm:text-2xl font-black text-white">
             Истражи по категории
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
             Над 10.000 достапни производи за секоја потреба
           </p>
         </div>
 
         <button
           onClick={() => navigateTo("catalog")}
-          className="text-xs sm:text-sm font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1 transition-colors"
+          className="text-xs sm:text-sm font-bold text-orange-400 hover:text-orange-300 flex items-center gap-1 transition-colors cursor-pointer"
         >
           Сите производи <ArrowRight className="w-4 h-4" />
         </button>
@@ -31,19 +31,19 @@ export const CategoryGrid = () => {
           <div
             key={cat.id}
             onClick={() => navigateTo("catalog", cat.id)}
-            className="group bg-white rounded-2xl border border-slate-200/80 p-3 sm:p-4 text-center cursor-pointer hover:shadow-lg hover:border-orange-300 hover:-translate-y-1 transition-all flex flex-col items-center justify-between"
+            className="group bg-[#0E1626]/90 rounded-2xl border border-slate-800 p-3 sm:p-4 text-center cursor-pointer hover:shadow-2xl hover:border-orange-500/40 hover:-translate-y-1 transition-all flex flex-col items-center justify-between"
           >
-            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-50 p-2 overflow-hidden mb-3 group-hover:bg-orange-50/60 transition-colors flex items-center justify-center">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white p-1.5 overflow-hidden mb-3 group-hover:scale-105 transition-transform flex items-center justify-center border border-slate-700/30">
               <img
                 src={cat.image}
                 alt={cat.name}
-                className="w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-300"
+                className="w-full h-full object-cover rounded-xl"
                 loading="lazy"
               />
             </div>
 
             <div>
-              <h3 className="font-bold text-xs sm:text-sm text-slate-800 group-hover:text-orange-600 transition-colors line-clamp-2 leading-tight">
+              <h3 className="font-bold text-xs sm:text-sm text-slate-200 group-hover:text-orange-400 transition-colors line-clamp-2 leading-tight">
                 {cat.name}
               </h3>
               <span className="text-[11px] text-slate-400 mt-1 block">

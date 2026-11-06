@@ -171,12 +171,12 @@ export const ProductCatalog = () => {
       </nav>
 
       {/* 2. Category Title Banner */}
-      <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 mb-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-[#0E1626]/90 rounded-3xl border border-slate-800 p-6 sm:p-8 mb-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 text-slate-200">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             {activeCategory ? activeCategory.name : "Сите производи во понуда"}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-xl">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
             {activeCategory
               ? `Прегледајте ги најдобрите понуди, попусти и гарантиран квалитет во категоријата ${activeCategory.name}.`
               : "Најголем избор на електроника, апарати за домаќинство, мода, спорт и сѐ за вашиот дом."}
@@ -184,8 +184,8 @@ export const ProductCatalog = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="px-4 py-2 rounded-2xl bg-slate-100 text-xs font-bold text-slate-700">
-            Вкупно: <span className="text-orange-600 font-extrabold">{filteredProducts.length}</span> производи
+          <div className="px-4 py-2 rounded-2xl bg-slate-800 text-xs font-bold text-slate-200 border border-slate-700">
+            Вкупно: <span className="text-orange-400 font-extrabold">{filteredProducts.length}</span> производи
           </div>
         </div>
       </div>
@@ -202,9 +202,9 @@ export const ProductCatalog = () => {
           <div className="fixed inset-0 z-50 lg:hidden">
             <div
               onClick={() => setIsMobileFiltersOpen(false)}
-              className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs"
+              className="fixed inset-0 bg-black/70 backdrop-blur-xs"
             />
-            <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl p-4 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-right duration-200">
+            <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-[#0B1120] text-slate-200 border-l border-slate-800 shadow-2xl p-4 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-right duration-200">
               <FilterSidebar
                 isMobileDrawer={true}
                 onCloseMobile={() => setIsMobileFiltersOpen(false)}
@@ -216,33 +216,33 @@ export const ProductCatalog = () => {
         {/* Catalog Main Content (3 cols) */}
         <div className="lg:col-span-3 space-y-4">
           {/* Top Control Bar: Active filters, Grid/List switch, Sort dropdown */}
-          <div className="bg-white rounded-2xl border border-slate-200/80 p-3 sm:p-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="bg-[#0E1626]/90 rounded-2xl border border-slate-800 p-3 sm:p-4 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-slate-200">
             {/* Left: Mobile Filter Button & Active Filter Summary */}
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMobileFiltersOpen(true)}
-                className="lg:hidden px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors"
+                className="lg:hidden px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700"
               >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-orange-500" />
+                <SlidersHorizontal className="w-3.5 h-3.5 text-orange-400" />
                 Филтри
               </button>
 
-              <span className="text-xs text-slate-500 font-medium">
-                Прикажани <strong className="text-slate-800">{paginatedProducts.length}</strong> од{" "}
-                <strong className="text-slate-800">{filteredProducts.length}</strong>
+              <span className="text-xs text-slate-400 font-medium">
+                Прикажани <strong className="text-white">{paginatedProducts.length}</strong> од{" "}
+                <strong className="text-white">{filteredProducts.length}</strong>
               </span>
             </div>
 
             {/* Right: Layout Switch & Sort */}
             <div className="flex items-center gap-3">
               {/* Layout Switcher */}
-              <div className="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200/80">
+              <div className="flex items-center bg-slate-800 p-0.5 rounded-xl border border-slate-700">
                 <button
                   onClick={() => setLayoutMode("grid")}
-                  className={`p-1.5 rounded-lg transition-colors ${
+                  className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                     layoutMode === "grid"
-                      ? "bg-white text-orange-600 shadow-xs"
-                      : "text-slate-400 hover:text-slate-700"
+                      ? "bg-slate-900 text-orange-400 shadow-xs"
+                      : "text-slate-400 hover:text-white"
                   }`}
                   title="Grid поглед"
                 >
@@ -250,10 +250,10 @@ export const ProductCatalog = () => {
                 </button>
                 <button
                   onClick={() => setLayoutMode("list")}
-                  className={`p-1.5 rounded-lg transition-colors ${
+                  className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                     layoutMode === "list"
-                      ? "bg-white text-orange-600 shadow-xs"
-                      : "text-slate-400 hover:text-slate-700"
+                      ? "bg-slate-900 text-orange-400 shadow-xs"
+                      : "text-slate-400 hover:text-white"
                   }`}
                   title="Листа поглед"
                 >

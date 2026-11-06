@@ -238,24 +238,24 @@ export const ProductDetailPage = () => {
 
         {/* Right Column: Details & Actions (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-xs">
+          <div className="bg-[#0E1626]/90 rounded-3xl border border-slate-800 p-6 sm:p-8 shadow-2xl text-slate-200">
             {/* Brand & Stock */}
             <div className="flex items-center justify-between gap-2 pb-2">
-              <span className="text-xs font-black text-orange-600 uppercase tracking-widest">
+              <span className="text-xs font-black text-orange-400 uppercase tracking-widest">
                 {product.brand}
               </span>
               <span
                 className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full ${
-                  product.inStock ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-600"
+                  product.inStock ? "bg-emerald-950/40 text-emerald-400 border border-emerald-800/40" : "bg-red-950/40 text-red-400 border border-red-800/40"
                 }`}
               >
-                <span className={`w-2 h-2 rounded-full ${product.inStock ? "bg-emerald-500" : "bg-red-500"}`} />
+                <span className={`w-2 h-2 rounded-full ${product.inStock ? "bg-emerald-400" : "bg-red-500"}`} />
                 {product.inStock ? "На залиха (брза испорака)" : "Нема на залиха"}
               </span>
             </div>
 
             {/* Product Title */}
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-white leading-tight">
               {product.title}
             </h1>
 
@@ -512,45 +512,45 @@ export const ProductDetailPage = () => {
       </div>
 
       {/* 4. Tabbed Details: Description, Specifications, Reviews */}
-      <div className="mt-12 bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+      <div className="mt-12 bg-[#0E1626]/90 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden text-slate-200">
         {/* Tab Headers */}
-        <div className="flex border-b border-slate-200 bg-slate-50/70 overflow-x-auto no-scrollbar">
+        <div className="flex border-b border-slate-800 bg-[#0B1120] overflow-x-auto no-scrollbar">
           <button
             onClick={() => setActiveTab("description")}
-            className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 ${
+            className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 cursor-pointer ${
               activeTab === "description"
-                ? "border-orange-500 text-orange-600 bg-white"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                ? "border-orange-500 text-orange-400 bg-slate-850"
+                : "border-transparent text-slate-400 hover:text-white"
             }`}
           >
             Опис & Карактеристики
           </button>
           <button
             onClick={() => setActiveTab("specs")}
-            className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 ${
+            className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 cursor-pointer ${
               activeTab === "specs"
-                ? "border-orange-500 text-orange-600 bg-white"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                ? "border-orange-500 text-orange-400 bg-slate-850"
+                : "border-transparent text-slate-400 hover:text-white"
             }`}
           >
             Технички спецификации
           </button>
           <button
             onClick={() => setActiveTab("reviews")}
-            className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 ${
+            className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 cursor-pointer ${
               activeTab === "reviews"
-                ? "border-orange-500 text-orange-600 bg-white"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                ? "border-orange-500 text-orange-400 bg-slate-850"
+                : "border-transparent text-slate-400 hover:text-white"
             }`}
           >
             Оценки & Рецензии ({product.reviews?.length || 0})
           </button>
           <button
             onClick={() => setActiveTab("shipping")}
-            className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 ${
+            className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 cursor-pointer ${
               activeTab === "shipping"
-                ? "border-orange-500 text-orange-600 bg-white"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                ? "border-orange-500 text-orange-400 bg-slate-850"
+                : "border-transparent text-slate-400 hover:text-white"
             }`}
           >
             Достава & Гаранција
@@ -562,7 +562,7 @@ export const ProductDetailPage = () => {
           {/* 1. Description */}
           {activeTab === "description" && (
             <div className="space-y-6">
-              <p className="text-slate-700 leading-relaxed text-sm sm:text-base">
+              <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
                 {product.description}
               </p>
 

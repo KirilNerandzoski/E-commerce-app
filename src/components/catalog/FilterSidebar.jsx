@@ -69,17 +69,17 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
   const selectedCategoryObj = CATEGORIES.find((c) => c.id === catalogFilters.category);
 
   return (
-    <aside className="w-full bg-white rounded-3xl border border-slate-200/80 p-5 shadow-xs space-y-6">
+    <aside className="w-full bg-[#0E1626]/90 rounded-3xl border border-slate-800 p-5 shadow-xl space-y-6 text-slate-200">
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-        <div className="flex items-center gap-2 font-bold text-sm text-slate-900">
-          <SlidersHorizontal className="w-4 h-4 text-orange-500" />
+      <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div className="flex items-center gap-2 font-bold text-sm text-white">
+          <SlidersHorizontal className="w-4 h-4 text-orange-400" />
           <span>Филтрирај</span>
         </div>
 
         <button
           onClick={handleResetFilters}
-          className="text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1 transition-colors"
+          className="text-xs font-semibold text-rose-400 hover:text-rose-300 flex items-center gap-1 transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3.5 h-3.5" /> Ресетирај
         </button>
@@ -87,54 +87,54 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
 
       {/* 1. Category Hierarchy */}
       <div>
-        <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider mb-2.5">
+        <h4 className="text-xs font-extrabold text-white uppercase tracking-wider mb-2.5">
           Категорија
         </h4>
         <div className="space-y-1">
           <button
             onClick={() => handleCategoryChange("all")}
-            className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors ${
+            className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
               catalogFilters.category === "all"
-                ? "bg-orange-50 text-orange-600 font-bold"
-                : "text-slate-600 hover:bg-slate-50"
+                ? "bg-orange-500/10 text-orange-400 font-bold"
+                : "text-slate-400 hover:bg-slate-800 hover:text-white"
             }`}
           >
             <span>Сите категории</span>
-            <span className="text-[11px] text-slate-400">{products.length}</span>
+            <span className="text-[11px] text-slate-500">{products.length}</span>
           </button>
 
           {CATEGORIES.map((cat) => (
             <div key={cat.id}>
               <button
                 onClick={() => handleCategoryChange(cat.id)}
-                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors ${
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                   catalogFilters.category === cat.id
-                    ? "bg-orange-50 text-orange-600 font-bold"
-                    : "text-slate-600 hover:bg-slate-50"
+                    ? "bg-orange-500/10 text-orange-400 font-bold"
+                    : "text-slate-400 hover:bg-slate-800 hover:text-white"
                 }`}
               >
                 <span className="truncate">{cat.name}</span>
-                <span className="text-[11px] text-slate-400">
+                <span className="text-[11px] text-slate-500">
                   {products.filter((p) => p.category === cat.id).length}
                 </span>
               </button>
 
               {/* Subcategories (if current category selected) */}
               {catalogFilters.category === cat.id && cat.subcategories && (
-                <div className="pl-4 pr-1 py-1 space-y-1 border-l-2 border-orange-200 ml-3 mt-1">
+                <div className="pl-4 pr-1 py-1 space-y-1 border-l-2 border-orange-500/30 ml-3 mt-1">
                   {cat.subcategories.map((sub) => (
                     <button
                       key={sub.id}
                       onClick={() => handleSubcategoryChange(sub.id)}
-                      className={`w-full text-left py-1 px-2 rounded-lg text-[11px] transition-colors flex items-center justify-between ${
+                      className={`w-full text-left py-1 px-2 rounded-lg text-[11px] transition-colors flex items-center justify-between cursor-pointer ${
                         catalogFilters.subcategory === sub.id
-                          ? "font-bold text-orange-600 bg-orange-100/50"
-                          : "text-slate-500 hover:text-slate-800"
+                          ? "font-bold text-orange-400 bg-orange-500/20"
+                          : "text-slate-400 hover:text-slate-200"
                       }`}
                     >
                       <span className="truncate">{sub.name}</span>
                       {catalogFilters.subcategory === sub.id && (
-                        <Check className="w-3 h-3 text-orange-600 shrink-0" />
+                        <Check className="w-3 h-3 text-orange-400 shrink-0" />
                       )}
                     </button>
                   ))}

@@ -19,14 +19,14 @@ export const RecentlyViewedSection = () => {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
+          <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-orange-400 border border-slate-750">
             <HistoryIcon className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-lg sm:text-xl font-black text-slate-900">
+            <h2 className="text-lg sm:text-xl font-black text-white">
               Неодамна прегледани производи
             </h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-400">
               Производи што ги разгледавте при оваа или претходна посета
             </p>
           </div>

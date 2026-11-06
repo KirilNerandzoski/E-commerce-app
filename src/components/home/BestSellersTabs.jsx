@@ -29,33 +29,33 @@ export const BestSellersTabs = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-black text-amber-600 uppercase tracking-wider">
-            <Trophy className="w-4 h-4 fill-amber-500 text-amber-500" />
+          <div className="flex items-center gap-2 text-xs font-black text-amber-400 uppercase tracking-wider">
+            <Trophy className="w-4 h-4 fill-amber-400 text-amber-400" />
             <span>Најпопуларен избор од купувачите</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-white mt-1">
             Најпродавани производи
           </h2>
         </div>
 
         <button
           onClick={() => navigateTo("catalog")}
-          className="text-xs sm:text-sm font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1 transition-colors self-start sm:self-auto"
+          className="text-xs sm:text-sm font-bold text-orange-400 hover:text-orange-300 flex items-center gap-1 transition-colors self-start sm:self-auto cursor-pointer"
         >
           Види ги сите производи <ArrowRight className="w-4 h-4" />
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200/80 mb-6 no-scrollbar">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-800 mb-6 no-scrollbar">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === tab.id
-                ? "bg-orange-500 text-white shadow-md shadow-orange-500/20"
-                : "bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                ? "bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 font-black shadow-lg shadow-orange-500/25"
+                : "bg-slate-850 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-750"
             }`}
           >
             {tab.label}
