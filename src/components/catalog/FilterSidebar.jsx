@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {} }) => {
-  const { products, catalogFilters, setCatalogFilters, currency } = useApp();
+  const { products, catalogFilters, setCatalogFilters, currency, theme } = useApp();
   const [brandSearch, setBrandSearch] = useState("");
 
   // Extract all unique brands from products
@@ -67,10 +67,10 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
   };
 
   return (
-    <aside className="w-full bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-5 shadow-xl space-y-6 text-[#FAF6F0]">
+    <aside className={`w-full rounded-3xl border p-5 shadow-xl space-y-6 transition-all ${theme === "light" ? "bg-white border-[#E5DDD2] text-[#1A1614]" : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"}`}>
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-[#2A2520]">
-        <div className="flex items-center gap-2 font-bold text-sm text-[#FAF6F0]">
+      <div className={`flex items-center justify-between pb-4 border-b ${theme === "light" ? "border-[#E5DDD2]" : "border-[#2A2520]"}`}>
+        <div className={`flex items-center gap-2 font-bold text-sm ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
           <SlidersHorizontal className="w-4 h-4 text-[#E26D46]" />
           <span>Филтрирај</span>
         </div>
@@ -85,7 +85,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
 
       {/* 1. Category Hierarchy */}
       <div>
-        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2.5">
+        <h4 className={`text-xs font-extrabold uppercase tracking-wider mb-2.5 ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
           Категорија
         </h4>
         <div className="space-y-1">
@@ -94,7 +94,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
               catalogFilters.category === "all"
                 ? "bg-[#E26D46]/15 text-[#E26D46] font-bold border border-[#E26D46]/30"
-                : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
+                : theme === "light" ? "text-[#5C544B] hover:bg-[#F3EFEA] hover:text-[#1A1614]" : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
             }`}
           >
             <span>Сите категории</span>
@@ -108,7 +108,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
                 className={`w-full text-left px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                   catalogFilters.category === cat.id
                     ? "bg-[#E26D46]/15 text-[#E26D46] font-bold border border-[#E26D46]/30"
-                    : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
+                    : theme === "light" ? "text-[#5C544B] hover:bg-[#F3EFEA] hover:text-[#1A1614]" : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
                 }`}
               >
                 <span className="truncate">{cat.name}</span>
@@ -144,8 +144,8 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
       </div>
 
       {/* 2. Fast Delivery & Badges */}
-      <div className="pt-4 border-t border-[#2A2520] space-y-2.5">
-        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2">
+      <div className={`pt-4 border-t space-y-2.5 ${theme === "light" ? "border-[#E5DDD2]" : "border-[#2A2520]"}`}>
+        <h4 className={`text-xs font-extrabold uppercase tracking-wider mb-2 ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
           Услуги & Поволности
         </h4>
 
@@ -218,8 +218,8 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
       </div>
 
       {/* 3. Price Range Slider */}
-      <div className="pt-4 border-t border-[#2A2520]">
-        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2">
+      <div className={`pt-4 border-t ${theme === "light" ? "border-[#E5DDD2]" : "border-[#2A2520]"}`}>
+        <h4 className={`text-xs font-extrabold uppercase tracking-wider mb-2 ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
           Опсег на цена
         </h4>
         <div className="flex items-center justify-between text-xs font-bold text-[#FAF6F0] mb-2">
@@ -241,7 +241,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
         />
 
         <div className="flex items-center gap-2 mt-3">
-          <div className="flex-1 bg-[#25211D] border border-[#2A2520] rounded-xl p-2 text-xs">
+          <div className={`flex-1 rounded-xl p-2 text-xs border ${theme === "light" ? "bg-[#F3EFEA] border-[#E0D7CC]" : "bg-[#25211D] border-[#2A2520]"}`}>
             <span className="text-[10px] text-[#A8A095] block">Мин (ден.)</span>
             <input
               type="number"
@@ -249,10 +249,10 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
               onChange={(e) =>
                 setCatalogFilters((prev) => ({ ...prev, minPrice: Number(e.target.value) }))
               }
-              className="w-full bg-transparent font-bold text-[#FAF6F0] outline-none"
+              className={`w-full bg-transparent font-bold outline-none ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}
             />
           </div>
-          <div className="flex-1 bg-[#25211D] border border-[#2A2520] rounded-xl p-2 text-xs">
+          <div className={`flex-1 rounded-xl p-2 text-xs border ${theme === "light" ? "bg-[#F3EFEA] border-[#E0D7CC]" : "bg-[#25211D] border-[#2A2520]"}`}>
             <span className="text-[10px] text-[#A8A095] block">Макс (ден.)</span>
             <input
               type="number"
@@ -260,15 +260,15 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
               onChange={(e) =>
                 setCatalogFilters((prev) => ({ ...prev, maxPrice: Number(e.target.value) }))
               }
-              className="w-full bg-transparent font-bold text-[#FAF6F0] outline-none"
+              className={`w-full bg-transparent font-bold outline-none ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}
             />
           </div>
         </div>
       </div>
 
       {/* 4. Brands Filter with Search */}
-      <div className="pt-4 border-t border-[#2A2520]">
-        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2">
+      <div className={`pt-4 border-t ${theme === "light" ? "border-[#E5DDD2]" : "border-[#2A2520]"}`}>
+        <h4 className={`text-xs font-extrabold uppercase tracking-wider mb-2 ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
           Бренд
         </h4>
 
@@ -279,7 +279,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             value={brandSearch}
             onChange={(e) => setBrandSearch(e.target.value)}
             placeholder="Пребарај бренд..."
-            className="w-full bg-[#25211D] border border-[#2A2520] rounded-xl px-2.5 py-1.5 pl-7 text-xs text-[#FAF6F0] placeholder-[#8C8377] outline-none focus:border-[#E26D46]"
+            className={`w-full rounded-xl px-2.5 py-1.5 pl-7 text-xs placeholder-[#8C8377] outline-none border focus:border-[#E26D46] ${theme === "light" ? "bg-[#F3EFEA] border-[#E0D7CC] text-[#1A1614]" : "bg-[#25211D] border-[#2A2520] text-[#FAF6F0]"}`}
           />
           <Search className="w-3.5 h-3.5 text-[#8C8377] absolute left-2 top-1/2 -translate-y-1/2" />
         </div>
@@ -292,7 +292,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
             return (
               <label
                 key={brand}
-                className="flex items-center justify-between p-1.5 rounded-lg hover:bg-[#25211D] cursor-pointer text-xs transition-colors"
+                className={`flex items-center justify-between p-1.5 rounded-lg cursor-pointer text-xs transition-colors ${theme === "light" ? "hover:bg-[#F3EFEA]" : "hover:bg-[#25211D]"}`}
               >
                 <div className="flex items-center gap-2">
                   <input
@@ -313,8 +313,8 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
       </div>
 
       {/* 5. Rating Filter */}
-      <div className="pt-4 border-t border-[#2A2520]">
-        <h4 className="text-xs font-extrabold text-[#FAF6F0] uppercase tracking-wider mb-2">
+      <div className={`pt-4 border-t ${theme === "light" ? "border-[#E5DDD2]" : "border-[#2A2520]"}`}>
+        <h4 className={`text-xs font-extrabold uppercase tracking-wider mb-2 ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
           Минимална оцена
         </h4>
         <div className="space-y-1">
@@ -330,7 +330,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
               className={`w-full p-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer ${
                 catalogFilters.minRating === stars
                   ? "bg-[#D49A55]/20 text-[#D49A55] font-bold border border-[#D49A55]/40"
-                  : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
+                  : theme === "light" ? "text-[#5C544B] hover:bg-[#F3EFEA] hover:text-[#1A1614]" : "text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0]"
               }`}
             >
               <div className="flex items-center gap-1.5 text-[#D49A55]">
@@ -347,7 +347,7 @@ export const FilterSidebar = ({ isMobileDrawer = false, onCloseMobile = () => {}
 
       {/* Mobile drawer apply button */}
       {isMobileDrawer && (
-        <div className="pt-4 border-t border-[#2A2520]">
+        <div className={`pt-4 border-t ${theme === "light" ? "border-[#E5DDD2]" : "border-[#2A2520]"}`}>
           <button
             onClick={onCloseMobile}
             className="w-full py-3 bg-gradient-to-r from-[#E26D46] to-[#D49A55] hover:brightness-110 text-[#141210] font-black text-sm rounded-xl shadow-md transition-colors cursor-pointer"

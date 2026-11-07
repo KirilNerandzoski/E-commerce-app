@@ -149,11 +149,16 @@ export const AppProvider = ({ children }) => {
     if (supabaseService.isConfigured) {
       supabaseService.getProducts().then(({ data }) => {
         if (data && data.length > 0) {
-          setProducts(data);
+          const supabaseMap = new Map(data.map((p) => [p.id, p]));
+          const merged = PRODUCTS.map((p) => supabaseMap.get(p.id) || p);
+          data.forEach((p) => {
+            if (!PRODUCTS.some((base) => base.id === p.id)) {
+              merged.push(p);
+            }
+          });
+          setProducts(merged);
         }
       });
-
-
     }
   }, []);
 

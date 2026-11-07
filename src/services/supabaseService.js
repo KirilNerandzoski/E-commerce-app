@@ -111,7 +111,16 @@ export const supabaseService = {
         freeShipping: item.free_shipping,
       }));
 
-      return { data: mapped, error: null };
+      // Merge Supabase live data with full PRODUCTS catalog so every category is fully stocked
+      const supabaseMap = new Map(mapped.map((p) => [p.id, p]));
+      const fullCatalog = PRODUCTS.map((p) => supabaseMap.get(p.id) || p);
+      mapped.forEach((p) => {
+        if (!PRODUCTS.some((base) => base.id === p.id)) {
+          fullCatalog.push(p);
+        }
+      });
+
+      return { data: fullCatalog, error: null };
     } catch (err) {
       console.warn("Supabase fetch failed, falling back to local products:", err);
       return { data: PRODUCTS, error: err };
