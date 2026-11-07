@@ -102,6 +102,18 @@ export const BRAND_CONFIG = {
     file: "tefal.svg",
     invertInDark: false,
   },
+  Garmin: {
+    name: "Garmin",
+    category: "Спортски часовници",
+    file: "garmin.svg",
+    invertInDark: true,
+  },
+  WMF: {
+    name: "WMF",
+    category: "Кујнски прибор",
+    file: "wmf.svg",
+    invertInDark: true,
+  },
 };
 
 export const normalizeBrandKey = (brand) => {

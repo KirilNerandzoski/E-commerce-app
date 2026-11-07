@@ -693,7 +693,7 @@ export const Navbar = () => {
               { id: "electronics", name: "Електроника & Телефони", shortName: "Електроника" },
               { id: "computers", name: "Компјутери & Гејминг", shortName: "Компјутери" },
               { id: "appliances", name: "Бела техника & Апарати", shortName: "Бела техника" },
-              { id: "home-living", name: "Мебел & Домување", shortName: "Домување" },
+              { id: "furniture", name: "Мебел & Домување", shortName: "Домување" },
               { id: "fashion", name: "Облека & Мода", shortName: "Мода" },
               { id: "beauty", name: "Убавина & Лична нега", shortName: "Убавина" },
               { id: "sports", name: "Спорт & Опрема", shortName: "Спорт" },

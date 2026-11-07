@@ -1434,5 +1434,717 @@ export const PRODUCTS = [
     reviews: [
       { id: "r33", user: "Ѓорѓи М.", rating: 5, date: "11.10.2026", comment: "Животот ми се смени! Сам ги пере крпите и ги суши со топол воздух, само менувам вода еднаш на две недели." },
     ],
+  },,
+  {
+  "id": "prod-33",
+  "title": "Нордиска масичка за кафе од масивен даб со долна полица",
+  "category": "furniture",
+  "subcategory": "living-room",
+  "brand": "NordicHome",
+  "price": 8490,
+  "originalPrice": 10990,
+  "discount": 23,
+  "rating": 4.8,
+  "reviewCount": 42,
+  "inStock": true,
+  "stock": 14,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": false,
+  "isNew": true,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Рачно изработена масичка за дневна соба со минималистички скандинавски линии. Заштитена со еколошки мат лак отпорен на влага и гребнатини со практична долна полица за списанија и далечински управувачи.",
+  "features": [
+    "Масивно природно дабово дрво со FSC сертификат",
+    "Цврста метална конструкција со црн мат финиш",
+    "Долна полица за организирање и складирање",
+    "Заштитни филцови на ногарките против гребење паркет"
+  ],
+  "specifications": {
+    "Димензии": "100 x 55 x 45 cm",
+    "Материјал": "Природен даб и челик",
+    "Тежина": "14.5 kg",
+    "Максимална носивост": "60 kg",
+    "Гаранција": "36 Месеци"
   },
+  "reviews": [
+    {
+      "id": "r34",
+      "user": "Игор В.",
+      "rating": 5,
+      "date": "02.11.2026",
+      "comment": "Дрвото е преубаво на допир, стабилна и се склопува за 10 минути. Вреди за секој денар."
+    }
+  ]
+},
+  {
+  "id": "prod-34",
+  "title": "Xiaomi Smart LED Подна амбиентална лампа со безжична контрола",
+  "category": "furniture",
+  "subcategory": "lighting",
+  "brand": "Xiaomi",
+  "price": 4990,
+  "originalPrice": 6490,
+  "discount": 23,
+  "rating": 4.9,
+  "reviewCount": 68,
+  "inStock": true,
+  "stock": 19,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": true,
+  "isNew": false,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Паметно амбиентално осветлување со над 16 милиони RGB бои и прилагодлива топла и ладна бела светлина. Синхронизација со музика, тајмери за спиење и гласовна контрола преку Google Assistant и Amazon Alexa.",
+  "features": [
+    "16 милиони бои и 1% до 100% прецизно затемнување",
+    "Синхронизација на светлосните ефекти со звук и филмови",
+    "Управување преку мобилна апликација Mi Home или далечинско",
+    "Минималистички алуминиумски столб со скриен кабел"
+  ],
+  "specifications": {
+    "Висина": "145 cm",
+    "Моќност": "24 W",
+    "Светлосен тек": "1800 Lumens",
+    "Поврзување": "Wi-Fi 2.4GHz + Bluetooth 5.0",
+    "Гаранција": "24 Месеци"
+  },
+  "reviews": [
+    {
+      "id": "r35",
+      "user": "Симона Д.",
+      "rating": 5,
+      "date": "28.10.2026",
+      "comment": "Амбиентот во дневната стана магичен навечер. Преку телефонот правам совршено пригушено топло светло за филм."
+    }
+  ]
+},
+  {
+  "id": "prod-35",
+  "title": "Nike Tech Fleece Машки долен дел тренерки Sportswear Slim Fit",
+  "category": "fashion",
+  "subcategory": "mens-clothing",
+  "brand": "Nike",
+  "price": 5490,
+  "originalPrice": 6990,
+  "discount": 21,
+  "rating": 4.9,
+  "reviewCount": 112,
+  "inStock": true,
+  "stock": 22,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": true,
+  "isNew": false,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Премиум лесен термален Tech Fleece материјал со мазна завршница од двете страни кој обезбедува врвна топлина без дополнителна тежина. Слим-фит крој со стеснети ногавици и препознатлив страничен џеб со патент.",
+  "features": [
+    "Оригинален двостран Nike Tech Fleece материјал",
+    "Голем страничен џеб со патент и внатрешен џеб за телефон",
+    "Еластичен појас со премиум врвка за затегнување",
+    "Анатомски крој на колената за слободно движење"
+  ],
+  "specifications": {
+    "Состав": "66% Памук, 34% Полиестер",
+    "Крој": "Slim Fit (Стеснет)",
+    "Одржување": "Машинско перење на 30°C",
+    "Потекло": "Оригинален Nike лиценциран производ"
+  },
+  "reviews": [
+    {
+      "id": "r36",
+      "user": "Кристијан Т.",
+      "rating": 5,
+      "date": "04.11.2026",
+      "comment": "Најудобните тренерки што сум ги носел, кројот е топ и не пуштаат боја по перење."
+    }
+  ]
+},
+  {
+  "id": "prod-36",
+  "title": "Dyson Supersonic HD07 Професионален јонски фен за коса со 5 додатоци",
+  "category": "beauty",
+  "subcategory": "hair-care",
+  "brand": "Dyson",
+  "price": 29990,
+  "originalPrice": 34990,
+  "discount": 14,
+  "rating": 4.9,
+  "reviewCount": 140,
+  "inStock": true,
+  "stock": 9,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": true,
+  "isNew": false,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Интелигентна контрола на топлината која ја мери температурата на воздухот над 40 пати во секунда, спречувајќи екстремно оштетување од топлина. Вклучува нов Flyaway додаток за скротување на непослушните влакна со Коанда ефект.",
+  "features": [
+    "Дигитален мотор Dyson V9 со брзина до 110.000 вртежи во минута",
+    "Air Multiplier технологија за концентриран млаз со висок притисок",
+    "5 магнетни додатоци кои ротираат 360°",
+    "Јонизирачка технологија за намалување на статичкиот електрицитет"
+  ],
+  "specifications": {
+    "Моќност": "1600 W",
+    "Тежина": "660 g",
+    "Брзини": "3 брзини на проток на воздух",
+    "Температурни поставки": "4 прецизни нивоа (28°C ладен млаз до 100°C)",
+    "Гаранција": "24 Месеци"
+  },
+  "reviews": [
+    {
+      "id": "r37",
+      "user": "Марија П.",
+      "rating": 5,
+      "date": "25.10.2026",
+      "comment": "Косата ми се суши за 4 минути и сјае како да излегувам од салон. Премиум класа!"
+    }
+  ]
+},
+  {
+  "id": "prod-37",
+  "title": "Philips Lumea IPL Серија 9000 Безжичен ласерски депилатор со SenseIQ",
+  "category": "beauty",
+  "subcategory": "skincare",
+  "brand": "Philips",
+  "price": 26990,
+  "originalPrice": 32990,
+  "discount": 18,
+  "rating": 4.8,
+  "reviewCount": 88,
+  "inStock": true,
+  "stock": 11,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": false,
+  "isNew": true,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1512290900672-1f55b9e07802?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "До 92% намалување на влакненцата по само 3 третмани со свиленкасто мазна кожа до 6 месеци. SenseIQ технологија со SmartSkin сензор кој го препознава тонот на вашата кожа и ја одредува најудобната светлина за вас.",
+  "features": [
+    "4 специјално заоблени паметни додатоци (тело, лице, бикини, пазуви)",
+    "SmartSkin сензор со автоматско прилагодување на моќноста",
+    "Можност за безжично користење или на кабел",
+    "Век на сијалицата: 450.000 блесоци (еквивалент на 39 години третмани)"
+  ],
+  "specifications": {
+    "Блесоци": "450.000",
+    "Напојување": "Батерија и струја (двојно)",
+    "Време на третман": "Долни нозе за само 8.5 минути",
+    "Гаранција": "24 Месеци"
+  },
+  "reviews": [
+    {
+      "id": "r38",
+      "user": "Елена С.",
+      "rating": 5,
+      "date": "19.10.2026",
+      "comment": "Резултатите се неверојатни уште по вториот месец, веќе немам потреба од бричење!"
+    }
+  ]
+},
+  {
+  "id": "prod-38",
+  "title": "Garmin Fenix 7 Pro Solar Премиум мултиспорт GPS часовник со соларно полнење",
+  "category": "sports",
+  "subcategory": "fitness",
+  "brand": "Garmin",
+  "price": 44990,
+  "originalPrice": 51990,
+  "discount": 13,
+  "rating": 4.9,
+  "reviewCount": 76,
+  "inStock": true,
+  "stock": 7,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": true,
+  "isNew": false,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1510017803434-a899398421b3?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Ултимативен спортски часовник за планинарење, трчање и тренинзи со Power Glass соларно полнење кое дава до 37 дена траење на батеријата. Вградена LED светилка, прецизен мулти-банд GPS и топографски мапи.",
+  "features": [
+    "Power Glass соларно стакло за продолжена автономија",
+    "Вградена бела и црвена LED светилка со променлив интензитет",
+    "Напредно мерење на Hill Score и Endurance Score",
+    "Водоотпорност до 100 метри (10 ATM) со титаниумска рамка"
+  ],
+  "specifications": {
+    "Екран": "1.3\" соларен MIP екран (260x260)",
+    "Батерија": "До 22 дена во smartwatch режим (37 со соларно)",
+    "Тежина": "79 g",
+    "Складиште": "32 GB за музика и офлајн мапи",
+    "Гаранција": "24 Месеци"
+  },
+  "reviews": [
+    {
+      "id": "r39",
+      "user": "Бојан К.",
+      "rating": 5,
+      "date": "01.11.2026",
+      "comment": "На Шар Планина и Кораб батеријата и GPS навигацијата ме спасија. Нема подобар часовник за на отворено."
+    }
+  ]
+},
+  {
+  "id": "prod-39",
+  "title": "Xiaomi WalkingPad R2 Склоплива патека за трчање и пешачење 2-во-1",
+  "category": "sports",
+  "subcategory": "fitness",
+  "brand": "Xiaomi",
+  "price": 31990,
+  "originalPrice": 38990,
+  "discount": 18,
+  "rating": 4.8,
+  "reviewCount": 64,
+  "inStock": true,
+  "stock": 9,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": false,
+  "isNew": true,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Патентиран систем на преклопување за 180 степени кој овозможува складирање под кревет или зад врата за само неколку секунди. Двојна намена: режим на одење до 6 km/h и режим на брзо трчање до 12 km/h.",
+  "features": [
+    "Иновативен 180° склоплив дизајн со дебелина од само 15 cm",
+    "Интелигентна контрола на брзината според положбата на стапалата",
+    "LED дисплеј вграден во основата и држач за телефон/таблет",
+    "Четирислојна амортизација за заштита на колената и зглобовите"
+  ],
+  "specifications": {
+    "Брзина": "0.5 – 12.0 km/h",
+    "Максимална носивост": "110 kg",
+    "Моќност": "918 W безчеткаст мотор",
+    "Тежина": "36 kg (со тркалца за лесно поместување)",
+    "Гаранција": "24 Месеци"
+  },
+  "reviews": [
+    {
+      "id": "r40",
+      "user": "Александар Ѓ.",
+      "rating": 5,
+      "date": "29.10.2026",
+      "comment": "Ја чувам исправена зад гардероберот. Правам по 10.000 чекори додека гледам серии дома."
+    }
+  ]
+},
+  {
+  "id": "prod-40",
+  "title": "De'Longhi Kimbo Espresso 100% Arabica Кафе во зрно 1kg",
+  "category": "groceries",
+  "subcategory": "coffee-tea",
+  "brand": "DeLonghi",
+  "price": 1490,
+  "originalPrice": 1890,
+  "discount": 21,
+  "rating": 4.9,
+  "reviewCount": 165,
+  "inStock": true,
+  "stock": 45,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": false,
+  "isNew": false,
+  "freeShipping": false,
+  "images": [
+    "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Ексклузивна неаполска мешавина од 100% селектирани зрна Арабика од најдобрите плантажи во Бразил, Перу и Колумбија. Совршено балансиран вкус со пријатна овошна киселост и фина карамелна нота специјално развиена за De'Longhi кафемати.",
+  "features": [
+    "100% чиста премиум Арабика",
+    "Традиционално италијанско средно печење во Неапол",
+    "Херметичко пакување со еднонасочен вентил за свежина",
+    "Оптимална густина на кремата за автентично италијанско еспресо"
+  ],
+  "specifications": {
+    "Нето тежина": "1000 g (1 kg)",
+    "Интензитет": "8 / 10",
+    "Печење": "Средно (Medium Roast)",
+    "Потекло": "Италија"
+  },
+  "reviews": [
+    {
+      "id": "r41",
+      "user": "Стефан М.",
+      "rating": 5,
+      "date": "03.11.2026",
+      "comment": "За De'Longhi Magnifica е совршено кафе. Богата крема, нема горчина и мириса цела куќа."
+    }
+  ]
+},
+  {
+  "id": "prod-41",
+  "title": "Lavazza Crema e Aroma Кафе во зрно 1kg (Кремаста мешавина)",
+  "category": "groceries",
+  "subcategory": "coffee-tea",
+  "brand": "Lavazza",
+  "price": 1290,
+  "originalPrice": 1690,
+  "discount": 24,
+  "rating": 4.8,
+  "reviewCount": 220,
+  "inStock": true,
+  "stock": 50,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": true,
+  "isNew": false,
+  "freeShipping": false,
+  "images": [
+    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Омиленото кафе на милиони љубители на еспресо ширум светот. Хармонична комбинација на внимателно одбрани зрна Арабика и Робуста која создава густа долготрајна крема и интензивен вкус со ноти на чоколадо.",
+  "features": [
+    "Балансиран микс од Арабика и премиум Робуста зрна",
+    "Неверојатно густа и свиленкаста златна крема",
+    "Идеално за еспресо, макијато и капучино",
+    "Печено и пакувано во Торино, Италија"
+  ],
+  "specifications": {
+    "Нето тежина": "1000 g (1 kg)",
+    "Интензитет": "8 / 10",
+    "Печење": "Средно",
+    "Потекло": "Торино, Италија"
+  },
+  "reviews": [
+    {
+      "id": "r42",
+      "user": "Оливера Т.",
+      "rating": 5,
+      "date": "27.10.2026",
+      "comment": "Класика без грешка. Капучиното наутро е како од најдоброто кафуле во Италија."
+    }
+  ]
+},
+  {
+  "id": "prod-42",
+  "title": "LEGO Technic Ferrari Daytona SP3 (42143) Ексклузивен модел со 3778 делови",
+  "category": "toys",
+  "subcategory": "lego-building",
+  "brand": "LEGO",
+  "price": 27990,
+  "originalPrice": 32990,
+  "discount": 15,
+  "rating": 5,
+  "reviewCount": 52,
+  "inStock": true,
+  "stock": 6,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": true,
+  "isNew": false,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Врвно инженерско ремек-дело за возрасни градители. Модел во размер 1:8 со класична црвена Ferrari боја, хромирани фелни, функционален 8-степен секвенцијален менувач и детален V12 мотор со подвижни клипови.",
+  "features": [
+    "Размер 1:8 со должина од 59 cm и 3.778 прецизни елементи",
+    "Пеперутка врати што се отвораат нагоре и подвижен покрив Targa",
+    "Уникатен сериски број со онлајн пристап до ексклузивни содржини",
+    "Премиум луксузно пакување со две илустрирани колекционерски книги"
+  ],
+  "specifications": {
+    "Број на делови": "3778",
+    "Димензии": "59 cm должина x 25 cm ширина x 14 cm висина",
+    "Препорачана возраст": "18+ години",
+    "Лиценца": "Официјално Ferrari лиценциран производ"
+  },
+  "reviews": [
+    {
+      "id": "r43",
+      "user": "Дарко Б.",
+      "rating": 5,
+      "date": "05.11.2026",
+      "comment": "Инженерско совршенство. Градењето траеше околу 16 часа чисто уживање. Стои како скулптура во канцеларија."
+    }
+  ]
+},
+  {
+  "id": "prod-43",
+  "title": "Детска триколка со ротирачко седиште и кров за сонце Kinderkraft 5-во-1",
+  "category": "toys",
+  "subcategory": "baby-gear",
+  "brand": "Kinderkraft",
+  "price": 7990,
+  "originalPrice": 9990,
+  "discount": 20,
+  "rating": 4.8,
+  "reviewCount": 39,
+  "inStock": true,
+  "stock": 15,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": false,
+  "isNew": true,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1544717305-2782549b5136?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Мултифункционална триколка која расте заедно со вашето дете од 9 месеци до 5 години. Седиште кое ротира за 360 степени со поглед кон родителот или напред, склоплив кров со UPF50+ заштита и родителска рачка за управување.",
+  "features": [
+    "5 функции во 1: од количка за бебе до самостојна детска триколка",
+    "360° ротирачко анатомско седиште со меко перниче",
+    "Тркала од EVA пена отпорни на дупчење со задна сопирачка",
+    "Сигурносен појас со 3 точки и отстранлива заштитна ограда"
+  ],
+  "specifications": {
+    "Тежина": "8.6 kg",
+    "Возраст": "Од 9 месеци до 25 kg (околу 5 години)",
+    "Материјал": "Челична рамка и водоотпорен полиестер",
+    "Сертификат": "EN 71-1 европски безбедносен стандард"
+  },
+  "reviews": [
+    {
+      "id": "r44",
+      "user": "Наталија Г.",
+      "rating": 5,
+      "date": "23.10.2026",
+      "comment": "Многу практична за прошетки, лесно се врти седиштето кога ќе заспие бебето. Квалитетен челик."
+    }
+  ]
+},
+  {
+  "id": "prod-44",
+  "title": "Bosch Professional Сет рачен алат и додатоци Titanium 103 парчиња во куфер",
+  "category": "tools-auto",
+  "subcategory": "hand-tools",
+  "brand": "Bosch",
+  "price": 4490,
+  "originalPrice": 5990,
+  "discount": 25,
+  "rating": 4.9,
+  "reviewCount": 130,
+  "inStock": true,
+  "stock": 30,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": false,
+  "isNew": false,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Универзален премиум куфер со 103 висококвалитетни парчиња додатоци и рачен алат. Вклучува титаниумски бургии за метал со долг век на траење, бургии за камен и дрво, магнетни битови, либела, клешти и скалпел.",
+  "features": [
+    "Титаниум-нитридна обвивка за брзо дупчење и минимално триење",
+    "Компатибилно со сите марки на дупчалки и одвртувачи",
+    "Прегледно организиран робустен куфер со цврсти брави",
+    "Вклучени додатоци за дупчење кружни отвори за дрво"
+  ],
+  "specifications": {
+    "Број на делови": "103 парчиња",
+    "Димензии на куфер": "37 x 34 x 7 cm",
+    "Тежина": "3.48 kg",
+    "Производител": "Bosch Power Tools Germany"
+  },
+  "reviews": [
+    {
+      "id": "r45",
+      "user": "Васко Ѓ.",
+      "rating": 5,
+      "date": "31.10.2026",
+      "comment": "Секоја куќа мора да го има овој куфер. Бургиите за метал сечат како низ путер."
+    }
+  ]
+},
+  {
+  "id": "prod-45",
+  "title": "Makita Акумулаторска аголна брусилка DGA504Z 18V LXT 125mm без четкички",
+  "category": "tools-auto",
+  "subcategory": "power-tools",
+  "brand": "Makita",
+  "price": 9990,
+  "originalPrice": 12490,
+  "discount": 20,
+  "rating": 4.8,
+  "reviewCount": 75,
+  "inStock": true,
+  "stock": 12,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": true,
+  "isNew": false,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Професионална акумулаторска флексијална брусилка напојувана со безчеткаст (BL) мотор кој овозможува подолго време на работа и поголема моќност. Опремена со Automatic Torque Drive технологија (ADT) која автоматски го прилагодува вртежниот момент.",
+  "features": [
+    "BL безчеткаст мотор без потреба од одржување",
+    "ADT автоматско прилагодување на брзината според товарот",
+    "AFT технологија за исклучување при ненадејно заглавување на дискот",
+    "Ергономски гумиран мек држач за контрола со една рака"
+  ],
+  "specifications": {
+    "Напон": "18 V (Makita LXT литиум-јон)",
+    "Дијаметар на диск": "125 mm",
+    "Брзина без оптоварување": "8.500 вртежи/мин",
+    "Тежина со батерија": "2.5 kg",
+    "Гаранција": "36 Месеци со регистрација"
+  },
+  "reviews": [
+    {
+      "id": "r46",
+      "user": "Зоран С.",
+      "rating": 5,
+      "date": "18.10.2026",
+      "comment": "Моќна како кабелска брусилка, а слободата без кабли е незаменлива на градилиште."
+    }
+  ]
+},
+  {
+  "id": "prod-46",
+  "title": "WMF Професионален сет готвачки ножеви од специјален челик со блок 6 парчиња",
+  "category": "household",
+  "subcategory": "cookware",
+  "brand": "WMF",
+  "price": 11990,
+  "originalPrice": 15490,
+  "discount": 23,
+  "rating": 4.9,
+  "reviewCount": 65,
+  "inStock": true,
+  "stock": 16,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": false,
+  "isNew": true,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1593618998160-e34014e67546?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Врвен кујнски сет ножеви искован од специјално стврднат челик отпорен на киселини и корозија. Performance Cut технологијата гарантира двојно подолга острина во споредба со традиционалните ножеви, сместени во дизајнерски блок од буково дрво.",
+  "features": [
+    "Исковани од едно парче специјален ножарски челик",
+    "Performance Cut технологија со ласерско прецизно острење",
+    "Беспрекорни ергономски рачки без фуги за максимална хигиена",
+    "Вклучува: готвачки нож, нож за леб, нож за месо, универзален нож и ножици"
+  ],
+  "specifications": {
+    "Број на парчиња": "6 (5 ножеви + 1 дрвен блок)",
+    "Материјал": "Специјален германски нерѓосувачки челик и бука",
+    "Потекло": "Германија",
+    "Гаранција": "10 Години"
+  },
+  "reviews": [
+    {
+      "id": "r47",
+      "user": "Милчо Р.",
+      "rating": 5,
+      "date": "06.11.2026",
+      "comment": "Ножевите се брич остри, балансот во рака е перфектен. Готвењето е сега чисто задоволство."
+    }
+  ]
+},
+  {
+  "id": "prod-47",
+  "title": "Philips Пегла со генератор на пареа PerfectCare Compact 6.5 бара со OptimalTEMP",
+  "category": "household",
+  "subcategory": "cleaning-supplies",
+  "brand": "Philips",
+  "price": 13990,
+  "originalPrice": 17990,
+  "discount": 22,
+  "rating": 4.8,
+  "reviewCount": 84,
+  "inStock": true,
+  "stock": 14,
+  "isDirectDelivery": true,
+  "isDealOfTheDay": false,
+  "isBestSeller": true,
+  "isTrending": false,
+  "isNew": false,
+  "freeShipping": true,
+  "images": [
+    "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=800&auto=format&fit=crop&q=80",
+    "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?w=800&auto=format&fit=crop&q=80"
+  ],
+  "description": "Пеглајте побрзо и полесно со моќна континуирана пареа под притисок од 6.5 бара. Со OptimalTEMP технологијата не е потребно поставување на температура – гарантирано нема да изгори ниту една ткаенина, од свила до тексас.",
+  "features": [
+    "OptimalTEMP технологија – без ризик од горење облека",
+    "Притисок од 6.5 бара и моќен удар на пареа до 430 g/min",
+    "SteamGlide Plus керамичка плоча со супериорно лизгање",
+    "Голем отстранлив резервоар за вода од 1.5 литри со Smart Calc-Clean"
+  ],
+  "specifications": {
+    "Притисок": "6.5 бара",
+    "Континуирана пареа": "До 120 g/min",
+    "Удар на пареа": "До 430 g",
+    "Резервоар": "1.5 Литри",
+    "Гаранција": "24 Месеци"
+  },
+  "reviews": [
+    {
+      "id": "r48",
+      "user": "Билјана А.",
+      "rating": 5,
+      "date": "22.10.2026",
+      "comment": "Времето за пеглање ми се скрати на пола. Пеглам свилени кошули и дебели фармерки без да менувам температура!"
+    }
+  ]
+}
 ];
