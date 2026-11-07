@@ -4,7 +4,7 @@ import { ProductCard } from "../product/ProductCard";
 import { ArrowRight, Trophy } from "lucide-react";
 
 export const BestSellersTabs = () => {
-  const { products, navigateTo } = useApp();
+  const { products, navigateTo, theme } = useApp();
   const [activeTab, setActiveTab] = useState("all");
 
   const tabs = [
@@ -33,21 +33,27 @@ export const BestSellersTabs = () => {
             <Trophy className="w-4 h-4 fill-[#D49A55] text-[#D49A55]" />
             <span>Најпопуларен избор од купувачите</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-[#FAF6F0] mt-1">
+          <h2 className={`text-xl sm:text-2xl font-black mt-1 ${
+            theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"
+          }`}>
             Најпродавани производи
           </h2>
         </div>
 
         <button
           onClick={() => navigateTo("catalog")}
-          className="text-xs sm:text-sm font-bold text-[#E26D46] hover:text-[#D49A55] flex items-center gap-1 transition-colors self-start sm:self-auto cursor-pointer"
+          className={`text-xs sm:text-sm font-bold flex items-center gap-1 transition-colors self-start sm:self-auto cursor-pointer ${
+            theme === "light" ? "text-[#C84E25] hover:text-[#B45309]" : "text-[#E26D46] hover:text-[#D49A55]"
+          }`}
         >
           Види ги сите производи <ArrowRight className="w-4 h-4" />
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-[#2A2520] mb-6 no-scrollbar">
+      <div className={`flex items-center gap-2 overflow-x-auto pb-2 border-b mb-6 no-scrollbar ${
+        theme === "light" ? "border-[#E5DDD2]" : "border-[#2A2520]"
+      }`}>
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -55,6 +61,8 @@ export const BestSellersTabs = () => {
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
               activeTab === tab.id
                 ? "bg-gradient-to-r from-[#E26D46] to-[#D49A55] text-[#141210] font-black shadow-lg shadow-[#E26D46]/20"
+                : theme === "light"
+                ? "bg-white text-[#70675C] hover:bg-[#F3EFEA] hover:text-[#1A1614] border border-[#E0D7CC]"
                 : "bg-[#1D1A17] text-[#A8A095] hover:bg-[#25211D] hover:text-[#FAF6F0] border border-[#2A2520]"
             }`}
           >

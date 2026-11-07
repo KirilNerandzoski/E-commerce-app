@@ -33,33 +33,48 @@ export const OrderCompletedChatBubble = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // Initialize or update chat messages when a new order is completed
+    // Initialize or update chat messages
   useEffect(() => {
-    if (!lastPlacedOrder) return;
-
-    const initialMessages = [
-      {
-        id: "msg-1",
-        sender: "bot",
-        text: `👋 Здраво, ${lastPlacedOrder.customerName || "Купувач"}! Вашата нарачка е успешно комплетирана! 🎉`,
-        timestamp: "Штотуку",
-      },
-      {
-        id: "msg-2",
-        sender: "bot",
-        isOrderCard: true,
-        order: lastPlacedOrder,
-        timestamp: "Штотуку",
-      },
-      {
-        id: "msg-3",
-        sender: "bot",
-        text: `📦 Вашата пратка веќе се подготвува во AURA централниот центар во Скопје. Наскоро ќе добиете SMS и е-пошта со број за следење (${lastPlacedOrder.trackingNumber}).`,
-        timestamp: "Штотуку",
-      },
-    ];
-
-    setMessages(initialMessages);
+    if (lastPlacedOrder) {
+      const initialMessages = [
+        {
+          id: "msg-1",
+          sender: "bot",
+          text: `👋 Здраво, ${lastPlacedOrder.customerName || "Купувач"}! Вашата нарачка е успешно комплетирана! 🎉`,
+          timestamp: "Штотуку",
+        },
+        {
+          id: "msg-2",
+          sender: "bot",
+          isOrderCard: true,
+          order: lastPlacedOrder,
+          timestamp: "Штотуку",
+        },
+        {
+          id: "msg-3",
+          sender: "bot",
+          text: `📦 Вашата пратка веќе се подготвува во AURA централниот центар во Скопје. Наскоро ќе добиете SMS и е-пошта со број за следење (${lastPlacedOrder.trackingNumber}).`,
+          timestamp: "Штотуку",
+        },
+      ];
+      setMessages(initialMessages);
+    } else {
+      const welcomeMessages = [
+        {
+          id: "msg-welcome-1",
+          sender: "bot",
+          text: "👋 Добредојдовте во AURA! Јас сум вашиот личен AI Консиерж. Како можам да ви помогнам денес со вашиот избор?",
+          timestamp: "Штотуку",
+        },
+        {
+          id: "msg-welcome-2",
+          sender: "bot",
+          text: "💡 Можете да ме прашате за услови за бесплатна достава, купување на 24 рати, AuraBox пакетоматите или препорака за производ!",
+          timestamp: "Штотуку",
+        },
+      ];
+      setMessages(welcomeMessages);
+    }
   }, [lastPlacedOrder?.id]);
 
   // Auto scroll to bottom of chat
@@ -69,7 +84,7 @@ export const OrderCompletedChatBubble = () => {
     }
   }, [messages, isOrderChatBubbleOpen, isTyping]);
 
-  if (!lastPlacedOrder) return null;
+
 
   const handleSendMessage = (textToSend) => {
     const query = (textToSend || inputText).trim();
@@ -92,16 +107,28 @@ export const OrderCompletedChatBubble = () => {
       let botReply = "";
       const lower = query.toLowerCase();
 
-      if (lower.includes("кога") || lower.includes("стигне") || lower.includes("рок") || lower.includes("доста")) {
-        botReply = `🚚 Доставата на вашата нарачка #${lastPlacedOrder.id} е со ${lastPlacedOrder.deliveryMethod} и се очекува да пристигне на вашата адреса (${lastPlacedOrder.address}) за 24 до 48 работни часа!`;
-      } else if (lower.includes("плаќа") || lower.includes("картичка") || lower.includes("готовина") || lower.includes("фактура")) {
-        botReply = `💳 Плаќањето е регистрирано со "${lastPlacedOrder.paymentMethod}". Вкупниот износ за подмирување е ${formatPrice(lastPlacedOrder.total, currency)}. Фискална сметка ќе биде приложена во пакетот.`;
-      } else if (lower.includes("откаж") || lower.includes("промена") || lower.includes("адрес")) {
-        botReply = `📞 За итна промена на адреса или детали на нарачката пред преземање од курирот, нашиот контакт центар е достапен на 02 3100 500 (секој ден од 08:00 до 22:00 ч).`;
+            if (lower.includes("кога") || lower.includes("стигне") || lower.includes("рок") || lower.includes("доста")) {
+        if (lastPlacedOrder) {
+          botReply = `🚚 Доставата на вашата нарачка #${lastPlacedOrder.id} е со ${lastPlacedOrder.deliveryMethod} и пристигнува за 24-48 работни часа на ${lastPlacedOrder.address}!`;
+        } else {
+          botReply = "🚚 Доставата низ цела Македонија се врши за 24 до 48 работни часа директно до вашата врата! За сите нарачки над 1.500 ден. доставата е потполно БЕСПЛАТНА.";
+        }
+      } else if (lower.includes("плаќа") || lower.includes("картичка") || lower.includes("готовина") || lower.includes("рати")) {
+        if (lastPlacedOrder) {
+          botReply = `💳 Плаќањето е со "${lastPlacedOrder.paymentMethod}". Вкупниот износ е ${formatPrice(lastPlacedOrder.total, currency)}. Фискална сметка ќе биде приложена во пакетот.`;
+        } else {
+          botReply = "💳 Поддржуваме плаќање со кредитни/дебитни картички (Visa, Mastercard), плаќање во готово при преземање на пратката, како и купување до 24 рати без камата за сите производи над 3.000 ден.";
+        }
+      } else if (lower.includes("гаранци") || lower.includes("сервис") || lower.includes("оригинал")) {
+        botReply = "🛡️ Сите производи во AURA се 100% оригинални со официјална гаранција од 24 месеци и овластен сервис во Скопје и Македонија.";
+      } else if (lower.includes("враќа") || lower.includes("замен")) {
+        botReply = "🔄 Имате загарантирано право на бесплатно враќање или замена на производите во рок од 14 дена од приемот, без комплицирани процедури.";
+      } else if (lower.includes("aurabox") || lower.includes("пакетомат")) {
+        botReply = "📦 AuraBox се наши паметни пакетомати распоредени на 50+ локации ширум Македонија каде пратката можете да ја подигнете 0-24 часа кога вам ви одговара со едноставен SMS код.";
       } else if (lower.includes("фала") || lower.includes("благодарам") || lower.includes("супер") || lower.includes("ок")) {
-        botReply = `😊 Секогаш со задоволство! Ви благодариме за довербата во AURA. Се надеваме ќе уживате во новите производи! ✨`;
+        botReply = "😊 Секогаш со задоволство! Ви благодариме што сте со AURA. Уживајте во вашиот шопинг! ✨";
       } else {
-        botReply = `✅ Вашата порака е евидентирана за нарачката #${lastPlacedOrder.id}. Нашиот агент за грижа на корисници е на повик на 02 3100 500 доколку ви е потребна дополнителна информација.`;
+        botReply = "✅ Ви благодариме на прашањето! Нашиот тим за корисничка поддршка е исто така достапен на 02 3100 500 (секој ден од 08:00 до 22:00 ч).";
       }
 
       setMessages((prev) => [
@@ -377,9 +404,19 @@ export const OrderCompletedChatBubble = () => {
                 : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>Вашата нарачка #{lastPlacedOrder.id} е завршена!</span>
-            <span className="text-[10px] text-[#E26D46] font-black underline">Отвори чат &rarr;</span>
+            {lastPlacedOrder ? (
+              <>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>Вашата нарачка #{lastPlacedOrder.id} е завршена!</span>
+                <span className="text-[10px] text-[#E26D46] font-black underline">Отвори чат &rarr;</span>
+              </>
+            ) : (
+              <>
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                <span>AURA Консиерж Асистент</span>
+                <span className="text-[10px] text-[#E26D46] font-black underline">Помош? &rarr;</span>
+              </>
+            )}
           </button>
 
           {/* Circular Chat Trigger Icon */}

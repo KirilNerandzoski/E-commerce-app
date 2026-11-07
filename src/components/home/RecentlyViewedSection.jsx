@@ -4,7 +4,7 @@ import { ProductCard } from "../product/ProductCard";
 import { History as HistoryIcon } from "lucide-react";
 
 export const RecentlyViewedSection = () => {
-  const { recentlyViewed, products } = useApp();
+  const { recentlyViewed, products, theme } = useApp();
 
   if (!recentlyViewed || recentlyViewed.length === 0) return null;
 
@@ -19,14 +19,22 @@ export const RecentlyViewedSection = () => {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 sm:mt-16">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-[#1D1A17] flex items-center justify-center text-[#E26D46] border border-[#2A2520]">
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center border ${
+            theme === "light"
+              ? "bg-[#F3EFEA] text-[#C84E25] border-[#E0D7CC]"
+              : "bg-[#1D1A17] text-[#E26D46] border-[#2A2520]"
+          }`}>
             <HistoryIcon className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-lg sm:text-xl font-black text-[#FAF6F0]">
+            <h2 className={`text-lg sm:text-xl font-black ${
+              theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"
+            }`}>
               Неодамна прегледани производи
             </h2>
-            <p className="text-xs text-[#A8A095]">
+            <p className={`text-xs ${
+              theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+            }`}>
               Производи што ги разгледавте при оваа или претходна посета
             </p>
           </div>

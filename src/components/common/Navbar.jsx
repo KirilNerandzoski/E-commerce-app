@@ -357,7 +357,11 @@ export const Navbar = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
                 placeholder="Пребарајте производи, брендови, категории (пр. iPhone, Airfryer, Bosch)..."
-                className="w-full bg-[#1D1A17] hover:bg-[#25211D] focus:bg-[#25211D] text-[#FAF6F0] placeholder-[#8C8377] text-xs sm:text-sm pl-11 pr-24 py-2.5 sm:py-3 rounded-2xl border border-[#2A2520] focus:border-[#E26D46] focus:ring-4 focus:ring-[#E26D46]/20 transition-all outline-none"
+                className={`w-full text-xs sm:text-sm pl-11 pr-24 py-2.5 sm:py-3 rounded-2xl border focus:ring-4 transition-all outline-none ${
+                  theme === "light"
+                    ? "bg-white text-[#1A1614] placeholder-[#8C8377] border-[#D6CCC0] focus:border-[#E26D46] focus:ring-[#E26D46]/15 shadow-xs"
+                    : "bg-[#1D1A17] hover:bg-[#25211D] focus:bg-[#25211D] text-[#FAF6F0] placeholder-[#8C8377] border-[#2A2520] focus:border-[#E26D46] focus:ring-[#E26D46]/20"
+                }`}
               />
               <Search className="w-4 h-4 text-[#8C8377] absolute left-4 top-1/2 -translate-y-1/2" />
 
@@ -366,7 +370,11 @@ export const Navbar = () => {
                   <button
                     type="button"
                     onClick={() => setSearchQuery("")}
-                    className="p-1 hover:bg-[#25211D] text-[#8C8377] hover:text-[#FAF6F0] rounded-full"
+                    className={`p-1 rounded-full transition-colors ${
+                      theme === "light"
+                        ? "hover:bg-[#EAE3D8] text-[#8C8377] hover:text-[#1A1614]"
+                        : "hover:bg-[#25211D] text-[#8C8377] hover:text-[#FAF6F0]"
+                    }`}
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -382,11 +390,17 @@ export const Navbar = () => {
 
             {/* Live Autocomplete Dropdown */}
             {isSearchFocused && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-[#1D1A17] rounded-2xl shadow-2xl border border-[#2A2520] overflow-hidden z-[100] animate-in fade-in duration-150 text-[#FAF6F0]">
+              <div className={`absolute top-full left-0 right-0 mt-2 rounded-2xl shadow-2xl border overflow-hidden z-[100] animate-in fade-in duration-150 ${
+                theme === "light"
+                  ? "bg-white text-[#1A1614] border-[#D6CCC0] shadow-[0_20px_40px_-15px_rgba(26,22,20,0.15)]"
+                  : "bg-[#1D1A17] text-[#FAF6F0] border-[#2A2520]"
+              }`}>
                 {searchQuery.trim() === "" ? (
                   // Empty query suggestions
                   <div className="p-4">
-                    <div className="text-[11px] font-bold text-[#A8A095] uppercase tracking-wider mb-2.5">
+                    <div className={`text-[11px] font-bold uppercase tracking-wider mb-2.5 ${
+                      theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+                    }`}>
                       Популарни пребарувања
                     </div>
                     <div className="flex flex-wrap gap-1.5">
@@ -398,9 +412,13 @@ export const Navbar = () => {
                             navigateTo("catalog", { search: term, category: "all" });
                             setIsSearchFocused(false);
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#25211D] text-[#FAF6F0] hover:bg-[#E26D46]/20 hover:text-[#E26D46] border border-[#2A2520] text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
+                          className={`px-3 py-1.5 rounded-xl border text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
+                            theme === "light"
+                              ? "bg-[#F4EFEA] text-[#1A1614] hover:bg-[#E26D46]/10 hover:text-[#C84E25] border-[#E0D7CC]"
+                              : "bg-[#25211D] text-[#FAF6F0] hover:bg-[#E26D46]/20 hover:text-[#E26D46] border-[#2A2520]"
+                          }`}
                         >
-                          <Search className="w-3 h-3 text-[#A8A095]" />
+                          <Search className="w-3 h-3 text-[#8C8377]" />
                           {term}
                         </button>
                       ))}
@@ -408,11 +426,15 @@ export const Navbar = () => {
                   </div>
                 ) : (
                   // Search query active
-                  <div className="max-h-[420px] overflow-y-auto divide-y divide-[#2A2520]">
+                  <div className={`max-h-[420px] overflow-y-auto divide-y ${
+                    theme === "light" ? "divide-[#EAE3D8]" : "divide-[#2A2520]"
+                  }`}>
                     {/* Matching categories */}
                     {matchingCategories.length > 0 && (
-                      <div className="p-3 bg-[#141210]">
-                        <div className="text-[10px] font-bold text-[#A8A095] uppercase tracking-wider mb-1.5">
+                      <div className={`p-3 ${theme === "light" ? "bg-[#FAF7F2]" : "bg-[#141210]"}`}>
+                        <div className={`text-[10px] font-bold uppercase tracking-wider mb-1.5 ${
+                          theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+                        }`}>
                           Категории
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -423,7 +445,11 @@ export const Navbar = () => {
                                 handleCategorySelect(c.id);
                                 setIsSearchFocused(false);
                               }}
-                              className="text-xs font-semibold text-[#E26D46] hover:text-[#D49A55] bg-[#25211D] border border-[#2A2520] px-3 py-1 rounded-lg cursor-pointer"
+                              className={`text-xs font-semibold px-3 py-1 rounded-lg cursor-pointer border ${
+                                theme === "light"
+                                  ? "text-[#C84E25] bg-[#EEE8DF] hover:bg-[#E5DDD2] border-[#E0D7CC]"
+                                  : "text-[#E26D46] hover:text-[#D49A55] bg-[#25211D] border-[#2A2520]"
+                              }`}
                             >
                               Во категорија: {c.name}
                             </button>
@@ -435,14 +461,18 @@ export const Navbar = () => {
                     {/* Products list */}
                     {searchResults.length > 0 ? (
                       <div className="p-2">
-                        <div className="text-[10px] font-bold text-[#A8A095] uppercase tracking-wider px-2 py-1">
+                        <div className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 ${
+                          theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+                        }`}>
                           Производи ({searchResults.length})
                         </div>
                         {searchResults.map((product) => (
                           <div
                             key={product.id}
                             onClick={() => handleProductSelect(product.id)}
-                            className="p-2 rounded-xl hover:bg-[#25211D] flex items-center gap-3 cursor-pointer transition-colors"
+                            className={`p-2 rounded-xl flex items-center gap-3 cursor-pointer transition-colors ${
+                              theme === "light" ? "hover:bg-[#F5EFEB]" : "hover:bg-[#25211D]"
+                            }`}
                           >
                             <img
                               src={product.images[0]}
@@ -453,7 +483,9 @@ export const Navbar = () => {
                               <span className="text-[10px] font-bold text-[#D49A55] uppercase">
                                 {product.brand}
                               </span>
-                              <h5 className="text-xs font-semibold text-[#FAF6F0] truncate">
+                              <h5 className={`text-xs font-semibold truncate ${
+                                theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"
+                              }`}>
                                 {product.title}
                               </h5>
                               <div className="text-xs font-bold text-[#E26D46] mt-0.5">
@@ -464,17 +496,23 @@ export const Navbar = () => {
                         ))}
                       </div>
                     ) : (
-                      <div className="p-6 text-center text-xs text-[#A8A095]">
+                      <div className={`p-6 text-center text-xs ${
+                        theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+                      }`}>
                         Нема пронајдено производи за "<strong>{searchQuery}</strong>".
                       </div>
                     )}
 
                     {/* View all search results button */}
                     {searchResults.length > 0 && (
-                      <div className="p-2.5 bg-[#141210] text-center">
+                      <div className={`p-2.5 text-center ${
+                        theme === "light" ? "bg-[#FAF7F2] border-t border-[#EAE3D8]" : "bg-[#141210] border-t border-[#2A2520]"
+                      }`}>
                         <button
                           onClick={handleSearchSubmit}
-                          className="text-xs font-bold text-[#E26D46] hover:text-[#D49A55] cursor-pointer"
+                          className={`text-xs font-bold cursor-pointer ${
+                            theme === "light" ? "text-[#C84E25] hover:text-[#B45309]" : "text-[#E26D46] hover:text-[#D49A55]"
+                          }`}
                         >
                           Види ги сите резултати за "{searchQuery}" &rarr;
                         </button>
@@ -491,7 +529,11 @@ export const Navbar = () => {
             {/* Compare Tool */}
             <button
               onClick={() => setIsCompareModalOpen(true)}
-              className="relative p-2.5 text-[#A8A095] hover:text-[#D49A55] hover:bg-[#25211D] rounded-xl transition-colors hidden sm:flex items-center cursor-pointer"
+              className={`relative p-2.5 rounded-xl transition-colors hidden sm:flex items-center cursor-pointer ${
+                theme === "light"
+                  ? "text-[#5C544B] hover:text-[#C84E25] hover:bg-[#EDE7DE]"
+                  : "text-[#A8A095] hover:text-[#D49A55] hover:bg-[#25211D]"
+              }`}
               title="Спореди производи"
             >
               <SlidersHorizontal className="w-5 h-5" />
@@ -505,7 +547,11 @@ export const Navbar = () => {
             {/* Wishlist */}
             <button
               onClick={() => navigateTo("wishlist")}
-              className="relative p-2.5 text-[#A8A095] hover:text-[#E26D46] hover:bg-[#25211D] rounded-xl transition-colors hidden sm:flex items-center cursor-pointer"
+              className={`relative p-2.5 rounded-xl transition-colors hidden sm:flex items-center cursor-pointer ${
+                theme === "light"
+                  ? "text-[#5C544B] hover:text-[#C84E25] hover:bg-[#EDE7DE]"
+                  : "text-[#A8A095] hover:text-[#E26D46] hover:bg-[#25211D]"
+              }`}
               title="Омилени"
             >
               <Heart className="w-5 h-5" />
@@ -525,31 +571,49 @@ export const Navbar = () => {
                     e.stopPropagation();
                     setIsUserDropdownOpen((prev) => !prev);
                   }}
-                  className="flex items-center gap-2 p-2 hover:bg-[#25211D] rounded-xl transition-colors text-left cursor-pointer select-none"
+                  className={`flex items-center gap-2 p-2 rounded-xl transition-colors text-left cursor-pointer select-none ${
+                    theme === "light" ? "hover:bg-[#EDE7DE]" : "hover:bg-[#25211D]"
+                  }`}
                 >
                   <div className="w-8 h-8 rounded-full bg-[#E26D46]/20 text-[#E26D46] border border-[#E26D46]/40 flex items-center justify-center overflow-hidden font-bold text-xs">
                     {user.name ? user.name.slice(0, 2).toUpperCase() : "AP"}
                   </div>
                   <div className="hidden xl:flex flex-col">
-                    <span className="text-[11px] text-[#A8A095] font-medium leading-none">
+                    <span className={`text-[11px] font-medium leading-none ${
+                      theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+                    }`}>
                       Здраво,
                     </span>
-                    <span className="text-xs font-bold text-[#FAF6F0] leading-tight truncate max-w-[100px]">
+                    <span className={`text-xs font-bold leading-tight truncate max-w-[100px] ${
+                      theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"
+                    }`}>
                       {user.name ? user.name.split(" ")[0] : "Корисник"}
                     </span>
                   </div>
-                  <ChevronDown className={`w-3.5 h-3.5 text-[#A8A095] hidden xl:block transition-transform duration-200 ${isUserDropdownOpen ? "rotate-180 text-[#E26D46]" : ""}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 hidden xl:block transition-transform duration-200 ${
+                    theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+                  } ${isUserDropdownOpen ? "rotate-180 text-[#E26D46]" : ""}`} />
                 </button>
 
                 {/* Dropdown Menu */}
                 {isUserDropdownOpen && (
                   <div
-                    className="absolute right-0 top-full mt-2 w-64 bg-[#1D1A17] rounded-2xl shadow-2xl border border-[#2A2520] py-2 z-[100] animate-in fade-in duration-150 text-[#FAF6F0]"
+                    className={`absolute right-0 top-full mt-2 w-64 rounded-2xl shadow-2xl border py-2 z-[100] animate-in fade-in duration-150 ${
+                      theme === "light"
+                        ? "bg-white text-[#1A1614] border-[#D6CCC0] shadow-[0_20px_40px_-15px_rgba(26,22,20,0.15)]"
+                        : "bg-[#1D1A17] text-[#FAF6F0] border-[#2A2520]"
+                    }`}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="px-4 py-2.5 border-b border-[#2A2520]">
-                      <p className="text-xs font-bold text-[#FAF6F0]">{user.name || "Корисник"}</p>
-                      <p className="text-[11px] text-[#A8A095] truncate">{user.email || ""}</p>
+                    <div className={`px-4 py-2.5 border-b ${
+                      theme === "light" ? "border-[#EAE3D8]" : "border-[#2A2520]"
+                    }`}>
+                      <p className={`text-xs font-bold ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
+                        {user.name || "Корисник"}
+                      </p>
+                      <p className={`text-[11px] truncate ${theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"}`}>
+                        {user.email || ""}
+                      </p>
                     </div>
 
                     <div className="py-1">
@@ -559,13 +623,19 @@ export const Navbar = () => {
                           setIsUserDropdownOpen(false);
                           navigateTo("profile", "orders");
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46] flex items-center justify-between transition-colors"
+                        className={`w-full text-left px-4 py-2.5 text-xs font-semibold flex items-center justify-between transition-colors ${
+                          theme === "light"
+                            ? "text-[#1A1614] hover:bg-[#F5EFEB] hover:text-[#C84E25]"
+                            : "text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46]"
+                        }`}
                       >
                         <div className="flex items-center gap-2.5">
                           <Package className="w-4 h-4 text-[#E26D46]" />
                           <span>Мои нарачки</span>
                         </div>
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#25211D] text-[#A8A095]">
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                          theme === "light" ? "bg-[#EDE7DE] text-[#5C544B]" : "bg-[#25211D] text-[#A8A095]"
+                        }`}>
                           {user.orders?.length || 0}
                         </span>
                       </button>
@@ -576,9 +646,13 @@ export const Navbar = () => {
                           setIsUserDropdownOpen(false);
                           navigateTo("profile", "info");
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46] flex items-center gap-2.5 transition-colors"
+                        className={`w-full text-left px-4 py-2.5 text-xs font-semibold flex items-center gap-2.5 transition-colors ${
+                          theme === "light"
+                            ? "text-[#1A1614] hover:bg-[#F5EFEB] hover:text-[#C84E25]"
+                            : "text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46]"
+                        }`}
                       >
-                        <User className="w-4 h-4 text-[#A8A095]" />
+                        <User className="w-4 h-4 text-[#8C8377]" />
                         <span>Податоци за профил & Статистика</span>
                       </button>
 
@@ -588,7 +662,11 @@ export const Navbar = () => {
                           setIsUserDropdownOpen(false);
                           navigateTo("wishlist");
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46] flex items-center justify-between transition-colors"
+                        className={`w-full text-left px-4 py-2.5 text-xs font-semibold flex items-center justify-between transition-colors ${
+                          theme === "light"
+                            ? "text-[#1A1614] hover:bg-[#F5EFEB] hover:text-[#C84E25]"
+                            : "text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46]"
+                        }`}
                       >
                         <div className="flex items-center gap-2.5">
                           <Heart className="w-4 h-4 text-[#E26D46]" />
@@ -605,20 +683,28 @@ export const Navbar = () => {
                           setIsUserDropdownOpen(false);
                           navigateTo("profile", "preferences");
                         }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46] flex items-center gap-2.5 transition-colors"
+                        className={`w-full text-left px-4 py-2.5 text-xs font-semibold flex items-center gap-2.5 transition-colors ${
+                          theme === "light"
+                            ? "text-[#1A1614] hover:bg-[#F5EFEB] hover:text-[#C84E25]"
+                            : "text-[#FAF6F0] hover:bg-[#25211D] hover:text-[#E26D46]"
+                        }`}
                       >
-                        <Settings className="w-4 h-4 text-[#A8A095]" />
+                        <Settings className="w-4 h-4 text-[#8C8377]" />
                         <span>Поставки & Известувања</span>
                       </button>
 
-                      <div className="pt-1 mt-1 border-t border-[#2A2520] space-y-0.5">
+                      <div className={`pt-1 mt-1 border-t space-y-0.5 ${
+                        theme === "light" ? "border-[#EAE3D8]" : "border-[#2A2520]"
+                      }`}>
                         <button
                           type="button"
                           onClick={() => {
                             setIsUserDropdownOpen(false);
                             setIsAuthModalOpen(true);
                           }}
-                          className="w-full text-left px-4 py-2.5 text-xs font-bold text-[#E26D46] hover:bg-[#25211D] flex items-center gap-2.5 transition-colors"
+                          className={`w-full text-left px-4 py-2.5 text-xs font-bold text-[#E26D46] flex items-center gap-2.5 transition-colors ${
+                            theme === "light" ? "hover:bg-[#F5EFEB]" : "hover:bg-[#25211D]"
+                          }`}
                         >
                           <Lock className="w-4 h-4 text-[#E26D46]" />
                           <span>Најава со друга сметка / SuperAdmin</span>
@@ -630,9 +716,11 @@ export const Navbar = () => {
                             setIsUserDropdownOpen(false);
                             logoutUser();
                           }}
-                          className="w-full text-left px-4 py-2 text-xs font-semibold text-[#A8A095] hover:text-red-400 hover:bg-red-950/20 flex items-center gap-2.5 transition-colors"
+                          className={`w-full text-left px-4 py-2 text-xs font-semibold hover:text-red-400 flex items-center gap-2.5 transition-colors ${
+                            theme === "light" ? "text-[#70675C] hover:bg-red-50" : "text-[#A8A095] hover:bg-red-950/20"
+                          }`}
                         >
-                          <LogOut className="w-4 h-4 text-[#A8A095]" />
+                          <LogOut className="w-4 h-4 text-[#8C8377]" />
                           <span>Одјави се</span>
                         </button>
                       </div>
@@ -644,17 +732,31 @@ export const Navbar = () => {
               <button
                 type="button"
                 onClick={() => setIsAuthModalOpen(true)}
-                className="flex items-center gap-2 p-2 hover:bg-[#25211D] rounded-xl transition-colors text-left cursor-pointer group border border-[#2A2520] hover:border-[#38322B]"
+                className={`flex items-center gap-2 p-2 rounded-xl transition-colors text-left cursor-pointer group border shadow-xs ${
+                  theme === "light"
+                    ? "hover:bg-[#EDE7DE] border-[#D6CCC0] hover:border-[#C4B9AA]"
+                    : "hover:bg-[#25211D] border-[#2A2520] hover:border-[#38322B]"
+                }`}
                 title="Најави се или регистрирај се"
               >
-                <div className="w-8 h-8 rounded-full bg-[#25211D] group-hover:bg-[#E26D46]/20 text-[#A8A095] group-hover:text-[#E26D46] flex items-center justify-center transition-colors">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                  theme === "light"
+                    ? "bg-[#E5DFD5] group-hover:bg-[#E26D46]/15 text-[#5C544B] group-hover:text-[#C84E25]"
+                    : "bg-[#25211D] group-hover:bg-[#E26D46]/20 text-[#A8A095] group-hover:text-[#E26D46]"
+                }`}>
                   <User className="w-4.5 h-4.5" />
                 </div>
                 <div className="hidden xl:flex flex-col">
-                  <span className="text-[11px] text-[#A8A095] font-medium leading-none">
+                  <span className={`text-[11px] font-medium leading-none ${
+                    theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+                  }`}>
                     Добредојдовте,
                   </span>
-                  <span className="text-xs font-bold text-[#FAF6F0] group-hover:text-[#E26D46] leading-tight transition-colors">
+                  <span className={`text-xs font-bold leading-tight transition-colors ${
+                    theme === "light"
+                      ? "text-[#1A1614] group-hover:text-[#C84E25]"
+                      : "text-[#FAF6F0] group-hover:text-[#E26D46]"
+                  }`}>
                     Најави се
                   </span>
                 </div>

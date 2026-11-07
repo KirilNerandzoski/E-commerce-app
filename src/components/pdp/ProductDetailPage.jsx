@@ -38,6 +38,7 @@ export const ProductDetailPage = () => {
     currency,
     addReviewToProduct,
     addToast,
+    theme,
   } = useApp();
 
   const product = products.find((p) => p.id === currentProductId) || products[0];
@@ -121,9 +122,13 @@ export const ProductDetailPage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-[#FAF6F0]">
+    <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 ${
+      theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"
+    }`}>
       {/* 1. Breadcrumb Navigation */}
-      <nav className="flex items-center gap-1.5 text-xs text-[#A8A095] mb-6 overflow-x-auto whitespace-nowrap">
+      <nav className={`flex items-center gap-1.5 text-xs mb-6 overflow-x-auto whitespace-nowrap ${
+        theme === "light" ? "text-[#70675C]" : "text-[#A8A095]"
+      }`}>
         <button onClick={() => navigateTo("home")} className="hover:text-[#E26D46] transition-colors cursor-pointer">
           Почетна
         </button>
@@ -143,7 +148,9 @@ export const ProductDetailPage = () => {
           </>
         )}
         <ChevronRight className="w-3.5 h-3.5 text-[#8C8377] shrink-0" />
-        <span className="font-bold text-[#FAF6F0] truncate max-w-xs">{product.title}</span>
+        <span className={`font-bold truncate max-w-xs ${
+          theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"
+        }`}>{product.title}</span>
       </nav>
 
       {/* 2. Main Product Grid */}
@@ -262,7 +269,7 @@ export const ProductDetailPage = () => {
 
         {/* Right Column: Details & Actions (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-6 sm:p-8 shadow-2xl text-[#FAF6F0]">
+          <div className={`rounded-3xl border p-6 sm:p-8 shadow-2xl transition-all ${theme === "light" ? "bg-white border-[#E5DDD2] text-[#1A1614]" : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"}`}>
             {/* Brand & Filters/Compare Logo bar placed directly above Product Title */}
             <div className="flex items-center justify-between gap-2 pb-2 flex-wrap">
               <div className="flex items-center gap-2.5">
@@ -284,6 +291,8 @@ export const ProductDetailPage = () => {
                   className={`px-3 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all border cursor-pointer ${
                     inCompare
                       ? "bg-[#D49A55] text-[#141210] border-[#D49A55]"
+                      : theme === "light"
+                      ? "bg-[#F3EFEA] text-[#1A1614] border-[#E0D7CC] hover:border-[#D49A55]"
                       : "bg-[#25211D] text-[#FAF6F0] border-[#2A2520] hover:border-[#D49A55]"
                   }`}
                   title={inCompare ? "Отстрани од споредба" : "Спореди / Филтрирај производ"}
@@ -304,7 +313,7 @@ export const ProductDetailPage = () => {
             </div>
 
             {/* Product Title */}
-            <h1 className="text-2xl sm:text-3xl font-black text-[#FAF6F0] leading-tight">
+            <h1 className={`text-2xl sm:text-3xl font-black leading-tight ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
               {product.title}
             </h1>
 
@@ -323,10 +332,10 @@ export const ProductDetailPage = () => {
             </div>
 
             {/* Price Box */}
-            <div className="mt-6 p-5 rounded-2xl bg-[#25211D] border border-[#2A2520] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className={`mt-6 p-5 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${theme === "light" ? "bg-[#F7F4EE] border-[#E5DDD2]" : "bg-[#25211D] border-[#2A2520]"}`}>
               <div>
                 <div className="flex items-baseline gap-3">
-                  <span className="text-3xl sm:text-4xl font-black text-[#F5BA58]">
+                  <span className={`text-3xl sm:text-4xl font-black ${theme === "light" ? "text-[#B45309]" : "text-[#F5BA58]"}`}>
                     {formatPrice(product.price, currency)}
                   </span>
                   {product.originalPrice && product.originalPrice > product.price && (
@@ -469,29 +478,29 @@ export const ProductDetailPage = () => {
             </div>
 
             {/* Assurance Perks List */}
-            <div className="mt-6 pt-6 border-t border-[#2A2520] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#A8A095]">
-              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#25211D] border border-[#2A2520]">
+            <div className={`mt-6 pt-6 border-t grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs ${theme === "light" ? "border-[#E5DDD2] text-[#70675C]" : "border-[#2A2520] text-[#A8A095]"}`}>
+              <div className={`flex items-center gap-2.5 p-2.5 rounded-xl border ${theme === "light" ? "bg-[#F7F4EE] border-[#E5DDD2]" : "bg-[#25211D] border-[#2A2520]"}`}>
                 <Truck className="w-4 h-4 text-[#E26D46] shrink-0" />
                 <span>
-                  <strong className="text-[#FAF6F0]">Брза достава:</strong> 24-48 часа до врата
+                  <strong className={theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}>Брза достава:</strong> 24-48 часа до врата
                 </span>
               </div>
-              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#25211D] border border-[#2A2520]">
+              <div className={`flex items-center gap-2.5 p-2.5 rounded-xl border ${theme === "light" ? "bg-[#F7F4EE] border-[#E5DDD2]" : "bg-[#25211D] border-[#2A2520]"}`}>
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>
-                  <strong className="text-[#FAF6F0]">Гаранција:</strong> 24 месеци овластен сервис
+                  <strong className={theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}>Гаранција:</strong> 24 месеци овластен сервис
                 </span>
               </div>
-              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#25211D] border border-[#2A2520]">
+              <div className={`flex items-center gap-2.5 p-2.5 rounded-xl border ${theme === "light" ? "bg-[#F7F4EE] border-[#E5DDD2]" : "bg-[#25211D] border-[#2A2520]"}`}>
                 <RotateCcw className="w-4 h-4 text-[#D49A55] shrink-0" />
                 <span>
-                  <strong className="text-[#FAF6F0]">14 Дена:</strong> Бесплатно право на враќање
+                  <strong className={theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}>14 Дена:</strong> Бесплатно право на враќање
                 </span>
               </div>
-              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#25211D] border border-[#2A2520]">
+              <div className={`flex items-center gap-2.5 p-2.5 rounded-xl border ${theme === "light" ? "bg-[#F7F4EE] border-[#E5DDD2]" : "bg-[#25211D] border-[#2A2520]"}`}>
                 <Package className="w-4 h-4 text-[#D49A55] shrink-0" />
                 <span>
-                  <strong className="text-[#FAF6F0]">AuraBox 0-24:</strong> Подигни кога сакаш
+                  <strong className={theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}>AuraBox 0-24:</strong> Подигни кога сакаш
                 </span>
               </div>
             </div>
@@ -500,12 +509,12 @@ export const ProductDetailPage = () => {
       </div>
 
       {/* 3. Frequently Bought Together Bundle */}
-      <div className="mt-12 bg-[#1D1A17] rounded-3xl p-6 sm:p-8 border border-[#2A2520] shadow-xl">
+      <div className={`mt-12 rounded-3xl p-6 sm:p-8 border shadow-xl ${theme === "light" ? "bg-white border-[#E5DDD2] text-[#1A1614]" : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"}`}>
         <div className="flex items-center gap-2 text-xs font-black text-[#D49A55] uppercase tracking-wider mb-2">
           <Sparkles className="w-4 h-4" />
           <span>Супер Комплет</span>
         </div>
-        <h3 className="text-xl sm:text-2xl font-black text-[#FAF6F0]">
+        <h3 className={`text-xl sm:text-2xl font-black ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
           Често купувани заедно со попуст
         </h3>
 
@@ -561,15 +570,13 @@ export const ProductDetailPage = () => {
       </div>
 
       {/* 4. Tabbed Details: Description, Specifications, Reviews */}
-      <div className="mt-12 bg-[#1D1A17] rounded-3xl border border-[#2A2520] shadow-2xl overflow-hidden text-[#FAF6F0]">
+      <div className={`mt-12 rounded-3xl border shadow-2xl overflow-hidden ${theme === "light" ? "bg-white border-[#E5DDD2] text-[#1A1614]" : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"}`}>
         {/* Tab Headers */}
-        <div className="flex border-b border-[#2A2520] bg-[#141210] overflow-x-auto no-scrollbar">
+        <div className={`flex border-b overflow-x-auto no-scrollbar ${theme === "light" ? "border-[#E5DDD2] bg-[#FAF8F5]" : "border-[#2A2520] bg-[#141210]"}`}>
           <button
             onClick={() => setActiveTab("description")}
             className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 cursor-pointer ${
-              activeTab === "description"
-                ? "border-[#E26D46] text-[#E26D46] bg-[#1D1A17]"
-                : "border-transparent text-[#A8A095] hover:text-[#FAF6F0]"
+              activeTab === "description" ? (theme === "light" ? "border-[#E26D46] text-[#C84E25] bg-white font-black" : "border-[#E26D46] text-[#E26D46] bg-[#1D1A17] font-black") : (theme === "light" ? "border-transparent text-[#70675C] hover:text-[#1A1614]" : "border-transparent text-[#A8A095] hover:text-[#FAF6F0]")
             }`}
           >
             Опис & Карактеристики
@@ -577,9 +584,7 @@ export const ProductDetailPage = () => {
           <button
             onClick={() => setActiveTab("specs")}
             className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 cursor-pointer ${
-              activeTab === "specs"
-                ? "border-[#E26D46] text-[#E26D46] bg-[#1D1A17]"
-                : "border-transparent text-[#A8A095] hover:text-[#FAF6F0]"
+              activeTab === "specs" ? (theme === "light" ? "border-[#E26D46] text-[#C84E25] bg-white font-black" : "border-[#E26D46] text-[#E26D46] bg-[#1D1A17] font-black") : (theme === "light" ? "border-transparent text-[#70675C] hover:text-[#1A1614]" : "border-transparent text-[#A8A095] hover:text-[#FAF6F0]")
             }`}
           >
             Технички спецификации
@@ -587,9 +592,7 @@ export const ProductDetailPage = () => {
           <button
             onClick={() => setActiveTab("reviews")}
             className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 cursor-pointer ${
-              activeTab === "reviews"
-                ? "border-[#E26D46] text-[#E26D46] bg-[#1D1A17]"
-                : "border-transparent text-[#A8A095] hover:text-[#FAF6F0]"
+              activeTab === "reviews" ? (theme === "light" ? "border-[#E26D46] text-[#C84E25] bg-white font-black" : "border-[#E26D46] text-[#E26D46] bg-[#1D1A17] font-black") : (theme === "light" ? "border-transparent text-[#70675C] hover:text-[#1A1614]" : "border-transparent text-[#A8A095] hover:text-[#FAF6F0]")
             }`}
           >
             Оценки & Рецензии ({product.reviews?.length || 0})
@@ -597,9 +600,7 @@ export const ProductDetailPage = () => {
           <button
             onClick={() => setActiveTab("shipping")}
             className={`px-6 py-4 text-xs sm:text-sm font-bold transition-colors whitespace-nowrap border-b-2 cursor-pointer ${
-              activeTab === "shipping"
-                ? "border-[#E26D46] text-[#E26D46] bg-[#1D1A17]"
-                : "border-transparent text-[#A8A095] hover:text-[#FAF6F0]"
+              activeTab === "shipping" ? (theme === "light" ? "border-[#E26D46] text-[#C84E25] bg-white font-black" : "border-[#E26D46] text-[#E26D46] bg-[#1D1A17] font-black") : (theme === "light" ? "border-transparent text-[#70675C] hover:text-[#1A1614]" : "border-transparent text-[#A8A095] hover:text-[#FAF6F0]")
             }`}
           >
             Достава & Гаранција
@@ -717,17 +718,17 @@ export const ProductDetailPage = () => {
           {activeTab === "shipping" && (
             <div className="space-y-4 text-xs sm:text-sm text-[#A8A095] leading-relaxed">
               <p>
-                <strong className="text-[#FAF6F0]">Начин на достава:</strong> Сите нарачки направени до 16:00 часот се обработуваат истиот ден и се предаваат на курирската служба.
+                <strong className={theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}>Начин на достава:</strong> Сите нарачки направени до 16:00 часот се обработуваат истиот ден и се предаваат на курирската служба.
               </p>
               <ul className="list-disc pl-5 space-y-2">
                 <li>
-                  <strong className="text-[#FAF6F0]">Aura Direkt:</strong> Испорака за 24 часа директно од нашиот централен логистички центар.
+                  <strong className={theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}>Aura Direkt:</strong> Испорака за 24 часа директно од нашиот централен логистички центар.
                 </li>
                 <li>
-                  <strong className="text-[#FAF6F0]">AuraBox 24/7:</strong> Подигнување во било кое време (00-24ч) без чекање со уникатен СМС код за отклучување.
+                  <strong className={theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}>AuraBox 24/7:</strong> Подигнување во било кое време (00-24ч) без чекање со уникатен СМС код за отклучување.
                 </li>
                 <li>
-                  <strong className="text-[#FAF6F0]">Бесплатна достава:</strong> За секоја нарачка со вкупна вредност поголема од 1.500 ден.
+                  <strong className={theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}>Бесплатна достава:</strong> За секоја нарачка со вкупна вредност поголема од 1.500 ден.
                 </li>
               </ul>
             </div>
@@ -823,7 +824,7 @@ export const ProductDetailPage = () => {
       {relatedProducts.length > 0 && (
         <div className="mt-16">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl sm:text-2xl font-black text-[#FAF6F0]">
+            <h2 className={`text-xl sm:text-2xl font-black ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
               Слични производи од истата категорија
             </h2>
             <button
@@ -841,6 +842,53 @@ export const ProductDetailPage = () => {
           </div>
         </div>
       )}
+      {/* Mobile Sticky Add-to-Cart Bar */}
+      <div className={`fixed bottom-0 left-0 right-0 z-40 lg:hidden border-t p-3 backdrop-blur-xl shadow-2xl transition-all duration-300 ${
+        theme === "light" ? "bg-white/95 border-[#E5DDD2]" : "bg-[#141210]/95 border-[#2A2520]"
+      }`}>
+        <div className="max-w-md mx-auto flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <img
+              src={product.images[0]}
+              alt={product.title}
+              className="w-11 h-11 rounded-xl object-contain bg-[#FAF7F2] p-1 border border-[#E6DFD5] shrink-0"
+            />
+            <div className="min-w-0">
+              <h4 className={`text-xs font-bold truncate leading-tight ${
+                theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"
+              }`}>
+                {product.title}
+              </h4>
+              <div className="text-xs font-black text-[#E26D46] mt-0.5">
+                {formatPrice(product.price, currency)}
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={handleAddToCart}
+            disabled={!product.inStock}
+            className={`px-4 py-2.5 rounded-xl font-black text-xs shrink-0 flex items-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer ${
+              isAdded
+                ? "bg-emerald-600 text-white"
+                : product.inStock
+                ? "bg-gradient-to-r from-[#E26D46] to-[#D49A55] text-[#141210]"
+                : "bg-[#25211D] text-[#8C8377] cursor-not-allowed"
+            }`}
+          >
+            {isAdded ? (
+              <>
+                <Check className="w-3.5 h-3.5" /> Додадено!
+              </>
+            ) : (
+              <>
+                <ShoppingCart className="w-3.5 h-3.5" /> Во кошничка
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    
     </div>
   );
 };

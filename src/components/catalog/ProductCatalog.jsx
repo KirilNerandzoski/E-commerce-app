@@ -18,6 +18,7 @@ export const ProductCatalog = () => {
     catalogFilters,
     setCatalogFilters,
     navigateTo,
+    theme,
   } = useApp();
 
   const [layoutMode, setLayoutMode] = useState("grid"); // 'grid' | 'list'
@@ -169,9 +170,9 @@ export const ProductCatalog = () => {
       </nav>
 
       {/* 2. Category Title Banner */}
-      <div className="bg-[#1D1A17] rounded-3xl border border-[#2A2520] p-6 sm:p-8 mb-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 text-[#FAF6F0]">
+      <div className={`rounded-3xl border p-6 sm:p-8 mb-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all ${theme === "light" ? "bg-white border-[#E5DDD2] text-[#1A1614]" : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"}`}>
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#FAF6F0] tracking-tight">
+          <h1 className={`text-2xl sm:text-3xl font-black tracking-tight ${theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"}`}>
             {activeCategory ? activeCategory.name : "Сите производи во понуда"}
           </h1>
           <p className="text-xs sm:text-sm text-[#A8A095] mt-1 max-w-xl">
@@ -182,7 +183,7 @@ export const ProductCatalog = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="px-4 py-2 rounded-2xl bg-[#25211D] text-xs font-bold text-[#FAF6F0] border border-[#2A2520]">
+          <div className={`px-4 py-2 rounded-2xl text-xs font-bold border ${theme === "light" ? "bg-[#F3EFEA] text-[#1A1614] border-[#E0D7CC]" : "bg-[#25211D] text-[#FAF6F0] border-[#2A2520]"}`}>
             Вкупно: <span className="text-[#E26D46] font-extrabold">{filteredProducts.length}</span> производи
           </div>
         </div>
@@ -214,12 +215,12 @@ export const ProductCatalog = () => {
         {/* Catalog Main Content (3 cols) */}
         <div className="lg:col-span-3 space-y-4">
           {/* Top Control Bar: Active filters, Grid/List switch, Sort dropdown */}
-          <div className="bg-[#1D1A17] rounded-2xl border border-[#2A2520] p-3 sm:p-4 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[#FAF6F0]">
+          <div className={`rounded-2xl border p-3 sm:p-4 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all ${theme === "light" ? "bg-white border-[#E5DDD2] text-[#1A1614]" : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"}`}>
             {/* Left: Mobile Filter Button & Active Filter Summary */}
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMobileFiltersOpen(true)}
-                className="lg:hidden px-3.5 py-2 bg-[#25211D] hover:bg-[#2A2520] text-[#FAF6F0] rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-[#2A2520]"
+                className={`lg:hidden px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border ${theme === "light" ? "bg-[#F3EFEA] hover:bg-[#EAE3D8] text-[#1A1614] border-[#E0D7CC]" : "bg-[#25211D] hover:bg-[#2A2520] text-[#FAF6F0] border-[#2A2520]"}`}
               >
                 <SlidersHorizontal className="w-3.5 h-3.5 text-[#E26D46]" />
                 Филтри

@@ -4,7 +4,7 @@ import { ProductCard } from "../product/ProductCard";
 import { Sparkles, ArrowRight } from "lucide-react";
 
 export const RecommendationsSection = () => {
-  const { products, navigateTo } = useApp();
+  const { products, navigateTo, theme } = useApp();
 
   // Recommendations: products with high ratings and trending status
   const recommended = products.filter((p) => p.isTrending || p.rating >= 4.8).slice(0, 4);
@@ -17,14 +17,18 @@ export const RecommendationsSection = () => {
             <Sparkles className="w-4 h-4 fill-[#D49A55] text-[#D49A55]" />
             <span>Персонализиран избор</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-[#FAF6F0] mt-1">
+          <h2 className={`text-xl sm:text-2xl font-black mt-1 ${
+            theme === "light" ? "text-[#1A1614]" : "text-[#FAF6F0]"
+          }`}>
             Препорачано за тебе
           </h2>
         </div>
 
         <button
           onClick={() => navigateTo("catalog")}
-          className="text-xs sm:text-sm font-bold text-[#E26D46] hover:text-[#D49A55] flex items-center gap-1 transition-colors cursor-pointer"
+          className={`text-xs sm:text-sm font-bold flex items-center gap-1 transition-colors cursor-pointer ${
+            theme === "light" ? "text-[#C84E25] hover:text-[#B45309]" : "text-[#E26D46] hover:text-[#D49A55]"
+          }`}
         >
           Види повеќе <ArrowRight className="w-4 h-4" />
         </button>
