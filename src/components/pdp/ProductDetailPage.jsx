@@ -162,6 +162,10 @@ export const ProductDetailPage = () => {
             <img
               src={product.images[activeImageIndex] || product.images[0]}
               alt={`${product.title} - поглед ${activeImageIndex + 1}`}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80";
+              }}
               className="w-full h-full object-contain transition-all duration-300 group-hover:scale-105"
             />
 

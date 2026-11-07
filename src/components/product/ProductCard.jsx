@@ -58,6 +58,10 @@ export const ProductCard = ({ product, layout = "grid" }) => {
           <img
             src={product.images[0]}
             alt={product.title}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80";
+            }}
             className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
           />
@@ -231,6 +235,10 @@ export const ProductCard = ({ product, layout = "grid" }) => {
           <img
             src={product.images[0]}
             alt={product.title}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80";
+            }}
             className={`w-full h-full object-contain transition-all duration-300 ${
               product.images.length > 1 ? "group-hover/img:opacity-0" : "group-hover:scale-108"
             }`}
@@ -242,6 +250,10 @@ export const ProductCard = ({ product, layout = "grid" }) => {
             <img
               src={product.images[1]}
               alt={`${product.title} - страничен поглед`}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = product.images[0];
+              }}
               className="absolute inset-0 w-full h-full object-contain p-3 sm:p-4 transition-all duration-300 opacity-0 group-hover/img:opacity-100 group-hover/img:scale-105 pointer-events-none"
               loading="lazy"
             />

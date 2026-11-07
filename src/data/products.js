@@ -775,8 +775,8 @@ export const PRODUCTS = [
     isNew: false,
     freeShipping: true,
     images: [
-      "https://images.unsplash.com/photo-1580481077195-c3a8b006c646?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1505797149-43b0069ec26b?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1589998059171-988d887df646?w=800&auto=format&fit=crop&q=80",
     ],
     description: "Висококвалитетна ергономска фотелја со дишечка мрежа која овозможува правилна положба на 'рбетот при продолжено седење од 8+ часа дневно.",
@@ -911,7 +911,7 @@ export const PRODUCTS = [
     freeShipping: true,
     images: [
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1540518614846-7ede433c4ef0?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&auto=format&fit=crop&q=80",
     ],
     description: "Кралевски спален кревет со високо капитонирано меко возглавје и лесен гасен хидрауличен механизам кој отвора огромен простор за складирање под душекот.",
@@ -1100,7 +1100,7 @@ export const PRODUCTS = [
     isNew: false,
     freeShipping: true,
     images: [
-      "https://images.unsplash.com/photo-1542272604-780c96856592?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&auto=format&fit=crop&q=80",
     ],
@@ -1196,7 +1196,7 @@ export const PRODUCTS = [
     isNew: false,
     freeShipping: true,
     images: [
-      "https://images.unsplash.com/photo-1559591937-e1032c510257?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1559671216-bda69517c47f?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&auto=format&fit=crop&q=80",
     ],
@@ -1932,7 +1932,7 @@ export const PRODUCTS = [
     isNew: false,
     freeShipping: false,
     images: [
-      "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1635437536607-b8572f443763?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?w=800&auto=format&fit=crop&q=80",
     ],
