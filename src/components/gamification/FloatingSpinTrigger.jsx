@@ -10,8 +10,8 @@ export const FloatingSpinTrigger = ({ onOpen }) => {
 
   return (
     <div
-      className={`fixed bottom-20 sm:bottom-6 z-40 animate-bounce duration-1000 transition-all ${
-        lastPlacedOrder ? "right-20 sm:right-24" : "right-4 sm:right-6"
+      className={`fixed z-40 animate-bounce duration-1000 transition-all right-4 sm:right-6 ${
+        lastPlacedOrder ? "bottom-36 sm:bottom-24" : "bottom-20 sm:bottom-6"
       }`}
     >
       <button

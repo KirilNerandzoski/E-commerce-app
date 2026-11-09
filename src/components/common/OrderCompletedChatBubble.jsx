@@ -19,6 +19,7 @@ import {
 export const OrderCompletedChatBubble = () => {
   const {
     lastPlacedOrder,
+    setLastPlacedOrder,
     isOrderChatBubbleOpen,
     setIsOrderChatBubbleOpen,
     hasOrderNotification,
@@ -32,6 +33,11 @@ export const OrderCompletedChatBubble = () => {
   const [inputText, setInputText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
+
+  // Only render after an order is completed, avoiding any overlap with the Lucky Wheel
+  if (!lastPlacedOrder) {
+    return null;
+  }
 
     // Initialize or update chat messages
   useEffect(() => {
@@ -195,9 +201,16 @@ export const OrderCompletedChatBubble = () => {
               </button>
               <button
                 type="button"
-                onClick={handleToggleOpen}
+                onClick={() => {
+                  setIsOrderChatBubbleOpen(false);
+                  setHasOrderNotification(false);
+                  setLastPlacedOrder(null);
+                  try {
+                    sessionStorage.removeItem("aura_last_order");
+                  } catch {}
+                }}
                 className="p-1.5 rounded-xl hover:bg-black/20 text-white transition-colors cursor-pointer"
-                title="Затвори"
+                title="Затвори целосно"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -395,29 +408,40 @@ export const OrderCompletedChatBubble = () => {
       {!isOrderChatBubbleOpen && (
         <div className="flex items-center gap-2 animate-in slide-in-from-bottom-2 duration-300">
           {/* Sneak peek notification message pill */}
-          <button
-            type="button"
-            onClick={handleToggleOpen}
-            className={`hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-2xl shadow-xl border text-xs font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer ${
-              theme === "light"
-                ? "bg-white border-[#E5DDD2] text-[#1A1614]"
-                : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"
-            }`}
-          >
-            {lastPlacedOrder ? (
-              <>
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>Вашата нарачка #{lastPlacedOrder.id} е завршена!</span>
-                <span className="text-[10px] text-[#E26D46] font-black underline">Отвори чат &rarr;</span>
-              </>
-            ) : (
-              <>
-                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                <span>AURA Консиерж Асистент</span>
-                <span className="text-[10px] text-[#E26D46] font-black underline">Помош? &rarr;</span>
-              </>
-            )}
-          </button>
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={handleToggleOpen}
+              className={`hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-2xl shadow-xl border text-xs font-bold transition-all hover:scale-105 active:scale-95 cursor-pointer ${
+                theme === "light"
+                  ? "bg-white border-[#E5DDD2] text-[#1A1614]"
+                  : "bg-[#1D1A17] border-[#2A2520] text-[#FAF6F0]"
+              }`}
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>Вашата нарачка #{lastPlacedOrder.id} е завршена!</span>
+              <span className="text-[10px] text-[#E26D46] font-black underline">Отвори чат &rarr;</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setIsOrderChatBubbleOpen(false);
+                setHasOrderNotification(false);
+                setLastPlacedOrder(null);
+                try {
+                  sessionStorage.removeItem("aura_last_order");
+                } catch {}
+              }}
+              className={`hidden sm:flex items-center justify-center w-7 h-7 rounded-xl border text-xs font-bold transition-all hover:bg-red-500/10 hover:text-red-500 cursor-pointer ${
+                theme === "light"
+                  ? "bg-white border-[#E5DDD2] text-[#5C544B]"
+                  : "bg-[#1D1A17] border-[#2A2520] text-[#A8A095]"
+              }`}
+              title="Отстрани го известувањето"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
 
           {/* Circular Chat Trigger Icon */}
           <button
