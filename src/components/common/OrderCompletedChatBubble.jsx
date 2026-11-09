@@ -34,12 +34,7 @@ export const OrderCompletedChatBubble = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // Only render after an order is completed, avoiding any overlap with the Lucky Wheel
-  if (!lastPlacedOrder) {
-    return null;
-  }
-
-    // Initialize or update chat messages
+  // Initialize or update chat messages
   useEffect(() => {
     if (lastPlacedOrder) {
       const initialMessages = [
@@ -158,6 +153,12 @@ export const OrderCompletedChatBubble = () => {
     }
   };
 
+  // Only render after an order is completed, avoiding any overlap with the Lucky Wheel
+  // Guard is placed strictly AFTER all React hooks to preserve Hook execution order
+  if (!lastPlacedOrder) {
+    return null;
+  }
+
   return (
     <aside aria-label="AURA Консиерж Чат за Нарачки" className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end">
       {/* 1. EXPANDED CHAT WINDOW */}
@@ -185,7 +186,7 @@ export const OrderCompletedChatBubble = () => {
                 </div>
                 <span className="text-[11px] text-white/85 font-medium flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
-                  Нарачка #{lastPlacedOrder.id} • Активна
+                  Нарачка #{lastPlacedOrder?.id} • Активна
                 </span>
               </div>
             </div>
@@ -224,7 +225,7 @@ export const OrderCompletedChatBubble = () => {
             }`}
           >
             {messages.map((m) => {
-              if (m.isOrderCard) {
+              if (m.isOrderCard && m.order) {
                 return (
                   <div
                     key={m.id}
@@ -248,46 +249,50 @@ export const OrderCompletedChatBubble = () => {
                       <div className="flex justify-between">
                         <span className="text-[#8C8377]">Вкупно за плаќање:</span>
                         <span className="font-black text-[#F5BA58]">
-                          {formatPrice(m.order.total, currency)}
+                          {formatPrice(m.order.total || 0, currency)}
                         </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-[#8C8377]">Начин на плаќање:</span>
                         <span className="font-semibold text-right truncate max-w-[170px]">
-                          {m.order.paymentMethod}
+                          {m.order.paymentMethod || "Готовина"}
                         </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-[#8C8377]">Достава:</span>
-                        <span className="font-semibold">{m.order.deliveryMethod}</span>
+                        <span className="font-semibold">{m.order.deliveryMethod || "Стандардна"}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-[#8C8377]">Адреса:</span>
                         <span className="font-semibold text-right truncate max-w-[170px]">
-                          {m.order.address}
+                          {m.order.address || "Адреса"}
                         </span>
                       </div>
                     </div>
 
                     {/* Purchased items preview */}
-                    <div className="pt-2 border-t border-black/5 dark:border-white/5 flex items-center gap-2 overflow-x-auto no-scrollbar">
-                      {m.order.items?.slice(0, 3).map((it, idx) => (
-                        <div key={idx} className="flex items-center gap-1.5 shrink-0 bg-black/5 dark:bg-white/5 px-2 py-1 rounded-lg text-[10px]">
-                          <img
-                            src={it.image}
-                            alt={it.title}
-                            className="w-5 h-5 rounded object-cover"
-                          />
-                          <span className="truncate max-w-[90px] font-medium">{it.title}</span>
-                          <span className="text-[#8C8377]">x{it.quantity}</span>
-                        </div>
-                      ))}
-                      {m.order.items?.length > 3 && (
-                        <span className="text-[10px] text-[#8C8377] font-bold">
-                          +{m.order.items.length - 3} уште
-                        </span>
-                      )}
-                    </div>
+                    {Array.isArray(m.order.items) && m.order.items.length > 0 && (
+                      <div className="pt-2 border-t border-black/5 dark:border-white/5 flex items-center gap-2 overflow-x-auto no-scrollbar">
+                        {m.order.items.slice(0, 3).map((it, idx) => (
+                          <div key={idx} className="flex items-center gap-1.5 shrink-0 bg-black/5 dark:bg-white/5 px-2 py-1 rounded-lg text-[10px]">
+                            {it.image && (
+                              <img
+                                src={it.image}
+                                alt={it.title || "производ"}
+                                className="w-5 h-5 rounded object-cover"
+                              />
+                            )}
+                            <span className="truncate max-w-[90px] font-medium">{it.title}</span>
+                            <span className="text-[#8C8377]">x{it.quantity}</span>
+                          </div>
+                        ))}
+                        {m.order.items.length > 3 && (
+                          <span className="text-[10px] text-[#8C8377] font-bold">
+                            +{m.order.items.length - 3} уште
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
                 );
               }
@@ -419,7 +424,7 @@ export const OrderCompletedChatBubble = () => {
               }`}
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span>Вашата нарачка #{lastPlacedOrder.id} е завршена!</span>
+              <span>Вашата нарачка #{lastPlacedOrder?.id} е завршена!</span>
               <span className="text-[10px] text-[#E26D46] font-black underline">Отвори чат &rarr;</span>
             </button>
             <button

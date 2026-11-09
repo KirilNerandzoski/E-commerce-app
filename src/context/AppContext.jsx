@@ -460,8 +460,14 @@ export const AppProvider = ({ children }) => {
     });
 
     // Also persist to Supabase if configured
+    let supabaseSuccess = false;
     if (supabaseService.isConfigured) {
-      supabaseService.createOrder(newOrder, user?.id);
+      try {
+        const res = await supabaseService.createOrder(newOrder, user?.id);
+        if (res) supabaseSuccess = true;
+      } catch (err) {
+        console.warn("Supabase order sync warning:", err);
+      }
     }
 
     setLastPlacedOrder(newOrder);
