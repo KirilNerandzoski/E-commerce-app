@@ -171,13 +171,13 @@ export const SpinWheelModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
       <div
-        className="bg-[#1D1A17] border border-[#2A2520] rounded-3xl max-w-md w-full p-6 text-[#FAF6F0] relative shadow-2xl shadow-[#E26D46]/10 text-center"
+        className="bg-[#1D1A17] border border-[#2A2520] rounded-3xl max-w-md w-full p-4 sm:p-6 text-[#FAF6F0] relative shadow-2xl shadow-[#E26D46]/10 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-[#25211D] text-[#A8A095] hover:text-[#FAF6F0] hover:bg-[#2A2520] transition-colors cursor-pointer"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 rounded-full bg-[#25211D] text-[#A8A095] hover:text-[#FAF6F0] hover:bg-[#2A2520] transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -187,13 +187,13 @@ export const SpinWheelModal = ({ isOpen, onClose }) => {
           <Sparkles className="w-3.5 h-3.5" />
           <span>Дневно тркало на среќата</span>
         </div>
-        <h2 className="text-2xl font-black text-[#FAF6F0]">Заврти и освој попуст!</h2>
-        <p className="text-xs text-[#A8A095] mt-1 mb-6">
+        <h2 className="text-xl sm:text-2xl font-black text-[#FAF6F0]">Заврти и освој попуст!</h2>
+        <p className="text-xs text-[#A8A095] mt-1 mb-5">
           Секој ден имате шанса за ексклузивни купони, ваучери и бесплатна достава на AURA.
         </p>
 
         {/* Wheel Container */}
-        <div className="relative w-[300px] h-[300px] mx-auto mb-6 flex items-center justify-center">
+        <div className="relative w-[270px] h-[270px] sm:w-[300px] sm:h-[300px] max-w-full mx-auto mb-6 flex items-center justify-center">
           {/* Top Pointer */}
           <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[26px] border-t-[#D49A55] drop-shadow-[0_4px_10px_rgba(212,154,85,0.8)]" />
 

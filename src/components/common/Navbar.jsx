@@ -119,12 +119,12 @@ export const Navbar = () => {
   return (
     <header className={`sticky top-0 z-40 ${theme === "light" ? "bg-[#FBF9F5]/95 border-b border-[#E5DDD2]" : "bg-[#141210]/95 border-b border-[#2A2520]"} backdrop-blur-xl shadow-md transition-colors`}>
       {/* 1. Top Announcement Bar */}
-      <div className={`${theme === "light" ? "bg-[#EDE7DE] text-[#5C544B] border-b border-[#E0D7CC]" : "bg-[#0D0B0A] text-[#A8A095] border-b border-[#1F1C18]"} text-xs py-1.5 px-4 sm:px-8 transition-colors`}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4 overflow-hidden">
-            <span className="flex items-center gap-1.5 text-[#D49A55] font-semibold truncate">
-              <Zap className="w-3.5 h-3.5 fill-[#D49A55] shrink-0" />
-              БЕСПЛАТНА достава за нарачки над 1.500 ден.
+      <div className={`${theme === "light" ? "bg-[#EDE7DE] text-[#5C544B] border-b border-[#E0D7CC]" : "bg-[#0D0B0A] text-[#A8A095] border-b border-[#1F1C18]"} text-xs py-1 px-2.5 sm:px-8 transition-colors`}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-4 overflow-hidden min-w-0">
+            <span className="flex items-center gap-1 text-[#D49A55] font-semibold text-[10px] sm:text-xs truncate">
+              <Zap className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#D49A55] shrink-0" />
+              БЕСПЛАТНА достава над 1.500 ден.
             </span>
             <span className="hidden md:inline text-[#8C8377]/40">|</span>
             <span className="hidden md:inline">
@@ -853,7 +853,11 @@ export const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
             className="fixed inset-0 bg-black/80 backdrop-blur-xs"
           />
-          <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-[#171412] text-[#FAF6F0] border-r border-[#2A2520] shadow-2xl p-6 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-left duration-200">
+          <div className={`fixed inset-y-0 left-0 w-4/5 max-w-sm border-r shadow-2xl p-6 pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-left duration-200 ${
+            theme === "light"
+              ? "bg-white text-[#1A1614] border-[#E5DDD2]"
+              : "bg-[#171412] text-[#FAF6F0] border-[#2A2520]"
+          }`}>
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-[#2A2520]">
                 <div className="flex items-center gap-2.5">

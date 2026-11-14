@@ -203,7 +203,11 @@ export const ProductCatalog = () => {
               onClick={() => setIsMobileFiltersOpen(false)}
               className="fixed inset-0 bg-black/80 backdrop-blur-xs"
             />
-            <div className="fixed inset-y-0 right-0 w-full max-w-xs bg-[#171412] text-[#FAF6F0] border-l border-[#2A2520] shadow-2xl p-4 overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-right duration-200">
+            <div className={`fixed inset-y-0 right-0 w-full max-w-xs border-l shadow-2xl p-4 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] overflow-y-auto z-10 flex flex-col justify-between animate-in slide-in-from-right duration-200 ${
+              theme === "light"
+                ? "bg-white text-[#1A1614] border-[#E5DDD2]"
+                : "bg-[#171412] text-[#FAF6F0] border-[#2A2520]"
+            }`}>
               <FilterSidebar
                 isMobileDrawer={true}
                 onCloseMobile={() => setIsMobileFiltersOpen(false)}

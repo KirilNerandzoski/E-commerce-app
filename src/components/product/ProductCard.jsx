@@ -373,7 +373,7 @@ export const ProductCard = ({ product, layout = "grid" }) => {
             title={inCompare ? "Отстрани од споредба" : "Спореди / Филтер"}
           >
             <SlidersHorizontal className="w-3 h-3 text-[#D49A55]" />
-            <span>{inCompare ? "Во споредба" : "Спореди"}</span>
+            <span className="hidden sm:inline">{inCompare ? "Во споредба" : "Спореди"}</span>
           </button>
         </div>
 

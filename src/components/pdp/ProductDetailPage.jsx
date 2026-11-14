@@ -847,7 +847,7 @@ export const ProductDetailPage = () => {
         </div>
       )}
       {/* Mobile Sticky Add-to-Cart Bar */}
-      <div className={`fixed bottom-0 left-0 right-0 z-40 lg:hidden border-t p-3 backdrop-blur-xl shadow-2xl transition-all duration-300 ${
+      <div className={`fixed bottom-0 left-0 right-0 z-40 lg:hidden border-t p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl shadow-2xl transition-all duration-300 ${
         theme === "light" ? "bg-white/95 border-[#E5DDD2]" : "bg-[#141210]/95 border-[#2A2520]"
       }`}>
         <div className="max-w-md mx-auto flex items-center justify-between gap-3">

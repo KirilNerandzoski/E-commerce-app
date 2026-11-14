@@ -9,15 +9,28 @@ export const MobileBottomNav = () => {
     cartTotalItemsCount,
     wishlist,
     setIsCartDrawerOpen,
+    theme,
   } = useApp();
 
+  // Hide on product detail view so the sticky Purchase Bar is unobstructed
+  if (currentView === "product") return null;
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#141210]/95 backdrop-blur-xl border-t border-[#2A2520] py-1.5 px-3 flex items-center justify-around shadow-2xl lg:hidden text-[#A8A095]">
+    <nav
+      aria-label="Мобилна навигација"
+      className={`fixed bottom-0 left-0 right-0 z-40 backdrop-blur-xl border-t py-1.5 px-2 flex items-center justify-around shadow-2xl lg:hidden transition-colors pb-[max(0.6rem,env(safe-area-inset-bottom))] ${
+        theme === "light"
+          ? "bg-white/95 border-[#E5DDD2] text-[#5C544B]"
+          : "bg-[#141210]/95 border-[#2A2520] text-[#A8A095]"
+      }`}
+    >
       {/* Home */}
       <button
         onClick={() => navigateTo("home")}
         className={`flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors cursor-pointer ${
-          currentView === "home" ? "text-[#E26D46] font-bold" : "text-[#A8A095] hover:text-[#FAF6F0]"
+          currentView === "home"
+            ? theme === "light" ? "text-[#C84E25] font-bold" : "text-[#E26D46] font-bold"
+            : theme === "light" ? "text-[#5C544B] hover:text-[#1A1614]" : "text-[#A8A095] hover:text-[#FAF6F0]"
         }`}
       >
         <Home className="w-5 h-5" />
@@ -28,7 +41,9 @@ export const MobileBottomNav = () => {
       <button
         onClick={() => navigateTo("catalog")}
         className={`flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors cursor-pointer ${
-          currentView === "catalog" ? "text-[#E26D46] font-bold" : "text-[#A8A095] hover:text-[#FAF6F0]"
+          currentView === "catalog"
+            ? theme === "light" ? "text-[#C84E25] font-bold" : "text-[#E26D46] font-bold"
+            : theme === "light" ? "text-[#5C544B] hover:text-[#1A1614]" : "text-[#A8A095] hover:text-[#FAF6F0]"
         }`}
       >
         <Grid className="w-5 h-5" />
@@ -39,7 +54,9 @@ export const MobileBottomNav = () => {
       <button
         onClick={() => navigateTo("wishlist")}
         className={`relative flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors cursor-pointer ${
-          currentView === "wishlist" ? "text-[#E26D46] font-bold" : "text-[#A8A095] hover:text-[#FAF6F0]"
+          currentView === "wishlist"
+            ? theme === "light" ? "text-[#C84E25] font-bold" : "text-[#E26D46] font-bold"
+            : theme === "light" ? "text-[#5C544B] hover:text-[#1A1614]" : "text-[#A8A095] hover:text-[#FAF6F0]"
         }`}
       >
         <div className="relative">
@@ -57,7 +74,9 @@ export const MobileBottomNav = () => {
       <button
         onClick={() => setIsCartDrawerOpen(true)}
         className={`relative flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors cursor-pointer ${
-          currentView === "cart" ? "text-[#E26D46] font-bold" : "text-[#A8A095] hover:text-[#FAF6F0]"
+          currentView === "cart"
+            ? theme === "light" ? "text-[#C84E25] font-bold" : "text-[#E26D46] font-bold"
+            : theme === "light" ? "text-[#5C544B] hover:text-[#1A1614]" : "text-[#A8A095] hover:text-[#FAF6F0]"
         }`}
       >
         <div className="relative">
@@ -75,12 +94,14 @@ export const MobileBottomNav = () => {
       <button
         onClick={() => navigateTo("profile")}
         className={`flex flex-col items-center gap-1 p-1 text-[11px] font-semibold transition-colors cursor-pointer ${
-          currentView === "profile" ? "text-[#E26D46] font-bold" : "text-[#A8A095] hover:text-[#FAF6F0]"
+          currentView === "profile"
+            ? theme === "light" ? "text-[#C84E25] font-bold" : "text-[#E26D46] font-bold"
+            : theme === "light" ? "text-[#5C544B] hover:text-[#1A1614]" : "text-[#A8A095] hover:text-[#FAF6F0]"
         }`}
       >
         <User className="w-5 h-5" />
         <span>Профил</span>
       </button>
-    </div>
+    </nav>
   );
 };

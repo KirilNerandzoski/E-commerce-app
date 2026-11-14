@@ -28,7 +28,7 @@ const MainContent = () => {
   const { currentView } = useApp();
 
   return (
-    <main className="min-h-[70vh]">
+    <main className="min-h-[70vh] pb-20 lg:pb-0">
       {currentView === "home" && <HomePage />}
       {currentView === "catalog" && <ProductCatalog />}
       {currentView === "product" && <ProductDetailPage />}

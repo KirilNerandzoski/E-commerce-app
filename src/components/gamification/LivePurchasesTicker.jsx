@@ -78,7 +78,7 @@ export const LivePurchasesTicker = () => {
 
   return (
     <div
-      className={`fixed bottom-20 sm:bottom-6 left-4 sm:left-6 z-40 max-w-xs sm:max-w-sm transition-all duration-500 ease-out ${
+      className={`fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] sm:bottom-6 left-3 sm:left-6 z-40 max-w-[calc(100vw-24px)] sm:max-w-sm transition-all duration-500 ease-out ${
         isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-4 pointer-events-none"

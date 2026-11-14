@@ -26,6 +26,7 @@ export const CartDrawer = () => {
     setIsCartDrawerOpen,
     navigateTo,
     currency,
+    theme,
   } = useApp();
 
   if (!isCartDrawerOpen) return null;
@@ -51,10 +52,16 @@ export const CartDrawer = () => {
         className="absolute inset-0 bg-black/80 backdrop-blur-xs transition-opacity"
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[#171412] text-[#FAF6F0] border-l border-[#2A2520] shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
+        <div className={`w-screen max-w-md border-l shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300 ${
+          theme === "light"
+            ? "bg-white text-[#1A1614] border-[#E5DDD2]"
+            : "bg-[#171412] text-[#FAF6F0] border-[#2A2520]"
+        }`}>
           {/* Header */}
-          <div className="p-4 sm:p-5 border-b border-[#2A2520] flex items-center justify-between bg-[#141210]">
+          <div className={`p-4 sm:p-5 border-b flex items-center justify-between ${
+            theme === "light" ? "bg-[#FAF8F5] border-[#E5DDD2]" : "bg-[#141210] border-[#2A2520]"
+          }`}>
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-[#E26D46]/15 text-[#E26D46] flex items-center justify-center border border-[#E26D46]/30">
                 <ShoppingCart className="w-5 h-5" />
@@ -188,7 +195,11 @@ export const CartDrawer = () => {
 
           {/* Footer Summary & CTAs */}
           {cart.length > 0 && (
-            <div className="p-4 sm:p-5 border-t border-[#2A2520] bg-[#141210] space-y-3 text-[#FAF6F0]">
+            <div className={`p-4 sm:p-5 border-t space-y-3 pb-[max(1.25rem,env(safe-area-inset-bottom))] ${
+              theme === "light"
+                ? "bg-[#FAF8F5] border-[#E5DDD2] text-[#1A1614]"
+                : "bg-[#141210] border-[#2A2520] text-[#FAF6F0]"
+            }`}>
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between text-[#A8A095]">
                   <span>Вкупно производи:</span>
